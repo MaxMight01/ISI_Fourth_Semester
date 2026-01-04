@@ -1,0 +1,86 @@
+.subject-card {
+  display: block;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  height: 100%;
+}
+
+.subject-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--card-shadow-hover);
+  border-color: var(--accent-color);
+}
+
+.subject-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  height: 100%;
+}
+
+.subject-code {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.subject-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.subject-description {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+  flex: 1;
+  line-height: 1.5;
+}
+
+.subject-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-color);
+  font-size: 0.85rem;
+}
+
+.subject-chapters {
+  color: var(--text-tertiary);
+}
+
+.subject-cta {
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+.subject-card:hover .subject-cta {
+  color: var(--accent-hover);
+}
+
+@media (max-width: 640px) {
+  .subject-card {
+    padding: 1rem;
+  }
+
+  .subject-name {
+    font-size: 1.1rem;
+  }
+
+  .subject-description {
+    font-size: 0.9rem;
+  }
+}
