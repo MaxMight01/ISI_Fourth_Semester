@@ -1,3 +1,4 @@
+import { Download, FileText } from 'lucide-react';
 import '../styles/PDFViewer.css';
 
 interface PDFViewerProps {
@@ -9,9 +10,15 @@ export const PDFViewer = ({ pdfPath, title }: PDFViewerProps) => {
   return (
     <div className="pdf-viewer">
       <div className="pdf-header">
-        <h2>{title}</h2>
+        <div className="pdf-title-group">
+          <div className="pdf-icon">
+            <FileText size={22} strokeWidth={2.5} />
+          </div>
+          <h2>{title}</h2>
+        </div>
         <a href={pdfPath} download className="pdf-download-btn">
-          ⬇️ Download PDF
+          <Download size={18} />
+          <span>Download PDF</span>
         </a>
       </div>
 
@@ -22,13 +29,6 @@ export const PDFViewer = ({ pdfPath, title }: PDFViewerProps) => {
           title={`PDF viewer for ${title}`}
         />
       </div>
-
-      {/* <div className="pdf-note">
-        <p>
-          💡 Tip: Use your browser's built-in PDF controls for zooming, searching, and other features. You can also
-          download the PDF to view offline.
-        </p>
-      </div> */}
     </div>
   );
 };

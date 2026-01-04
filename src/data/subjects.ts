@@ -15,6 +15,13 @@ export const SUBJECTS: Subject[] = [
     courseInfoUrl: 'https://www.isibang.ac.in/~adean/infsys/database/Bmath/Ele.html',
   },
   {
+    id: 'rings-modules',
+    name: 'Rings and Modules',
+    shortCode: 'RAM',
+    pdfPath: '/subjects/Rings_and_Modules/ram.pdf',
+    courseInfoUrl: 'https://www.isibang.ac.in/~adean/infsys/database/Bmath/RM.html',
+  },
+  {
     id: 'linear-models-regression',
     name: 'Introduction to Linear Models and Regression',
     shortCode: 'LMR',
@@ -27,13 +34,6 @@ export const SUBJECTS: Subject[] = [
     shortCode: 'ODE',
     pdfPath: '/subjects/Ordinary_Differential_Equations/ode.pdf',
     courseInfoUrl: 'https://www.isibang.ac.in/~adean/infsys/database/Bmath/ODE.html',
-  },
-  {
-    id: 'rings-modules',
-    name: 'Rings and Modules',
-    shortCode: 'RAM',
-    pdfPath: '/subjects/Rings_and_Modules/ram.pdf',
-    courseInfoUrl: 'https://www.isibang.ac.in/~adean/infsys/database/Bmath/RM.html',
   },
   {
     id: 'topology',
