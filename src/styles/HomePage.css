@@ -75,23 +75,45 @@
 
 .home-footer {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem 2rem;
   border-top: 1px solid var(--border-color);
   color: var(--text-secondary);
   font-size: 0.9rem;
   margin-top: auto;
 }
 
-.home-footer p {
+.contact-info {
+  margin-bottom: 2rem;
+  text-align: left;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-info h3 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.contact-info p {
   margin: 0.5rem 0;
+  font-size: 1rem;
 }
 
-.home-footer a {
+.contact-info a {
   color: var(--accent-color);
+  word-break: break-all;
 }
 
-.home-footer a:hover {
+.contact-info a:hover {
   color: var(--accent-hover);
+}
+
+.footer-credits {
+  font-size: 0.9rem;
+  color: var(--text-tertiary);
 }
 
 @media (max-width: 768px) {

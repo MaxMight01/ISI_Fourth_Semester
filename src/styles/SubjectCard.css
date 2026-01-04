@@ -41,11 +41,7 @@
 }
 
 .subject-description {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  margin: 0;
-  flex: 1;
-  line-height: 1.5;
+  display: none;
 }
 
 .subject-card-footer {

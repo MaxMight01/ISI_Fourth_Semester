@@ -36,23 +36,7 @@ export const SubjectPage = () => {
         </a>
       </div>
 
-      <div className="subject-info">
-        <p>{subject.description}</p>
-      </div>
-
       <div className="subject-content">
-        <div className="chapters-sidebar">
-          <h3>Chapters</h3>
-          <ul className="chapters-list">
-            {subject.chapters.map(chapter => (
-              <li key={chapter.id} className="chapter-item">
-                <span className="chapter-number">Ch. {chapter.number}</span>
-                <span className="chapter-title">{chapter.title}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
         <div className="pdf-section">
           <PDFViewer pdfPath={subject.pdfPath} title={`${subject.name} — Full Notes`} />
         </div>

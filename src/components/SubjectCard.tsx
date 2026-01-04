@@ -12,9 +12,7 @@ export const SubjectCard = ({ subject }: SubjectCardProps) => {
       <div className="subject-card-content">
         <h3 className="subject-code">{subject.shortCode}</h3>
         <h2 className="subject-name">{subject.name}</h2>
-        <p className="subject-description">{subject.description}</p>
         <div className="subject-card-footer">
-          <span className="subject-chapters">{subject.chapters.length} chapter(s)</span>
           <span className="subject-cta">View Notes →</span>
         </div>
       </div>
