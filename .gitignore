@@ -22,3 +22,19 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# LaTeX stuff + extras
+test_folder/
+extra/
+assignments/
+.vscode/
+*.aux
+*.idx
+*.ilg
+*.ind
+*.log
+*.toc
+*.fls
+*.fdb_latexmk
+*.gz
+*.synctex(busy)
