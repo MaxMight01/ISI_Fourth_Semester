@@ -8,7 +8,7 @@ import './App.css';
 function App() {
   return (
     <ThemeProvider>
-      <Router>
+      <Router basename="/ISI_Fourth_Semester">
         <div className="app-container">
           <Header />
           <main className="app-main">
