@@ -1,0 +1,71 @@
+\chapter{AN INTRODUCTION}
+
+
+\section{The Wave Equation}
+\textit{January 5th.}
+
+The story of ordinary differential equations (ODEs) begins with Newton in the 17th century, where he laid the foundations of classical mechanics and formulated the laws of motion. During this time, he also (co)developed calculus, which provided the mathematical framework necessary to describe change and motion. Thus came about the first ordinary differential equations, which were used to model the motion of moving bodies.
+
+Around the mid-18th century, questions were asked regarding the vibration of strings. Let us focus on such a string of length $L$ fixed at both ends, and place a coordinate system from $0$ to $L$ along the string. At a time $t$, the string may be displaced from its equilibrium position by a small amount $u(x,t)$ at a point $x$ along the string. We wish to understand this $u(x,t)$.
+
+Consider a small segment of the string between $x$ and $x + \Delta x$. The tension in the string at $x$ is given by $T(x,t)$, and at $x + \Delta x$ it is given by $T(x + \Delta x, t)$. The vertical components of these tensions are $V(x,t) = T(x,t) \sin \theta$ and $V(x + \Delta x, t) = T(x + \Delta x, t) \sin (\theta + \Delta \theta)$ respectively, where $\theta$ is the angle the string makes with the horizontal axis at point $x$. Thus, using Newton's second law, the net vertical force on the segment is given by
+\begin{align}
+    V(x + \Delta x, t) - V(x,t) = \rho \Delta x \, u_{tt}(\bar{x},t),
+\end{align}
+where $\rho$ is the linear mass density of the string. Dividing by $\Delta x$ and taking the limit as $\Delta x \to 0$, we obtain
+\begin{align}
+    \partial_{x} V(x,t) = \rho \, u_{tt}(x,t).
+\end{align}
+The horizontal components of the tension must balance out giving us $H(x,t) = H(x + \Delta x, t)$, where $H(x,t) = T(x,t) \cos \theta$ and $H(x + \Delta x, t) = T(x + \Delta x, t) \cos (\theta + \Delta \theta)$. Since $V(x,t) = H(x,t) \tan \theta$ and $\tan \theta$ can be approximated as
+\begin{align}
+    \tan \theta \approx \frac{u(x + \Delta x, t) - u(x,t)}{\Delta x} = \partial_{x} u(x,t),
+\end{align}
+we have
+\begin{align}
+    V(x,t) = \partial_{x} u(x,t) \, H(x,t) = H_{0} \, \partial_{x} u(x,t).
+\end{align}
+Plugging this in to the earlier equation, we get
+\begin{align}
+    \partial_{x} (H_{0} \, \partial_{x} u(x,t)) = \rho \, u_{tt}(x,t) \implies \frac{H_{0}}{\rho} \, u_{xx}(x,t) = u_{tt}(x,t).
+\end{align}
+This is known as the wave equation, and it models the vibrations of the string. We drop the constants for now; we wish to now solve $u_{xx} = u_{tt}$ with boundary conditions $u(0,t) = 0$ and $u(L,t) = 0$ for all $t \geq 0$, and initial conditions $u(x,0) = f(x)$ and $u_{t}(x,0) = 0$ for all $x \in [0,L]$.
+
+We make the assumption that $u(x,t) = v(x) \, w(t)$, that the variables can be separated. Plugging this in, we get $u_{tt}(x,t) = v(x) \, w''(t)$ and $u_{xx}(x,t) = v''(x) \, w(t)$. Thus,
+\begin{align}
+    v''(x) \, w(t) = v(x) \, w''(t) \implies \frac{v''(x)}{v(x)} = \frac{w''(t)}{w(t)}.
+\end{align}
+Since the variables are independent on both sides, this ratio must be a constant $\lambda \in \R$. We look at functions that satisfy $v''(x) = \lambda \, v(x)$. If $\lambda > 0$, then functions of the form $v(x) = A e^{\sqrt{\lambda} x} + B e^{-\sqrt{\lambda} x}$ satisfy the equation. $\lambda = 0$ gives functions of the form $v(x) = Ax + B$ and $\lambda < 0$ gives functions of the form $v(x) = A \sin (\sqrt{-\lambda} x) + B \cos (\sqrt{-\lambda} x)$. Let us say $\lambda = -1$. Let us show that the only solutions of $v'' + v = 0$ are of this form $A \sin x + B \cos x$ for some $A,B \in \R$.
+
+Suppose $g$ is a solution of $v'' + v = 0$. Let's assume that $g(0) = B$ and $g'(0) = A$. Consider the function $h(x) = g(x) - (A \sin x + B \cos x)$. We have $h(0) = 0$ and $h'(0) = 0$. Also, $h''(x) + h(x) = 0$. Define $\Psi = (h')^{2} + h^{2}$. This gives
+\begin{align}
+    \Psi' = 2 h' h'' + 2 h h'= 2 h' (h'' + h) = 0.
+\end{align}
+Thus, $\Psi$ is constant. Since $\Psi(0) = (h'(0))^{2} + (h(0))^{2} = 0$, we have $\Psi(x) = 0$ for all $x$ which gives $h \equiv 0$; $g$ must be of the form $A \sin x + B \cos x$. The same argument works for all $\lambda < 0$.
+
+If we let $\lambda < 0$, then the boundary conditions become $V(0) = 0$ and $V(L) = 0$. Since $V$ must be of the form $V(x) = A \sin (\sqrt{-\lambda} x) + B \cos (\sqrt{-\lambda} x)$, we have $V(0) = B = 0$. Thus, $V(x) = A \sin (\sqrt{-\lambda} x)$. The second boundary condition gives us $V(L) = A \sin (\sqrt{-\lambda} L) = 0$. For a non-trivial solution, we must have $\sin (\sqrt{-\lambda} L) = 0$, which gives us $\sqrt{-\lambda} L = n \pi$ for some $n \in \N$. Thus, $\lambda = - n^{2} \pi^{2} / L^{2}$. From the same ratio equation, we also obtain
+\begin{align}
+    w(t) = a \sin ( \frac{n\pi}{L} t) + b \cos ( \frac{n \pi}{L} t).
+\end{align}
+The initial condition $w'(0) = 0$ gives us $a = 0$. Having obtained $v$ and $w$, we found a solution of the wave equation as
+\begin{align}
+    u_{n}(x,t) = c_{n} \sin ( \frac{n \pi}{L} x) \cos ( \frac{n \pi}{L} t).
+\end{align}
+Note that if $\phi$ and $\psi$ are two different solutions of the wave equation, then so is any linear combination of the two. Thus, we can combine all these solutions to get
+\begin{align}
+    u(x,t) = \sum_{n \geq 1} c_{n} \sin ( \frac{n \pi}{L} x) \cos ( \frac{n \pi}{L} t).
+\end{align}
+It can be shown that the infinite summation above makes sense. In fact, every solution is of this form(!). Assuming this statement, let us use the initial condition $u(x,0) = f(x)$ to determine the coefficients $c_{n}$. We have
+\begin{align}
+    f(x) = \sum_{n \geq 1} c_{n} \sin ( \frac{n \pi}{L} x).
+\end{align}
+This is known as the Fourier sine series of $f$. The coefficients can be determined using the orthogonality of the sine functions. Multiplying both sides by $\sin ( \frac{m \pi}{L} x)$ and integrating from $0$ to $L$, we get
+\begin{align}
+    c_{m} = \frac{2}{L} \int_{0}^{L} f(x) \sin (\frac{m \pi}{L} x) \, \di{x}.
+\end{align}
+A similar approach is used in two dimensions, where instead of a string of length $L$, there is a drum (membrane) $\Omega$ of boundary $\Gamma$. Here, the wave equation satisfies $\partial_{tt} u = \Delta u$, where $\Delta$ is the Laplacian operator. The boundary conditions are $u(x,t) = 0$ for all $x \in \Gamma$ and $t \geq 0$, and the initial conditions are $u(x,0) = f(x)$ and $u_{t}(x,0) = 0$ for all $x \in \Omega$. 
+
+\section{(Ordinary) Differential Equations}
+
+A general theme of the subject is that we have a system that evolves with time. The evolution of this function is encoded in differential equations, and vice versa. We wish to understand this evolution, or to determine solutions of the differential equations; we wish to determine their existence, uniqueness, and even explicit forms. Finally, we also look at how the system and solutions depend on initial conditions.
+
+To put it explicitly, a differential equation is of the form $F(t,f',f'',\cdots,f^{(n)}) = 0$, where $t$ is an independent variable and $f$ is a function of $t$.
