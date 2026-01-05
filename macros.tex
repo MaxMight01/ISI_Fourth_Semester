@@ -2,6 +2,11 @@
 \usepackage{mathtools}
 \usepackage{xfrac}
 \usepackage{stackengine}
+\usepackage{calligra}
+\DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
+\DeclareFontShape{T1}{calligra}{m}{n}{<->s*[2.2]callig15}{}
+\newcommand{\curs}[1]{\ensuremath{\mathcalligra{#1}}}
+
 \newcommand{\defeq}{\vcentcolon=}
 \newcommand{\eax}[1]{\emph{#1}\index{#1}} % Macro for emphasis and index
 \newcommand{\abs}[1]{\left| #1 \right|} % Absolute value
@@ -72,3 +77,5 @@
 \newcommand{\tensor}[1]{\overset{\leftrightarrow}{#1}} % Tensor notation
 \newcommand{\len}{\operatorname{len}} % Length of a word
 \newcommand{\conv}{\operatorname{conv}} % Convex hull
+\newcommand{\bv}[1]{\mathbf{#1}} % Bold vector
+\newcommand{\di}[1]{\mathrm{d}#1} % Differential in integrals
