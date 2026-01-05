@@ -1,0 +1,76 @@
+\chapter{ELECTROSTATICS}
+
+\section{Introduction}
+
+\textit{January 5th.}
+
+The bulk of classical mechanics was developed by Newton in the 17th century. It was mostly concerned with the motion and trajectories of macroscopic objects under the influence of forces. This theory, however, breaks down at very high speeds when $v/c$ approaches unity. This necessitated the special theory of relativity by Einstein in 1905. Electrodynamics is a part of classical mechanics, but sits at the crossroads of both special relativity and quantum mechanics; it does sit in classical mechanics yet violates many Newtonian principles. The idea of Einstein's special relativity paper was born with these conflicts of electrodynamics with Newtonian mechanics.
+
+Another area where classical mechanics fails is at very small length scales. The laws of classical mechanics are unable to explain phenomena at atomic and subatomic scales, leading to the development of quantum mechanics in the early 20th century. Quantum mechanics and special relaitivity were later unified into quantum field theory. Under this, electrodynamics was reformulated as quantum electrodynamics.
+
+\subsection{Forces}
+
+Every force in nature can be classified into four fundamental interactions:
+\begin{itemize}
+    \item Gravitational force
+    \item Electromagnetic force
+    \item Strong force
+    \item Weak force
+\end{itemize}
+The \eax{strong force} is reponsible for holding the nucleus of an atom together, while the \eax{weak force} is responsible for nuclear decay. They are both short-range forces, acting only at subatomic distances. The \eax{gravitational force} is the weakest of the four fundamental forces, but it has an infinite range and acts attractively on all masses. The \eax{electromagnetic force} is much stronger than gravity and also has an infinite range, but it can be both attractive and repulsive, acting on charged particles.
+
+If we set two electrons one metre apart, the gravitational force between them is approximately $10^{-42}$ times weaker than the electromagnetic force. This stark contrast highlights the relative weakness of gravity compared to electromagnetism at the scale of elementary particles. The electromagnetic force has an important aspect in that it unifies electricity and magnetism, which were once thought to be separate phenomena.
+
+
+\section{Electrostatics}
+
+The field of \eax{electrostatics} deals with the study of electric charges at rest. The goal is, given a set of source charges with their positions and magnitudes, to determine the force on a test charge with a given position and magnitude. Moreover, we want to determine the trajectory of the test charge. The principle of superposition plays a crucial role in electrostatics, allowing us to calculate the net electric field or force by summing the contributions from individual charges. In general, both source and test charges can be in motion; the net force is not so simple to calculate in that case, since the individual forces also depends on the velocities of the charges and even their accelerations.
+
+It is not sufficient to just know positions and velocities at present time; we also need to know them at an earlier time due to the fact that electromagnetic interactions ``news'' travel at a finite velocity. We simplify this situation greatly. First, we assume that all source charges are at rest at fixed positions; they are stationary. Second, we assume that any electromagnetic effects propagate instantaneously.
+
+With these assumptions, we can focus on the electrostatic forces between charges. The fundamental law governing these interactions is \eax{Coulomb's law}. Let there be a point charge $q$ located at position $\bv{r}'$ and a test charge $Q$ located at position $\bv{r}$. If $\curs{r} = \bv{r} - \bv{r}'$ is the displacement vector from the source charge to the test charge, then the force $\bv{F}$ on the test charge due to the source charge is given by
+
+\begin{align}
+    \bv{F} = \frac{1}{4 \pi \epsilon_{0}} \frac{q Q}{\abs{\curs{r}}^{2}} \hat{\curs{r}},
+\end{align}
+
+where $\epsilon_{0}$ is the \eax{permittivity of free space}, a fundamental constant with a value of approximately $8.854 \times 10^{-12} \; \mathrm{C^{2}/Nm^{2}}$ in SI units. The unit vector $\hat{\mathscr{r}}$ points from the source charge to the test charge, indicating the direction of the force. The force is attractive if the charges have opposite signs and repulsive if they have the same sign. We may also rewrite $\bv{F}$ in terms of the \eax{electric field} $\bv{E}$ defined by $\bv{F} = Q \bv{E}$. Thus, over a set of source charges $q_{i}$, the electric field at position $\bv{r}$ is given by
+\begin{align}
+    \bv{E}(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \sum_{i} \frac{q_{i}}{\abs{\curs{r}_{i}}^{2}} \hat{\curs{r}}_{i},
+\end{align}
+where $\curs{r}_{i}$ is defined similarly as above for each source charge. For a continuous distribution of source charges, typically represented by a linear density $\lambda$, surface density $\sigma$ or volume density $\rho$, an integral appropriately replaces the summation. In this case, we consider $\di{q} = \lambda \; \di{l}$, $\di{q} = \sigma \; \di{A}$ or $\di{q} = \rho \; \di{V}$ as the infinitesimal charge elements, and integrate over the entire distribution to find the electric field at the point of interest. For example, for a volume charge distribution, the electric field is given by
+\begin{align}
+    \bv{E}(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\di{q}}{\abs{\curs{r}}^{2}} \hat{\curs{r}} = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\rho(\bv{r}')}{\abs{\curs{r}}^{2}} \hat{\curs{r}} \; \di{V}'.
+\end{align}
+
+\subsection{Electric Flux}
+
+The electric field $\bv{E}(\bv{r})$ is a \eax{vector field}, meaning that at every point in space, it assigns a vector quantity. We can represent this field by assigning an `arrow' at each point in space, where the direction of the arrow indicates the direction of the electric field vector, and the length of the arrow represents the magnitude of the field at that point. This gets messy. To visualise the electric field, we often use \eax{field lines}, which are imaginary lines that represent the direction of the electric field. The density of these lines indicates the strength of the field; closer lines correspond to a stronger field. Field lines originate from positive charges and terminate on negative charges, providing a visual representation of how the electric field behaves in space.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/field_lines.png}
+    \caption{The electric field lines around a positive and a negative point charge.}
+    \label{fig:field_lines}
+\end{figure}
+
+Associated with the electric field is the concept of \eax{electric flux}. Electric flux quantifies the amount of electric field passing through a given surface $S$. It is defined as
+\begin{align}
+    \Phi_{E} = \int_{S} \bv{E} \cdot \di{\bv{a}},
+\end{align}
+where $\di{\bv{a}}$ is an infinitesimal area element on the surface $S$, and the dot product $\bv{E} \cdot \di{\bv{a}}$ represents the component of the electric field passing through that area element. For example, let us consider a point charge $Q$ at the origin and a spherical surface of radius $R$ centred at the origin. We wish to find the electric flux through this spherical surface $S$. Converting to spherical coordinates, we have
+\begin{align}
+    \Phi_{E} = \oint_{S} \bv{E} \cdot \di{\bv{a}} = \frac{1}{4 \pi \epsilon_{0}} \int \frac{Q}{R^{2}} R^{2} \sin \theta \; \di{\theta} \; \di{\phi} = \frac{Q}{4 \pi \epsilon_{0}} \int_{0}^{\pi} \sin \theta \; \di{\theta} \int_{0}^{2 \pi} \di{\phi} = \frac{Q}{\epsilon_{0}}.
+\end{align}
+Here, $\oint$ represents a surface integral over a closed surface. \eax{Gauss's law} generalizes this result as
+\begin{align}
+    \Phi_{E} = \oint_{S} \bv{E} \cdot \di{\bv{a}} = \frac{Q_{\text{enc}}}{\epsilon_{0}},
+\end{align}
+where $Q_{\text{enc}}$ is the total charge enclosed within the surface $S$. Using the divergence theorem, we have
+\begin{align}
+    \int_{V} \nabla \cdot \bv{E} \; \di{V'} = \oint_{S} \bv{E} \cdot \di{\bv{a}} = \int_{V} \frac{\rho(\bv{r}')}{\epsilon_{0}} \; \di{V'}.
+\end{align}
+Since this holds for any arbitrary volume $V$, we obtain the differential form of Gauss's law:
+\begin{align}
+    \nabla \cdot \bv{E} = \frac{\rho}{\epsilon_{0}}.
+\end{align}
