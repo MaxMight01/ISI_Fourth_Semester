@@ -1,0 +1,152 @@
+\chapter{METRIC AND TOPOLOGICAL SPACES}
+
+\section{Metric Spaces and Examples}
+
+\textit{January 6th.}
+
+A \eax{metric space} is a pair $(X,d)$ where $X$ is a set and $d:X \times X \to \R_{\geq 0}$ is a function, called a \eax{metric} on $X$, satisfying the following properties for all $x,y,z \in X$:
+\begin{enumerate}[label=(\roman*)]
+    \item $d(x,y) = 0$ if and only if $x = y$ (\eax{positive definiteness}).
+    \item $d(x,y) = d(y,x)$ (\eax{symmetry}).
+    \item $d(x,z) \leq d(x,y) + d(y,z)$ (\eax{triangle inequality}).
+\end{enumerate}
+
+Let us look at some examples of metric spaces.
+
+\begin{example}
+    Any set $X$ can be made into a metric space by defining the \eax{discrete metric} $d$ as follows:
+    \begin{align}
+        d(x,y) = \begin{cases}
+            0 & \text{if } x = y, \\
+            1 & \text{if } x \neq y.
+        \end{cases}
+    \end{align}
+    It is easy to verify that $d$ satisfies all the properties of a metric.
+\end{example}
+
+\begin{example}
+    Recall that a normed space $(V, \norm{\cdot})$ was a vector space $V$ equipped with a \eax{norm} $\norm{\cdot}: V \to \R_{\geq 0}$ satisfying the following properties for all $u,v \in V$ and $\alpha \in \F$:
+    \begin{enumerate}[label=(\roman*)]
+        \item $\norm{v} = 0$ if and only if $v = 0$ (positive definiteness).
+        \item $\norm{\alpha v} = |\alpha| \norm{v}$ (\eax{absolute homogeneity}).
+        \item $\norm{u + v} \leq \norm{u} + \norm{v}$ (triangle inequality).
+    \end{enumerate}
+    Given a normed space $(V, \norm{\cdot})$, we can define a metric $d$ on $V$ as follows:
+    \begin{align}
+        d(u,v) = \norm{u - v} \quad \forall u,v \in V.
+    \end{align}
+    Yet again, it is straightforward to verify that $d$ satisfies all the properties of a metric. Given a vector space $V$, we can have multiple norms on it, and hence multiple metrics. For example, consider the vector space $\R^n$. We have the following norms on $\R^n$:
+    \begin{itemize}
+        \item The \eax{$\ell^{1}$ norm}: $\norm{x}_1 = \sum_{i=1}^{n} |x_i|$,
+        \item the \eax{Euclidean norm}: $\norm{x}_2 = \left( \sum_{i=1}^{n} |x_i|^2 \right)^{1/2}$,
+        \item the \eax{supremum norm}: $\norm{x}_{\infty} = \max_{1 \leq i \leq n} |x_i|$,
+    \end{itemize}
+    for all $x = (x_1, x_2, \ldots, x_n) \in \R^n$. Each of these norms induces a different metric on $\R^n$.
+\end{example}
+
+The notion of open and closed balls is also abstracted to metric spaces as follows.
+
+\begin{definition}
+    Let $(X,d)$ be a metric space. The \eax{open ball} of radius $r > 0$ centered at a point $x \in X$ is the set
+    \begin{align}
+        B(x,r) = \{ y \in X \mid d(x,y) < r \},
+    \end{align}
+    and the \eax{closed ball} of radius $r > 0$ centered at $x$ is the set
+    \begin{align}
+        B[x,r] = \{ y \in X \mid d(x,y) \leq r \}.
+    \end{align}
+\end{definition}
+
+Note that in the discrete metric space, $B(x,1) = \{x\} = B(x,\frac{1}{2})$, and $B(x,2) = X = B(y,2)$ for any $x,y \in X$. Thus, $B(x,r) = B(y,\rho)$ does not imply that $x = y$ or $r = \rho$ in general.
+
+\begin{example}
+    Let $p$ be a prime, say $p=3$. Define a function $\abs{\cdot}_{3}:\Z \to \R_{\geq 0}$ as follows: for any non-zero integer $m$, write $m = 3^{k} m'$ where $m'$ is not divisible by $3$, and set $\abs{m}_{3} = 3^{-k}$. Also, set $\abs{0}_{3} = 0$. This function $\abs{\cdot}_{3}$ is called the $3$-adic absolute value on $\Z$. In general, for any prime $p$, the \eax{$p$-adic absolute value} is defined similarly.
+
+    This $3$-adic absolute value induces a norm $d_{3}$ on $\Q$ as follows:
+    \begin{align}
+        \abs{q}_{3} = \begin{cases}
+            0 & \text{if } q = 0, \\
+            \abs{m}_{3} / \abs{n}_{3} & \text{if } q = m/n \text{ in lowest terms}.
+        \end{cases}
+    \end{align}
+    This induces a metric on $\Q$ defined by $d_{3}(x,y) = \abs{x - y}_{3}$ for all $x,y \in \Q$. This metric space $(\Q, d_{3})$ is called the $3$-adic metric space, and in general $(\Q, d_{p})$ is called the \eax{$p$-adic metric space}. The completion of $(\Q, d_{p})$ gives us the \eax{field of $p$-adic numbers}, denoted by $\Q_{p}$. This metric space has some interesting properties; for instance, the triangle inequality is strengthened to the \eax{ultrametric inequality}:
+    \begin{align}
+        d_{p}(x,z) \leq \max \{ d_{p}(x,y), d_{p}(y,z) \} \quad \forall x,y,z \in \Q.
+    \end{align}
+\end{example}
+
+
+\begin{lemma}[\eax{Hausdorff property}]
+    Let $(X,d)$ be a metric space. For any distinct $x,y \in X$, there exists $r > 0$ such that $B(x,r) \cap B(y,r) = \emptyset$.
+\end{lemma}
+\begin{proof}
+    Verify that choosing any $r \leq \frac{1}{2}d(x,y)$ works.
+\end{proof}
+
+Let $(X,d)$ be a metric space. Then a subset $A \subseteq X$ can also be made into a metric space by restricting the metric $d$ to $A \times A$. In the metric space $(A,d|_{A \times A})$, the open balls are given by $B_{A}(x,r) = B_{X}(x,r) \cap A$ for all $x \in A$ and $r > 0$, where $B_{X}(x,r)$ is the open ball in $(X,d)$.
+
+Again, as before, the notion of open sets is abstracted to metric spaces as follows.
+
+\begin{definition}
+    Let $(X,d)$ be a metric space. A subset $U \subseteq X$ is said to be an \eax{open set} if for every $x \in U$, there exists $r > 0$ such that $B(x,r) \subseteq U$. 
+\end{definition}
+
+As a small lemma, one can show that every open ball in a metric space is an open set. As an exercise, show that the complement of the closed ball $B[x,r]^{c} = \{y \mid d(x,y) > r\}$ is also an open set.
+
+\begin{proposition}
+    Let $(X,d)$ be a metric space. Let $\tau = \{ U \subseteq X \mid U \text{ is open} \}$, that is, the collection of all open sets in $X$. Then the following hold true.
+    \begin{enumerate}[label=(\roman*)]
+        \item $\emptyset, X \in \tau$.
+        \item For $\{U_{\alpha}\}_{\alpha \in \Lambda} \subseteq \tau$, we have $\bigcup_{\alpha \in \Lambda} U_{\alpha} \in \tau$. That is, an arbitrary union of open sets is open.
+        \item For $U_1, U_2, \ldots, U_n \in \tau$, we have $\bigcap_{i=1}^{n} U_i \in \tau$. That is, a finite intersection of open sets is open.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    The proof of the first property is trivial. For the second property, let $x \in \bigcup_{\alpha \in \Lambda} U_{\alpha}$. Then there exists some $\alpha_0 \in \Lambda$ such that $x \in U_{\alpha_0}$. Since $U_{\alpha_0}$ is open, there exists $r > 0$ such that $B(x,r) \subseteq U_{\alpha_0} \subseteq \bigcup_{\alpha \in \Lambda} U_{\alpha}$. Thus, $\bigcup_{\alpha \in \Lambda} U_{\alpha}$ is open.
+
+    For the third property, let $x \in \bigcap_{i=1}^{n} U_i$. Then $x \in U_i$ for all $1 \leq i \leq n$. Since each $U_i$ is open, there exists $r_i > 0$ such that $B(x,r_i) \subseteq U_i$ for all $1 \leq i \leq n$. Let $r = \min\{r_1, r_2, \ldots, r_n\}$. Then we have
+    \begin{align}
+        B(x,r) \subseteq B(x,r_i) \subseteq U_i \quad \forall 1 \leq i \leq n,
+    \end{align}
+    which implies that $B(x,r) \subseteq \bigcap_{i=1}^{n} U_i$. Thus, $\bigcap_{i=1}^{n} U_i$ is open.
+\end{proof}
+
+
+\section{Topological Spaces and Examples}
+
+A \eax{topological space} is a pair $(X, \tau)$ where $X$ is a set and $\tau$ is a collection of subsets of $X$ satisfying the following properties:
+\begin{enumerate}[label=(\roman*)]
+    \item $\emptyset, X \in \tau$.
+    \item For $\{U_{\alpha}\}_{\alpha \in \Lambda} \subseteq \tau$, we have $\bigcup_{\alpha \in \Lambda} U_{\alpha} \in \tau$. That is, an arbitrary union of sets in $\tau$ is in $\tau$.
+    \item For $U_1, U_2, \ldots, U_n \in \tau$, we have $\bigcap_{i=1}^{n} U_i \in \tau$. That is, a finite intersection of sets in $\tau$ is in $\tau$.
+\end{enumerate}
+
+These are the exact same properties that the collection of open sets in a metric space satisfy. Hence, every metric space $(X,d)$ gives rise to a topological space $(X, \tau_{d})$ where $\tau_{d}$ is the collection of all open sets in $(X,d)$. Such a topology $\tau_{d}$ is called the topology induced by the metric $d$.
+
+As a smaller example, let $X = \{0,1,2,3,4\}$ and consider the collection $\tau = \{\emptyset, X, \{0\}, \{0,1\}, \{2,4\}\}$. Then the pair $(X, \tau)$ is \textit{not} a topological space since $\{0,1\} \cup \{2,4\} = \{0,1,2,4\} \notin \tau$. However, the pair $(X, \tau')$ where $\tau' = \{\emptyset, X, \{0\}, \{0,1\}, \{2,4\}, \{0,1,2,4\}\}$ is a topological space.
+
+\subsubsection{Description of open sets in $\R$}
+
+\begin{theorem}
+    A non-empty open set in $\R$ is a countable union of pairwise disjoint open intervals.
+\end{theorem}
+\begin{proof}
+    Let $U \subseteq \R$ be a non-empty open set. For each $x \in U$, define
+    \begin{align}
+        I_{x} = \bigcup \{ (a,b) \mid x \in (a,b) \subseteq U \}.
+    \end{align}
+    Note that $x \in I_{x} \subseteq U$. Let $a_{x} = \inf I_{x}$ and $b_{x} = \sup I_{x}$. We claim that $I_{x} = (a_{x}, b_{x})$. For $a_{x} < z < b_{x}$, there exists $a,b \in I_{x}$ such that $a_{x} < a < z < b < b_{x}$. Since $z \in (a,b) \subseteq I_{x}$, we have $z \in I_{x}$. Thus, $(a_{x}, b_{x}) \subseteq I_{x}$. The other inclusion is trivial. Hence, $I_{x} = (a_{x}, b_{x})$ is an open interval.
+
+    We now claim that if $x \neq y$, then either $I_{x} = I_{y}$ or $I_{x} \cap I_{y} = \emptyset$. Suppose that $I_{x} \cap I_{y} \neq \emptyset$. Then $I_{x} \cup I_{y}$ is an interval containing both $x$ and $y$ and contained in $U$. By the definition of $I_{x}$ and $I_{y}$, we have $I_{x} \cup I_{y} \subseteq I_{x}$ and $I_{x} \cup I_{y} \subseteq I_{y}$. Thus, $I_{x} = I_{y}$.
+
+    Finally, let $U = \bigcup_{x \in U} I_{x}$. By the above claim, the collection $\{I_{x} \mid x \in U\}$ consists of pairwise disjoint open intervals. Since each $I_{x}$ contains a rational number (by the density of $\Q$ in $\R$), for each $I_{x}$, we can choose a distinct rational number $q_{x} \in I_{x}$. This gives $I_{x} = I_{q_{x}}$. Thus, we have
+    \begin{align}
+        U = \bigcup_{x \in U} I_{x} = \bigcup_{q \in \Q \cap U} I_{q},
+    \end{align}
+    which is a countable union of pairwise disjoint open intervals.
+\end{proof}
+
+\begin{definition}
+    Let $(X,d_{1})$ and $(X,d_{2})$ be two metric spaces on the same set $X$. The metrics $d_{1}$ and $d_{2}$ are said to be \eax{equivalent metrics}, $d_{1} \sim d_{2}$, if open sets in $(X,d_{1})$ are exactly the open sets in $(X,d_{2})$.
+\end{definition}
