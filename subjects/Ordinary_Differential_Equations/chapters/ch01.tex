@@ -64,8 +64,87 @@ This is known as the Fourier sine series of $f$. The coefficients can be determi
 \end{align}
 A similar approach is used in two dimensions, where instead of a string of length $L$, there is a drum (membrane) $\Omega$ of boundary $\Gamma$. Here, the wave equation satisfies $\partial_{tt} u = \Delta u$, where $\Delta$ is the Laplacian operator. The boundary conditions are $u(x,t) = 0$ for all $x \in \Gamma$ and $t \geq 0$, and the initial conditions are $u(x,0) = f(x)$ and $u_{t}(x,0) = 0$ for all $x \in \Omega$. 
 
-\section{(Ordinary) Differential Equations}
+\subsection{(Ordinary) Differential Equations}
 
 A general theme of the subject is that we have a system that evolves with time. The evolution of this function is encoded in differential equations, and vice versa. We wish to understand this evolution, or to determine solutions of the differential equations; we wish to determine their existence, uniqueness, and even explicit forms. Finally, we also look at how the system and solutions depend on initial conditions.
 
-To put it explicitly, a differential equation is of the form $F(t,f',f'',\cdots,f^{(n)}) = 0$, where $t$ is an independent variable and $f$ is a function of $t$.
+To put it explicitly, a \eax{differential equation} is of the form $F(t,f',f'',\cdots,f^{(n)}) = 0$, where $t$ is an independent variable and $f$ is a function of $t$.
+\\ \\
+\textit{January 7th.}
+
+Note that at the moment, we are not assuming anything about the `expression' function $F$; it could be linear or non-linear, explicit or implicit, algebraic or transcendental, continuous or discontinuous, and so on. The highest order of derivative appearing in the expression is called the \eax{order} of the differential equation.
+
+\begin{example}
+    $y''' + t \sin (y') + y = 0$ is a third-order differential equation. Here, $t$ is the independent variable and $y$ is the dependent variable.
+\end{example}
+
+Natural questions arise; does a solution exist? Is it unique? For how long does it exist? How does it depend on initial conditions? We divert our attention first to \eax{first-order differential equation}s, i.e., those of the form $F(t,y,y') = 0$.
+
+
+It may be noted that a solution may not even exist for a given differential equation. A simple example is given by $(y')^{2} + 1 = 0$. Thus, a solution need not always exist. Also note that even if a solution exists, it may not be unique. For example, consider the differential equation $(y' - 2)(y' + 2) = 0$; both $y = 2t$ and $y = -2t$ are solutions satisfying the same initial condition $y(0) = 0$. Finally, let us see an example where a solution exists and is unique, but only for a limited time. Consider the differential equation $y' = y^{2}$ with the initial condition $y(0) = 1$. The solution is given by $y(t) = \frac{1}{1 - t}$, which exists and is unique for $t \in (-\infty, 1)$, but blows up as $t \to 1$.
+\section{First-Order ODEs}
+
+Let us consider first-order ODEs of the form
+\begin{align}
+    \dot{y} = f(t,y).
+\end{align}
+If we assume that the variables can be separated, that is, $f(t,y) = w(y) \, v(t)$ for some functions $w$ and $v$, then we can rewrite this as
+\begin{align}
+    \frac{1}{w(y)} \, \dot{y} = v(t) \implies \frac{\di{y}}{w(y)} = v(t) \, \di{t}.
+\end{align}
+If $W$ is an antiderivative of $1/w$, and $V$ is an antiderivative of $v$, then we have
+\begin{align}
+    W(y(t)) = V(t) + C,
+\end{align}
+for some constant $C \in \R$. This gives us an implicit solution of the differential equation. If $W$ is invertible, then we can make it explicit. Of course, this calculation is completely formal. For a more rigorous treatment,
+\begin{align}
+    \frac{1}{w(y)} \frac{\di{y}}{\di{t}} = v(t) \implies \frac{\di{}}{\di{t}} W(y(t)) = \frac{\di{}}{\di{t}} V(t) \implies W(y(t)) = V(t) + C.
+\end{align}
+
+This is an algebraic point of view; given $F(t,y,y') = 0$, we solve for $y$. There is also a geometric point of view. Recall that a \eax{curve} in $\R^{n}$ is a continuous function $\gamma : [0,1] \to \R^{n}$. If $\gamma$ is $k$-times differentiable, then we say that $\gamma$ is a $C^{k}$ curve. A \eax{vector field} on $S \subseteq \R^{n}$ is a function $V: S \to \R^{n}$. Again, it is termed continuous or $C^{k}$ if the function is continuous or $k$-times differentiable respectively. We may also have a time-dependent vector field $V: S \times [0,\infty) \to \R^{n}$. An \eax{integral curve} of a vector field $V$ on $S$ is a cruve $\gamma:[0,1] \to S$ such that
+\begin{align}
+    \dot{\gamma}(t) = V(\gamma(t)).
+\end{align}
+If $V$ is time-dependent, then the integral curve satisfies
+\begin{align}
+    \dot{\gamma}(t) = V(\gamma(t),t).
+\end{align}
+Thus, given a first-order ODE $\dot{y} = f(t,y)$, we can think of $f$ as a time-dependent vector field on $\R$, and solutions of the ODE are integral curves of this vector field. We can also define $V(y,t) = (1, f(t,y))$ as a vector field on $\R^{2}$, and solutions of the ODE correspond to integral curves of this vector field, and are of the form $(t,y(t))$. We can impose certain regularity conditions on $f$ to ensure existence and uniqueness of solutions.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Note that at least continuity of $f$ is required to ensure the existence of a solution; if $f$ is not continuous, like in the case of
+    \begin{align}
+        f(y,t) = \begin{cases}
+            1 &\text{if } t \in [0,1], \\
+            0 & \text{if } t > 1,
+        \end{cases},
+    \end{align}
+    then there is no solution of the ODE $\dot{y} = f(t,y)$ with the initial condition $y(0) = 0$.
+    \item However, continuity alone does not guarantee uniqueness of solutions. For example, consider the ODE $\dot{y} = \sqrt{\abs{y}}$ with the initial condition $y(0) = 0$. Then both $y(t) = 0$ and $y(t) = \1_{[0,\infty)}(t) \, \frac{t^{2}}{4}$ are solutions.
+\end{enumerate}
+
+\begin{example}
+    Let us look at the case of a model for population growth of bacteria. Let $P(t)$ be the population at time $t$. A simple model given by the differential equation
+    \begin{align}
+        \frac{\di{P}}{\di{t}} = aP \left( 1 - \frac{P}{N} \right)
+    \end{align}
+    where $a$ and $P$ are appropriate constants. Here, $N$ is the carrying capacity of the environment. When $P$ is small, the population grows approximately exponentially, but as $P$ approaches $N$, the growth rate slows down and eventually stops when $P = N$. This is known as the logistic growth model. One can easily solve the ODE $\dot{y} = y(1-y)$ using the method of separation of variables to obtain
+    \begin{align}
+        y(t) = \frac{a_{0} e^{t}}{1 + a_{0} e^{t}},
+    \end{align}
+    where $a_{0} = y(0) / (1 - y(0))$. This solution approaches $1$ as $t \to \infty$, which corresponds to the carrying capacity in the original model. One can also analyze the long-term behaviour, dependence of initial conditions, etc.~without explicitly solving the ODE; this is the concern of dynamics, which will be studied towards the end of the course.
+\end{example}
+
+\subsection{Exact Equations}
+
+Consider a first-order ODE of the form
+\begin{align}
+    M(x,y) + N(x,y) \, \frac{\di{y}}{\di{x}} = 0, \quad \text{ that is, } M(x,y) \, \di{x} + N(x,y) \, \di{y} = 0.
+\end{align}
+Such an ODE of the form $M \, \di{x} + N \, \di{y} = 0$ is said to be \eax{exact} if there exists a function $g(x,y)$ such that $\partial_{x} g(x,y) = M(x,y)$ and $\partial_{y} g(x,y) = N(x,y)$. In this case, the solutions of the ODE are given by $g(x,y) = C$ for some constant $C \in \R$. If there does exist such a function $g$, then we must have
+\begin{align}
+    \frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}.
+\end{align}
+In fact, the converse is also true; if the above holds, then such a function $g$ exists and the equation is exact.
+
+A vector field $V$ on $\R^{n}$ is termed a \eax{conservative vector field} if there exists a scalar \eax{potential function} $\varphi : \R^{n} \to \R$ such that $V = \nabla \varphi$. Thus, a first-order ODE $M \, \di{x} + N \, \di{y} = 0$ is exact if and only if the vector field $V(x,y) = (M(x,y), N(x,y))$ is conservative with potential function $g$.
