@@ -22,7 +22,7 @@ The \eax{strong force} is reponsible for holding the nucleus of an atom together
 If we set two electrons one metre apart, the gravitational force between them is approximately $10^{-42}$ times weaker than the electromagnetic force. This stark contrast highlights the relative weakness of gravity compared to electromagnetism at the scale of elementary particles. The electromagnetic force has an important aspect in that it unifies electricity and magnetism, which were once thought to be separate phenomena.
 
 
-\section{Electrostatics}
+\subsection{Electrostatics}
 
 The field of \eax{electrostatics} deals with the study of electric charges at rest. The goal is, given a set of source charges with their positions and magnitudes, to determine the force on a test charge with a given position and magnitude. Moreover, we want to determine the trajectory of the test charge. The principle of superposition plays a crucial role in electrostatics, allowing us to calculate the net electric field or force by summing the contributions from individual charges. In general, both source and test charges can be in motion; the net force is not so simple to calculate in that case, since the individual forces also depends on the velocities of the charges and even their accelerations.
 
@@ -34,7 +34,7 @@ With these assumptions, we can focus on the electrostatic forces between charges
     \bv{F} = \frac{1}{4 \pi \epsilon_{0}} \frac{q Q}{\abs{\curs{r}}^{2}} \hat{\curs{r}},
 \end{align}
 
-where $\epsilon_{0}$ is the \eax{permittivity of free space}, a fundamental constant with a value of approximately $8.854 \times 10^{-12} \; \mathrm{C^{2}/Nm^{2}}$ in SI units. The unit vector $\hat{\mathscr{r}}$ points from the source charge to the test charge, indicating the direction of the force. The force is attractive if the charges have opposite signs and repulsive if they have the same sign. We may also rewrite $\bv{F}$ in terms of the \eax{electric field} $\bv{E}$ defined by $\bv{F} = Q \bv{E}$. Thus, over a set of source charges $q_{i}$, the electric field at position $\bv{r}$ is given by
+where $\epsilon_{0}$ is the \eax{permittivity of free space}, a fundamental constant with a value of approximately $8.854 \times 10^{-12} \; \mathrm{C^{2}/Nm^{2}}$ in SI units. The unit vector $\hat{\curs{r}}$ points from the source charge to the test charge, indicating the direction of the force. The force is attractive if the charges have opposite signs and repulsive if they have the same sign. We may also rewrite $\bv{F}$ in terms of the \eax{electric field} $\bv{E}$ defined by $\bv{F} = Q \bv{E}$. Thus, over a set of source charges $q_{i}$, the electric field at position $\bv{r}$ is given by
 \begin{align}
     \bv{E}(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \sum_{i} \frac{q_{i}}{\abs{\curs{r}_{i}}^{2}} \hat{\curs{r}}_{i},
 \end{align}
@@ -43,7 +43,7 @@ where $\curs{r}_{i}$ is defined similarly as above for each source charge. For a
     \bv{E}(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\di{q}}{\abs{\curs{r}}^{2}} \hat{\curs{r}} = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\rho(\bv{r}')}{\abs{\curs{r}}^{2}} \hat{\curs{r}} \; \di{V}'.
 \end{align}
 
-\subsection{Electric Flux}
+\section{Divergence of $\bv{E}$: Gauss's Law and Electric Flux}
 
 The electric field $\bv{E}(\bv{r})$ is a \eax{vector field}, meaning that at every point in space, it assigns a vector quantity. We can represent this field by assigning an `arrow' at each point in space, where the direction of the arrow indicates the direction of the electric field vector, and the length of the arrow represents the magnitude of the field at that point. This gets messy. To visualise the electric field, we often use \eax{field lines}, which are imaginary lines that represent the direction of the electric field. The density of these lines indicates the strength of the field; closer lines correspond to a stronger field. Field lines originate from positive charges and terminate on negative charges, providing a visual representation of how the electric field behaves in space.
 
@@ -74,3 +74,124 @@ Since this holds for any arbitrary volume $V$, we obtain the differential form o
 \begin{align}
     \nabla \cdot \bv{E} = \frac{\rho}{\epsilon_{0}}.
 \end{align}
+\\
+\textit{January 7th.}
+
+In some sense, Coulomb's law is more fundamental than Gauss's law, despite both being equivalent. Coulomb's law follows from the inverse-square nature of the electric field, which in turn arises from the three-dimensional nature of space. If the electric field were to fall off with distance $r$ in a different manner, say as $1/r^{3}$, then Gauss's law would not hold in its current form. 
+
+Let us now explicitly derive the \eax{differential form of Gauss's law}. Note that we had
+
+\begin{align}
+    \bv{E}(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\rho(\bv{r}')}{\abs{\curs{r}}^{2}} \hat{\curs{r}} \; \di{V}'.
+\end{align}
+Taking the divergence of both sides, we have
+\begin{align}
+    \nabla \cdot \bv{E} = \frac{1}{4 \pi \epsilon_{0}} \int \rho(\bv{r}') \nabla \cdot \left( \frac{\hat{\curs{r}}}{\abs{\curs{r}}^{2}} \right) \; \di{V}'
+\end{align}
+since the divergence operator acts on $\bv{r}$, not $\bv{r}'$ (a fixed quantity). Using the cartesian coordinates now gets messy quickly, so spherical coordinates are preferred; in these coordinates, the divergence of any vector field $\bv{A} = A_{r} \hat{\bv{r}} + A_{\theta} \hat{\bv{\theta}} + A_{\phi} \hat{\bv{\phi}}$ is given by
+\begin{align}
+    \nabla \cdot \bv{A} = \frac{1}{r^{2}} \frac{\partial}{\partial r} (r^{2} A_{r}) + \frac{1}{r \sin \theta} \frac{\partial}{\partial \theta} (A_{\theta} \sin \theta) + \frac{1}{r \sin \theta} \frac{\partial}{\partial \phi} A_{\phi}.
+\end{align}
+Applying this to $\bv{A} = \hat{\bv{r}} / \abs{r}^{2}$, we find that $\nabla \cdot \left( \hat{\bv{r}} / \abs{r}^{2} \right) = \frac{1}{r^{2}} \frac{\partial}{\partial r} (r^{2} \cdot \frac{1}{r^{2}}) = 0$ for $\bv{r} \neq 0$. Let us integrate this over the volume of a sphere of radius $R$ centred at the origin:
+\begin{align}
+    \int_{V} \nabla \cdot \bv{A} \; \di{V'} = \oint_{S} \bv{A} \cdot \di{\bv{a}} = \oint_{S} \frac{\hat{\bv{r}}}{r^{2}} \cdot d \bv{a} = \int_{0}^{2\pi} \int_{0}^{\pi} \frac{1}{R^{2}} R^{2} \sin \theta \; \di{\theta} \; \di{\phi} = 4\pi.
+\end{align}
+This is a \textit{contradictory} result, since we found that the divergence is zero everywhere except at the origin, so the integration should be zero. The resolution to this was provided by Dirac, who introduced the concept of the \eax{Dirac delta function} $\delta(x)$. This is not a function in the traditional sense, but rather something known as a distribution. It is defined such that it is zero everywhere except at $x = 0$, where it is \textit{infinitely} large, and its integral over the entire real line is equal to one:
+\begin{align}
+    \delta(x) = \begin{cases}
+        0 &\text{if } x \neq 0, \\
+        \infty &\text{if } x = 0,
+    \end{cases} \quad \text{and} \quad \int_{-\infty}^{\infty} \delta(x) \; \di{x} = 1.
+\end{align}
+One may also note that $\int_{-\infty}^{\infty} \delta(x - a) \; \di{x} = 1$ for any real number $a$. If $f(x)$ is a `well-behaved' function, then
+\begin{align}
+    \int_{-\infty}^{\infty} f(x) \delta(x - a) \; \di{x} = f(a).
+\end{align}
+The Dirac delta function can be generalised to higher dimensions; in three dimensions, it is defined as $\delta^{3}(\bv{r}) = \delta(x) \delta(y) \delta(z)$. Using this, we can write
+\begin{align}
+    \nabla \cdot \left( \frac{\hat{\bv{r}}}{r^{2}} \right) = 4 \pi \delta^{3}(\bv{r}).
+\end{align}
+This generalizes to
+\begin{align}
+    \nabla \cdot \left( \frac{\hat{\curs{r}}}{\abs{\curs{r}}^{2}} \right) = 4 \pi \delta^{3}(\curs{r})
+\end{align}
+where the divergence is taken with respect to $\bv{r}$. Thus, the divergence of the electric field becomes
+\begin{align}
+    \nabla \cdot \bv{E} = \frac{1}{4 \pi \epsilon_{0}} \int \rho(\bv{r}') \nabla \cdot \left( \frac{\hat{\curs{r}}}{\abs{\curs{r}}^{2}} \right) \; \di{V}' = \frac{1}{4 \pi \epsilon_{0}} \int \rho(\bv{r}') 4 \pi \delta^{3}(\curs{r}) \; \di{V}' = \frac{1}{\epsilon_{0}} \int \rho(\bv{r}') \delta^{3}(\bv{r} - \bv{r}') \; \di{V}' = \frac{\rho(\bv{r})}{\epsilon_{0}}.
+\end{align}
+This recovers Gauss's law in differential form.
+
+\subsubsection{Common charge densities}
+
+The charge distributions we encounter in electrostatics are often highly symmetric, allowing us to exploit this symmetry to simplify calculations. 
+
+\begin{enumerate}[label=\arabic*.]
+    \item \textit{Point charge}: A point charge is an idealized model of a charged particle with negligible size. The charge density for a point charge $q$ located at the origin is simply given by
+    \begin{align}
+        \rho(\bv{r}) = q \, \delta^{3}(\bv{r}).
+    \end{align}
+
+    \item \textit{Dipole}: A dipole consists of two equal and opposite point charges separated by a small distance. For a point charge $+q$ at the origin and a point charge $-q$ at position $\bv{a}$, the charge density is given by
+    \begin{align}
+        \rho(\bv{r}) = q \, \delta^{3}(\bv{r}) - q \, \delta^{3}(\bv{r} - \bv{a}).
+    \end{align}
+
+    \item \textit{Hollow sphere}: Consider a uniformly charged thin spherical shell of radius $R$ and total charge $Q$. The surface charge density $\sigma$ is given by $\sigma = \frac{Q}{4 \pi R^{2}}$. The volume charge density is then
+    \begin{align}
+        \rho(\bv{r}) = \sigma \, \delta(r - R) = \frac{Q}{4 \pi R^{2}} \, \delta(r - R).
+    \end{align}
+    To derive this, we note that $\rho(\bv{r})$ must be singular at the surface of the sphere, so it must be proportional to $\delta(r - R)$. To find the proportionality constant, we integrate over all space to ensure the total charge is $Q$:
+    \begin{align}
+        Q = \int \rho(\bv{r}) \; \di{V'} = 4 \pi \int_{0}^{\infty} r^{2} \, \rho(r) \, \di{r} = 4 \pi k \int_{0}^{\infty} r^{2} \, \delta(r - R) \, \di{r} = 4 \pi k R^{2} \implies k = \frac{Q}{4 \pi R^{2}}. 
+    \end{align}
+\end{enumerate}
+
+\section{Curl of $\bv{E}$: Electric Potential}
+
+Having discussed the divergence of the electric field, we now turn our attention to its curl; that is, we wish to compute $\nabla \times \bv{E}$. Consider the case of a point charge $q$ at the origin. Stokes' theorem gives us
+\begin{align}
+    \int_{S} (\nabla \times \bv{E}) \cdot \di{\bv{a}} = \oint_{C} \bv{E} \cdot \di{\bv{l}}.
+\end{align}
+Plugging in the expression for $\bv{E}$, and using the fact that $\di{\bv{l}} = \di{r} \hat{\bv{r}} + r \, \di{\theta} \hat{\bv{\theta}} + r \sin \theta \, \di{\phi} \hat{\bv{\phi}}$, let us integrate the line integral from $\bv{a}$ to $\bv{b}$ along some arbitrary path $C$:
+\begin{align}
+    \int_{C} \bv{E} \cdot \di{\bv{l}} = \frac{q}{4 \pi \epsilon_{0}} \int_{\bv{a}}^{\bv{b}} \frac{1}{r^{2}} \hat{\bv{r}} \cdot \di{\bv{l}} = \frac{q}{4 \pi \epsilon_{0}} \int_{r_{a}}^{r_{b}} \frac{1}{r^{2}} \, \di{r} = \frac{q}{4 \pi \epsilon_{0}} \left(\frac{1}{r_{a}} - \frac{1}{r_{b}}\right).
+\end{align}
+This result is independent of the path taken between points $\bv{a}$ and $\bv{b}$. Therefore, for any closed loop $C$, the line integral evaluates to zero, that is, $\oint \bv{E} \cdot \di{\bv{l}} = 0$. Since this holds for any arbitrary surface $S$ bounded by the loop $C$, we conclude that
+\begin{align}
+    \nabla \times \bv{E} = \bv{0}.
+\end{align}
+In fact, this result holds for any charge distribution and not just point charges. Note that this is a static situation; if charges were moving, then a time-varying magnetic field would be induced, leading to a non-zero curl of the electric field which we shall study later. We can also derive this result via computing the curl directly. Consider again a point charge $q$ at the origin. In cartesian coordinates, the electric field is given by
+\begin{align}
+    \bv{E}(\bv{r}) = \frac{q}{4 \pi \epsilon_{0}} \frac{\hat{\bv{r}}}{r^{3}} = \frac{q}{4 \pi \epsilon_{0}} \left( \frac{x \hat{\bv{x}} + y \hat{\bv{y}} + z \hat{\bv{z}}}{(x^{2} + y^{2} + z^{2})^{3/2}} \right).
+\end{align}
+Calculating the curl in cartesian coordinates is relatively straightforward, albeit a bit tedious via the determinant method:
+\begin{align}
+    \nabla \times \bv{E} = \begin{vmatrix}
+        \hat{\bv{x}} & \hat{\bv{y}} & \hat{\bv{z}} \\
+        \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+        E_{x} & E_{y} & E_{z}
+    \end{vmatrix}.
+\end{align}
+With this, one easily finds that $\nabla \times \bv{E} = \bv{0}$ for $\bv{r} \neq 0$. The singularity at the origin can be handled similarly as before using the Dirac delta function. Again, the result can be generalised to any (static) charge distribution by integrating over the entire distribution.
+
+Since $\int \bv{E} \cdot \di{\bv{l}}$ was found to be independent of the path taken, we are fit to define a scalar function $V(\bv{r})$ known as the \eax{electric potential} such that
+\begin{align}
+    V(\bv{r}) = - \int_{O}^{\bv{r}} \bv{E} \cdot \di{\bv{l}},
+\end{align}
+where $O$ is some standard point, often taken to be at infinity. This choice of reference point is arbitrary, as only the \eax{potential difference} between two points is physically meaningful:
+\begin{align}
+    V(\bv{b}) - V(\bv{a}) = - \int_{O}^{\bv{b}} \bv{E} \cdot \di{\bv{l}} + \int_{O}^{\bv{a}} \bv{E} \cdot \di{\bv{l}} = - \int_{\bv{a}}^{\bv{b}} \bv{E} \cdot \di{\bv{l}}.
+\end{align}
+What is also true is that
+\begin{align}
+    V(\bv{b}) - V(\bv{a}) = - \int_{\bv{a}}^{\bv{b}} \bv{E} \cdot \di{\bv{l}} \implies \bv{E} = - \nabla V = - \left( \frac{\partial V}{\partial x} \hat{\bv{x}} + \frac{\partial V}{\partial y} \hat{\bv{y}} + \frac{\partial V}{\partial z} \hat{\bv{z}} \right).
+\end{align}
+The advantage of working with the electric potential $V$ instead of the electric field $\bv{E}$ is that $V$ is a scalar function, making calculations often simpler. Note that this also implies $V$ is arbitrary up to an additive constant, since adding a constant to $V$ does not change $\bv{E}$. The principle of superposition also holds for electric potentials; the total potential due to a set of source charges is simply the algebraic sum of the potentials due to each individual charge. Thus, we have derived two fundamental properties of the electrostatic field:
+\begin{align}
+    \nabla \cdot \bv{E} = \frac{\rho}{\epsilon_{0}}, \quad \text{and} \quad \nabla \times \bv{E} = \bv{0}.
+\end{align}
+These are differential equations that govern the behaviour of the electrostatic field $\bv{E}$ in the presence of a charge distribution $\rho$. Using the relation $\bv{E} = - \nabla V$, we can rewrite the differential equations in terms of the electric potential $V$:
+\begin{align}
+    \nabla^{2} V = - \frac{\rho}{\epsilon_{0}}, \quad \text{and} \quad \nabla \times \nabla V = \bv{0}.
+\end{align}
+Here, $\nabla^{2} = \nabla \cdot \nabla$ is the Laplacian operator. The first equation is known as \eax{Poisson's equation}, while the second is an identity that holds for any scalar function. If there are no charges present in a region, that is, $\rho = 0$, then Poisson's equation reduces to \eax{Laplace's equation}, $\nabla^{2} V = 0$.
