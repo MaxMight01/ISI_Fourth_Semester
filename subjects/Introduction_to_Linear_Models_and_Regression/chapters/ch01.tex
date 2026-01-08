@@ -1,0 +1,88 @@
+\chapter{RANDOM VECTORS}
+\section{Definitions and Moments}
+\textit{January 8th.}
+
+Recall that for a random variable $X$, the $r$-th \eax{raw moment} is defined as
+\begin{align}
+    \mu'_r = \E[X^{r}]
+\end{align}
+provided the expectation exists. Here, $\mu'_{1} = \E[X] = \mu$ is the mean. The $r$-th \eax{central moment} is defined as
+\begin{align}
+    \mu_r = \E[(X - \mu)^{r}].
+\end{align}
+Similarly, for a set of sample points $x_1, x_2, \ldots, x_n$, the $r$-th \eax{sample raw moment} is defined as
+\begin{align}
+    m'_r = \frac{1}{n} \sum_{i=1}^n x_i^{r}
+\end{align}
+and the $r$-th \eax{sample central moment} is defined as
+\begin{align}
+    m_r = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^{r}
+\end{align}
+where $\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i$ is the sample mean. Note that $\mu_{2} = \Var(X)$ is the variance of $X$ and $\dfrac{\mu_{3}^{2}}{\mu_{2}^{3}}$ is the \eax{skewness} of $X$. There is also \eax{coefficient of variation} defined as $\dfrac{\sigma}{\mu}$ where $\sigma = \sqrt{\Var(X)}$ is the standard deviation of $X$. For a sample, it is defined as $\dfrac{s}{\bar{x}}$ where $s = \sqrt{\frac{1}{n-1} \sum_{i=1}^n (x_i - \bar{x})^{2}}$ is the sample standard deviation. The \eax{correlation coefficient} between $x_{i}$'s and $y_{i}$'s is defined as
+\begin{align}
+    \dfrac{\frac{1}{n} \sum (x_{i} - \bar{x})(y_{i}-\bar{y})}{\sqrt{\frac{1}{n} \sum (x_{i} - \bar{x})^{2} \cdot \frac{1}{n} \sum (y_{i} - \bar{y})^{2}}}
+\end{align}
+It is also known as the product-moment correlation coefficient.
+
+
+These definitions can be extended to random vectors as follows. For a random vector $\bv{X} = (X_{1}, X_{2}, \ldots, X_{p})^{T}$, the \eax{mean vector} is defined as
+\begin{align}
+    \bvs{\mu} = \E[\bv{X}] = \begin{pmatrix}
+        \E[X_{1}] \\
+        \E[X_{2}] \\
+        \vdots \\
+        \E[X_{p}]
+    \end{pmatrix}
+    = \begin{pmatrix}
+        \mu_{1} \\
+        \mu_{2} \\
+        \vdots \\
+        \mu_{p}
+    \end{pmatrix}.
+\end{align}
+The \eax{dispersion matrix}, or covariance matrix, is defined as
+\begin{align}
+    \bvs{\Sigma} = \E[(\bv{X} - \bvs{\mu})(\bv{X} - \bvs{\mu})^{T}] = \begin{pmatrix}
+        \Var(X_{1}) & \Cov(X_{1}, X_{2}) & \cdots & \Cov(X_{1}, X_{p}) \\
+        \Cov(X_{2}, X_{1}) & \Var(X_{2}) & \cdots & \Cov(X_{2}, X_{p}) \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \Cov(X_{p}, X_{1}) & \Cov(X_{p}, X_{2}) & \cdots & \Var(X_{p})
+    \end{pmatrix} =
+    \begin{pmatrix}
+        \sigma_{1}^{2} & \sigma_{12} & \cdots & \sigma_{1p} \\
+        \sigma_{21} & \sigma_{2}^{2} & \cdots & \sigma_{2p} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \sigma_{p1} & \sigma_{p2} & \cdots & \sigma_{p}^{2}
+    \end{pmatrix}.
+\end{align}
+Similar to the correlation coefficient for random variables, we define the \eax{correlation matrix} for a random vector $\bv{X}$ as
+\begin{align}
+    \bvs{R} = \begin{pmatrix}
+        1 & r_{12} & \cdots & r_{1p} \\
+        r_{21} & 1 & \cdots & r_{2p} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        r_{p1} & r_{p2} & \cdots & 1
+    \end{pmatrix}
+\end{align}
+Define $D_{\sigma}$ as the diagonal matrix $\diag (\sigma_{1},\sigma_{2}, \ldots, \sigma_{p})$. Then, we have the relation
+\begin{align}
+    \bvs{R} = D_{\sigma}^{-1} \bvs{\Sigma} D_{\sigma}^{-1}.
+\end{align}
+If $\bv{Z} = \begin{pmatrix}
+    \bv{X} \\ \bv{Y}
+\end{pmatrix}$ is a random vector where $\bv{X}$ is of dimension $p$ and $\bv{Y}$ is of dimension $q$, then we simply have
+\begin{align}
+    \E[\bv{Z}] = \begin{pmatrix}
+        \E[\bv{X}] \\ \E[\bv{Y}]
+    \end{pmatrix}, \quad
+    \Cov(\bv{Z}) = \begin{pmatrix}
+        \bvs{\Sigma}_{\bv{X}} & \bvs{\Sigma}_{\bv{X}\bv{Y}} \\
+        \bvs{\Sigma}_{\bv{X}\bv{Y}}^{\top} & \bvs{\Sigma}_{\bv{Y}}
+    \end{pmatrix}.
+\end{align}
+As for linear transformations, if $\bv{Y} = \bv{A} \bv{X} + \bv{b}$ where $\bv{A}$ is a $q \times p$ matrix and $\bv{b} \in \R^{q}$, then
+\begin{align}
+    \E[\bv{Y}] = \bv{A} \E[\bv{X}] + \bv{b}, \quad
+    \Cov(\bv{Y}) = \bv{A} \Cov(\bv{X}) \bv{A}^{\top}.
+\end{align}
+In particular, if $\bv{a} = \bv{A}^{\top}$ is a $p$-dimensional vector, then $Y$ is a univariate random variable written as $Y = \bv{a}^{\top} \bv{X} + b$.

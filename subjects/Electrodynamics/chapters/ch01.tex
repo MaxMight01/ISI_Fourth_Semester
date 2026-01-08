@@ -28,19 +28,19 @@ The field of \eax{electrostatics} deals with the study of electric charges at re
 
 It is not sufficient to just know positions and velocities at present time; we also need to know them at an earlier time due to the fact that electromagnetic interactions ``news'' travel at a finite velocity. We simplify this situation greatly. First, we assume that all source charges are at rest at fixed positions; they are stationary. Second, we assume that any electromagnetic effects propagate instantaneously.
 
-With these assumptions, we can focus on the electrostatic forces between charges. The fundamental law governing these interactions is \eax{Coulomb's law}. Let there be a point charge $q$ located at position $\bv{r}'$ and a test charge $Q$ located at position $\bv{r}$. If $\curs{r} = \bv{r} - \bv{r}'$ is the displacement vector from the source charge to the test charge, then the force $\bv{F}$ on the test charge due to the source charge is given by
+With these assumptions, we can focus on the electrostatic forces between charges. The fundamental law governing these interactions is \eax{Coulomb's law}. Let there be a point charge $q$ located at position $\bv{r}'$ and a test charge $Q$ located at position $\bv{r}$. If $\bcurs{r} = \bv{r} - \bv{r}'$ is the displacement vector from the source charge to the test charge, then the force $\bv{F}$ on the test charge due to the source charge is given by
 
 \begin{align}
-    \bv{F} = \frac{1}{4 \pi \epsilon_{0}} \frac{q Q}{\abs{\curs{r}}^{2}} \hat{\curs{r}},
+    \bv{F} = \frac{1}{4 \pi \epsilon_{0}} \frac{q Q}{\curs{r}^{2}} \hat{\bcurs{r}},
 \end{align}
 
-where $\epsilon_{0}$ is the \eax{permittivity of free space}, a fundamental constant with a value of approximately $8.854 \times 10^{-12} \; \mathrm{C^{2}/Nm^{2}}$ in SI units. The unit vector $\hat{\curs{r}}$ points from the source charge to the test charge, indicating the direction of the force. The force is attractive if the charges have opposite signs and repulsive if they have the same sign. We may also rewrite $\bv{F}$ in terms of the \eax{electric field} $\bv{E}$ defined by $\bv{F} = Q \bv{E}$. Thus, over a set of source charges $q_{i}$, the electric field at position $\bv{r}$ is given by
+where $\epsilon_{0}$ is the \eax{permittivity of free space}, a fundamental constant with a value of approximately $8.854 \times 10^{-12} \; \mathrm{C^{2}/Nm^{2}}$ in SI units. The unit vector $\hat{\bcurs{r}}$ points from the source charge to the test charge, indicating the direction of the force. The force is attractive if the charges have opposite signs and repulsive if they have the same sign. We may also rewrite $\bv{F}$ in terms of the \eax{electric field} $\bv{E}$ defined by $\bv{F} = Q \bv{E}$. Thus, over a set of source charges $q_{i}$, the electric field at position $\bv{r}$ is given by
 \begin{align}
-    \bv{E}(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \sum_{i} \frac{q_{i}}{\abs{\curs{r}_{i}}^{2}} \hat{\curs{r}}_{i},
+    \bv{E}(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \sum_{i} \frac{q_{i}}{\curs{r}_{i}^{2}} \hat{\bcurs{r}}_{i},
 \end{align}
-where $\curs{r}_{i}$ is defined similarly as above for each source charge. For a continuous distribution of source charges, typically represented by a linear density $\lambda$, surface density $\sigma$ or volume density $\rho$, an integral appropriately replaces the summation. In this case, we consider $\di{q} = \lambda \; \di{l}$, $\di{q} = \sigma \; \di{A}$ or $\di{q} = \rho \; \di{V}$ as the infinitesimal charge elements, and integrate over the entire distribution to find the electric field at the point of interest. For example, for a volume charge distribution, the electric field is given by
+where $\bcurs{r}_{i}$ is defined similarly as above for each source charge. For a continuous distribution of source charges, typically represented by a linear density $\lambda$, surface density $\sigma$ or volume density $\rho$, an integral appropriately replaces the summation. In this case, we consider $\di{q} = \lambda \; \di{l}$, $\di{q} = \sigma \; \di{A}$ or $\di{q} = \rho \; \di{V}$ as the infinitesimal charge elements, and integrate over the entire distribution to find the electric field at the point of interest. For example, for a volume charge distribution, the electric field is given by
 \begin{align}
-    \bv{E}(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\di{q}}{\abs{\curs{r}}^{2}} \hat{\curs{r}} = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\rho(\bv{r}')}{\abs{\curs{r}}^{2}} \hat{\curs{r}} \; \di{V}'.
+    \bv{E}(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\di{q}}{\curs{r}^{2}} \hat{\bcurs{r}} = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\rho(\bv{r}')}{\curs{r}^{2}} \hat{\bcurs{r}} \; \di{V}'.
 \end{align}
 
 \section{Divergence of $\bv{E}$: Gauss's Law and Electric Flux}
@@ -82,11 +82,11 @@ In some sense, Coulomb's law is more fundamental than Gauss's law, despite both 
 Let us now explicitly derive the \eax{differential form of Gauss's law}. Note that we had
 
 \begin{align}
-    \bv{E}(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\rho(\bv{r}')}{\abs{\curs{r}}^{2}} \hat{\curs{r}} \; \di{V}'.
+    \bv{E}(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\rho(\bv{r}')}{\curs{r}^{2}} \hat{\bcurs{r}} \; \di{V}'.
 \end{align}
 Taking the divergence of both sides, we have
 \begin{align}
-    \nabla \cdot \bv{E} = \frac{1}{4 \pi \epsilon_{0}} \int \rho(\bv{r}') \nabla \cdot \left( \frac{\hat{\curs{r}}}{\abs{\curs{r}}^{2}} \right) \; \di{V}'
+    \nabla \cdot \bv{E} = \frac{1}{4 \pi \epsilon_{0}} \int \rho(\bv{r}') \nabla \cdot \left( \frac{\hat{\bcurs{r}}}{\curs{r}^{2}} \right) \; \di{V}'
 \end{align}
 since the divergence operator acts on $\bv{r}$, not $\bv{r}'$ (a fixed quantity). Using the cartesian coordinates now gets messy quickly, so spherical coordinates are preferred; in these coordinates, the divergence of any vector field $\bv{A} = A_{r} \hat{\bv{r}} + A_{\theta} \hat{\bv{\theta}} + A_{\phi} \hat{\bv{\phi}}$ is given by
 \begin{align}
@@ -113,11 +113,11 @@ The Dirac delta function can be generalised to higher dimensions; in three dimen
 \end{align}
 This generalizes to
 \begin{align}
-    \nabla \cdot \left( \frac{\hat{\curs{r}}}{\abs{\curs{r}}^{2}} \right) = 4 \pi \delta^{3}(\curs{r})
+    \nabla \cdot \left( \frac{\hat{\bcurs{r}}}{\curs{r}^{2}} \right) = 4 \pi \delta^{3}(\bcurs{r})
 \end{align}
 where the divergence is taken with respect to $\bv{r}$. Thus, the divergence of the electric field becomes
 \begin{align}
-    \nabla \cdot \bv{E} = \frac{1}{4 \pi \epsilon_{0}} \int \rho(\bv{r}') \nabla \cdot \left( \frac{\hat{\curs{r}}}{\abs{\curs{r}}^{2}} \right) \; \di{V}' = \frac{1}{4 \pi \epsilon_{0}} \int \rho(\bv{r}') 4 \pi \delta^{3}(\curs{r}) \; \di{V}' = \frac{1}{\epsilon_{0}} \int \rho(\bv{r}') \delta^{3}(\bv{r} - \bv{r}') \; \di{V}' = \frac{\rho(\bv{r})}{\epsilon_{0}}.
+    \nabla \cdot \bv{E} = \frac{1}{4 \pi \epsilon_{0}} \int \rho(\bv{r}') \nabla \cdot \left( \frac{\hat{\bcurs{r}}}{\curs{r}^{2}} \right) \; \di{V}' = \frac{1}{4 \pi \epsilon_{0}} \int \rho(\bv{r}') 4 \pi \delta^{3}(\bcurs{r}) \; \di{V}' = \frac{1}{\epsilon_{0}} \int \rho(\bv{r}') \delta^{3}(\bv{r} - \bv{r}') \; \di{V}' = \frac{\rho(\bv{r})}{\epsilon_{0}}.
 \end{align}
 This recovers Gauss's law in differential form.
 
