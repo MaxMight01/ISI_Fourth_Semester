@@ -150,3 +150,74 @@ As a smaller example, let $X = \{0,1,2,3,4\}$ and consider the collection $\tau 
 \begin{definition}
     Let $(X,d_{1})$ and $(X,d_{2})$ be two metric spaces on the same set $X$. The metrics $d_{1}$ and $d_{2}$ are said to be \eax{equivalent metrics}, $d_{1} \sim d_{2}$, if open sets in $(X,d_{1})$ are exactly the open sets in $(X,d_{2})$.
 \end{definition}
+
+
+\textit{January 8th.}
+
+\begin{definition}
+    Let $A \subseteq X$ be a subset of a metric space $(X,d)$. The \eax{interior} of $A$, denoted by $\Int(A)$, is defined as
+    \begin{align}
+        \Int (A) \defeq \{ x \in A \mid \exists r > 0 \text{ such that } B(x,r) \subseteq A \}.
+    \end{align}
+\end{definition}
+
+For a general topological space, the interior of a set $A$ is defined as the largest open set contained in $A$. For another definition, we have
+\begin{align}
+    \Int(A) \defeq \{x \in A \mid \exists U \in \tau \text{ such that } x \in U \subseteq A \}.
+\end{align}
+
+\begin{lemma}
+    The above definitions of the interior of a set in a topological space are equivalent.
+\end{lemma}
+\begin{proof}
+    Suppose we affirm the second definition. Let $x \in \Int (A)$. Then there exists an open set $U_{x} \in \tau$ such that $x \in U_{x} \subseteq A$. Thus, $\bigcup_{x \in \Int (A)} U_{x} \subseteq A$ is contained in $A$ and is open. Moreover, if $z \in \Int (A) \setminus \bigcup_{x \in \Int (A)} U_{x}$, then there exists an open set $V \in \tau$ such that $z \in V \subseteq A$. But then $z \in U_{z} \subseteq \bigcup_{x \in \Int (A)} U_{x}$, a contradiction. Thus, $\Int (A) = \bigcup_{x \in \Int (A)} U_{x}$ is the largest open set contained in $A$. If $V$ is any open set contained in $A$, then for any $y \in V$, there exists an open set $V_{y} \in \tau$ such that $y \in V_{y} \subseteq A$. Thus, $y \in \Int (A)$, which implies that $V \subseteq \Int (A)$. Hence, the first definition holds.
+\end{proof}
+
+As an example, with the standard topology on $\R$, we have $\Int([0,1]) = (0,1)$, $\Int((0,1) \cup \{2\}) = (0,1)$, and $\Int(\Q) = \emptyset$. Note that the interior of an open set is the set itself; $\Int(U) = U$ for any open set $U$.
+
+In the spirit of an induced metric, the subspace topology is defined as follows.
+\begin{definition}
+    Let $(X, \tau)$ be a topological space and let $Y \subseteq X$. The \eax{subspace topology} on $Y$ is defined as
+    \begin{align}
+        \tau_{Y} = \{ U \cap Y \mid U \in \tau \}.
+    \end{align}
+\end{definition}
+
+One can verify that $\tau_{Y}$ is a topology on $Y$. Let us look at some examples of topological spaces.
+
+\begin{example}
+    The \eax{discrete topology} on a set $X$ is the topology $\tau = \cP(X)$, the power set of $X$. Every subset of $X$ is open in this topology. In contrast, the \eax{indiscrete topology} (trivial topology) on $X$ is the topology $\tau = \{\emptyset, X\}$. Only the empty set and the whole set are open in this topology.
+\end{example}
+
+\begin{example}
+    Let $X$ be any set. The \eax{cofinite topology} on $X$ is defined as
+    \begin{align}
+        \tau = \{ U \subseteq X \mid U = \emptyset \text{ or } U^{c} \text{ is finite} \}.
+    \end{align}
+    One can verify that $\tau$ is a topology on $X$; both $\emptyset$ and $X$ are in $\tau$. For an arbitrary union of sets in $\tau$, if any one of them is $X$, then the union is $X$. Otherwise, the complement of the union is the intersection of finite sets, which is finite. For a finite intersection of sets in $\tau$, the complement of the intersection is the finite union of finite sets, which is finite. Thus, $\tau$ is a topology on $X$.
+\end{example}
+
+\begin{example}
+    Let $X$ be any set. The \eax{cocountable topology} on $X$ is defined as
+    \begin{align}
+        \tau = \{ U \subseteq X \mid U = \emptyset \text{ or } U^{c} \text{ is countable} \}.
+    \end{align}
+    One can verify that $\tau$ is a topology on $X$; both $\emptyset$ and $X$ are in $\tau$. For an arbitrary union of sets in $\tau$, if any one of them is $X$, then the union is $X$. Otherwise, the complement of the union is the intersection of countable sets, which is countable. For a finite intersection of sets in $\tau$, the complement of the intersection is the finite union of countable sets, which is countable. Thus, $\tau$ is a topology on $X$.
+\end{example}
+
+
+\subsection{Basis}
+
+\begin{definition}
+    Let $(X,\tau)$ be a topological space. A collection $\cB \subseteq \tau$ is said to be a \eax{basis} for $\tau$ if
+    \begin{enumerate}[label=(\roman*)]
+        \item For every $x \in X$, there exists $B \in \cB$ such that $x \in B$.
+        \item For any $B_1, B_2 \in \cB$ and any $x \in B_1 \cap B_2$, there exists $B_3 \in \cB$ such that $x \in B_3 \subseteq B_1 \cap B_2$.
+    \end{enumerate}
+\end{definition}
+
+For any set $X$, if we have a collection $\cB$ of subsets of $X$ satisfying the above two properties, then the collection
+\begin{align}
+    \tau = \{U \subseteq X \mid \forall x \in U, \exists B \in \cB \text{ such that } x \in B \subseteq U \}
+\end{align}
+is a topology on $X$, and $\cB$ is a basis for this topology.
