@@ -195,3 +195,122 @@ These are differential equations that govern the behaviour of the electrostatic 
     \nabla^{2} V = - \frac{\rho}{\epsilon_{0}}, \quad \text{and} \quad \nabla \times \nabla V = \bv{0}.
 \end{align}
 Here, $\nabla^{2} = \nabla \cdot \nabla$ is the Laplacian operator. The first equation is known as \eax{Poisson's equation}, while the second is an identity that holds for any scalar function. If there are no charges present in a region, that is, $\rho = 0$, then Poisson's equation reduces to \eax{Laplace's equation}, $\nabla^{2} V = 0$.
+\\ \\
+\textit{January 12th.}
+
+Suppose $\bv{E} \sim \frac{1}{r^{3}} \hat{\bv{r}}$, that is, the electric field falls off as the cube of the distance from a point charge. Does it still hold true that $\nabla \times \bv{E} = \bv{0}$? Yes, since if a force only depends on the vector joining two points and not on the path taken, then the force must be conservative, and its curl must be zero, giving $q \nabla \times \bv{E} = \bv{0}$. However, Gauss's law would not hold in this case.
+
+Let us take a look at how the potential $V$ takes form. Start from a point charge $q$ at the origin. Then
+\begin{align}
+    V = - \int_{\infty}^{\bv{r}} \bv{E} \cdot \di{\bv{l}} = - \int_{\infty}^{\bv{r}} \frac{q}{4 \pi \epsilon_{0}} \frac{1}{r^{2}} \hat{\bv{r}} \cdot \hat{\bv{r}} \, \di{r} = \frac{q}{4 \pi \epsilon_{0} r}.
+\end{align}
+Thus, the potentia due to a point charge at $\bv{r}'$ is given by
+\begin{align}
+    V(\bv{r}) = \frac{q}{4 \pi \epsilon_{0} \curs{r}}.
+\end{align}
+For a set of point charges $q_{i}$ at positions $\bv{r}_{i}'$, the potential is given by
+\begin{align}
+    V(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \sum_{i} \frac{q_{i}}{\curs{r}_{i}}.
+\end{align}
+For a continuous distribution of charge with volume density $\rho(\bv{r}')$, the potential is given by
+\begin{align}
+    V(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\di{q}}{\curs{r}} = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\rho(\bv{r}')}{\curs{r}} \; \di{V}'.
+\end{align}
+This is the formal solution to Poisson's equation.
+
+One could compute the potential due to a uniformly charged spherical shell, but it is easier to use Gauss's law to find the electric field first, and then integrate to find the potential. Let us look at the case of a plate; consider a uniformly charged plate if radius $R$ and surface charge density $\sigma$. The potential at a point along the axis of the plate at a distance $z$ from its centre is given by
+\begin{align}
+    V(z) = \frac{1}{4 \pi \epsilon_{0}} \int \frac{\sigma(\bv{r}')}{\curs{r}} \; \di{A}' = \frac{\sigma}{4 \pi \epsilon_{0}} \int_{0}^{2 \pi} \int_{0}^{R} \frac{r' \, \di{r}' \, \di{\phi}'}{\sqrt{r'^{2} + z^{2}}} = \frac{\sigma}{2 \epsilon_{0}} \left( \sqrt{R^{2} + z^{2}} - z \right).
+\end{align}
+Thus, the electric field is given by
+\begin{align}
+    E_{z} = - \frac{\di{V}}{\di{z}} = \frac{\sigma}{2 \epsilon_{0}} \left( 1 - \frac{z}{\sqrt{R^{2} + z^{2}}} \right).
+\end{align}
+
+\subsection{Electrostatic Boundary Conditions}
+
+Let us look at the above example when the plate is infinite; consider an infinite plane with uniform surface charge density $\sigma$. By symmetry, the electric field must point directly away from the plane (if $\sigma > 0$) or towards the plane (if $\sigma < 0$). Using Gauss's law, we can find the magnitude of the electric field. Consider a cylindrical Gaussian surface that straddles the plane, with its flat faces parallel to the plane. The flux through the curved surface is zero since the electric field is perpendicular to it. The flux through the two flat faces (cyclindrical surface) is given by
+\begin{align}
+    \Phi_{E} = \oint \bv{E} \cdot \di{\bv{a}} = \frac{Q_{\text{enc}}}{\epsilon_{0}} \implies 2 E A = \frac{\sigma A}{\epsilon_{0}} \implies E = \frac{\sigma}{2 \epsilon_{0}}.
+\end{align}
+Note that there is a discontinuity in the electric field as we cross the plane. Just above the plane, the electric field is $\bv{E} = \frac{\sigma}{2 \epsilon_{0}} \hat{\bv{n}}$, while just below the plane, it is $\bv{E} = - \frac{\sigma}{2 \epsilon_{0}} \hat{\bv{n}}$, where $\hat{\bv{n}}$ is the unit normal vector pointing away from the plane.
+\\
+
+Now consider an arbitrary surface with a (not necessarily uniform) surface charge density $\sigma$. Consider a similar cylindrical Gaussian surface that straddles the surface; this cylinder is infinitesimal, with height $2 \epsilon$ and cross-sectional area $A$. Here, we have
+\begin{align}
+    \oint \bv{E} \cdot \di{\bv{a}} = \frac{\sigma A}{\epsilon_{0}} \implies (E_{\perp}^{\text{above}} - E_{\perp}^{\text{below}}) A = \frac{\sigma A}{\epsilon_{0}} \implies E_{\perp}^{\text{above}} - E_{\perp}^{\text{below}} = \frac{\sigma}{\epsilon_{0}},
+\end{align}
+implying that the normal component of the electric field has a discontinuity across a surface charge. Here, $E_{\perp}^{\text{above}}$ and $E_{\perp}^{\text{below}}$ are the normal components of the electric field just above and just below the surface, respectively.
+
+Through this surface, condier a small rectangular loop that pierces the surface; the loop has two sides parallel to the surface of length $l$ and two sides perpendicular to the surface of height $\epsilon$. We have
+\begin{align}
+    \oint \bv{E} \cdot \di{\bv{l}} = 0 \implies E_{\parallel}^{\text{above}} l - E_{\parallel}^{\text{below}} l = 0 \implies E_{\parallel}^{\text{above}} = E_{\parallel}^{\text{below}},
+\end{align}
+implying that the tangential component of the electric field is continuous across the surface. Thus, we can conclude that
+\begin{align}
+    \bv{E}_{\text{above}} - \bv{E}_{\text{below}} = \frac{\sigma}{\epsilon_{0}} \hat{\bv{n}}.
+\end{align}
+We discuss what happens to the potential $V$; since $\bv{E} = - \nabla V$, we have
+\begin{align}
+    - \int_{\bv{a}}^{\bv{b}} \bv{E}_{\text{above}} \cdot \di{\bv{l}} + \int_{\bv{a}}^{\bv{b}} \bv{E}_{\text{below}} \cdot \di{\bv{l}} = -\frac{\sigma}{\epsilon_{0}} \int_{\bv{a}}^{\bv{b}} \hat{\bv{n}} \cdot \di{\bv{l}} = -\frac{\sigma}{\epsilon_{0}} \epsilon + \frac{\sigma}{\epsilon_{0}} \epsilon = 0,
+\end{align}
+implying that
+\begin{align}
+    V_{\text{above}} - V_{\text{below}} = 0.
+\end{align}
+Thus, the electric potential is continuous across a surface charge, even though the electric field may be discontinuous. If we replace $\bv{E}$ with $- \nabla V$ in the earlier boundary condition for $\bv{E}$, we find that
+\begin{align}
+    \hat{\bv{n}} \cdot \left( -\nabla V_{\text{above}} + \nabla V_{\text{below}} \right) = \frac{\sigma}{\epsilon_{0}} \hat{\bv{n}} \cdot \hat{\bv{n}} \implies \left(- \frac{\partial V}{\partial n} \right)_{\text{above}} + \left( \frac{\partial V}{\partial n} \right)_{\text{below}} = \frac{\sigma}{\epsilon_{0}}.
+\end{align}
+
+\section{Work and Energy}
+
+Recall that for a conservative force field, the work done in moving a particle from point $\bv{a}$ to point $\bv{b}$ is given by
+\begin{align}
+    W_{\bv{a} \to \bv{b}} = \int_{\bv{a}}^{\bv{b}} \bv{F} \cdot \di{\bv{l}}.
+\end{align}
+Since the electrostatic force is conservative, for a test charge $Q$ in an electric field $\bv{E}$, the work done by an external agent in moving the charge from point $\bv{a}$ to point $\bv{b}$ is given by
+\begin{align}
+    W_{\bv{a} \to \bv{b}} = -\int_{\bv{a}}^{\bv{b}} Q \bv{E} \cdot \di{\bv{l}} = -Q \int_{\bv{a}}^{\bv{b}} \bv{E} \cdot \di{\bv{l}} = Q (V(\bv{b}) - V(\bv{a})).
+\end{align}
+Thus, we define
+\begin{align}
+    W = Q V.
+\end{align}
+
+Let us take up an example to illustrate this work done; let there be $n$ point charges $q_{1}, q_{2}, \ldots, q_{n}$ in some configuration. We wish to find the work done in bringing these charges in from infinity to their respective positions. The work done in bringing in the first charge $q_{1}$ is zero, since there are no other charges present. The work done in bringing in the second charge $q_{2}$ is given by
+\begin{align}
+    W_{2} = \frac{1}{4 \pi \epsilon_{0}} \frac{q_{1} q_{2}}{\curs{r}_{12}}.
+\end{align}
+Here, $\curs{r}_{12}$ is the distance between charges $q_{1}$ and $q_{2}$. The work done in bringing in the third charge $q_{3}$ is given by
+\begin{align}
+    W_{3} = \frac{1}{4 \pi \epsilon_{0}} \left( \frac{q_{1} q_{3}}{\curs{r}_{13}} + \frac{q_{2} q_{3}}{\curs{r}_{23}} \right).
+\end{align}
+Continuing in this manner, the total work done in assembling the configuration of $n$ charges is given by
+\begin{align}
+    W = \frac{1}{4 \pi \epsilon_{0}} \sum_{i = 1}^{n} \sum_{1 \leq j < i} \frac{q_{i} q_{j}}{\curs{r}_{ij}} = \frac{1}{8 \pi \epsilon_{0}} \sum_{i \neq j} \frac{q_{i} q_{j}}{\curs{r}_{ij}}.
+\end{align}
+To write in terms of the electric potential, we have
+\begin{align}
+    W = \frac{1}{2} \sum_{i} q_{i} V(\bv{r}_{i}), \quad \text{where} \quad V(\bv{r}_{i}) = \sum_{j \neq i} \frac{1}{4 \pi \epsilon_{0}} \frac{q_{j}}{\curs{r}_{ij}}.
+\end{align}
+For a continuous charge distribution,
+\begin{align}
+    W = \frac{1}{2} \int \rho(\bv{r}) V(\bv{r}) \; \di{V'}.
+\end{align}
+From Gauss's law,
+\begin{align}
+    W = \frac{\epsilon_{0}}{2} \int (\nabla \cdot \bv{E}) V \; \di{V'}.
+\end{align}
+Here, we make use of the vector identity
+\begin{align}
+    \nabla \cdot (f \bv{A}) = (\nabla \cdot \bv{A}) f + \bv{A} \cdot (\nabla f).
+\end{align}
+This identity will be used throughout the course. Using this, we have
+\begin{align}
+    W = \frac{\epsilon_{0}}{2} \int \nabla \cdot (V \bv{E}) \; \di{V'} - \frac{\epsilon_{0}}{2} \int \bv{E} \cdot (\nabla V) \; \di{V'} = \frac{\epsilon_{0}}{2} \oint V \bv{E} \cdot \di{\bv{a}} + \frac{\epsilon_{0}}{2} \int \bv{E} \cdot \bv{E} \; \di{V'}.
+\end{align}
+The surface integral vanishes if we take the surface to be at infinity, since both $V\bv{E}$ will fall off sufficiently fast. Thus, we have
+\begin{align}
+    W = \frac{\epsilon_{0}}{2} \int E^{2} \; \di{V'}.
+\end{align}
