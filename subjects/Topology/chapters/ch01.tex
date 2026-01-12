@@ -351,4 +351,110 @@ Analogous to the interior of a set, we have the notion of the closure of a set.
     For the converse inclusion, let $x \notin \overline{A}$. Then there exists a closed set $C$ such that $A \subseteq C$ but $x \notin C$. Thus, $x \in C^{c}$, where $C^{c}$ is open. Since $A \subseteq C$, we have $C^{c} \cap A = \emptyset$. Hence, there exists an open set $C^{c}$ containing $x$ such that $C^{c} \cap A = \emptyset$.
 \end{proof}
 
-Instead of using ``$\forall U \in \tau$'' in the above theorem, one can equivalently use ``$\forall B \in \cB$'' where $\cB$ is a basis for the topology $\tau$. 
+Instead of using ``$\forall U \in \tau$'' in the above theorem, one can equivalently use ``$\forall B \in \cB$'' where $\cB$ is a basis for the topology $\tau$.
+\\ \\
+\textit{January 12th.}
+
+\begin{lemma}
+    $A$ is closed if and only if $A = \overline{A}$. Moreover, $A \subseteq B$ implies $\overline{A} \subseteq \overline{B}$.
+\end{lemma}
+\begin{proof}
+    The first assertion is left as an exercise. For the second assertion, let $x \in \overline{A}$. Then for every open set $U$ containing $x$, we have $U \cap A \neq \emptyset$. Since $A \subseteq B$, we have $U \cap B \neq \emptyset$. Thus, $x \in \overline{B}$.
+\end{proof}
+
+\begin{theorem}
+    Let $Y \subseteq X$ be a subspace of a topological space $(X, \tau)$. For any $A \subseteq Y$, we have
+    \begin{align}
+        \overline{A}^{Y} = \overline{A} \cap Y,
+    \end{align}
+    where $\overline{A}^{Y}$ is the closure of $A$ in the subspace $(Y, \tau_{Y})$ and $\overline{A}$ is the closure of $A$ in $(X, \tau)$.
+\end{theorem}
+\begin{proof}
+    We have
+    \begin{align}
+        \overline{A}^{Y} = \{ y \in Y \mid y \in U \cap Y, \, U \in \tau, \, U \cap Y \cap A \neq \emptyset \} \subseteq \overline{A} \cap Y.
+    \end{align}
+    Now let $y_{0} \in \overline{A} \cap Y$. Then for every $U \in \tau$ such that $y_{0} \in U$, we have $U \cap A \neq \emptyset$. Thus, taking intersection over all closed sets containing $A$ in $(X, \tau)$ and then intersecting with $Y$, we have
+    \begin{align}
+        \bigcap_{\substack{C \subseteq X \\ C \text{ closed} \\ A \subseteq C}} (C \cap Y) = \overline{A} \cap Y.
+    \end{align}
+    Thus, $y_{0} \in \overline{A}^{Y}$. Hence, we have $\overline{A}^{Y} = \overline{A} \cap Y$.
+\end{proof}
+
+\section{Convergence}
+\begin{definition}
+    Let $(X,\tau)$ be a topological space and let $A \subseteq X$. A point $x \in X$ is said to be a \eax{limit point} of $A$ if for every open set $U \in \tau$ containing $x$, we have $(U \setminus \{x\}) \cap A \neq \emptyset$.
+\end{definition}
+
+Let us denote the set of all limit points of $A$ by $A'$. Then $A' \subseteq \overline{A}$ since for every open set $U$ containing a limit point $x$, we have $U \cap A \neq \emptyset$. Note that nothing can be said about the relation between $A$ and $A'$.
+
+For example, if $A = \{1/n \mid n \in \N\} \subseteq \R$ with the standard topology, then $A' = \{0\}$ and $\overline{A} = A \cup \{0\}$. If $A = (0,1) \cup \{2\}$, then $A' = [0,1]$ and $\overline{A} = [0,1] \cup \{2\}$. If $A = \Q \subseteq \R$ with the standard topology, then $A' = \R$ and $\overline{A} = \R$. There is a nice characterization of the closure of a set using limit points.
+
+\begin{theorem}
+    Let $(X,\tau)$ be a topological space and let $A \subseteq X$. Then
+    \begin{align}
+        \overline{A} = A \cup A'.
+    \end{align}
+\end{theorem}
+
+\begin{proof}
+    One direction is easy since we have already seen that $A, A' \subseteq \overline{A}$. For the other direction, let $x \in \overline{A}$. If $x \in A$, then we are done. So suppose that $x \notin A$. Then for every open set $U$ containing $x$, we have $U \cap A \neq \emptyset$. Since $x \notin A$, we have $(U \setminus \{x\}) \cap A \neq \emptyset$. Thus, $x$ is a limit point of $A$, and hence $x \in A'$. Therefore, we have $\overline{A} \subseteq A \cup A'$, and hence the result follows.
+\end{proof}
+
+\begin{corollary}
+    A set $A$ is closed if and only if $A' \subseteq A$.
+\end{corollary}
+
+We are now ready to define convergence in a (metric) topological space.
+
+\begin{definition}
+    Let $(X,d)$ be a metric space. A sequence $(x_{n})_{n \geq 1} \subseteq X$ is said to \eax{converge} to a point $x \in X$ if for every $\varepsilon > 0$, there exists a natural $N(\varepsilon) \equiv N \in \N$ such that
+    \begin{align}
+        d(x_{n}, x) < \varepsilon \quad \forall n \geq N.
+    \end{align}
+    Equivalently, the sequence $(d(x_{n},x))_{n \geq 1} \subseteq \R$ converges to $0$ in the usual sense.
+\end{definition}
+
+In the topological sense, we say $(x_{n})_{n \geq 1}$ converges to $x$ if for every open set $U$ containing $x$, there exists a natural $N(U) \equiv N \in \N$ such that
+\begin{align}
+        x_{n} \in U \quad \forall n \geq N.
+\end{align}
+
+Note that the limit of a sequence in a metric space is unique. However, in a general topological space, the limit of a sequence need not be unique. For example, consider the set $X$ with the indiscrete topology. Then every sequence in $X$ converges to every point in $X$.
+
+\begin{theorem}
+    Let $(X,d)$ be a metric space and let $(x_{n})_{n \geq 1} \subseteq X$ be a sequence converging to both $x$ and $y$ in $X$. Then $x = y$.
+\end{theorem}
+\begin{proof}
+    For every $\varepsilon > 0$, there exists $N_{1} \in \N$ such that
+    \begin{align}
+        d(x_{n}, x) < \varepsilon/2 \quad \forall n \geq N_{1}.
+    \end{align}
+    Similarly, there exists $N_{2} \in \N$ such that
+    \begin{align}
+        d(x_{n}, y) < \varepsilon/2 \quad \forall n \geq N_{2}.
+    \end{align}
+    Let $N = \max\{N_{1}, N_{2}\}$. Then for all $n \geq N$, we have
+    \begin{align}
+        d(x,y) \leq d(x,x_{n}) + d(x_{n},y) < \varepsilon/2 + \varepsilon/2 = \varepsilon.
+    \end{align}
+    Since $\varepsilon > 0$ is arbitrary, we have $d(x,y) = 0$, which implies that $x = y$.
+\end{proof}
+
+The concept of Hausdorff property can be generalized to topological spaces as follows: for every $x,y \in X$ with $x \neq y$, there exist open sets $U,V \in \tau$ such that $x \in U$, $y \in V$, and $U \cap V = \emptyset$.
+
+\begin{theorem}
+    Let $(X,\tau)$ be a Hausdorff topological space and let $(x_{n})_{n \geq 1} \subseteq X$ be a sequence converging to both $x$ and $y$ in $X$. Then $x = y$.
+\end{theorem}
+\begin{proof}
+    The proof is similar to that in the metric space case. For $x \neq y$, there exist open sets $U,V \in \tau$ such that $x \in U$, $y \in V$, and $U \cap V = \emptyset$. Since $(x_{n})_{n \geq 1}$ converges to $x$, there exists $N_{1} \in \N$ such that
+    \begin{align}
+        x_{n} \in U \quad \forall n \geq N_{1}.
+    \end{align}
+    Similarly, since $(x_{n})_{n \geq 1}$ converges to $y$, there exists $N_{2} \in \N$ such that
+    \begin{align}
+        x_{n} \in V \quad \forall n \geq N_{2}.
+    \end{align}
+    Let $N = \max\{N_{1}, N_{2}\}$. Then for all $n \geq N$, we have $x_{n} \in U$ and $x_{n} \in V$, which implies that $x_{n} \in U \cap V$. This is a contradiction since $U \cap V = \emptyset$. Hence, we must have $x = y$.
+\end{proof}
+
