@@ -82,7 +82,7 @@ Natural questions arise; does a solution exist? Is it unique? For how long does 
 
 
 It may be noted that a solution may not even exist for a given differential equation. A simple example is given by $(y')^{2} + 1 = 0$. Thus, a solution need not always exist. Also note that even if a solution exists, it may not be unique. For example, consider the differential equation $(y' - 2)(y' + 2) = 0$; both $y = 2t$ and $y = -2t$ are solutions satisfying the same initial condition $y(0) = 0$. Finally, let us see an example where a solution exists and is unique, but only for a limited time. Consider the differential equation $y' = y^{2}$ with the initial condition $y(0) = 1$. The solution is given by $y(t) = \frac{1}{1 - t}$, which exists and is unique for $t \in (-\infty, 1)$, but blows up as $t \to 1$.
-\section{First-Order ODEs}
+\subsection{First-Order ODEs}
 
 Let us consider first-order ODEs of the form
 \begin{align}
@@ -135,7 +135,7 @@ Thus, given a first-order ODE $\dot{y} = f(t,y)$, we can think of $f$ as a time-
     where $a_{0} = y(0) / (1 - y(0))$. This solution approaches $1$ as $t \to \infty$, which corresponds to the carrying capacity in the original model. One can also analyze the long-term behaviour, dependence of initial conditions, etc.~without explicitly solving the ODE; this is the concern of dynamics, which will be studied towards the end of the course.
 \end{example}
 
-\subsection{Exact Equations}
+\section{Exact Equations}
 
 Consider a first-order ODE of the form
 \begin{align}
@@ -148,3 +148,132 @@ Such an ODE of the form $M \, \di{x} + N \, \di{y} = 0$ is said to be \eax{exact
 In fact, the converse is also true; if the above holds, then such a function $g$ exists and the equation is exact.
 
 A vector field $V$ on $\R^{n}$ is termed a \eax{conservative vector field} if there exists a scalar \eax{potential function} $\varphi : \R^{n} \to \R$ such that $V = \nabla \varphi$. Thus, a first-order ODE $M \, \di{x} + N \, \di{y} = 0$ is exact if and only if the vector field $V(x,y) = (M(x,y), N(x,y))$ is conservative with potential function $g$.
+
+\subsubsection{Review of Multivariate Calculus}
+\textit{January 12th.}
+
+Recall that $f:(a,b) \to \R$ is differentiable at $p \in (a,b)$ if the limit
+\begin{align}
+    \lim_{h \to 0} \frac{f(p+h) - f(p)}{h}
+\end{align}
+exists; this limit is denoted by $f'(p)$. If we define
+\begin{align}
+    \epsilon_{p}(h) \defeq f(p+h) - f(p) - f'(p) \, h,
+\end{align}
+the error term, then we have
+\begin{align}
+    f(p+h) = f(p) + f'(p) \, h + \epsilon_{p}(h).
+\end{align}
+Here, $\lim_{h \to 0} \epsilon_{p}(h) = 0$. Moreover, $\lim_{h \to 0} \frac{1}{h} \epsilon_{p}(h) = 0$, to indicate this, we write $\epsilon_{p}(h) = \lilo(h)$ as $h \to 0$. This is known as the little-o notation. Thus, we have
+\begin{align}
+    f(p+h) = f(p) + f'(p) \, h + \lilo(h) \quad \text{ as } h \to 0.
+\end{align}
+This is the linear approximation of $f$ at $p$. If $f$ is differentiable at every point of $(a,b)$, then we say that $f$ is differentiable on $(a,b)$. If $f'$ is continuous on $(a,b)$, then we say that $f$ is continuously differentiable on $(a,b)$, or $f \in C^{1}(a,b)$. Let's say $f \in C^{1}(a,b)$, and say the second derivative of $f$ exists at $p \in (a,b)$. Similar to above, one can show that
+\begin{align}
+    f(p+h) = f(p) + f'(p) \, h + \frac{f''(p)}{2} \, h^{2} + \lilo(h^{2}) \quad \text{ as } h \to 0.
+\end{align}
+If a function $f$ is infinitely differentiable, that is, all its derivatives exist, then we say that $f$ is a smooth function, or $f \in C^{\infty}(a,b)$. There is another class of funcitons known as analytic functions. A function $f$ is said to be analytic at $p \in (a,b)$ if there exists a power series $\sum_{n=0}^{\infty} a_{n} (x - p)^{n}$ that converges to $f(x)$ for all $x$ in some neighbourhood of $p$. If $f$ is analytic at every point of $(a,b)$, then we say that $f$ is analytic on $(a,b)$. It can be shown that if $f$ is analytic at $p$, then $f$ is infinitely differentiable at $p$, and the coefficients of the power series are given by
+\begin{align}
+    a_{n} = \frac{f^{(n)}(p)}{n!}.
+\end{align}
+However, the converse is not true; there exist smooth functions that are not analytic. For example, consider the function
+\begin{align}
+    f(x) = \begin{cases}
+        e^{-1/x} &\text{if } x > 0, \\
+        0 & \text{if } x \leq 0.
+    \end{cases}
+\end{align}
+Here, 0 is the only problematic point. It can be shown that $f$ is infinitely differentiable at $0$, and $f^{(n)}(0) = 0$ for all $n \geq 0$. Thus, the Taylor series of $f$ at $0$ is identically $0$, which does not converge to $f(x)$ for any $x > 0$. Thus, $f$ is not analytic at $0$.
+
+Suppose $f:(a,b) \to \R$ is analytic. Assume there exists a sequence of distinct points $(x_{n})_{n\geq 1} \subseteq (a,b)$ such that $x_{n} \to p \in (a,b)$ and $f(x_{n}) = 0$ for all $n \geq 1$. Then, it can be shown that $f$ is identically $0$ in some neighbourhood of $p$. If $f$ is analytic on the whole interval $(a,b)$, then $f$ is identically $0$ on $(a,b)$. 
+
+\begin{proof}
+    Let $f(x) = \sum_{n \geq 0} a_{n} (x-p)^{n}$, and let $N = \min \{n \geq 0 \mid a_{n} \neq 0\}$. Assume that $f$ is not identically $0$; thus $N$ is finite. Thus, $f$ must be of the form
+    \begin{align}
+        f(x) = a_{N}(x-p)^{N} + a_{N+1}(x-p)^{N+1} + \cdots = (x-p)^{N} \left( a_{N} + a_{N+1}(x-p) + \cdots \right).
+    \end{align}
+    Since $a_{N} \neq 0$, the term in the parentheses is non-zero in some neighbourhood of $p$. Thus, $f(x) = 0$ implies that $(x-p)^{N} = 0$, that is, $x = p$. This contradicts the assumption that there exists a sequence of distinct points $(x_{n})_{n\geq 1}$ converging to $p$ such that $f(x_{n}) = 0$ for all $n \geq 1$.
+\end{proof}
+
+Let us now move to higher dimensions. A function $g:\R^{2} \to \R^{2}$ is said to be differentiable at a point $p = (x_{0},y_{0})$ if there exists a linear operator $T_{p}:\R^{2} \to \R^{2}$ such that
+\begin{align}
+    \frac{\norm{g(x_{0}+h,y_{0}+k) - g(x_{0},y_{0}) - T_{p}(h,k)}}{\norm{(h,k)}} \to 0 \quad \text{ as } (h,k) \to (0,0).
+\end{align}
+The linear operator, if it exists, as a matrix is given by
+\begin{align}
+    T_{p} = \begin{bmatrix}
+        \partial_{x} g_{1}(p) & \partial_{y} g_{1}(p) \\
+        \partial_{x} g_{2}(p) & \partial_{y} g_{2}(p)
+    \end{bmatrix},
+\end{align}
+where $g = (g_{1}, g_{2})$. Thus, by a similar calculation as before, we have
+\begin{align}
+    g(x_{0}+h,y_{0}+k) = g(x_{0},y_{0}) + T_{p}(h,k) + \lilo(\norm{(h,k)}) \quad \text{ as } (h,k) \to (0,0).
+\end{align}
+For a function $f:\R^{2} \to \R$, differentiability at $p$ is defined similarly, and one would have
+\begin{align}
+    f(x_{0}+h,y_{0}+k) = f(x_{0},y_{0}) + \partial_{x} f(p) \, h + \partial_{y} f(p) \, k + \lilo(\norm{(h,k)}) \quad \text{ as } (h,k) \to (0,0).
+\end{align}
+Now suppose $\tilde{f}:\R^{2} \to \R^{2}$ is an affine map defined as
+\begin{align}
+    \tilde{f}(x,y) = (c_{1},c_{2}) + A(x,y).
+\end{align}
+Such a map is invertible if and only if $A$ is invertible. Recall the inverse function theorem; if $f:\R^{2} \to \R^{2}$ is a $C^{1}$ function, and the derivative of $f$ at $p$, $Df(p)$, is invertible, then there exist neighbourhoods $U$ of $p$ and $V$ of $f(p)$ such that $f:U \to V$ is a bijection. In such a case, $f$ can be seen as an approximate affine map near $p$. Also recall the implicit function theorem: let $f:\R^{2} \to \R$ be a $C^{1}$ function. Suppose $f(x_{0},y_{0}) = 0$ and $\partial_{x} f(x_{0},y_{0}) \neq 0$. Then locally at $(x_{0},y_{0})$, that is, in an open neighbourhood $U$ of $(x_{0},y_{0})$, there is a $C^{1}$ function $r$ such that
+\begin{align}
+    Z_{U} = \{(x,y) \in U \mid f(x,y) = 0\} = \{(r(t), t) \mid t \in I\},
+\end{align}
+for some open interval $I$ containing $y_{0}$. We are now interested in level sets of $C^{1}$ function $f:\R^{2} \to \R$. For any $l \in \R$, the level set of $f$ at $l$ is defined as
+\begin{align}
+    E_{l} = \{(x,y) \in \R^{2} \mid f(x,y) = l\}.
+\end{align}
+For example, level sets of the function $f(x,y) = x^{2} + y^{2}$ are circles centred at the origin. For the function $f(x,y) = x^{2} - y^{2}$, the level sets are hyperbolas. We claim this: suppose $f$ is such that $\nabla f \neq 0$ on $\R^{2}$. Then for any $l \in \R$, the level set $E_{l}$ is a 1-manifold in $\R^{2}$. A 1-manifold in $\R^{2}$ is a set $S$ that locally looks like $\R$. That is, for every point $p$ in the set, there exists a neighbourhood $U$ of $p$ such that $U \cap S$ is homeomorphic to an open interval in $\R$. To this claim, assume $l = 0$ (otherwise, we can look at $f - l$). Let $p = (x_{0},y_{0}) \in E_{0}$. Since $\nabla f(p) \neq 0$, at least one of $\partial_{x} f(p)$ or $\partial_{y} f(p)$ is non-zero. Assume $\partial_{y} f(p) \neq 0$. By the implicit function theorem, there exists a neighbourhood $U$ of $p$ and an open interval $I$ containing $y_{0}$ such that
+\begin{align}
+    U \cap E_{0} = \{(r(t), t) \mid t \in I\},
+\end{align}
+for some $C^{1}$ function $r:I \to \R$. The map $\phi: I \to U \cap E_{0}$ defined as $\phi(t) = (r(t), t)$ is a homeomorphism, which shows that $E_{0}$ is a 1-manifold. The case when $\partial_{x} f(p) \neq 0$ is similar. Suppose $f:\R^{2} \to \R$ is a $C^{1}$ function such that $\nabla f \neq 0$ on $\R^{2}$. Then the gradient vector field $\nabla f(p)$ at a point $p$ is orthogonal to the level set of $f$ passing through $p$. Let us move back to exact equations.
+
+\subsubsection{Back to Exact Equations}
+
+\begin{example}
+    Consider the ODE
+    \begin{align}
+        e^{y} \di{x} + (x e^{y} + 2y) \di{y} = 0.
+    \end{align}
+    Verify that this equation is exact. Thus, solutions are given by $g(x,y) = C$ for some constant $C \in \R$, where
+    \begin{align}
+        g(x,y) = x e^{y} + y^{2}.
+    \end{align}
+    The solutions are level curves of $g$. Note that $\nabla g(x,y) = (e^{y}, x e^{y} + 2y)$. Since $e^{y} > 0$ for all $y \in \R$, we have $\nabla g(x,y) \neq 0$ for all $(x,y) \in \R^{2}$. Thus, the level sets of $g$ are 1-manifolds in $\R^{2}$.
+\end{example}
+
+We wish to show the converse that if $\partial_{y} M = \partial_{x} N$, then the equation is exact.
+
+\begin{proof}
+    We wish to find a function $g$ such that $\partial_{x} g = M$ and $\partial_{y} g = N$. Suppose we had fuond such a $g$. Then, we would have
+    \begin{align}
+        \partial_{x} g = M \implies g(x,y) = \int_{0}^{x} M \di{x} + \psi(y).
+    \end{align}
+    The partial with respect to $y$ gives
+    \begin{align}
+        N(x,y) = \partial_{y} g(x,y) = \int_{0}^{x} \partial_{y} M \di{x} + \psi'(y).
+    \end{align}
+    Thus, we obtain
+    \begin{align}
+        \psi'(y) = N(x,y) - \int_{0}^{x} \partial_{y} M(s,y) \di{s}.
+    \end{align}
+    Differentiating with respect to $x$ gives $\partial_{x} N(x,y) - \partial_{y} M(x,y) = 0$, which holds by assumption. Thus, $\psi'(y)$ is indeed a function of $y$ alone.
+\end{proof}
+
+So far, we have shown that $M \di{x} + N \di{y} = 0$ is exact with solution $g$, if and only if $F = (M,N)$ is a conservative vector field with respect to the potential function $g$. Moreover, solutions of the exact equation are level sets of $g$.
+
+\subsection{Integrating Factors}
+
+Look at the equation
+\begin{align}
+    y \di{x} + (x^{2}y - x) \di{y} = 0.
+\end{align}
+This equation is not exact. However, if we multiply both sides by the integrating factor $\mu(x,y) = 1/x^{2}$, we get
+\begin{align}
+    \frac{y}{x^{2}} \di{x} + \left(y - \frac{1}{x}\right) \di{y} = 0,
+\end{align}
+which is exact. Thus, solutions are given by $g(x,y) = C$ for some constant $C \in \R$, $g(x,y) = \frac{y^{2}}{2} - \frac{y}{x}$. Such a term $\mu(x,y)$ is known as an \eax{integrating factor}.
