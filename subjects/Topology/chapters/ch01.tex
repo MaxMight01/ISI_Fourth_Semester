@@ -381,7 +381,7 @@ Instead of using ``$\forall U \in \tau$'' in the above theorem, one can equivale
     Thus, $y_{0} \in \overline{A}^{Y}$. Hence, we have $\overline{A}^{Y} = \overline{A} \cap Y$.
 \end{proof}
 
-\section{Convergence}
+\section{Convergence and Hausdorff Spaces}
 \begin{definition}
     Let $(X,\tau)$ be a topological space and let $A \subseteq X$. A point $x \in X$ is said to be a \eax{limit point} of $A$ if for every open set $U \in \tau$ containing $x$, we have $(U \setminus \{x\}) \cap A \neq \emptyset$.
 \end{definition}
@@ -458,3 +458,71 @@ The concept of Hausdorff property can be generalized to topological spaces as fo
     Let $N = \max\{N_{1}, N_{2}\}$. Then for all $n \geq N$, we have $x_{n} \in U$ and $x_{n} \in V$, which implies that $x_{n} \in U \cap V$. This is a contradiction since $U \cap V = \emptyset$. Hence, we must have $x = y$.
 \end{proof}
 
+\noindent \textit{January 13th.}
+
+\begin{lemma}
+    Let $(X,\tau)$ be a Hausdorff topological space. Then every finite subset of $X$ is closed.
+\end{lemma}
+\begin{proof}
+    It is enough to show that a singleton set $\{x\}$ is closed for any $x \in X$. Let $y \in \{x\}^{c}$. Then $y \neq x$, and by the Hausdorff property, there exist open sets $U,V \in \tau$ such that $x \in U$, $y \in V$, and $U \cap V = \emptyset$. Thus, $V \subseteq \{x\}^{c}$, which implies that $\{x\}^{c}$ is open. Hence, $\{x\}$ is closed.
+\end{proof}
+
+We ask this: is it true that if every finite subset of a topological space $(X,\tau)$ is closed, then $(X,\tau)$ is Hausdorff? The answer is no, since a counterexample is provided by the cofinite topology on an infinite set $X$. In this topology, every finite subset is closed, but the space is not Hausdorff.
+
+\begin{definition}
+    We say that a topological space $(X,\tau)$ is \eax{T1} if finite subsets of $X$ are closed.
+\end{definition}
+
+\begin{theorem}
+    Suppose $(X,\tau)$ is a T1 topological space. Let $A \subseteq X$. Then $x \in A'$ if and only if for every open set $U \in \tau$ containing $x$, we have $U \cap A$ is an infinite set.
+\end{theorem}
+\begin{proof}
+    The reverse implication is obvious by the very definition of $A'$. For the forward implication, let $x \in A'$ and let $U \in \tau$ be any open set containing $x$. Suppose for the sake of contradiction that $U \cap A$ is a finite set. Since $(X,\tau)$ is T1, finite subsets of $X$ are closed. Thus, $(U \cap A)^{c}$ is open. Moreover, we have
+    \begin{align}
+        x \in U \cap (U \cap A)^{c}, \quad (U \cap (U \cap A)^{c}) \cap A = \emptyset,
+    \end{align}
+    which is a contradiction since $x \in A'$. Hence, $U \cap A$ is an infinite set.
+\end{proof}
+
+Let us look at some examples of Hausdorff spaces.
+
+\begin{example}
+    If $X$ is Hausdorff, then the subspace $Y \subseteq X$ with the subspace topology is also Hausdorff. This is because for any $y_1, y_2 \in Y$ with $y_1 \neq y_2$, there exist open sets $U,V \in \tau$ such that $y_1 \in U$, $y_2 \in V$, and $U \cap V = \emptyset$. Thus, $y_1 \in U \cap Y$, $y_2 \in V \cap Y$, and $(U \cap Y) \cap (V \cap Y) = \emptyset$.
+\end{example}
+
+\begin{example}
+    For a space $(X,\tau)$, and a subset $A \subseteq X$, the \eax{boundary} of $A$ is defined as $\Bd(A) = \overline{A} \cap \overline{X\setminus A}$. Then $\Bd(A)$ and $\Int(A)$ are disoint; indeed, let $x \in \Bd(A) \cap \Int(A)$. Then there exists an open set $U \in \tau$ such that $x \in U \subseteq A$. Since $x \in \Bd(A)$, we have $x \in \overline{X \setminus A}$. Thus, for every open set $V \in \tau$ containing $x$, we have $V \cap (X \setminus A) \neq \emptyset$. In particular, taking $V = U$, we have $U \cap (X \setminus A) \neq \emptyset$, which is a contradiction since $U \subseteq A$. Hence, we must have $\Bd(A) \cap \Int(A) = \emptyset$.
+
+    Moreover, we have $\overline{A} = \Int(A) \cup \Bd(A)$. The reverse inclusion is trivial since $\Bd(A) \subseteq \overline{A}$ and $\Int(A) \subseteq A \subseteq \overline{A}$. For the forward inclusion, let $x \in \overline{A}$. If $x \in \Bd(A)$, then we are done. So suppose that $x \notin \Bd(A)$. Then $x \notin \overline{X \setminus A}$, which implies that there exists an open set $U \in \tau$ such that $x \in U$ and $U \cap (X \setminus A) = \emptyset$. Thus, we have $U \subseteq A$, which implies that $x \in \Int(A)$. Therefore, we have $\overline{A} = \Int(A) \cup \Bd(A)$.
+
+    Finally, if $\Bd(A) = \emptyset$, then $A$ is both open and closed. Indeed, since $\overline{A} = \Int(A) \cup \Bd(A)$, we have $\overline{A} = \Int(A)$. Thus, $A$ is closed. Also, since $\Bd(A) = \emptyset$, we have $\overline{X \setminus A} = \Int(X \setminus A)$. Thus, $X \setminus A$ is closed, which implies that $A$ is open.
+\end{example}
+
+\section{Product Spaces}
+
+For two metric spaces $(X,d_{X})$ and $(Y,d_{Y})$, we can define a metric on the product set $X \times Y$ as follows:
+\begin{align}
+    d((x_{1},y_{1}),(x_{2},y_{2})) = \max\{d_{X}(x_{1},x_{2}), d_{Y}(y_{1},y_{2}).\}
+\end{align}
+A basis of $X \times Y$ with the product metric is given by
+\begin{align}
+    \cB = \{ B_{X}(x,r) \times B_{Y}(y,r) \mid x \in X, y \in Y, r > 0 \}.
+\end{align}
+
+In particular, if $(X, \tau_{X})$ and $(Y, \tau_{Y})$ are two topological spaces, then we can define a topology on $X \times Y$, called the \eax{product topology}, by taking the basis
+\begin{align}
+    \cB = \{ U \times V \mid U \in \tau_{X}, V \in \tau_{Y} \}.
+\end{align}
+Then, the topology $\tau_{X \times Y}$ generated by the basis $\cB$ is called the product topology on $X \times Y$. Verify that $\tau_{X \times Y}$ is indeed a topology on $X \times Y$. Note that if $\tau_{X \times Y}$ was taken to be $\{U \times V \mid U \in \tau_{X}, V \in \tau_{Y}\}$, then it would not be a topology since it is not closed under arbitrary unions. Also worth noting is that if $X$ and $Y$ are both Hausdorff, then so is $X \times Y$ with the product topology.
+
+\begin{example}
+    $X$ is Hausdorff if and only if the diagonal set $\Delta = \{(x,x) \mid x \in X\} \subseteq X \times X$ is closed in $X \times X$ with the product topology; suppose $X$ is Hausdorff. Let $(x,y) \in (X \times X) \setminus \Delta$. Then $x \neq y$, and by the Hausdorff property, there exist open sets $U,V \in \tau$ such that $x \in U$, $y \in V$, and $U \cap V = \emptyset$. Thus, we have
+    \begin{align}
+        (U \times V) \cap \Delta = \emptyset, \quad (x,y) \in U \times V \subseteq (X \times X) \setminus \Delta,
+    \end{align}
+    which implies that $(X \times X) \setminus \Delta$ is open. Hence, $\Delta$ is closed. Conversely, suppose $\Delta$ is closed. Let $x,y \in X$ with $x \neq y$. Then $(x,y) \in (X \times X) \setminus \Delta$, which is open. Thus, there exists a basis element $U \times V$ such that
+    \begin{align}
+        (x,y) \in U \times V \subseteq (X \times X) \setminus \Delta.
+    \end{align}
+    This implies that $x \in U$, $y \in V$, and $U \cap V = \emptyset$. Hence, $X$ is Hausdorff.
+\end{example}

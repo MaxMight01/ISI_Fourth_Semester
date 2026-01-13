@@ -1,0 +1,102 @@
+\chapter{MAPPINGS}
+
+\section{Continuous Functions}
+Recall the definition of a continuous function on $\R$; a function $f :\R \to \R$ was said to be continuous at a point $x \in \R$ if for every $\varepsilon > 0$, there exists a $\delta > 0$ such that
+\begin{align}
+    \abs{f(x) - f(y)} < \varepsilon \text{ whenever } \abs{x - y} < \delta.
+\end{align}
+
+We can abstract this definition to metric spaces as follows.
+\begin{definition}
+    A function $f : (X,d_{X}) \to (Y,d_{Y})$ between two metric spaces is said to be \eax{continuous} at a point $x \in X$ if for every $\varepsilon > 0$, there exists a $\delta > 0$ such that
+    \begin{align}
+        d_{Y}(f(x), f(y)) < \varepsilon \text{ whenever } d_{X}(x,y) < \delta.
+    \end{align}
+    It is continuous at every point of $X$ if it is continuous at each $x \in X$.
+\end{definition}
+
+Also recall that a function $f : \R \to \R$ was continuous at $x \in \R$ if and only if for every open set $V \subseteq \R$ containing $f(x)$, the preimage $f^{-1}(V)$ is an open set in $\R$ containing $x$. We can use this characterization to define continuity in topological spaces.
+
+\begin{definition}
+    A function $f : (X,\tau_{X}) \to (Y,\tau_{Y})$ between two topological spaces is said to be \eax{continuous} at a point $x \in X$ if for every open set $V \in \tau_{Y}$ containing $f(x)$, the preimage $f^{-1}(V)$ is an open set in $\tau_{X}$ containing $x$. That is,
+    \begin{align}
+        \forall V \in \tau_{Y}, f(x) \in V \implies x \in f^{-1}(V) \in \tau_{X}.
+    \end{align}
+    It is continuous at every point of $X$ if it is continuous at each $x \in X$. That is,
+    \begin{align}
+        \forall V \in \tau_{Y} \implies f^{-1}(V) \in \tau_{X}.
+    \end{align}
+\end{definition}
+
+The above statement can be made more tight via bases: $f$ is continuous if and only if the preimage of every basis element of $Y$ is an open set in $X$.
+
+\begin{lemma}
+    A function $f: (X,d_{X}) \to (Y,d_{Y})$ between two metric spaces is continuous if and only if $f:(X,\tau_{X}) \to (Y,\tau_{Y})$ is continuous, where $\tau_{X}$ and $\tau_{Y}$ are the topologies induced by the metrics $d_{X}$ and $d_{Y}$ respectively.
+\end{lemma}
+
+\begin{proof}
+    Suppose $f: (X,d_{X}) \to (Y,d_{Y})$ is continuous. Let $V \in \tau_{Y}$ be an open set in $Y$. Then, for every $y \in V$, there exists an $\varepsilon_{y} > 0$ such that $B_{Y}(y,\varepsilon_{y}) \subseteq V$. Since $f$ is continuous, for every $x \in f^{-1}(V)$, there exists a $\delta_{x} > 0$ such that
+    \begin{align}
+        f(B_{X}(x,\delta_{x})) \subseteq B_{Y}(f(x),\varepsilon_{f(x)}) \subseteq V.
+    \end{align}
+    Thus, $B_{X}(x,\delta_{x}) \subseteq f^{-1}(V)$. Hence, $f^{-1}(V)$ is open in $X$ and so $f:(X,\tau_{X}) \to (Y,\tau_{Y})$ is continuous.
+
+    For the converse, suppose $f:(X,\tau_{X}) \to (Y,\tau_{Y})$ is continuous. That is, for every open set $V \in \tau_{Y}$, the preimage $f^{-1}(V)$ is an open set in $\tau_{X}$. Let $\varepsilon > 0$ be given. Consider the open ball $B_{Y}(f(x),\varepsilon) \in \tau_{Y}$. Since $f$ is continuous, $f^{-1}(B_{Y}(f(x),\varepsilon))$ is open in $X$ and contains $x$. Thus, there exists a $\delta > 0$ such that $B_{X}(x,\delta) \subseteq f^{-1}(B_{Y}(f(x),\varepsilon))$. Hence, for every $y \in B_{X}(x,\delta)$, we have
+    \begin{align}
+        f(y) \in B_{Y}(f(x),\varepsilon),
+    \end{align}
+    proving that $f: (X,d_{X}) \to (Y,d_{Y})$ is continuous.
+\end{proof}
+
+
+
+\begin{lemma}
+    Let $(X,\tau)$ be a topological space and let $A \subseteq X$. Then the following hold.
+    \begin{enumerate}[label=(\roman*)]
+        \item For every sequence $(a_{n})_{n \in \N} \subseteq A$, if $a_{n} \to x$ in $X$, then $x \in \overline{A}$. That is, if $x \in U$ for some open set $U \in \tau$, there exists a $N(U) \equiv N \in \N$ such that $a_{n} \in A \cap U$ for all $n \geq N$.
+        \item The converse holds if $X$ is a metric space.
+        \item In general, the converse need not hold.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We prove the second statement only. Suppose $x \in \overline{A}$. Then $B(x, \frac{1}{n}) \cap A \neq \emptyset$ for every $n \in \N$. Thus, we can choose $a_{n} \in B(x, \frac{1}{n}) \cap A$ for each $n \in \N$. Then, for every $\varepsilon > 0$, there exists a $N \equiv N(\varepsilon) \in \N$ such that $\frac{1}{N} < \varepsilon$. Thus, for every $n \geq N$, we have
+    \begin{align}
+        d(a_{n}, x) < \frac{1}{n} \leq \frac{1}{N} < \varepsilon,
+    \end{align}
+    proving that $a_{n} \to x$ in $X$.
+\end{proof}
+
+There is a third definition for metric spaces. A function $f:(X,d_{X}) \to (Y,d_{Y})$ between two metric spaces is said to be \eax{continuous} at a point $x \in X$ if for every sequence $(x_{n})_{n \in \N} \subseteq X$ such that $x_{n} \to x$ in $X$, we have $f(x_{n}) \to f(x)$ in $Y$. In fact, the open-set definition implies the sequential definition.
+
+\begin{proof}
+    Assume the open-set definition of continuity. Let $(x_{n})_{n \in \N} \subseteq X$ be a sequence such that $x_{n} \to x$ in $X$. Let $\varepsilon > 0$ be given. Consider the open ball $B_{Y}(f(x),\varepsilon) \in \tau_{Y}$. Since $f$ is continuous, $f^{-1}(B_{Y}(f(x),\varepsilon))$ is open in $X$ and contains $x$. Thus, there exists a $\delta > 0$ such that $B_{X}(x,\delta) \subseteq f^{-1}(B_{Y}(f(x),\varepsilon))$. Since $x_{n} \to x$ in $X$, there exists a $N \equiv N(\delta) \in \N$ such that for every $n \geq N$, we have
+    \begin{align}
+        x_{n} \in B_{X}(x,\delta) \implies f(x_{n}) \in B_{Y}(f(x),\varepsilon),
+    \end{align}
+    proving that $f(x_{n}) \to f(x)$ in $Y$.
+\end{proof}
+
+For metric spaces, the sequential definition also implies the open-set definition.
+
+\begin{example}
+    Recall $\R_{l}$, which was generated from the basis $\cB = \{[a,b) : a < b, a,b \in \R\}$. Consider the identity function $f : \R \to \R_{l}$, with $x \mapsto x$. Then $[0,1)$ is open in $\R_{l}$, but its preimage under $f$ is $[0,1)$, which is not open in $\R$.  
+\end{example}
+
+
+\begin{theorem}
+    Let $f:(X,\tau_{X}) \to (Y,\tau_{Y})$ be a function between two topological spaces. Then the following are equivalent.
+    \begin{enumerate}[label=(\roman*)]
+        \item $f$ is (open-set) continuous.
+        \item For every closed $C \subseteq Y$, the preimage $f^{-1}(C)$ is closed in $X$.
+        \item For every $A \subseteq X$, we have $f(\overline{A}) \subseteq \overline{f(A)}$.
+        \item For all $f(x) \in V$ with $V \in \tau_{Y}$, there exists $U \in \tau_{X}$ such that $x \in U$ and $f(U) \subseteq V$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    We first show that (i) and (ii) are equivalent. Suppose $C$ is closed in $Y$. Then, $Y \setminus C$ is open in $Y$. Since $f$ is continuous, the preimage $f^{-1}(Y \setminus C)$ is open in $X$. But,
+    \begin{align}
+        f^{-1}(Y \setminus C) = X \setminus f^{-1}(C).
+    \end{align}
+    Thus, $f^{-1}(C)$ is closed in $X$. One can follow the converse argument to show that (ii) implies (i).
+\end{proof}
