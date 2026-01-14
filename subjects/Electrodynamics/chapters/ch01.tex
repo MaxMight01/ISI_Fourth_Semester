@@ -314,3 +314,59 @@ The surface integral vanishes if we take the surface to be at infinity, since bo
 \begin{align}
     W = \frac{\epsilon_{0}}{2} \int E^{2} \; \di{V'}.
 \end{align}
+
+\noindent \textit{January 14th.}
+
+Here, $W$ may also be interpreted as the energy of the charge distribution. Note that the energy density (energy per unit volume) of the electrostatic field is given by
+\begin{align}
+    \frac{\epsilon_{0}}{2} E^{2}.
+\end{align}
+We have two expressions for the work  done as $\frac{1}{2} \epsilon_{0} \int E^{2} \; \di{V'}$ and $\frac{1}{2} \sum_{i} q_{i} V(\bv{r}_{i})$. The first of these expressions is always positive, while the second expression can be negative if there are opposite charges present. This is due to the fact that in the second expression, charges are taken as given; they do not take into account the energy required to assemble the charges themselves. On the contrary, in the first expression, $\rho(\bv{r})$ is treated as a continuous distribution, and the self-energy of assembling the charge distribution is included.
+
+Another important feature is that since $W \propto E^{2}$, the energy does not obey the principle of superposition. That is, if we have two electric fields $\bv{E}_{1}$ and $\bv{E}_{2}$ due to two different charge distributions, then the total energy is not given by the sum of the individual energies but rather as
+\begin{align}
+    W = \frac{\epsilon_{0}}{2} \int (\bv{E}_{1} + \bv{E}_{2})^{2} \; \di{V'} = \frac{\epsilon_{0}}{2} \int (E_{1}^{2} + E_{2}^{2} + 2 \bv{E}_{1} \cdot \bv{E}_{2}) \; \di{V'}.
+\end{align}
+
+
+\subsection{Conductors and Induced Charges}
+
+The property of a \eax{conductor} is that the electrons (and the positive holes) are free to move within the material. When a conductor is placed in an external electric field, the free charges rearrange themselves in such a way that the electric field inside the conductor is zero. This is because if there were a non-zero electric field inside the conductor, it would exert a force on the free charges, causing them to move until they reach an equilibrium state where the internal electric field is nullified. Thus, in electrostatic equilibrium, the electric field inside a conductor is zero.
+
+\newpage
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/conductor_in_field.jpg}
+    \caption{\centering A conductor placed in an external electric field. Free charges within the conductor rearrange themselves to cancel the field inside the conductor.}
+    \label{fig:conductor_in_field}
+\end{figure}
+
+That is, if the field applied was $\bv{E}_{0}$, then the induced field $\bv{E}_{\text{ind}}$ within the conductor is such that $\bv{E}_{0} + \bv{E}_{\text{ind}} = \bv{0}$. Thus, $\bv{E} = \bv{0}$ within a conductor. This also implies that the charge density $\rho$ is also zero within the conductor, since from Gauss's law, $\nabla \cdot \bv{E} = \frac{\rho}{\epsilon_{0}}$. Moreover, a conductor is an equipotential region; that is, the electric potential $V$ is constant throughout the conductor. This is because if there were a potential difference between two points within the conductor, it would create an electric field that would cause charges to move, contradicting the assumption of electrostatic equilibrium. In mathematical terms,
+\begin{align}
+    V = - \int \bv{E} \cdot \di{\bv{l}} = V(\bv{b}) - V(\bv{a}) = 0 \implies V(\bv{a}) = V(\bv{b}).
+\end{align}
+Another property worth noting is that the electric field $\bv{E}$ just outside the surface of a conductor must be perpendicular to the surface: we know that $V$ is constant on the surface. If we take $\di{\bv{r}}$ to be a small displacement along the surface, then
+\begin{align}
+    \nabla V \cdot \di{\bv{r}} = 0 \implies \nabla V \perp \di{\bv{r}}.
+\end{align}
+
+
+Now suppose we are dealing with a cavity within a conductor, as shown in Figure \ref{fig:conductor_cavity}. If there are no charges within the cavity, then the electric field within the cavity is zero. This is because if there were a non-zero electric field within the cavity, it would create a potential difference between points on the surface of the cavity. However, since the surface of the cavity is part of the conductor, and the conductor is an equipotential region, this would lead to a contradiction. Thus, the electric field within the cavity must also be zero if there are no charges present within it.
+
+However, let us suppose a point charge $q$ is placed within the cavity. 
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/conductor_cavity.png}
+    \caption{\centering A conductor placed in an external electric field. Free charges within the conductor rearrange themselves to cancel the field inside the conductor.}
+    \label{fig:conductor_cavity}
+\end{figure}
+
+
+The presence of this charge induces a redistribution of charges on the inner surface of the cavity, resulting in an induced charge distribution that ensures the electric field within the conductor remains zero. If we denote $q_{\text{ind}}$ as the total induced charge on the inner surface of the cavity, we can determine its value using Gauss's law. Consider a Gaussian surface that lies just inside the conductor, enclosing the cavity and the point charge $q$. Since the electric field within the conductor is zero, the flux through this Gaussian surface is also zero. According to Gauss's law,
+\begin{align}
+    \oint \bv{E} \cdot \di{\bv{a}} = \frac{q + q_{\text{ind}}}{\epsilon_{0}} = 0 \implies q_{\text{ind}} = -q.
+\end{align}
+Thus, the total induced charge on the inner surface of the cavity is equal in magnitude but opposite in sign to the charge placed within the cavity. This induced charge distribution creates an electric field that cancels out the field produced by the charge $q$ within the conductor, maintaining the condition of electrostatic equilibrium. If the Gaussian surface is taken just outside the conductor, then the total enclosed charge is $q$, since the conductor as a whole is electrically neutral. Thus, the electric field outside the conductor is as if the conductor were not present at all, and is completely independent of the location or shape of the cavity within the conductor.
