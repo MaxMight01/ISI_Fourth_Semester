@@ -267,13 +267,155 @@ We wish to show the converse that if $\partial_{y} M = \partial_{x} N$, then the
 So far, we have shown that $M \di{x} + N \di{y} = 0$ is exact with solution $g$, if and only if $F = (M,N)$ is a conservative vector field with respect to the potential function $g$. Moreover, solutions of the exact equation are level sets of $g$.
 
 \subsection{Integrating Factors}
+\textit{January 14th.}
 
 Look at the equation
 \begin{align}
     y \di{x} + (x^{2}y - x) \di{y} = 0.
 \end{align}
-This equation is not exact. However, if we multiply both sides by the integrating factor $\mu(x,y) = 1/x^{2}$, we get
+This equation is not exact. However, if we multiply both sides by $\mu(x,y) = 1/x^{2}$, we get
 \begin{align}
     \frac{y}{x^{2}} \di{x} + \left(y - \frac{1}{x}\right) \di{y} = 0,
 \end{align}
-which is exact. Thus, solutions are given by $g(x,y) = C$ for some constant $C \in \R$, $g(x,y) = \frac{y^{2}}{2} - \frac{y}{x}$. Such a term $\mu(x,y)$ is known as an \eax{integrating factor}.
+which is exact. Thus, solutions are given by $g(x,y) = C$ for some constant $C \in \R$, $g(x,y) = \frac{y^{2}}{2} - \frac{y}{x}$. Such a term $\mu(x,y)$ is known as an \eax{integrating factor}. We are now to characterize the equations that admit integrating factors.
+
+We claim that if $M$ and $N$ satisfy any one of the following conditions---
+\begin{itemize}
+    \item $\dfrac{\partial_{y} M - \partial_{x} N}{N} \equiv \phi(x)$ is a function of $x$ alone, or
+    \item $\dfrac{-\partial_{y} M + \partial_{x} N}{M} \equiv \psi(y)$ is a function of $y$ alone,
+\end{itemize}
+then there exists an integrating factor $\mu(x,y)$, which is
+\begin{align}
+    \mu(x,y) \equiv \mu(x) = e^{\displaystyle\int_{x_{0}}^{x} \phi(t) \, \di{t}} \quad \text{ or } \quad \mu(x,y) \equiv \mu(y) = e^{\displaystyle\int_{y_{0}}^{y} \psi(s) \, \di{s}},
+\end{align}
+respectively, for some $x_{0}, y_{0} \in \R$.
+
+\begin{example}
+    Suppose we are given the equation
+    \begin{align}
+        e^{x} \, \di{x} + (e^{x} \cot y + 2 y \csc y) \, \di{y} = 0.
+    \end{align}
+    This equation is not exact. However, we have
+    \begin{align}
+        \frac{-\partial_{y} M + \partial_{x} N}{M} = \frac{-0 + e^{x} \cot y}{e^{x}} = \cot y,
+    \end{align}
+    which is a function of $y$ alone. Thus, an integrating factor is given by
+    \begin{align}
+        \mu(y) = e^{\int \cot y \, \di{y}} = e^{\log \sin y} = \sin y.
+    \end{align}
+    Multiplying both sides of the original equation by $\sin y$, we get
+    \begin{align}
+        e^{x} \sin y \, \di{x} + (e^{x} \cos y + 2 y) \, \di{y} = \di{\left( e^{x} \sin y + y^{2} \right)} = 0,
+    \end{align}
+    which is exact.
+\end{example}
+
+We now prove the claim.
+
+\begin{proof}
+    We show a sequence of equivalences; $\mu$ is an integrating factor if and only if $\mu M \, \di{x} + \mu N \, \di{y} = 0$ is exact, which is true if and only if $\partial_{y}(\mu M) = \partial_{x}(\mu N)$, which is true if and only if
+    \begin{align}
+        \partial_{y} \mu \, M + \mu \partial_{y} M = \partial_{x} \mu \, N + \mu \partial_{x} N
+    \end{align}
+    which occurs if and only if
+    \begin{align}
+        \mu (\partial_{y} M - \partial_{x} N) = \partial_{x} \mu \, N - \partial_{y} \mu \, M.
+    \end{align}
+    If we assume that $\mu \equiv \mu(x)$, then $\partial_{y} \mu = 0$, and we have
+    \begin{align}
+        \mu (\partial_{y} M - \partial_{x} N) = \partial_{x} \mu \, N \implies \frac{\partial_{x} \mu}{\mu} = \frac{\partial_{y} M - \partial_{x} N}{N} = \phi(x).
+    \end{align}
+    Here, the left side is $\frac{\di{}}{\di{x}} \log \mu(x)$, and thus we have $\mu(x) = e^{\int_{x_{0}}^{x} \phi(t) \, \di{t}}$. The case when $\mu \equiv \mu(y)$ is similar.
+\end{proof}
+
+\section{Linear Equations and Homogeneous Equations}
+
+A first-order ODE of the form
+\begin{align}
+    y' + A(x) \, y = B(x)
+\end{align}
+is said to be a \eax{linear equation}, where $A$ and $B$ are continuous functions. In such a case, an integrating factor is given by
+\begin{align}
+    \mu(x) = e^{\displaystyle\int_{x_{0}}^{x} A(s) \, \di{s}}.
+\end{align}
+
+Multiplying both sides of the equation by $\mu(x)$, we get
+\begin{align}
+    \mu(x) \, y' + \mu(x) \, A(x) \, y = \mu(x) \, B(x) \implies \frac{\di{}}{\di{x}} (\mu(x) \, y) = \mu(x) \, B(x).
+\end{align}
+
+\begin{example}
+    Consider the linear ODE
+    \begin{align}
+        y' + y = (2xe^{-x} + x^{2}).
+    \end{align}
+    Here, $A(x) = 1$ and $B(x) = 2xe^{-x} + x^{2}$. An integrating factor is given by
+    \begin{align}
+        \mu(x) = e^{\int 1 \, \di{x}} = e^{x}.
+    \end{align}
+    Introducing this into the equation, we get
+    \begin{align}
+        e^{x} \, y' + e^{x} \, y = 2x + x^{2} e^{x} \implies \frac{\di{}}{\di{x}} (e^{x} \, y) = 2x + x^{2} e^{x}.
+    \end{align}
+    Integrating both sides, we get
+    \begin{align}
+        e^{x} \, y = \int (2x + x^{2} e^{x}) \, \di{x} = 2(x - 1) e^{x} + x^{2} e^{x} + C.
+    \end{align}
+\end{example}
+
+Finally, for first order ODEs, we are left with discussing equations of the form
+\begin{align}
+    M \, \di{x} + N \, \di{y} = 0,
+\end{align}
+where $M$ and $N$ are homogeneous functions of the same degree. That is, $M(tx,ty) = t^{k} M(x,y)$ and $N(tx,ty) = t^{k} N(x,y)$ for some $k \in \N$ and all $t > 0$. If we rewrite this equation as
+\begin{align}
+    y' = -\frac{M(x,y)}{N(x,y)} = f(x,y),
+\end{align}
+then we have $f(x,y)$ being homogenous of degree $0$, that is, $f(tx,ty) = f(x,y)$ for all $t > 0$. In such a case, the equation is termed a \eax{homogeneous equation}. Moreover, $f$ can be expressed as a function of the ratio $y/x$ alone via $f(x,y) \equiv f(1,y/x)$. If we set $z = y/x$, then $y = zx$ and $y' = z'x + z$. Thus, we have
+\begin{align}
+    z'x + z = f(1,z) \implies z' = \frac{f(1,z) - z}{x}.
+\end{align}
+This is a separable equation in $z$ and $x$, which can be solved to obtain $z(x)$, and thus $y(x) = z(x) \, x$.
+
+\begin{example}
+    Take a look at the equation
+    \begin{align}
+        x^{2} y' - 3xy - 2y^{2} = 0.
+    \end{align}
+    Here, $M(x,y) = -3xy - 2y^{2}$ and $N(x,y) = x^{2}$ are homogeneous functions of degree $2$. Rewriting, we have
+    \begin{align}
+        y' = \frac{3xy + 2y^{2}}{x^{2}} = \frac{3z + 2z^{2}}{1} = f(1,z),
+    \end{align}
+    where $z = y/x$. Thus, we have
+    \begin{align}
+        z' = \frac{f(1,z) - z}{x} = \frac{2z^{2} + 2z}{x}.
+    \end{align}
+    Separation of variables gives
+    \begin{align}
+        \frac{\di{z}}{2z^{2} + 2z} = \frac{\di{x}}{x} \implies \frac{1}{2} \log \abs{\frac{z}{z+1}} = \log \abs{x} + C \implies \frac{z}{z+1} = C_{1} x^{2}.
+    \end{align}
+    Back-substituting for $z$, we get
+    \begin{align}
+        \frac{y}{y+x} = C_{1} x^{2} \implies y = \frac{C_{1} x^{3}}{1 - C_{1} x^{2}}.
+    \end{align}
+\end{example}
+
+\section{Existence and Uniqueness Theorems}
+
+We now are focussed on when solutions of first-order ODEs exist and are unique. The first of these is the Peano existence theorem.
+
+\begin{theorem}[\eax{Peano existence theorem}]
+    Let $D = (x_{1}, x_{2}) \times (y_{1}, y_{2}) \subseteq \R^{2}$ be an open rectangle, and let $f:D \to \R$ be a continuous function. Also suppose $(x_{0},y_{0}) \in D$. Then, there exists a solution $y$ for $y' = f(x,y)$ in a neighbourhood of $x_{0}$ with the initial condition $y(x_{0}) = y_{0}$.
+\end{theorem}
+
+Note that this theorem only guarantees solutions in a neighbourhood of $x_{0}$. Moreover, it does not guarantee uniqueness of solutions. Another important theorem is that of Arzelà-Ascoli.
+
+\begin{theorem}[\eax{Arzelà-Ascoli theorem}]
+    Suppose $\cF = \{f : [a,b] \to \R\}$ is a family of continuous functions on $[a,b]$. Suppose $\cF$ satisfies the following two conditions:
+    \begin{itemize}
+        \item \eax{Uniform boundedness}: there exists $M > 0$ such that $\abs{f(x)} \leq M$ for all $f \in \cF$ and all $x \in [a,b]$.
+        \item \eax{Equicontinuity}: for every $\epsilon > 0$, there exists $\delta > 0$ such that for all $f \in \cF$ and all $x, y \in [a,b]$ with $\abs{x - y} < \delta$, we have $\abs{f(x) - f(y)} < \epsilon$.
+    \end{itemize}
+    Then every sequence $(f_{n})_{n \geq 1} \subseteq \cF$ has a subsequence $(f_{n_{k}})_{k \geq 1}$ that converges uniformly to a continuous function $f:[a,b] \to \R$.
+\end{theorem}
+
