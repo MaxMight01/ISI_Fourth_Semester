@@ -1,0 +1,71 @@
+\chapter{INTRODUCTION TO RINGS}
+
+\textit{January 19th.}
+
+Of course, we begin with the definition of a ring.
+
+\begin{definition}
+    A \eax{ring} is a triple $(R, +, \cdot)$ where $R$ is a set, and $+$ and $\cdot$ are binary operations on $R$ such that the following axioms are satisfied:
+    \begin{itemize}
+        \item $(R, +)$ is an abelian group. The identity element of this group is denoted by $0_{R}$, and the (additive) inverse of an element $a \in R$ is denoted by $-a$.
+        \item The property of \eax{associativity} of $\cdot$ holds; i.e., for all $a, b, c \in R$, we have $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+        \item The property of \eax{distributivity} of $\cdot$ over $+$ holds; i.e., for all $a, b, c \in R$, we have
+        \begin{align}
+            a \cdot (b + c) &= a \cdot b + a \cdot c, \\
+            (a + b) \cdot c &= a \cdot c + b \cdot c.
+        \end{align}
+    \end{itemize}
+\end{definition}
+
+Rings may be written simply as $R$ instead of the triple. The ring $R$ is termed a \eax{ring with unity} if there exists an element $1_{R} \in R$ such that for all $a \in R$, we have $1_{R} \cdot a = a \cdot 1_{R} = a$. Some examples of rings with unity include $\Z$, $\Q$, $\R$, $\C$, $M_{n}(\R)$ with the usual addition and multiplication. A ring $R$ is said to be a \eax{commutative ring} if for all $a, b \in R$, we have $a \cdot b = b \cdot a$. Examples of commutative rings include $\Z$, $\Q$, $\R$, $\C$, but $M_{n}(\R)$ is not commutative for $n \geq 2$. Lastly, a commutative ring $R$ with unity is termed a \eax{field} if every non-zero element of $R$ has a multiplicative inverse; i.e., for every $a \in R \setminus \{0_{R}\}$, there exists an element $b \in R$ such that $a \cdot b = b \cdot a = 1_{R}$. Examples of fields include $\Q$, $\R$, $\C$, but $\Z$ is not a field.
+
+Example of rings without unity include $2\Z$ with the usual addition and multiplication, and the set of all continuous functions from $\R$ to $\R$ that vanish at $0$, with the usual addition and multiplication of functions. Another class of rings we previously studied was $\Z/n\Z$ for $n \geq 2$, with the usual addition and multiplication modulo $n$. This ring has unity, but is a field if and only if $n$ is prime.
+
+\begin{definition}
+    Let $R$ be a ring with unity. An element $a \in R$ is called a \eax{unit} if there exists an element $b \in R$ such that $a \cdot b = b \cdot a = 1_{R}$.
+\end{definition}
+
+For example, in the ring $\Z/n\Z$, an element $\bar{a}$ is a unit if and only if $\gcd(a, n) = 1$. The set of all units in a ring $R$ with unity is denoted by $R^{\times}$. It can be easily verified that $(R^{\times}, \cdot)$ is an abelian group.
+
+\section{Properties and Maps}
+Some basic properties may be inferred.
+
+\begin{proposition}
+    Let $R$ be a ring with unity. Then,
+    \begin{itemize}
+    \item $1_{R}$ is the unique multiplicative identity in $R$.
+    \item $1_{R} \cdot 0_{R} = 0_{R}$. In general, $a \cdot 0_{R} = 0_{R}$ for all $a \in R$.
+    \item $-1_{R} \cdot a = -a$ for all $a \in R$.
+\end{itemize}
+\begin{proof}
+    \begin{itemize}
+        \item This is left as an exercise to the reader.
+        \item $1_{R} \cdot 0_{R} = 1_{R}$ is trivial since $1_{R}$ is the multiplicative identity. For the general case, let $a \in R$. Then,
+        \begin{align}
+            a \cdot 0_{R} = a \cdot (0_{R} + 0_{R}) = a \cdot 0_{R} + a \cdot 0_{R} \implies a \cdot 0_{R} = 0_{R}
+        \end{align}
+        by the addition of $-(a \cdot 0_{R})$ on both sides.
+        \item Let $a \in R$. Then,
+        \begin{align}
+            (-1_{R} \cdot a) + a = (-1_{R} + 1_{R}) \cdot a = 0_{R} \implies -1_{R} \cdot a = -a.
+        \end{align}
+    \end{itemize}
+\end{proof}
+\end{proposition}
+
+The subscript $R$ in $0_{R}$ and $1_{R}$ may be dropped when the context is clear. We move on to some special maps.
+
+\begin{definition}
+    A \eax{ring homomorphism} is a map $\varphi : (R, +, \cdot) \to (S, \oplus, \odot)$ between two rings such that for all $a, b \in R$, we have
+    \begin{align}
+        \varphi(a + b) = \varphi(a) \oplus \varphi(b), \quad \varphi(a \cdot b) = \varphi(a) \odot \varphi(b).
+    \end{align}
+\end{definition}
+Most of the time, we shall drop $\oplus$ and $\odot$ when the context is clear. Some examples of ring homomorphisms include the map $\varphi : \Z \to \Z/n\Z$ defined by $\varphi(a) = \bar{a}$ for all $a \in \Z$, and the inclusion map from $\Z$ to $\Q$. Non-examples include $n \mapsto -n$ from $\Z$ to $\Z$, and the determinant map from $M_{n}(\R)$ to $\R$.
+
+Let $(\Z \times \Z, +, \cdot)$ be the ring where addition and multiplication are defined component-wise. Then the map $Z \to \Z \times \Z$ defined by $a \mapsto (a, 0)$ is a ring homomorphism since it preserves both addition and multiplication. However, the unity of $\Z$ is mapped to $(1, 0)$, which is not the unity of $\Z \times \Z$. Thus, ring homomorphisms need not map unity to unity.
+
+\begin{definition}
+    Let $R$ be a ring with $S \subseteq R$ a subset. Then, $S$ is called a \eax{subring} of $R$ if $(S, +, \cdot)$ is itself a ring with the operations inherited from $R$.
+\end{definition}
+Again, even if $R$ has unity, a subring $S$ need not have the same unity as $R$ or even a unity at all.
