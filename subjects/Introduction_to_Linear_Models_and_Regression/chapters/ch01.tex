@@ -86,3 +86,66 @@ As for linear transformations, if $\bv{Y} = \bv{A} \bv{X} + \bv{b}$ where $\bv{A
     \Cov(\bv{Y}) = \bv{A} \Cov(\bv{X}) \bv{A}^{\top}.
 \end{align}
 In particular, if $\bv{a} = \bv{A}^{\top}$ is a $p$-dimensional vector, then $Y$ is a univariate random variable written as $Y = \bv{a}^{\top} \bv{X} + b$.
+
+
+\subsubsection{Mahalanobis Distance}
+
+All of the below equations
+\begin{align}
+    d^{2} &= (\bv{y}_{1} - \bv{y}_{2})^{\top} \bv{S}^{-1} (\bv{y}_{1} - \bv{y}_{2}),\\
+    D^{2} &= (\bar{\bv{y}} - \bvs{\mu})^{\top} \bv{S}^{-1} (\bar{\bv{y}} - \bvs{\mu}),\\
+    D^{2} &= (\bar{\bv{y}} - \bvs{\mu})^{\top} \bvs{\Sigma}^{-1} (\bv{y} - \bvs{\mu}),
+\end{align}
+are known as the \eax{Mahalanobis distance}. Here, $S$ is the sample covariance matrix and $\bvs{\Sigma}$ is the population covariance matrix. The Mahalanobis distance is a measure of distance that accounts for the correlations between variables and the different scales of the variables. Since $\bvs{\Sigma}$ is positive semi-definite, we set $\bv{z} = \bvs{\Sigma}^{-1/2} \bv{y} - \bvs{\Sigma}^{-1/2} \bvs{\mu}$ to get
+\begin{align}
+    (\bv{y}-\bvs{\mu})^{\top} \bvs{\Sigma}^{-1} (\bv{y} - \bvs{\mu}) = (\bv{y}-\bvs{\mu})^{\top} \bvs{\Sigma}^{-1/2} \bvs{\Sigma}^{-1/2} (\bv{y} - \bvs{\mu}) = \bv{z}^{\top} \bv{z}.
+\end{align}
+This shows that the Mahalanobis distance is equivalent to the Euclidean distance in the transformed space where the data has been standardized by the covariance matrix. The covariance matrix of $\bv{z}$ is
+\begin{align}
+    \Cov(\bv{z}) = \bvs{\Sigma}^{-1/2} \Cov(\bv{y}) \bvs{\Sigma}^{-1/2} = \bvs{\Sigma}^{-1/2} \frac{1}{n}\bvs{\Sigma} \bvs{\Sigma}^{-1/2} = \frac{1}{n}\bv{I}_{p}.
+\end{align}
+Thus, the variables in $\bv{z}$ are uncorrelated with equal variances; in other words, they have been standardized. 
+
+\subsection{Moment Generating Function}
+
+Recall that in the univariate case, the moment generating function (MGF) of a random variable $X$ is defined as
+\begin{align}
+    M_{X}(t) \defeq \E[e^{tX}] = \E \left[ \sum_{r=0}^{\infty} \frac{t^r X^r}{r!} \right].
+\end{align}
+We extend this definition to the multivariate case as follows; for a random vector $\bv{X} = (X_{1}, X_{2}, \ldots, X_{p})^{T}$, the \eax{moment generating function} is defined as
+\begin{align}
+    M_{\bv{X}}(\bv{t}) \defeq \E[e^{\bv{t}^{\top} \bv{X}}] = \E \left[ e^{\sum_{i=1}^{p} t_i X_i} \right]
+\end{align}
+for all $\bv{t} = (t_{1}, t_{2}, \ldots, t_{p})^{T} \in \R^{p}$ such that the expectation exists. When the $X_{i}$'s are independent, we have
+\begin{align}
+    M_{\bv{X}}(\bv{t}) = \prod_{i=1}^{p} M_{X_{i}}(t_{i}).
+\end{align}
+Similar to the univariate case, the MGF can be used to compute moments of the random vector. For example, the first moment (mean vector) can be obtained by taking the gradient of the MGF at $\bv{t} = \bv{0}$:
+\begin{align}
+    \E[\bv{X}] = \nabla_{\bv{t}} M_{\bv{X}}(\bv{t}) \bigg|_{\bv{t}=\bv{0}}.
+\end{align}
+The second moment (covariance matrix) can be obtained by taking the Hessian of the MGF at $\bv{t} = \bv{0}$:
+\begin{align}
+    \Cov(\bv{X}) = \nabla_{\bv{t}}^{2} M_{\bv{X}}(\bv{t}) \bigg|_{\bv{t}=\bv{0}} - \E[\bv{X}] \E[\bv{X}]^{\top}.
+\end{align}
+Suppose $\bv{Y} = \bv{A} \bv{X} + \bv{b}$ where $\bv{A}$ is a $q \times p$ matrix and $\bv{b} \in \R^{q}$. Then, the MGF of $\bv{Y}$ is given by
+\begin{align}
+    M_{\bv{Y}}(\bv{t}) = e^{\bv{t}^{\top} \bv{b}} M_{\bv{X}}(\bv{A}^{\top} \bv{t}).
+\end{align}
+
+\section{Linear Models}
+
+Generally, we had
+\begin{align}
+    y = \beta_{0} + \beta_{1} x + \epsilon
+\end{align}
+where $\epsilon \sim N(0, \sigma^{2})$. Here, we note that $y$ is a random variable while $x$ is a fixed variable. Moreover, $\sum_{i} (y_{i} - \bar{y}) = 0$ implies that $\sum_{i} \epsilon_{i} = 0$. In such a case, $\E[y] = \beta_{0} + \beta_{1} \E[x]$ and $\E[y \mid x] = \beta_{0} + \beta_{1} x$. A theorem states that if any one of the regression lines is constant, then $\Cov(X,Y) = 0$.
+
+A simple proof is given as follows: note that $\E[Y \mid X] = k \implies \E[Y] = k$. Also,
+\begin{align}
+    \E[XY] = \int_{\R} \int_{\R} xy f(x,y) \, \di{x} \, \di{y} = \int_{\R} x \int_{\R} y f_{Y \mid X}(y \mid x) \, \di{y} f_{X}(x) \, \di{x} = \int_{\R} x k f_{X}(x) \, \di{x} = k \E[X].
+\end{align}
+Thus,
+\begin{align}
+    \Cov(X,Y) = \E[XY] - \E[X] \E[Y] = k \E[X] - \E[X] k = 0.
+\end{align}

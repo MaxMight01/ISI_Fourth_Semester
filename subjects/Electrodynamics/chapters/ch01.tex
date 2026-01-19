@@ -370,3 +370,44 @@ The presence of this charge induces a redistribution of charges on the inner sur
     \oint \bv{E} \cdot \di{\bv{a}} = \frac{q + q_{\text{ind}}}{\epsilon_{0}} = 0 \implies q_{\text{ind}} = -q.
 \end{align}
 Thus, the total induced charge on the inner surface of the cavity is equal in magnitude but opposite in sign to the charge placed within the cavity. This induced charge distribution creates an electric field that cancels out the field produced by the charge $q$ within the conductor, maintaining the condition of electrostatic equilibrium. If the Gaussian surface is taken just outside the conductor, then the total enclosed charge is $q$, since the conductor as a whole is electrically neutral. Thus, the electric field outside the conductor is as if the conductor were not present at all, and is completely independent of the location or shape of the cavity within the conductor.
+
+\subsubsection{Surface Charge and Force on a Conductor}
+\textit{January 19th.}
+
+Consider a conductor with a surface charge density $\sigma$. The electric field just outside the surface of the conductor is given by Gauss's law as
+\begin{align}
+    \bv{E} = \frac{\sigma}{\epsilon_{0}} \hat{\bv{n}}.
+\end{align}
+From here, one can see that
+\begin{align}
+    \sigma = -\epsilon_{0} \frac{\partial V}{\partial n}.
+\end{align}
+In the presence of an external electric field, the conductor experiences a force. The force per unit area (pressure) on the surface of the conductor due to the electric field is given by
+\begin{align}
+    \bv{f} = \sigma \bv{E}.
+\end{align}
+The questions is since the electric field is discontinuous across the surface of the conductor, which value of $\bv{E}$ should we use to compute the force? For a surface distribution, note that $\bv{E}_{\text{total}} = \bv{E}_{\text{patch}} + \bv{E}_{\text{other}}$, where $\bv{E}_{\text{patch}}$ is the field due to the surface charge patch itself, and $\bv{E}_{\text{other}}$ is the field due to all other charges. Thus, just above and below the surface of the conductor, we have
+\begin{align}
+    \bv{E}_{\text{total}}^{\text{above}} = \bv{E}_{\text{patch}}^{\text{above}} + \bv{E}_{\text{other}}, \quad \text{and} \quad \bv{E}_{\text{total}}^{\text{below}} = \bv{E}_{\text{patch}}^{\text{below}} + \bv{E}_{\text{other}}.
+\end{align}
+Noting that $\bv{E}_{\text{patch}}^{\text{above}} = \frac{1}{2\epsilon_{0}} \sigma \hat{\bv{n}}$ and $\bv{E}_{\text{patch}}^{\text{below}} = - \frac{1}{2\epsilon_{0}} \sigma \hat{\bv{n}}$, we have
+\begin{align}
+    \bv{E}_{\text{other}} = \frac{1}{2} \left( \bv{E}_{\text{above}} + \bv{E}_{\text{below}} \right).
+\end{align}
+This argument shows that the effective electric field that exerts a force on the surface charge is the average of the fields just above and just below the surface; this argument applies to any surface charge distribution. So, since $\bv{E}_{\text{below}} = \bv{0}$ for a conductor, we have
+\begin{align}
+    \bv{f} = \sigma \left( \frac{1}{2} \bv{E}_{\text{above}} \right) = \frac{1}{2} \frac{\sigma^{2}}{\epsilon_{0}} \hat{\bv{n}}.
+\end{align}
+The force per unit area on the surface of a conductor due to the electric field is given by
+\begin{align}
+    P = \frac{1}{2} \frac{\sigma^{2}}{\epsilon_{0}} = \frac{1}{2} \epsilon_{0} E^{2}.
+\end{align}
+Let us now focus on Laplace's equation, $\nabla^{2} V = 0$. This is a second-order partial differential equation. If this equation were one-dimensional, then
+\begin{align}
+    \frac{\di^{2} V}{\di{x}^{2}} = 0 \implies V(x) = mx + c,
+\end{align}
+where $m$ and $c$ are constants. To determine these constants, we need two boundary conditions, for example, the values of $V$ at two different points. In such a case, $V(x)$ is the average of $V(x+a)$ and $V(x-a)$:
+\begin{align}
+    V(x) = \frac{1}{2} \left( V(x+a) + V(x-a) \right).
+\end{align}
+This solution has no local maxima or minima; the maximum and minimum values of $V$ occur at the boundaries. 
