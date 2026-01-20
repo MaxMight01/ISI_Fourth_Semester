@@ -411,11 +411,40 @@ We now are focussed on when solutions of first-order ODEs exist and are unique. 
 Note that this theorem only guarantees solutions in a neighbourhood of $x_{0}$. Moreover, it does not guarantee uniqueness of solutions. Another important theorem is that of Arzelà-Ascoli.
 
 \begin{theorem}[\eax{Arzelà-Ascoli theorem}]
-    Suppose $\cF = \{f : [a,b] \to \R\}$ is a family of continuous functions on $[a,b]$. Suppose $\cF$ satisfies the following two conditions:
+    Suppose $\cF = \{f : [a,b] \to \R\}$ is a family of continuous functions on $[a,b]$ such that $\cF$ satisfies the following two conditions:
     \begin{itemize}
-        \item \eax{Uniform boundedness}: there exists $M > 0$ such that $\abs{f(x)} \leq M$ for all $f \in \cF$ and all $x \in [a,b]$.
-        \item \eax{Equicontinuity}: for every $\epsilon > 0$, there exists $\delta > 0$ such that for all $f \in \cF$ and all $x, y \in [a,b]$ with $\abs{x - y} < \delta$, we have $\abs{f(x) - f(y)} < \epsilon$.
+        \item \eax{uniform boundedness}: there exists $M > 0$ such that $\abs{f(x)} \leq M$ for all $f \in \cF$ and all $x \in [a,b]$.
+        \item \eax{equicontinuity}: for every $\epsilon > 0$, there exists $\delta > 0$ such that for all $f \in \cF$ and all $x, y \in [a,b]$ with $\abs{x - y} < \delta$, we have $\abs{f(x) - f(y)} < \epsilon$.
     \end{itemize}
     Then every sequence $(f_{n})_{n \geq 1} \subseteq \cF$ has a subsequence $(f_{n_{k}})_{k \geq 1}$ that converges uniformly to a continuous function $f:[a,b] \to \R$.
 \end{theorem}
 
+
+\subsubsection{A Brief Detour}
+\textit{January 19th.}
+
+Let $X$ be a metric space with metric $d$. A collection of open sets $(U_{\alpha})_{\alpha \in \Lambda}$ is said to be an \eax{open cover} of $X$ if $\bigcup_{\alpha \in \Lambda} U_{\alpha} \supseteq X$. A metric space $X$ is said to be \eax{compact} if every open cover of $X$ admits a finite subcover; that is, for every open cover $(U_{\alpha})_{\alpha \in \Lambda}$ of $X$, there exists a finite subset $\{\alpha_{1}, \ldots, \alpha_{n}\} \subseteq \Lambda$ such that $\bigcup_{i=1}^{n} U_{\alpha_{i}} \supseteq X$. A subset $K \subseteq X$ is said to be compact if $K$ is compact as a metric space with the induced metric from $X$. A subset $A \subseteq X$ is said to be \eax{sequentially compact} if every sequence $(x_{n})_{n \geq 1} \subseteq A$ has a subsequence that converges to a point in $A$. It can be shown that a subset $K \subseteq X$ is compact if and only if $K$ is sequentially compact.
+
+Note that $C[0,1]$ is a linear space. A norm on $C[0,1]$ is the supremum norm defined as $\norm{f} \defeq \sup_{x \in [0,1]} \abs{f(x)}$. With this norm, $C[0,1]$ is a metric space with the metric $d(f,g) = \norm{f-g}$. Thus, restated, the Arzelà-Ascoli theorem says that the closure of a subset $\cF \subseteq C[0,1]$ is sequentially compact if and only if $\cF$ is uniformly bounded and equicontinuous. The theorem precisely characterizes the compact subsets of $C[0,1]$. We now prove this theorem.
+
+\begin{proof}[Proof of Arzelà-Ascoli theorem]
+    Let $\delta_{1}$ be such that equicontinuity holds for $\epsilon = \frac{1}{2}$. Split the domain $[0,1]$ into subintervals of length less than $\delta_{1}$, and split the range $[-M,M]$ into intervals of length less than $\frac{1}{2}$. Thus, we have a grid on $[0,1] \times [-M,M]$. Call this `Step 1'. For a function $f$, let its shape at Step 1 be the collection of rectangles in the grid that $f$ intersects. Since there are only finitely many possible shapes at Step 1, there is at least one shape, say $S_{1}$, such that infinitely many functions in the sequence $(f_{n})_{n \geq 1}$ have shape $S_{1}$. Let $f_{n_{1}}$ be the function with the least index among these. Now choose $\epsilon = \frac{1}{4}$, and let $\delta_{2}$ be such that equicontinuity holds. Split the domain $[0,1]$ into subintervals of length less than $\delta_{2}$, and split the range $[-M,M]$ into intervals of length less than $\frac{1}{4}$. This gives a finer grid on $[0,1] \times [-M,M]$. Call this `Step 2'. Then there is again a shape $S_{2}$ at Step 2 such that infinitely many functions in the sequence $(f_{n_{k}})_{k \geq 1}$ have shape $S_{2}$. Let $f_{n_{2}}$ be the function with the least index among these. Continuing in this manner, we obtain a subsequence $(f_{n_{k}})_{k \geq 1}$ such that all functions in this subsequence have the same shape at Step $k$. We claim that this subsequence converges uniformly to a continuous function $f:[0,1] \to \R$. Indeed, for any $\epsilon > 0$, choose $N$ such that $\frac{1}{2^{N}} < \epsilon$. For any $m,n \geq N$ and any $x \in [0,1]$, since $f_{n}$ and $f_{m}$ have the same shape at Step $N$, we have $\abs{f_{n}(x) - f_{m}(x)} < \frac{1}{2^{N-1}} < \epsilon$. This shows that $(f_{n_{k}})_{k \geq 1}$ is uniformly Cauchy, and thus converges uniformly to some function $f:[0,1] \to \R$. Since each $f_{n_{k}}$ is continuous, and the convergence is uniform, $f$ is also continuous.
+\end{proof}
+
+We now prove the Peano existence theorem.
+
+\begin{proof}[Proof of Peano existence theorem]
+    Let $D$ be the open rectangle $(a,b) \times (c,d)$. Since $f$ is continuous on the compact set $\overline{D}$, there exists an $M > 0$ such that $\abs{f(x,y)} \leq M$ for all $(x,y) \in D$. The idea here is to construct a sequence of approximate solutions that converges to a solution of the ODE via Arzelà-Ascoli. For any $\epsilon > 0$, define a function $y_{\epsilon}$ precisely as follows: on $[x_{0},x_{1}]$ where $x_{1} = x_{0} + \epsilon$, it is exactly the line segment through $(x_{0},y_{0})$ with slope $f(x_{0},y_{0})$. On $[x_{1},x_{2}]$ where $x_{2} = x_{1} + \epsilon$, it is exactly the line segment through $(x_{1},y_{\epsilon}(x_{1}))$ with slope $f(x_{1},y_{\epsilon}(x_{1}))$. Continuing in this manner, we define $y_{\epsilon}$ on $[x_{0}, x_{0} + n \epsilon]$ for all $n$ such that $x_{0} + n \epsilon \leq b$. We can similarly define $y_{\epsilon}$ on $[x_{0}-n\epsilon,x_{0}]$. Note that since $\abs{f(x,y)} \leq M$, we have
+    \begin{align}
+        \abs{y_{\epsilon}(x) - y_{\epsilon}(x_{0})} \leq \abs{y_{0} - y_{\epsilon}(x_{1})} + \abs{y_{\epsilon}(x_{1}) - y_{\epsilon}(x_{2})} + \cdots + \abs{y_{\epsilon}(x_{n-1}) - y_{\epsilon}(x)} \leq M \abs{x - x_{0}}.
+    \end{align}
+    Now consider the family $\{y_{\epsilon} : \epsilon > 0\}$. This family is uniformly bounded since $\abs{y_{\epsilon}(x)} \leq \abs{y_{0}} + M \abs{x - x_{0}}$ for all $x \in [a,b]$ and all $\epsilon > 0$. This family is also equicontinuous since for any $\epsilon > 0$ and any $x,y \in [a,b]$, we have
+    \begin{align}
+        \abs{y_{\epsilon}(x) - y_{\epsilon}(y)} \leq M \abs{x - y}.
+    \end{align}
+    By Arzelà-Ascoli, there exists a sequence $(y_{\epsilon_{n}})_{n \geq 1}$ that converges uniformly to a continuous function $y:[a,b] \to \R$. We now show that $y$ is a solution of the ODE with the initial condition. It suffices to show that for any $u \in [a,b]$ and $v = y(x)$, one has $y'(u) = f(u,v)$. That is, we wish to show
+    \begin{align}
+        \lim_{h \to 0} \frac{y(u+h) - y(u)}{h} = f(u,v).
+    \end{align}
+
+\end{proof}
