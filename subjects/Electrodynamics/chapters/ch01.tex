@@ -402,6 +402,8 @@ The force per unit area on the surface of a conductor due to the electric field 
 \begin{align}
     P = \frac{1}{2} \frac{\sigma^{2}}{\epsilon_{0}} = \frac{1}{2} \epsilon_{0} E^{2}.
 \end{align}
+
+\section{Properties of Laplace's Equation}
 Let us now focus on Laplace's equation, $\nabla^{2} V = 0$. This is a second-order partial differential equation. If this equation were one-dimensional, then
 \begin{align}
     \frac{\di^{2} V}{\di{x}^{2}} = 0 \implies V(x) = mx + c,
@@ -410,4 +412,59 @@ where $m$ and $c$ are constants. To determine these constants, we need two bound
 \begin{align}
     V(x) = \frac{1}{2} \left( V(x+a) + V(x-a) \right).
 \end{align}
-This solution has no local maxima or minima; the maximum and minimum values of $V$ occur at the boundaries. 
+This solution has no local maxima or minima; the maximum and minimum values of $V$ occur at the boundaries.
+\\ \\
+\textit{January 21st.}
+
+In three dimensions, we claim that these properties still hold. Let us suppose that there is a sphere of radius $R$ centred at the origin, and a point charge $q$ is placed at a distance of $z$ along the $z$-axis from the origin. We wish to find the potential on the surface of the sphere due to this point charge. For an arbitrary point $P$ on the surface of the sphere, we have
+\begin{align}
+    V_{P} = \frac{1}{4 \pi \epsilon_{0}} \frac{q}{\curs{r}} = \frac{1}{4 \pi \epsilon_{0}} \frac{q}{\sqrt{R^{2} + z^{2} - 2 R z \cos \theta}}
+\end{align}
+where $\theta$ is the angle between the $z$-axis and the line joining the origin to point $P$. The average potential on the surface of the sphere is given by
+\begin{align}
+    V_{\text{avg}} = \frac{1}{4 \pi R^{2}} \oint V_{P} \; \di{a} &= \frac{1}{4 \pi R^{2}} \frac{q}{4 \pi \epsilon_{0}} \int_{0}^{\pi} \int_{0}^{2\pi} \frac{R^{2} \sin \theta}{\sqrt{R^{2} + z^{2} - 2 R z \cos \theta}} \; \di{\theta} \, \di{\phi} \notag \\
+    &= \frac{q}{8 \pi \epsilon_{0}} \int_{0}^{\pi} \frac{\sin \theta}{\sqrt{R^{2} + z^{2} - 2 R z \cos \theta}} \; \di{\theta} = \frac{q}{4 \pi \epsilon_{0} R} \quad \text{(for $z < R$)}.
+\end{align}
+That is, $V_{\text{avg}}$ is exactly $V$ at the centre of the sphere. This can be generalized through superposition by adding more point charges. Again, there is no local maxima or minima of $V$; the maximum and minimum values of $V$ occur at the boundaries. Since $V$ can have no local minimum, an equilibrium configuration of charges cannot be stable; any small perturbation will cause the charges to move away from the equilibrium position. This is known as \eax{Earnshaw's theorem}.
+
+\subsection{Boundary Conditions and Uniqueness}
+
+To solve Laplace's equation, we need to specify boundary conditions. The first uniqueness theorem is needed here.
+
+\begin{theorem}[The \eax{first uniqueness theorem}]
+    The solution to Laplace's equation in a region of volume $\curs{v}$ is uniquely determined by specifying $V$ on the boundary surface $S$ of the volume.
+\end{theorem}
+
+Assume there are two possible distinct solutions $V_{1}$ and $V_{2}$ obeying the same boundary conditions. Then $\nabla^{2} V_{1} = 0 = \nabla^{2} V_{2}$, and thus $\nabla^{2} (V_{1} - V_{2}) = 0$. Let $U = V_{1} - V_{2}$; then $\nabla^{2} U = 0$ with $U = 0$ on the boundary surface $S$. Since extreme values can only occur on the boundary, and $U = 0$ on the boundary, we have $U = 0$ everywhere within the volume $\curs{v}$. Thus, $V_{1} = V_{2}$ everywhere within the volume $\curs{v}$, proving uniqueness.
+
+Suppose we have a hollow conductor with no charges inside it. The potential on the surface of the conductor is constant, say $V_{0}$. By the first uniqueness theorem, the potential within the hollow region is uniquely determined by the boundary condition $V = V_{0}$ on the surface of the conductor. A constant function $V = V_{0}$ within the hollow region satisfies Laplace's equation and the boundary condition. Thus, by uniqueness, $V = V_{0}$ everywhere within the hollow region, and thus $\bv{E} = - \nabla V = \bv{0}$ within the hollow region.
+
+We now ask whether we can extend this to Poisson's equation $\nabla^{2} V = - \frac{\rho}{\epsilon_{0}}$. Assume two solutions $V_{1}$ and $V_{2}$ satisfying the same boundary conditions. Then $\nabla^{2} (V_{1} - V_{2}) = 0$. Letting $U = V_{1} - V_{2}$, we have $\nabla^{2} U = 0$ with $U = 0$ on the boundary surface $S$. By the same argument as before, we have $U = 0$ everywhere within the volume $\curs{v}$, proving uniqueness for Poisson's equation as well. The potential in a region $\curs{v}$ is uniquely determined if either $\rho$ is specified within $\curs{v}$ and $V$ is specified on the boundary surface $S$. This forms the basis for the second uniqueness theorem.
+
+\begin{theorem}[The \eax{second uniqueness theorem}]
+    In a volume $\curs{v}$ filled with charge density $\rho$, and containing conductors, the electric field $\bv{E}$ is uniquely determined by the total charge on the conductors.
+\end{theorem}
+
+Let us assume two distinct solutions $\bv{E}_{1}$ and $\bv{E}_{2}$ satisfying the same boundary conditions. Then $\nabla \cdot \bv{E}_{1} = \frac{\rho}{\epsilon_{0}} = \nabla \cdot \bv{E}_{2}$. With a Gaussian surface around the $i$-th conductor with charge $Q_{i}$, we have
+\begin{align}
+    \oint \bv{E}_{1} \cdot \di{\bv{a}} = \frac{Q_{i}}{\epsilon_{0}} = \oint \bv{E}_{2} \cdot \di{\bv{a}}.
+\end{align}
+Defining $\bv{E} = \bv{E}_{1} - \bv{E}_{2}$, we have $\nabla \cdot \bv{E} = 0$, and $\oint \bv{E} \cdot \di{\bv{a}} = 0$ for any Gaussian surface around each conductor. Since conducting surfaces must be equipotential surfaces, we can conclude that the potential $V$, associated with $\bv{E}$, is (not necessarily the same) constant on each conductor. Taking the divergence of $V \bv{E}$, we have
+\begin{align}
+    \nabla \cdot (V \bv{E}) = V (\nabla \cdot \bv{E}) + \bv{E} \cdot (\nabla V) = V (0) + \bv{E} \cdot (-\bv{E}) = - E^{2}.
+\end{align}
+Integrating over the volume $\curs{v}$, we have
+\begin{align}
+    \int_{\curs{v}} \nabla \cdot (V \bv{E}) \; \di{V'} = \oint_{S} V \bv{E} \cdot \di{\bv{a}} = - \int_{\curs{v}} E^{2} \; \di{V'}.
+\end{align}
+Since $V$ is constant on $S$, and $\oint_{S} \bv{E} \cdot \di{\bv{a}} = 0$, the left-hand side is zero. But the right-hand side is negative since $E^{2} \geq 0$. Thus, we must have $\bv{E} = \bv{0}$ everywhere within the volume $\curs{v}$, proving uniqueness(?: proof incomplete).
+
+\subsection{The Method of Images}
+The \eax{method of images} is a mathematical technique used to solve electrostatic problems involving conductors by replacing the conductors with imaginary charges (image charges) that replicate the boundary conditions imposed by the conductors. This method simplifies the problem by allowing us to work with point charges in free space rather than dealing with complex conductor geometries directly. Consider a point charge $q$ located at a distance $d$ above an infinite grounded conducting plane $(z=0)$. We wish to find the potential $V$ at a point $P(x,y)$ in a region above the plane $(z \geq 0)$. To solve this problem using the method of images, we introduce an imaginary charge $-q$ at a distance $d$ below the plane and remove the conducting plane from the problem. The potential at point $P$ due to both the real charge $q$ and the image charge $-q$ is given by
+\begin{align}
+    V(x,y,z) = \frac{q}{4 \pi \epsilon_{0} \sqrt{x^{2} + y^{2} + (z - d)^{2}}} - \frac{q}{4 \pi \epsilon_{0} \sqrt{x^{2} + y^{2} + (z + d)^{2}}}.
+\end{align}
+This potential satisfies Laplace's equation in the region above the plane and meets the boundary condition that $V = 0$ on the conducting plane $(z=0)$. Moreover, $V(x,y,z)$ approaches zero as $z \to \infty$, which is consistent with the physical expectation that the potential should vanish far away from the charges. Uniquness theorems guarantee that this is the correct solution to the original problem with the conducting plane. To find the charge density induced on the conduting plane, we have
+\begin{align}
+    \sigma(x,y) = \epsilon_{0}E = -\epsilon_{0} \frac{\partial V}{\partial z} \bigg|_{z=0} &= \frac{1}{4 \pi \epsilon_{0}} \left( \frac{-q(z-d)}{(x^{2}+y^{2}+(z-d)^{2})^{3/2}} + \frac{q(z+d)}{(x^{2}+y^{2}+(z+d)^{2})^{3/2}}  \right) \notag \\ &= -\frac{q d}{2 \pi (x^{2} + y^{2} + d^{2})^{3/2}}.
+\end{align}

@@ -93,10 +93,27 @@ For metric spaces, the sequential definition also implies the open-set definitio
     \end{enumerate}
 \end{theorem}
 
+\textit{January 20th.}
+
 \begin{proof}
     We first show that (i) and (ii) are equivalent. Suppose $C$ is closed in $Y$. Then, $Y \setminus C$ is open in $Y$. Since $f$ is continuous, the preimage $f^{-1}(Y \setminus C)$ is open in $X$. But,
     \begin{align}
         f^{-1}(Y \setminus C) = X \setminus f^{-1}(C).
     \end{align}
     Thus, $f^{-1}(C)$ is closed in $X$. One can follow the converse argument to show that (ii) implies (i).
+
+    For (i) implies (iii), let $A \subseteq X$ and let $x \in \overline{A}$. Let $V$ be an open neighbourhood of $f(x)$ in $Y$. Since $f$ is continuous, $f^{-1}(V)$ is an open neighbourhood of $x$ in $X$. Thus, $f^{-1}(V) \cap A \neq \emptyset$. Let $a \in f^{-1}(V) \cap A$. Then, $f(a) \in V$ and $f(a) \in f(A)$. Since $V$ was arbitrary, we must have $V \cap f(A) \neq \emptyset$. Thus, $f(x) \in \overline{f(A)}$, proving that $f(\overline{A}) \subseteq \overline{f(A)}$. For (iii) implies (ii), let $V$ be a closed set in $Y$. Then
+    \begin{align}
+        f^{-1}(V) \subseteq X \implies f(\overline{f^{-1}(V)}) \subseteq \overline{f(f^{-1}(V))} \subseteq \overline{V} = V
+    \end{align}
+    which tells us $\overline{f^{-1}(V)} \subseteq f^{-1}(V)$, proving that $f^{-1}(V)$ is closed in $X$.
+
+    For (i) implies (iv), let $f(x) \in V$ with $V \in \tau_{Y}$. Since $f$ is continuous, $f^{-1}(V)$ is open in $X$ and contains $x$. Thus, we can take $U = f^{-1}(V)$, proving (iv). For (iv) implies (i), let $V \in \tau_{Y}$. For every $x \in f^{-1}(V)$, we have $f(x) \in V$. By (iv), there exists an open set $U_{x} \in \tau_{X}$ such that $x \in U_{x}$ and $f(U_{x}) \subseteq V$. Thus, taking the union over all $x \in f^{-1}(V)$ gives $\bigcup_{x \in f^{-1}(V)} U_{x} = f^{-1}(V)$, proving that $f^{-1}(V)$ is open in $X$.
 \end{proof}
+
+
+\subsection{Rules of Continuous Functions}
+
+Note that the constant function $f : X \to Y$ defined by $f(x) = y_{0}$ for some fixed $y_{0} \in Y$ is continuous. Also, the identity function $\id_{X} : X \to X$ defined by $\id_{X}(x) = x$ is continuous.
+
+Let $X$ be a topological space, and $A$ be a subset of $X$ with the subspace topology. Then the inclusion map $i : A \hookrightarrow X$ defined by $i(a) = a$ is continuous. If $f: X \to Y$ and $g : Y \to Z$ are continuous functions between topological spaces, then the composition $g \circ f : X \to Z$ defined by $(g \circ f)(x) = g(f(x))$ is also continuous.
