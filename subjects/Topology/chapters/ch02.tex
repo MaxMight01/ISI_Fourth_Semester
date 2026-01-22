@@ -117,3 +117,87 @@ For metric spaces, the sequential definition also implies the open-set definitio
 Note that the constant function $f : X \to Y$ defined by $f(x) = y_{0}$ for some fixed $y_{0} \in Y$ is continuous. Also, the identity function $\id_{X} : X \to X$ defined by $\id_{X}(x) = x$ is continuous.
 
 Let $X$ be a topological space, and $A$ be a subset of $X$ with the subspace topology. Then the inclusion map $i : A \hookrightarrow X$ defined by $i(a) = a$ is continuous. If $f: X \to Y$ and $g : Y \to Z$ are continuous functions between topological spaces, then the composition $g \circ f : X \to Z$ defined by $(g \circ f)(x) = g(f(x))$ is also continuous.
+
+\begin{theorem}
+    Let $f_{1}:Z \to X$ and $f_{2}:Z \to Y$ be functions between topological spaces. Then the function $f : Z \to X \times Y$ defined by $f(z) = (f_{1}(z), f_{2}(z))$ is continuous if and only if both $f_{1}$ and $f_{2}$ are continuous.
+\end{theorem}
+It is important to note that a function $f: X \to Y$ is continuousif and only if $f^{-1}(B)$ is open in $X$ for every basis element $B$ of $Y$.
+\begin{proof}
+    For the forward implication, it is enough to show that $f^{-1}(U \times V) = f_{1}^{-1}(U) \cap f_{2}^{-1}(V)$ is open in $Z$, where $U$ and $V$ are open sets in $X$ and $Y$ respectively. $f$ is continuous implies that $f^{-1}(U \times V)$ is open in $Z$. In particular, both $f_{1}^{-1}(U)$ and $f_{2}^{-1}(V)$ are open in $Z$, proving that both $f_{1}$ and $f_{2}$ are continuous.
+
+    Conversely, suppose both $f_{1}$ and $f_{2}$ are continuous. Let $U \times V$ be a basis element of $X \times Y$, where $U$ and $V$ are open sets in $X$ and $Y$ respectively. By continuity of $f_{1}$ and $f_{2}$, both $f_{1}^{-1}(U)$ and $f_{2}^{-1}(V)$ are open in $Z$. Thus $f^{-1}(U \times V) = f_{1}^{-1}(U) \cap f_{2}^{-1}(V)$ is open in $Z$, proving that $f$ is continuous.
+\end{proof}
+
+\begin{lemma}
+    Let $(X,d)$ be a metric space, and let $f: X \to \R$ be a continuous function. Suppose $f(x) \neq 0$ for some $x \in X$. Then there exists $r > 0$ such that $f(y) \neq 0$ for all $y \in B(x,r)$. Moreover, the map $g:B(x,r) \to \R$ defined by $g(y) = \frac{1}{f(y)}$ is continuous.
+\end{lemma}
+
+\begin{proof}
+    Suppose such an $r$ does not exist. Then for every natural $n \in \N$, there exists a point $x_{n} \in B(x, \frac{1}{n})$ such that $f(x_{n}) = 0$. Thus, the sequence $(x_{n})_{n \in \N}$ converges to $x$ in $X$. Since $f$ is continuous, the sequence $(f(x_{n}))_{n \in \N}$ converges to $f(x)$ in $\R$. But $f(x_{n}) = 0$ for all $n \in \N$, so $(f(x_{n}))_{n \in \N}$ is the constant sequence $0$, which converges to $0$. Thus, we must have $f(x) = 0$, a contradiction. Hence, there exists $r > 0$ such that $f(y) \neq 0$ for all $y \in B(x,r)$.
+
+    To show continuity of $g$, let $(y_{n})_{n \geq 1} \subseteq B(x,r)$ be a sequence such that $y_{n} \to y$ in $B(x,r)$. Since $f$ is continuous, we have $f(y_{n}) \to f(y)$ in $\R$. Since $f(y) \neq 0$, there exists a natural $N \in \N$ such that for every $n \geq N$, we have $f(y_{n}) \neq 0$. Thus, for every $n \geq N$, we have $g(y_{n}) = \frac{1}{f(y_{n})}$. Since the function $h : \R \setminus \{0\} \to \R$ defined by $h(t) = \frac{1}{t}$ is continuous, we have $g(y_{n}) = h(f(y_{n})) \to h(f(y)) = g(y)$ in $\R$, proving that $g$ is continuous.
+\end{proof}
+
+For a metric space $(X,d)$, we define $C(X,\R)$ to be the set of all continuous functions from $X$ to $\R$. It can be easily seen that $C(X,\R)$ is a vector space over $\R$ under pointwise addition and scalar multiplication. Moreover, if we define multiplication of functions pointwise, then $C(X,\R)$ is an algebra over $\R$. An example is any polynomial map $p:\R^{n} \to \R$; in such a case, $p \in C(\R^{n},\R)$.
+
+If we denote $M_{2}(\R)$ to be the set of all $2 \times 2$ real matrices, then matrices can be viewed as points in $\R^{4}$, and the same Euclidean topology can be induced on $M_{2}(\R)$. Thus, we can consider continuous functions from $M_{2}(\R)$ to $\R$. An example is the determinant function $\det : M_{2}(\R) \to \R$ defined by $(a,b,c,d) \mapsto ad-bc$, which is a polynomial map and hence continuous. Since this is a continuous map, and $\R\setminus \{0\}$ is open in $\R$, the preimage $\det^{-1}(\R \setminus \{0\})$ is open in $M_{2}(\R)$. But $\det^{-1}(\R \setminus \{0\})$ is precisely the set of all invertible $2 \times 2$ real matrices $GL_{2}(\R)$. Thus, we have shown that $GL_{2}(\R)$ is an open subset of $M_{2}(\R)$. The set $SL_{2}(\R)$ of all $2 \times 2$ real matrices with determinant $1$, however, is closed in $M_{2}(\R)$, since it is the preimage of the closed set $\{1\}$ under the continuous determinant function.
+
+\begin{example}
+    Let us classify all $f:\R \to \R$ that are continuous and are also group homomorphisms. Since $f$ is continuous, we only need to determine $f$  $\R$ to $\R$ are of the form $f(x) = \lambda x$ for some fixedon the rationals. Let $\lambda \defeq f(1)$. Then, for every $m \in \Z$, $f(m) = m f(1) = m \lambda$. For every $n \in \N$, we have $n f(\frac{m}{n}) = f(n \cdot \frac{m}{n}) = f(m) = m \lambda$, so $f(\frac{m}{n}) = \frac{m}{n} \lambda$. Thus, for every rational number $q$, we have $f(q) = q \lambda$. Since the rationals are dense in $\R$ and $f$ is continuous, we must have $f(x) = x \lambda$ for all real numbers $x$. Thus, all continuous group homomorphisms from $\lambda \in \R$.
+\end{example}
+
+
+\section{Product Topology}
+\noindent\textit{January 22nd.}
+
+The concept of the product topology can be extended to arbitrary products. Let $\{(X_{n}, \tau_{n}) \mid n \geq 1\}$ be a collection of topological spaces. Consider the Cartesian product
+\begin{align}
+    \prod_{n=1}^{\infty} X_{n} = \{(x_{1}, x_{2}, \ldots) \mid x_{n} \in X_{n} \text{ for all } n \geq 1\}.
+\end{align}
+The product topology on $\prod_{n=1}^{\infty} X_{n}$ is the topology generated by the basis
+\begin{align}
+    \cB = \{U_{1} \times U_{2} \times \ldots \mid U_{n} \in \tau_{n} \text{ for all } n \geq 1,\; U_{i} \neq \emptyset \text{ for finitely many } i\}.
+\end{align}
+We require that $U_{i} \neq \emptyset$ for only finitely many $i$ to ensure that this is still a basis. This is known as the box topology. If this restriction were not in place, then the fact that countable intersections of open sets may not be open would imply that this is not a topology. A second option is to use the basis
+\begin{align}
+    \cB = \{U_{1} \times U_{2} \times \ldots \mid U_{n} \in \tau_{n} \text{ for all } n \geq 1,\; U_{i} = X_{i} \text{ for all but finitely many } i\}.
+\end{align}
+This is known as the product topology. Note that for finite products, both definitions coincide. In the infinite case, the product topology is more interesting than the box topology. The product topology also extends to a collection of topological spaces indexed by an arbitrary set, such as $\{(X_{\alpha}, \tau_{\alpha}) \mid \alpha \in \Lambda\}$ for some set $\Lambda$.
+
+\begin{lemma}
+    If $\{(X_{n}, \tau_{n}) \mid n \geq 1\}$ is a collection of Hausdorff topological spaces, then the product space $\prod_{n=1}^{\infty} X_{n}$ with the product topology is also Hausdorff.
+\end{lemma}
+\begin{proof}
+    Let $x = (x_{1}, x_{2}, \ldots)$ and $y = (y_{1}, y_{2}, \ldots)$ be two distinct points in $\prod_{n=1}^{\infty} X_{n}$. Then, there exists some $k \geq 1$ such that $x_{k} \neq y_{k}$. Since $X_{k}$ is Hausdorff, there exist disjoint open sets $U_{k}, V_{k} \in \tau_{k}$ such that $x_{k} \in U_{k}$ and $y_{k} \in V_{k}$. Now, consider the open sets
+    \begin{align}
+        U = X_{1} \times X_{2} \times \ldots \times U_{k} \times X_{k+1} \times \ldots,
+    \end{align}
+    and
+    \begin{align}
+        V = X_{1} \times X_{2} \times \ldots \times V_{k} \times X_{k+1} \times \ldots.
+    \end{align}
+    Then, $U$ and $V$ are open in the product topology, and they are disjoint since $U_{k}$ and $V_{k}$ are disjoint. Moreover, $x \in U$ and $y \in V$, proving that $\prod_{n=1}^{\infty} X_{n}$ is Hausdorff.
+\end{proof}
+
+\begin{lemma}
+    The function $f:Z \to \prod_{n=1}^{\infty} X_{n}$ defined by $f(z) = (f_{1}(z), f_{2}(z), \ldots)$ is continuous if and only if each component function $f_{n} : Z \to X_{n}$ is continuous for all $n \geq 1$. Here, $\prod_{n=1}^{\infty} X_{n}$ is equipped with the product topology.
+\end{lemma}
+\begin{proof}
+    For the forward implication, let $n \geq 1$ be given. Consider an open set $U_{n} \in \tau_{n}$. Then, the set
+    \begin{align}
+        U = X_{1} \times X_{2} \times \ldots \times U_{n} \times X_{n+1} \times \ldots
+    \end{align}
+    is open in the product topology. Since $f$ is continuous, the preimage $f^{-1}(U)$ is open in $Z$. But,
+    \begin{align}
+        f^{-1}(U) = f_{n}^{-1}(U_{n}),
+    \end{align}
+    proving that $f_{n}$ is continuous.
+
+    Conversely, suppose each component function $f_{n}$ is continuous for all $n \geq 1$. Let $U = U_{1} \times U_{2} \times \ldots$ be a basis element of the product topology, where $U_{n} \in \tau_{n}$ for all $n \geq 1$ and $U_{i} = X_{i}$ for all but finitely many $i$. Then,
+    \begin{align}
+        f^{-1}(U) = \bigcap_{n=1}^{\infty} f_{n}^{-1}(U_{n}) = \bigcap_{i=1}^{k} f_{i}^{-1}(U_{i}),
+    \end{align}
+    where $k$ is such that $U_{i} = X_{i}$ for all $i > k$. Since each $f_{i}$ is continuous, each $f_{i}^{-1}(U_{i})$ is open in $Z$. Thus, $f^{-1}(U)$ is open in $Z$, proving that $f$ is continuous.
+\end{proof}
+
+Note that the above lemma does not hold if the product topology is replaced by the box topology. Consider the function $f : \R \to \R^{\N}$ defined by $f(x) = (x,x,x,\ldots)$. Each component function $f_{n} : \R \to \R$ defined by $f_{n}(x) = x$ is continuous. However, $f$ is not continuous when $\R^{\N}$ is equipped with the box topology. To see this, consider the open set $(-1,1) \times (-\frac{1}{2}, \frac{1}{2}) \times (-\frac{1}{3}, \frac{1}{3}) \times \ldots$ in the box topology. The preimage under $f$ is $\{0\}$, which is not open in $\R$. Thus, $f$ is not continuous. However, the continuity of $f$ implies the continuity of each component function $f_{n}$, so the converse implication still holds for the box topology.
