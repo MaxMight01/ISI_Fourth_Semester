@@ -69,3 +69,116 @@ Let $(\Z \times \Z, +, \cdot)$ be the ring where addition and multiplication are
     Let $R$ be a ring with $S \subseteq R$ a subset. Then, $S$ is called a \eax{subring} of $R$ if $(S, +, \cdot)$ is itself a ring with the operations inherited from $R$.
 \end{definition}
 Again, even if $R$ has unity, a subring $S$ need not have the same unity as $R$ or even a unity at all.
+\\ \\
+\textit{January 23rd.}
+
+\begin{definition}
+    A ring homomorphism $\varphi: R \to S$ is termed a \eax{ring monomorphism} if it is injective, a \eax{ring epimorphism} if it is surjective, and a \eax{ring isomorphism} if it is bijective. If there exists a ring isomorphism from $R$ to $S$, then $R$ and $S$ are said to be \eax{isomorphic}, denoted by $R \cong S$.
+\end{definition}
+
+Note that if $\varphi: R \to S$ is bijective, then its inverse $\varphi^{-1} : S \to R$ is a ring homomorphism. We look at some examples of rings and mappings.
+
+\begin{example}
+    Let $X$ be any set and let $R \defeq \{f:X \to \R\}$ be the set of all functions from $X$ to $\R$. Then, $(R, +, \cdot)$ is a ring where addition and multiplication are defined pointwise; i.e., for all $f, g \in R$ and $x \in X$, $(f + g)(x) \defeq f(x) + g(x)$ and $(f \cdot g)(x) \defeq f(x) \cdot g(x)$. The additive identity is the zero function $0:X \to \R$ defined by $0(x) = 0$ for all $x \in X$, and the multiplicative identity is the constant function $1:X \to \R$ defined by $1(x) = 1$ for all $x \in X$. It is easy to verify that all ring axioms are satisfied. Moreover, this ring is commutative and has unity. Note that $\R$ can be replaced by any ring $S$ to form the ring of functions from $X$ to $S$. In such a case, $R$ is a (commutative) ring with unity if and only if $S$ is a (commutative) ring with unity.
+
+    In the special case that $X = \{1,2,\ldots,n\}$ for some $n \in \N$, the ring $R$ is isomorphic to the ring $(\R^{n},+,\cdot)$ where addition and multiplication are defined component-wise. The isomorphism $\varphi : R \to \R^{n}$ is given by $\varphi(f) = (f(1), f(2), \ldots, f(n))$ for all $f \in R$.
+\end{example}
+
+\begin{example}
+    Continuing from the previous example, let $X = [a,b]$. Note that the $R$ in this case is the set of all functions from the interval $[a,b]$ to $\R$, which is not a very manageable set. Thus, we may consider the subset $C([a,b], \R) \subseteq R$ consisting of all continuous functions from $[a,b]$ to $\R$. It is easy to verify that $C([a,b], \R)$ is a subring of $R$. Similarly, one defined $C^{n}([a,b], \R)$ to be the set of all $n$-times continuously differentiable functions from $[a,b]$ to $\R$, and $C^{\infty}([a,b], \R)$ to be the set of all infinitely differentiable functions from $[a,b]$ to $\R$. Both of these are subrings of $R$ as well.
+\end{example}
+
+\begin{example}
+    The set $\Z[i] \defeq \{a + bi : a, b \in \Z\}$ is a subring of the field $\C$. It is easy to verify that $\Z[i]$ is a ring with unity, but it is not a field since, for example, the element $1 + i$ does not have a multiplicative inverse in $\Z[i]$. Note that there is a natural bijection $\varphi : \Z[i] \to \Z^{2}$ defined by $\varphi(a + bi) = (a, b)$ for all $a + bi \in \Z[i]$, where $\Z^{2}$ has component-wise addition and multiplication. However, this map is not a ring isomorphism since it does not preserve multiplication; for example, $\varphi(i \cdot i) = \varphi(-1) = (-1, 0)$, but $\varphi(i) \cdot \varphi(i) = (0, 1) \cdot (0, 1) = (0, 1)$.
+\end{example}
+
+\subsection{Polynomials}
+
+Let $R$ be a ring. The polynomial ring in the variable $x$ with coefficients from $R$ is defined as follows:
+\begin{definition}
+    The \eax{polynomial ring} $R[x]$ is defined as
+    \begin{align}
+        R[x] \defeq \{f:\N_{0} \to R \mid f(n) = 0 \text{ for all but finitely many } n \in \N_{0}\}.
+    \end{align}
+    The elements of $R[x]$ are called \eax{polynomials} in the variable $x$ with coefficients from $R$. For $f, g \in R[x]$ and $n \in \N_{0}$, addition is defined as
+    \begin{align}
+        (f + g)(n) \defeq f(n) + g(n) \quad \text{ for all } n \in \N_{0},
+    \end{align}
+    and multiplication is defined as
+    \begin{align}
+        (f \cdot g)(n) \defeq \sum_{k=0}^{n} f(k) \cdot g(n-k) \quad \text{ for all } n \in \N_{0}.
+    \end{align}
+\end{definition}
+
+Alternatively, a polynomial $f \in R[x]$ may be expressed in the form
+\begin{align}
+    f(x) = a_{0} + a_{1}x + a_{2}x^{2} + \cdots + a_{n}x^{n},
+\end{align}
+where $a_{i} = f(i)$ for all $0 \leq i \leq n$ and $f(k) = 0$ for all $k > n$. For $0 \neq f \in R[x]$ as above with $a_{n} \neq 0_{R}$, the integer $n$ is called the \eax{degree} of $f$, denoted by $\deg(f)$. The degree of the zero polynomial is usually left undefined, or changed upon convention. Also note that $f \cdot g \in R[x]$ since $f \cdot g(k) = 0_{R}$ for all $k > \deg(f) + \deg(g)$.
+
+\begin{proposition}
+    For a ring $R$, the polynomial ring $R[x]$ is, indeed, a ring with unity under the operations defined above. If $R$ is commutative, then so is $R[x]$. The map $\iota : R \to R[x]$ defined by $\iota(a) = f_{a}$ where $f_{a}(0) = a$ and $f_{a}(n) = 0_{R}$ for all $n \geq 1$ is a ring monomorphism.
+\end{proposition}
+
+\begin{proof}
+    That $(R[x],+)$ forms an abelian group is clear. The associativity of multiplication is verified as follows: let $f, g, h \in R[x]$ and $n \in \N_{0}$. Then,
+    \begin{align}
+        ((f \cdot g) \cdot h)(n) &=  \sum_{k=0}^{n} (f \cdot g)(k) \cdot h(n-k) = \sum_{k=0}^{n} \left( \sum_{j=0}^{k} f(j) \cdot g(k-j) \right) \cdot h(n-k) \notag \\ &= \sum_{j=0}^{n} f(j) \cdot \left( \sum_{k=j}^{n} g(k-j) \cdot h(n-k) \right) = \sum_{j=0}^{n} f(j) \cdot (g \cdot h)(n-j) = (f \cdot (g \cdot h))(n).
+    \end{align}
+    The distributive properties follow similarly. The unity in $R[x]$ is the polynomial $1_{R[x]}$ defined by $1_{R[x]}(0) = 1_{R}$ and $1_{R[x]}(n) = 0_{R}$ for all $n \geq 1$. Finally, it is easy to verify that $\iota$ is a ring homomorphism, and it is injective since $\iota(a) = \iota(b)$ implies that $a = b$.
+\end{proof}
+
+With $R[x]$ established as a ring, we may consider a higher level of abstraction, by considering polynomials over this polynomial ring itself; that is, $(R[x])[y]$. Elements of this ring look like
+\begin{align}
+    f(x,y) = a_{00} + a_{10}x + a_{01}y + a_{20}x^{2} + a_{11}xy + a_{02}y^{2} + \cdots + a_{mn}x^{m}y^{n},
+\end{align}
+where $a_{ij} \in R$ for all $i, j \geq 0$ and $a_{ij} = 0_{R}$ for all but finitely many pairs $(i,j)$. We have already shown that $R[x]$ is a ring, so it follows that $(R[x])[y]$ is also a ring. This ring is usually denoted by $R[x,y]$. For $f \in R[x,y]$ as above with $a_{mn} \neq 0_{R}$, the degree of $f$ is defined as $\deg(f) = m + n$. Similarly, one may define $R[x_{1}, x_{2}, \ldots, x_{n}]$ for any $n \in \N$. For a countable number of indeterminates, one may define $R[x_{1}, x_{2}, x_{3}, \ldots]$ as the union $\bigcup_{n=1}^{\infty} R[x_{1}, x_{2}, \ldots, x_{n}]$.
+
+\begin{example}
+    Let $e \in \R$ be the Euler's number (or any transcendental number). Then $\Z[e] \subseteq \C$ is the smallest subring of $\C$ containing both $\Z$ and $e$. Here, $\Z[e]$ consists of all polynomials in $e$ with integer coefficients; i.e., all elements of the form $a_{0} + a_{1}e + a_{2}e^{2} + \cdots + a_{n}e^{n}$ where $n \geq 0$ and $a_{i} \in \Z$. Since $e$ is transcendental, there are no non-trivial polynomial relations among the powers of $e$ with integer coefficients. Thus, the map $\varphi : \Z[x] \to \Z[e]$ defined by $\varphi(f) = f(e)$ for all $f \in \Z[x]$ is a ring isomorphism.
+\end{example}
+
+\section{Ideals}
+
+\begin{definition}
+    Let $R$ be a commutative ring with unity. A subset $I \subseteq R$ is called an \eax{ideal} of $R$ if the following conditions hold:
+    \begin{itemize}
+        \item for all $a, b \in I$, we have $a + b \in I$,
+        \item for all $a \in I$ and $r \in R$, we have $r \cdot a \in I$.
+    \end{itemize}
+\end{definition}
+
+Note that the first condition implies that $(I, +)$ is a subgroup of $(R, +)$. Some examples of ideals include the set $\{0_{R}\}$, the ring $R$ itself, and the set $n\Z = \{nk : k \in \Z\}$ for any $n \in \Z_{\geq 0}$ as an ideal of the ring $\Z$. A non-example is $\Z$ in $\R$; it is a subring, but not an ideal since, for example, $1 \in \Z$ but $\pi \cdot 1 = \pi \notin \Z$. Note that if $1_{R} \in I$, then $I = R$.
+
+\begin{example}
+    Let us look at ideals of $\R$. Trivially, $\{0\}$ and $\R$ are ideals of $\R$. We claim that these are the only ideals of $\R$. To see this, let $I$ be any ideal of $\R$ such that $I \neq \{0\}$. Then, there exists some $a \in I$ such that $a \neq 0$. Since $\R$ is a field, $a$ has a multiplicative inverse $a^{-1} \in \R$. Thus, $1 = a^{-1} \cdot a \in I$, which implies that $I = \R$. In fact, this argument shows that in any field, the only ideals are the zero ideal and the field itself.
+\end{example}
+
+\begin{example}
+    We examine ideals of $\Z$. From group theory, we know that every subgroup of $(\Z, +)$ is of the form $n\Z$ for some $n \in \Z_{\geq 0}$, so $n\Z$ are the only candidates for ideals of $\Z$. In fact, each $n\Z$ is an ideal of $\Z$ since for all $a, b \in n\Z$, we have $a + b \in n\Z$, and for all $a \in n\Z$ and $r \in \Z$, we have $r \cdot a \in n\Z$. Thus, the ideals of $\Z$ are precisely the sets $n\Z$ for $n \in \Z_{\geq 0}$, and $\Z$.
+\end{example}
+
+\begin{proposition}
+    Let $f:R \to S$ be a ring homomorphism between two commutative rings with unity. Then, the \eax{kernel} of $f$, defined as
+    \begin{align}
+        \ker f \defeq \{a \in R \mid f(a) = 0_{S}\},
+    \end{align}
+    is an ideal of $R$. Moreover, $f$ is a ring monomorphism if and only if $\ker f = \{0_{R}\}$.
+\end{proposition}
+\begin{proof}
+    Let $a, b \in \ker f$ and $r \in R$. Then,
+    \begin{align}
+        f(a + b) = f(a) + f(b) = 0_{S} + 0_{S} = 0_{S},
+    \end{align}
+    so $a + b \in \ker f$. Also,
+    \begin{align}
+        f(r \cdot a) = f(r) \cdot f(a) = f(r) \cdot 0_{S} = 0_{S},
+    \end{align}
+    so $r \cdot a \in \ker f$. Thus, $\ker f$ is an ideal of $R$.
+
+    Now, suppose that $f$ is a ring monomorphism. Let $a \in \ker f$. Then, $f(a) = 0_{S} = f(0_{R})$. Since $f$ is injective, we have $a = 0_{R}$, so $\ker f = \{0_{R}\}$. Conversely, suppose that $\ker f = \{0_{R}\}$. Let $a, b \in R$ such that $f(a) = f(b)$. Then,
+    \begin{align}
+        f(a - b) = f(a) - f(b) = 0_{S},
+    \end{align}
+    so $a - b \in \ker f$. Thus, $a - b = 0_{R}$, which implies that $a = b$. Therefore, $f$ is injective.
+\end{proof}
