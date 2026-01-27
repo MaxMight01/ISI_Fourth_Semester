@@ -226,6 +226,93 @@ where $x = (x_{1}, x_{2}, \ldots)$ and $y = (y_{1}, y_{2}, \ldots)$. One can ver
     We first show that $(x-\varepsilon,x+\varepsilon) \times \R \times \R \times \cdots$ is open in the uniform topology. Let $y = (y_{1}, y_{2}, \ldots) \in (x-\varepsilon,x+\varepsilon) \times \R \times \R \times \cdots$. Then, there exists a $\delta > 0$ such that $(y_{1}-\delta,y_{1}+\delta) \subseteq (x-\varepsilon,x+\varepsilon)$. Thus, $B(y,\delta) \subseteq (x-\varepsilon,x+\varepsilon) \times \R \times \R \times \cdots$, proving that this set is open in the uniform topology. Since basis elements of the product topology are finite intersections of such sets, they are also open in the uniform topology. Thus, the product topology is coarser than the uniform topology.
 \end{proof}
 
+\textit{January 27th.}
+
 \begin{theorem}
     On $\R^{\N}$, with $D(x,y) \defeq \sup_{n \geq 1} \frac{\bar{d}(x_{n},y_{n})}{n}$ where $\bar{d}(x,y) = \min\{\abs{x-y}, 1\}$, the topology induced by $D$ is the product topology.
 \end{theorem}
+
+\begin{proof}
+    For the forward implication, we wish to show that given an open ball $B_{D}(x,\varepsilon)$, and $y \in B_{D}(x,\varepsilon)$, that there exists a set $U$ open in the product topology such that $y \in U \subseteq B_{D}(x,\varepsilon)$. Choose $N \in \N$ such that $\frac{1}{N} < \frac{\varepsilon}{4}$. Now we claim that
+    \begin{align}
+        (x_{1} - \frac{\varepsilon}{3}, x_{1} + \frac{\varepsilon}{3}) \times (x_{2} - \frac{\varepsilon}{3}, x_{2} + \frac{\varepsilon}{3}) \times \cdots \times (x_{N+1} - \frac{\varepsilon}{3}, x_{N+1} + \frac{\varepsilon}{3}) \times \R \times \R \times \cdots \subseteq B_{D}(x,\varepsilon).
+    \end{align}
+    To this end, let $y = (y_{1}, y_{2}, \ldots)$ be in the left-hand side. Then for every $1 \leq i \leq N-1$, we have $\abs{y_{i}-x_{i}} < \frac{2\varepsilon}{3}$, so $\bar{d}(x_{i},y_{i})/i \leq \bar{d}(x_{i},y_{i}) < \frac{2\varepsilon}{3} < \varepsilon$. Moreover, for all $i \geq N$, $\bar{d}(x_{i},y_{i})/i \leq 1/i \leq 1/N < \frac{\varepsilon}{4} < \varepsilon$. Thus, $\sup_{i \geq 1} \bar{d}(x_{i},y_{i})/i = D(x,y) \leq \frac{2\varepsilon}{3} < \varepsilon$, proving the claim. Hence, we have found an open set in the product topology containing $x$ and contained in $U$.
+
+    For the converse, let $U = \prod_{i \in \N} U_{i}$ be open in the product topology, where $U_{i}$ is open in $\R$ for all $i \geq 1$ and $U_{i} = \R$ for all but finitely many $i$. It is enough to containment for these sets, since they form a basis for the product topology. Thus, we wish to show that given any $x \in U$, there exists an $\varepsilon > 0$ such that $B_{D}(x,\varepsilon) \subseteq U$. Let $\alpha$ denote an arbitrary index such that $U_{\alpha} \neq \R$ (there are only finitely many such indices). Let $x \in U$. Then $x_{\alpha} \in U_{\alpha}$, so there exists $\varepsilon_{\alpha} > 0$ such that $(x_{\alpha} - \varepsilon_{\alpha}, x_{\alpha} + \varepsilon_{\alpha}) \subseteq U_{\alpha}$. Now, let $\varepsilon = \min_{\alpha} \frac{\varepsilon_{\alpha}}{\alpha}$, where the minimum is taken over all indices $\alpha$ such that $U_{\alpha} \neq \R$. We claim that this $\varepsilon$ works. To see this, let $y = (y_{1}, y_{2}, \ldots) \in B_{D}(x,\varepsilon)$. Then, for every index $\alpha$ such that $U_{\alpha} \neq \R$, we have
+    \begin{align}
+        \abs{y_{\alpha} - x_{\alpha}} \leq \bar{d}(x_{\alpha},y_{\alpha}) < \alpha \varepsilon \leq \varepsilon_{\alpha},
+    \end{align}
+    so $y_{\alpha} \in (x_{\alpha} - \varepsilon_{\alpha}, x_{\alpha} + \varepsilon_{\alpha}) \subseteq U_{\alpha}$. For all other indices $\beta$ such that $U_{\beta} = \R$, we have $y_{\beta} \in U_{\beta}$ trivially. Thus, $y \in U$, proving that $B_{D}(x,\varepsilon) \subseteq U$.
+\end{proof}
+
+The box topology, however, is not metrizable. 
+
+\begin{lemma}
+    The box topology on $\R^{\N}$ is not metrizable.
+\end{lemma}
+To show this, recall that in a metric space if $A$ is a subset of a metric space $(X,d)$, and $(a_{n})_{n \geq 1}$ is a sequence in $A$ that converges to some $x \in X$, then $x \in \overline{A}$. The converse also holds in metric spaces. 
+
+\begin{proof}
+    Let $A = \{(x_{1}, x_{2}, \ldots) \mid x_{i} > 0 \text{ for all } i \geq 1\} \subseteq \R^{\N}$ with the box topology. Note that $A$ is open in the box topology. Now consider the point $x = (0,0,0,\ldots) \in \R^{\N}$. We claim that $x \in \overline{A}$. To see this, let $U = U_{1} \times U_{2} \times \ldots$ be an open neighbourhood of $x$ in the box topology. Then, for each $i \geq 1$, there exists $\varepsilon_{i} > 0$ such that $(-\varepsilon_{i}, \varepsilon_{i}) \subseteq U_{i}$. Now, consider the point $y = (y_{1}, y_{2}, \ldots)$ defined by $y_{i} = \frac{\varepsilon_{i}}{2} > 0$ for all $i \geq 1$. Then, $y \in A \cap U$, proving that every open neighbourhood of $x$ intersects $A$. Thus, $x \in \overline{A}$.
+    However, there does not exist a sequence $(a_{n})_{n \geq 1} \subseteq A$ such that $a_{n} \to x$ in the box topology. To see this, suppose such a sequence exists. Then, for each $i \geq 1$, consider the open neighbourhood $U^{(i)} = U_{1}^{(i)} \times U_{2}^{(i)} \times \ldots$ of $x$ defined by
+    \begin{align}
+        U_{j}^{(i)} = \begin{cases}
+            (-\frac{1}{i}, \frac{1}{i}) & j = i, \\
+            \R & j \neq i.
+        \end{cases}
+    \end{align}
+    Since $a_{n} \to x$ in the box topology, there exists a natural $N_{i} \in \N$ such that for every $n \geq N_{i}$, we have $a_{n} \in U^{(i)}$. In particular, this implies that for every $n \geq N_{i}$, the $i$-th coordinate of $a_{n}$ satisfies $\abs{(a_{n})_{i}} < \frac{1}{i}$. Now, consider the sequence of natural numbers $(N_{i})_{i \geq 1}$. Since this is an increasing sequence, we have $N_{i} \leq N_{j}$ for all $j \geq i$. Thus, for every $j \geq i$, we have $\abs{(a_{N_{j}})_{i}} < \frac{1}{i}$. In particular, this implies that $(a_{N_{j}})_{i} \geq 0$ for all $j \geq i$, since $a_{N_{j}} \in A$. Thus, for each fixed $i \geq 1$, the sequence $((a_{N_{j}})_{i})_{j \geq i}$ is a sequence of non-negative real numbers that converges to $0$. However, this does not guarantee that the entire sequence $(a_{n})_{n \geq 1}$ converges to $x$ in the box topology, since the convergence must hold uniformly across all coordinates. This contradicts our assumption that such a sequence exists. Hence, there does not exist a sequence $(a_{n})_{n \geq 1} \subseteq A$ such that $a_{n} \to x$ in the box topology, proving that the box topology is not metrizable.
+\end{proof}
+
+
+\section{Connectedness}
+
+The \eax{distance from a set} $A$ of a point $x$ is defined as
+\begin{align}
+    d_{A}(x) \defeq \inf \{d(x,a) \mid a \in A\}.
+\end{align}
+Note that $d_{A}(x) = 0$ if and only if $x \in \overline{A}$. Moreover, the map $\varphi : X \to \R$ defined by $\varphi(x) = d_{A}(x)$ is continuous.
+
+\begin{lemma}
+    Let $(X,d)$ be a metric space, and $A,B \subseteq X$ be disjoint closed sets. Then there exists a continuous map $f:X \to [0,1]$ such that $f(a) = 0$ for all $a \in A$ and $f(b) = 1$ for all $b \in B$.
+\end{lemma}
+
+\begin{definition}
+    For a topological space $(X,\tau)$, a \eax{separation} of $X$ is a pair of disjoint non-empty open sets $U,V \in \tau$ such that $X = U \cup V$. If no such separation exists, then $X$ is said to be \eax{connected}.
+\end{definition}
+Note that $X$ is connected if and only if the only non-empty clopen subset of $X$ is $X$ itself. For example, $\Q$ is not connected in $\R$ since $(-\infty, \sqrt{2}) \cap \Q$, $ (\sqrt{2}, \infty) \cap \Q$ is a separation of $\Q$.
+
+\begin{lemma}
+    Suppose $C$ and $D$ form a separation of a topological space $X$. If $Y$ is a connected subspace of $X$, then either $Y \subseteq C$ or $Y \subseteq D$.
+\end{lemma}
+\begin{proof}
+    Suppose not. Then, there exist points $y_{1}, y_{2} \in Y$ such that $y_{1} \in C$ and $y_{2} \in D$. Since $C$ and $D$ are open in $X$, the sets $C \cap Y$ and $D \cap Y$ are open in the subspace topology on $Y$. Moreover, they are disjoint and non-empty, and $Y = (C \cap Y) \cup (D \cap Y)$. Thus, $C \cap Y$ and $D \cap Y$ form a separation of $Y$, contradicting the connectedness of $Y$. Hence, either $Y \subseteq C$ or $Y \subseteq D$.
+\end{proof}
+
+\begin{theorem}
+    Suppose $X_{\alpha}$ are connected subspaces of a topological space $X$ for all $\alpha$ in some index set $\Lambda$. If $\bigcap_{\alpha \in \Lambda} X_{\alpha} \neq \emptyset$, then $\bigcup_{\alpha \in \Lambda} X_{\alpha}$ is connected.
+\end{theorem}
+\begin{proof}
+    Let $x \in \bigcap_{\alpha} X_{\alpha}$. Suppose, for contradicion, that there exists a non-empty set $U \subseteq \bigcup_{\alpha} X_{\alpha}$ that is clopen in the subspace topology. That is, $U \cap X_{\alpha}$ is open and closed in $X_{\alpha}$ for all $\alpha \in \Lambda$. Since $X_{\alpha}$ is connected, we must have either $U \cap X_{\alpha} = \emptyset$ or $U \cap X_{\alpha} = X_{\alpha}$ for all $\alpha \in \Lambda$. But since $x \in \bigcap_{\alpha} X_{\alpha}$, we must have $x \in U$ or $x \notin U$. Thus, either $U = \emptyset$ or $U = \bigcup_{\alpha} X_{\alpha}$, proving that $\bigcup_{\alpha} X_{\alpha}$ is connected.
+\end{proof}
+
+\begin{lemma}
+    Let $f:X \to Y$ be a continuous map. If $X$ is connected, then $f(X)$ is also connected.
+\end{lemma}
+\begin{proof}
+    Suppose not. Then, there exist disjoint non-empty open sets $U,V \subseteq Y$ such that $f(X) = U \cup V$. Since $f$ is continuous, the preimages $f^{-1}(U)$ and $f^{-1}(V)$ are open in $X$. Moreover, they are disjoint and non-empty, and $X = f^{-1}(U) \cup f^{-1}(V)$. Thus, $f^{-1}(U)$ and $f^{-1}(V)$ form a separation of $X$, contradicting the connectedness of $X$. Hence, $f(X)$ is connected.
+\end{proof}
+
+\begin{definition}
+    Two topological spaces $X$ and $Y$ are \eax{homeomorphic} if there exists a bijective continuous map $f:X \to Y$ such that the inverse map $f^{-1} : Y \to X$ is also continuous. Such a map $f$ is called a \eax{homeomorphism}.
+\end{definition}
+
+
+
+\begin{theorem}
+    If $X_{i}$ are connected topological spaces for all $1 \leq i \leq n$, then the product space $\prod_{i=1}^{n} X_{i}$ is also connected.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
