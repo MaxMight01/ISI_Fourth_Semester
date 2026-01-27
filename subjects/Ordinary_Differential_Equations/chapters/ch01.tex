@@ -431,6 +431,8 @@ Note that $C[0,1]$ is a linear space. A norm on $C[0,1]$ is the supremum norm de
     Let $\delta_{1}$ be such that equicontinuity holds for $\epsilon = \frac{1}{2}$. Split the domain $[0,1]$ into subintervals of length less than $\delta_{1}$, and split the range $[-M,M]$ into intervals of length less than $\frac{1}{2}$. Thus, we have a grid on $[0,1] \times [-M,M]$. Call this `Step 1'. For a function $f$, let its shape at Step 1 be the collection of rectangles in the grid that $f$ intersects. Since there are only finitely many possible shapes at Step 1, there is at least one shape, say $S_{1}$, such that infinitely many functions in the sequence $(f_{n})_{n \geq 1}$ have shape $S_{1}$. Let $f_{n_{1}}$ be the function with the least index among these. Now choose $\epsilon = \frac{1}{4}$, and let $\delta_{2}$ be such that equicontinuity holds. Split the domain $[0,1]$ into subintervals of length less than $\delta_{2}$, and split the range $[-M,M]$ into intervals of length less than $\frac{1}{4}$. This gives a finer grid on $[0,1] \times [-M,M]$. Call this `Step 2'. Then there is again a shape $S_{2}$ at Step 2 such that infinitely many functions in the sequence $(f_{n_{k}})_{k \geq 1}$ have shape $S_{2}$. Let $f_{n_{2}}$ be the function with the least index among these. Continuing in this manner, we obtain a subsequence $(f_{n_{k}})_{k \geq 1}$ such that all functions in this subsequence have the same shape at Step $k$. We claim that this subsequence converges uniformly to a continuous function $f:[0,1] \to \R$. Indeed, for any $\epsilon > 0$, choose $N$ such that $\frac{1}{2^{N}} < \epsilon$. For any $m,n \geq N$ and any $x \in [0,1]$, since $f_{n}$ and $f_{m}$ have the same shape at Step $N$, we have $\abs{f_{n}(x) - f_{m}(x)} < \frac{1}{2^{N-1}} < \epsilon$. This shows that $(f_{n_{k}})_{k \geq 1}$ is uniformly Cauchy, and thus converges uniformly to some function $f:[0,1] \to \R$. Since each $f_{n_{k}}$ is continuous, and the convergence is uniform, $f$ is also continuous.
 \end{proof}
 
+\noindent \textit{January 27th.}
+
 We now prove the Peano existence theorem.
 
 \begin{proof}[Proof of Peano existence theorem]
@@ -446,5 +448,17 @@ We now prove the Peano existence theorem.
     \begin{align}
         \lim_{h \to 0} \frac{y(u+h) - y(u)}{h} = f(u,v).
     \end{align}
-
+    To this end, let $(y_{1/n_{k}})_{k \geq 1}$ be the subsequence converging to $y$, where we have taken $\epsilon_{n} = 1/n$. Fix some $h \neq 0$ such that $u + h \in [a,b]$. There exists some $k_{0} \gg 1$ such that for all $k \geq k_{0}$, we have $\abs{y_{1/n_{k}}(x) - y(x)} \leq h$. That is, the graph of $y_{1/n_{k}}$ on $[u-h,u+h]$ lies inside $[u-h,u+h] \times [v-2Mh, v+2Mh]$. This is due to the fact that $\abs{y_{1/n_{k}}(\tilde{u}) - y_{1/n_{k}}(u)} \leq M \abs{\tilde{u} - u} \leq Mh$ implies
+    \begin{align}
+        \abs{y_{1/n_{k}}(\tilde{u}) - v} \leq \abs{y_{1/n_{k}}(\tilde{u}) - y_{1/n_{k}}(u)} + \abs{y_{1/n_{k}}(u) - y(u)} \leq 2Mh.
+    \end{align}
+    Via this construction, we obtain
+    \begin{align}
+        \frac{y_{1/n_{k}}(u+h)-y_{1/n_{k}}(u)}{h} = f(\tilde{u},\tilde{v}) = f(u,v) + \mathrm{O}(h).
+    \end{align}
+    Letting $k \to \infty$, we have
+    \begin{align}
+        \frac{y(u+h)-y(u)}{h} = f(u,v) + \mathrm{O}(h).
+    \end{align}
+    Finally, letting $h \to 0$, we obtain the desired result.
 \end{proof}
