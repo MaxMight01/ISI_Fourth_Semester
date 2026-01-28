@@ -462,3 +462,96 @@ We now prove the Peano existence theorem.
     \end{align}
     Finally, letting $h \to 0$, we obtain the desired result.
 \end{proof}
+
+\noindent \textit{January 28th.}
+
+\begin{theorem}[\eax{Osgood's theorem}]
+    Let $y' = f(x,y)$ be an ODE where $f:\cR \subseteq \R^{2} \to \R$ is a continuous function satisfying
+    \begin{align}
+        \abs{f(x,y_{1})-f(x,y_{2})} \leq \varphi(\abs{y_{1}-y_{2}}) \quad \text{ for all } (x,y_{1}),(x,y_{2}) \in \cR.
+    \end{align}
+    Here, $\varphi:\R \to \R$ is a continuous function such that $\varphi > 0$ on $(0,\infty)$, and $\int_{0}^{c} \frac{1}{\varphi(s)} \, \di{s} = \infty$ for some $c > 0$. Then, there is at most one solution of the ODE passing through any point in $(x_{0},y_{0}) \in \cR$.
+\end{theorem}
+
+Before diving into the proof, we study $\varphi$ satisfying the conditions in Osgood's theorem. Note that $\varphi$ is positive and continuous on $(0,\infty)$. Thus, $\frac{1}{\varphi}$ is also continuous on $(0,\infty)$. The condition $\int_{0}^{c} \frac{1}{\varphi(s)} \, \di{s} = \infty$ implies that $\frac{1}{\varphi}$ is not integrable near $0$. For example, $\varphi(s) = s^{\alpha}$ for $\alpha \geq 1$ satisfies this condition. Moreover, the condition of non-integrability near $0$, positivity, and continuity imply that $\varphi(0) = 0$.
+
+A useful lemma before the proof is the following.
+\begin{lemma}
+    Suppose $g,h:(-\epsilon,\epsilon) \to \R$ are differentiable functions such that $g(0) = h(0)$ and $g' > h'$ on $(-\epsilon,\epsilon)$. Then, $g(x) > h(x)$ for all $x \in (0,\epsilon)$ and $g(x) < h(x)$ for all $x \in (-\epsilon,0)$.
+\end{lemma}
+\begin{proof}
+    Look at $f = g-h$. Then, $f(0) = 0$. By the fundamental theorem of calculus, for any $x \in (0,\epsilon)$, we have
+    \begin{align}
+        g(x) - h(x) = f(x) = \int_{0}^{x} (g'-h')(s) \, \di{s} > 0.
+    \end{align}
+    Similarly, for any $x \in (-\epsilon,0)$, we have
+    \begin{align}
+        g(x) - h(x) = f(x) = \int_{0}^{x} (g'-h')(s) \, \di{s} < 0.
+    \end{align}
+\end{proof}
+
+
+We now prove Osgood's theorem.
+
+\begin{proof}[Proof of Osgood's theorem]
+    Suppose $y_{1}$ and $y_{2}$ are two different solutions of the ODE passing through $(x_{0},y_{0})$; that is $y_{1}(x_{0}) = y_{0} = y_{2}(x_{0})$. Since $y_{1} \neq y_{2}$, there exists some $x_{1} > x_{0}$ such that $y_{1}(x_{1}) > y_{2}(x_{1})$, without loss of generality. Let $z(x) = y_{1}(x) - y_{2}(x)$. Then, $z(x_{0}) = 0$ and $z(x_{1}) > 0$. Moreover,
+    \begin{align}
+        z'(x) = y_{1}'(x) - y_{2}'(x) = f(x,y_{1}(x)) - f(x,y_{2}(x)) \leq \varphi(\abs{y_{1}(x)-y_{2}(x)}) = \varphi(\abs{z(x)}) < 2\varphi(\abs{z(x)})
+    \end{align}
+    whenever $z(x) \neq 0$. Now compare $z$ with $v$ where $v'(x) = 2 \varphi(v(x))$ and $v(x_{1}) = z(x_{1}) > 0$. For now, assume $\varphi(x) = x$. Then, $v'(x) = 2 v(x)$, or $v(x) = v(x_{1})e^{-2(x_{1}-x)}$. Thus, we have $v(x_{1}) = z(x_{1})$ and $v'(x_{1}) = 2 v(x_{1}) > z'(x_{1})$ (and thus, $v' > z'$ in a neighbourhood of $x_{1}$). Observe that $z(x_{0}) = 0$ and $v(x_{0}) > 0$. If $p \defeq \min \{x > x_{0} \mid v(x) = z(x)\}$, then $v > z$ on $[x_{0},p]$. However, from the lemma, it follows that $v < z$ to the left of $p$, which is a contradiction. Thus, $y_{1} = y_{2}$.
+
+    If $q$ is any point in the domain where $v(q) = z(q)$ and $v'(q) > z'(q)$, then by the same argument as above, we reach a contradiction. To complete the proof, we need to work with a general $\varphi$, instead of just $\varphi(x) = x$. To this end, note that if $v'(x) = 2 \varphi(v(x))$, then
+    \begin{align}
+        \Phi(v(x)) \defeq \int_{v(x)}^{v(x_{1})} \frac{1}{\varphi(s)} \, \di{s} = 2 (x_{1} - x).
+    \end{align}
+    Note that $\Phi$ is well-defined since $\varphi > 0$ on $(0,\infty)$. Also, $\Phi$ is strictly decreasing since its derivative is $-\frac{1}{\varphi} < 0$. Thus, $\Phi$ is invertible. Thus,
+    \begin{align}
+        v(x) = \Phi^{-1}(2 (x_{1} - x)).
+    \end{align}
+\end{proof}
+
+\begin{theorem}[The \eax{fixed point theorem}]
+    Suppose $(X,d)$ is a complete metric space, and $T:X \to X$ is a contraction; that is, there exists $ c \in (0,1)$ such that
+    \begin{align}
+        d(T(x),T(y)) \leq c \, d(x,y) \quad \text{ for all } x,y \in X.
+    \end{align}
+    Then, there exists a unique fixed point $x_{0} \in X$ such that $T(x_{0}) = x_{0}$.
+\end{theorem}
+
+
+\begin{proof}
+    We first show uniqueness. Suppose $\tilde{x}$ and $\tilde{y}$ are two distinct fixed points. Then,
+    \begin{align}
+        d(\tilde{x},\tilde{y}) = d(T(\tilde{x}),T(\tilde{y})) \leq c \, d(\tilde{x},\tilde{y})
+    \end{align}
+    which is a contradiction since $c < 1$. Thus, the fixed point is unique. For existence, pick any $x_{1} \in X$, and define a sequence $(x_{n})_{n \geq 1}$ via $x_{n+1} = T(x_{n})$. We claim that this sequence is Cauchy. Indeed, for any natural $n$,
+    \begin{align}
+        d(x_{n+1},x_{n}) = d(T(x_{n}),T(x_{n-1})) \leq c \, d(x_{n},x_{n-1}) \leq c^{n-1} d(x_{2},x_{1}).
+    \end{align}
+    Thus, for any $m > n$,
+    \begin{align}
+        d(x_{n},x_{m}) \leq d(x_{n},x_{n+1}) + \cdots + d(x_{m-1},x_{m}) \leq d(x_{2},x_{1}) (c^{n-1} + c^{n} + \cdots) = \frac{d(x_{2},x_{1}) c^{n-1}}{1-c}.
+    \end{align}
+    Thus, $(x_{n})_{n \geq 1}$ is Cauchy, and thus converges to some $x_{\infty} \in X$ since $X$ is complete. Finally, simply applying $T$ and taking limits gives $T(x_{\infty}) = x_{\infty}$.
+\end{proof}
+
+
+
+\begin{theorem}\eax{Picard's theorem}
+    Suppose $y' = f(x,y)$ is an ODE where $f:\cR \subseteq \R^{2} \to \R$ is a continuous function on $\cR$ satisfying a Lipschitz condition in $y$; that is, there exists some $K > 0$ such that
+    \begin{align}
+        \abs{f(x,s)-f(x,t)} \leq K\abs{s-t} \quad \text{ for all } (x,s),(x,t) \in \cR
+    \end{align}
+    and where $\cR$ is a closed rectangle containing the point $(x_{0},y_{0})$. Then, there exists a unique solution of the ODE passing through $(x_{0},y_{0})$.
+\end{theorem}
+\begin{proof}
+    Integrating the ODE gives $y(x) = y(x_{0}) + \int_{x_{0}}^{x} f(s,y(s)) \, \di{s}$. Note that $y$ is a solution of the ODE if and only if it satisfies this integral equation. Over the interval $I = [x_{0}-h,x_{0}+h]$ for some $h > 0$, define the space $C(I)$ of continuous functions on $I$ with the supremum norm $\norm{y} = \sup_{x \in I} \abs{y(x)}$. Define the map $T:C(I) \to C(I)$ via
+    \begin{align}
+        (Ty)(x) = y_{0} + \int_{x_{0}}^{x} f(s,y(s)) \, \di{s}.
+    \end{align}
+    Note that $y$ is a solution of the ODE if and only if $Ty = y$. We now show that $T$ is a contraction for sufficiently small $h$. Indeed, for any $y_{1},y_{2} \in C(I)$ and any $x \in I$, we have
+    \begin{align}
+        \abs{(Ty_{1})(x) - (Ty_{2})(x)} = \abs{\int_{x_{0}}^{x} (f(s,y_{1}(s)) - f(s,y_{2}(s))) \, \di{s}} \leq \int_{x_{0}}^{x} K \abs{y_{1}(s) - y_{2}(s)} \, \di{s} \leq K h \, \norm{y_{1}-y_{2}}.
+    \end{align}
+    Thus, $\norm{Ty_{1} - Ty_{2}} \leq K h \, \norm{y_{1}-y_{2}}$. Choosing $h$ such that $K h < 1$, we have that $T$ is a contraction. By the fixed point theorem, there exists a unique fixed point of $T$, which is the unique solution of the ODE passing through $(x_{0},y_{0})$.
+\end{proof}
