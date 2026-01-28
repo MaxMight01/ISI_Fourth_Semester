@@ -459,7 +459,7 @@ Integrating over the volume $\curs{v}$, we have
 \end{align}
 Since $V$ is constant on $S$, and $\oint_{S} \bv{E} \cdot \di{\bv{a}} = 0$, the left-hand side is zero. But the right-hand side is negative since $E^{2} \geq 0$. Thus, we must have $\bv{E} = \bv{0}$ everywhere within the volume $\curs{v}$, proving uniqueness(?: proof incomplete).
 
-\subsection{The Method of Images}
+\section{The Method of Images}
 The \eax{method of images} is a mathematical technique used to solve electrostatic problems involving conductors by replacing the conductors with imaginary charges (image charges) that replicate the boundary conditions imposed by the conductors. This method simplifies the problem by allowing us to work with point charges in free space rather than dealing with complex conductor geometries directly. Consider a point charge $q$ located at a distance $d$ above an infinite grounded conducting plane $(z=0)$. We wish to find the potential $V$ at a point $P(x,y)$ in a region above the plane $(z \geq 0)$. To solve this problem using the method of images, we introduce an imaginary charge $-q$ at a distance $d$ below the plane and remove the conducting plane from the problem. The potential at point $P$ due to both the real charge $q$ and the image charge $-q$ is given by
 \begin{align}
     V(x,y,z) = \frac{q}{4 \pi \epsilon_{0} \sqrt{x^{2} + y^{2} + (z - d)^{2}}} - \frac{q}{4 \pi \epsilon_{0} \sqrt{x^{2} + y^{2} + (z + d)^{2}}}.
@@ -468,3 +468,55 @@ This potential satisfies Laplace's equation in the region above the plane and me
 \begin{align}
     \sigma(x,y) = \epsilon_{0}E = -\epsilon_{0} \frac{\partial V}{\partial z} \bigg|_{z=0} &= \frac{1}{4 \pi \epsilon_{0}} \left( \frac{-q(z-d)}{(x^{2}+y^{2}+(z-d)^{2})^{3/2}} + \frac{q(z+d)}{(x^{2}+y^{2}+(z+d)^{2})^{3/2}}  \right) \notag \\ &= -\frac{q d}{2 \pi (x^{2} + y^{2} + d^{2})^{3/2}}.
 \end{align}
+
+\noindent \textit{January 28th}.
+
+Since we now have the charge density on the conducting plane, we can compute the total induced charge on the plane as
+\begin{align}
+    Q = \int \sigma(x,y) \; \di{a} = \int_{0}^{2\pi} \int_{0}^{\infty} -\frac{q d}{2 \pi (r^{2} + d^{2})^{3/2}} r \, \di{r} \, \di{\phi} = -q.
+\end{align}
+This shows that the total induced charge on the conducting plane is equal in magnitude but opposite in sign to the original point charge $q$, which is consistent with the principle of conservation of charge. We can also compute the electric field at any point above the conducting plane by taking the negative gradient of the potential:
+\begin{align}
+    E = -\frac{\partial V}{\partial z} = -\frac{1}{4\pi \epsilon_{0}} \left( -\frac{q(z-d)}{(x^{2}+y^{2}+(z-d)^{2})^{3/2}} + \frac{q(z+d)}{(x^{2}+y^{2}+(z+d)^{2})^{3/2}} \right).
+\end{align}
+Note that there is a singularity in the electric field at the location of the point charge $q$, as expected. Thus, to calculate the force on the point charge $q$ due to the induced charges on the conducting plane, we drop the first term (self-force) and only consider the contribution from the image charge $-q$. The force on the point charge $q$ (at $(0,0,d)$) is given by
+\begin{align}
+    \bv{F} = q\bv{E} = q \cdot \left( -\frac{1}{4\pi\epsilon_{0}} \frac{2qd}{((2d)^{2})^{3/2}} \hat{\bv{z}}\right) = -\frac{q^{2}}{16 \pi \epsilon_{0} d^{2}} \hat{\bv{z}}.
+\end{align}
+This is the same force the point charge $q$ would experience due to the image charge $-q$ located at $(0,0,-d)$. We have thus essentially ignored the sheet of induced charge and replaced it with the image charge $-q$ located at $(0,0,-d)$. The question now is whether one can repeat this argument for energies. The work done, in this argument, is given by
+\begin{align}
+    W = \frac{1}{2} \sum_{i} q_{i} V(\bv{r}_{i}) = \frac{1}{2} \left( -\frac{q^{2}}{(4\pi \epsilon_{0}) 2d} - \frac{q^{2}}{(4\pi\epsilon_{0})2d} \right) = -\frac{q^{2}}{8 \pi \epsilon_{0} d}.
+\end{align}
+This is \textit{not} the correct answer, and is off by a factor of $2$. We look at the alternate expression for work done:
+\begin{align}
+    W = \frac{\epsilon_{0}}{2} \int E^{2} \; \di{V'}
+\end{align}
+If we compute the work done in brining $q$ from infinity to its position at $(0,0,d)$,
+\begin{align}
+    W = \int \bv{F} \cdot \di{\bv{l}} = \int_{-\infty}^{d} \frac{q^{2}}{4 \pi \epsilon_{0} (2z)^{2}} \hat{\bv{z}} \cdot \di{z} \hat{\bv{z}} = -\frac{q^{2}}{16 \pi \epsilon_{0} d}.
+\end{align}
+Let us look at another image problem. Suppose we have a point charge $q$ located at a distance $a$ from the centre of a grounded conducting sphere of radius $R$ (with $a > R$). We wish to find $V(\bv{r})$ for $r > R$. We place an image charge $q'$ at a distance $b$ from the centre of the sphere along the line joining the centre of the sphere to the point charge $q$, where
+\begin{align}
+    q' = -\frac{R}{a} q, \quad b = \frac{R^{2}}{a}.
+\end{align}
+For a point $P$ outside the sphere, let $\curs{r}'$ denote the distance from $q'$ and $\curs{r}$ denote the distance from $q$. The potential at point $P$ due to both the real charge $q$ and the image charge $q'$ is given by
+\begin{align}
+    V(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \left( \frac{q}{\curs{r}} + \frac{q'}{\curs{r}'} \right) = \frac{1}{4 \pi \epsilon_{0}} \left( \frac{q}{\sqrt{r^{2}+a^{2}-2ra \cos \theta}} + \frac{q'}{\sqrt{r^{2}+b^{2}-2rb \cos \theta}} \right)
+\end{align}
+where $\theta$ is the angle between the line joining the centre of the sphere to point $P$ and the line joining the centre of the sphere to the point charge $q$. Plugging in the values of $q'$ and $b$, we get
+\begin{align}
+    V(r,\theta) = \frac{1}{4 \pi \epsilon_{0}} \left( \frac{q}{\sqrt{r^{2}+a^{2}-2ra \cos \theta}} - \frac{q}{\sqrt{R^{2} + \left( \frac{ra}{R} \right)^{2} - 2ra \cos \theta}} \right).
+\end{align}
+One can verify that $V(R,\theta) = 0$, satisfying the boundary condition on the surface of the sphere. Uniqueness theorems guarantee that this is the correct solution to the original problem with the conducting sphere. Using $\sigma = -\epsilon_{0} \partial V/\partial n$, we have
+\begin{align}
+    \sigma(\theta) = -\epsilon_{0} \frac{\partial V}{\partial r} \bigg|_{r=R}.
+\end{align}
+One can verify that
+\begin{align}
+    q_{\text{ind}} = \int \sigma(\theta) \; \di{a} = q' = -\frac{R}{a} q.
+\end{align}
+Let us now modify the problem slightly, by placing the conducting sphere at a potential $V_{0}$ instead of grounding it. One can solve this problem by simply adding another point charge $q''$ at the centre of the sphere, with $q'' = 4 \pi \epsilon_{0} R V_{0}$. Another variation of the problem is to maintain neutrality of the conducting sphere. This can be achieved by placing a charge $q'' = -q'$ at the centre of the sphere. The force between the point charge $q$ and the neutral sphere is then
+\begin{align}
+    F = \frac{q}{4 \pi \epsilon_{0}} \left( \frac{q'}{(a-b)^{2}} + \frac{q''}{a^{2}} \right).
+\end{align}
+Finally, we consider the case where we need to fix a charge $Q$ on the conducting sphere. 
