@@ -149,3 +149,132 @@ Thus,
 \begin{align}
     \Cov(X,Y) = \E[XY] - \E[X] \E[Y] = k \E[X] - \E[X] k = 0.
 \end{align}
+
+\section{Multivariate Normal}
+\textit{January 29th.}
+
+Recall in the case of univariate normal distribution, we had $X \sim N(\mu, \sigma^{2})$ with probability density function (PDF)
+\begin{align}
+    f(x) = \begin{cases}
+        \dfrac{1}{\sqrt{2 \pi} \sigma} \exp \left(-\dfrac{(x - \mu)^{2}}{2 \sigma^{2}}\right), & x \in \R,\\[10pt]
+        0, & \text{otherwise}.
+    \end{cases}
+\end{align}
+We extend this to the multivariate case as follows. A random vector $\bv{X} = (X_{1}, X_{2}, \ldots, X_{p})^{T}$ is said to have a \eax{multivariate normal distribution} with mean vector $\bvs{\mu} \in \R^{p}$ and covariance matrix $\bvs{\Sigma}$ (denoted as $\bv{X} \sim N_{p}(\bvs{\mu}, \bvs{\Sigma})$) if its probability density function (PDF) is given by
+\begin{align}
+    f(\bv{x}) = \begin{cases}
+        \dfrac{1}{(2 \pi)^{p/2} |\bvs{\Sigma}|^{1/2}} \exp \left( -\dfrac{1}{2} (\bv{x} - \bvs{\mu})^{\top} \bvs{\Sigma}^{-1} (\bv{x} - \bvs{\mu}) \right), & \bv{x} \in \R^{p},\\[10pt]
+        0, & \text{otherwise}.
+    \end{cases}
+\end{align}
+where $\bvs{\Sigma}$ is positive definite. The moment generating function (MGF) of $\bv{X}$ is given by
+\begin{align}
+    M_{\bv{X}}(\bv{t}) = \exp \left( \bv{t}^{\top} \bvs{\mu} + \dfrac{1}{2} \bv{t}^{\top} \bvs{\Sigma} \bv{t} \right).
+\end{align}
+For further results, we make use of the following lemmas.
+\begin{lemma}
+    If $\bvs{\Sigma}$ is a positive definite matrix, then there exists a non-singular matrix $\bv{B}$ such that $\bvs{\Sigma} = \bv{B}^{\top} \bv{B}$.
+\end{lemma}
+\begin{lemma}
+    If $\bv{X} \sim N_{p}(\bvs{\mu}, \bvs{\Sigma})$ and $\bv{B}$ is as above $(\bvs{\Sigma} = \bv{B}^{\top} \bv{B})$ and satisfies $\bv{B}^{\top} \bv{Y} = \bv{X} - \bvs{\mu}$, then $\bv{Y} \sim N_{p}(\bv{0}, \bv{I}_{p})$.
+\end{lemma}
+\begin{proof}
+    The Jacobian of the transformation is given by $|\bv{B}| = \sqrt{|\bvs{\Sigma}|}$. Also, $\bv{B} \bvs{\Sigma}^{-1} \bv{B}^{\top} = \bv{I}_{p}$. Thus,
+    \begin{align}
+        (\bv{X}-\bvs{\mu})^{\top} \bvs{\Sigma}^{-1} (\bv{X}-\bvs{\mu}) = \bv{Y}^{\top} \bv{Y}.
+    \end{align}
+    Therefore, the PDF of $\bv{Y}$ is given by
+    \begin{align}
+        f_{\bv{Y}}(\bv{y}) &= f_{\bv{X}}(\bv{B}^{\top} \bv{y} + \bvs{\mu}) |\bv{B}| \\
+        &= \dfrac{1}{(2 \pi)^{p/2} |\bvs{\Sigma}|^{1/2}} \exp \left( -\dfrac{1}{2} \bv{y}^{\top} \bv{y} \right) |\bv{B}| \\
+        &= \dfrac{1}{(2 \pi)^{p/2}} \exp \left( -\dfrac{1}{2} \bv{y}^{\top} \bv{y} \right).
+    \end{align}
+    This shows that $\bv{Y} \sim N_{p}(\bv{0}, \bv{I}_{p})$.
+\end{proof}
+\begin{lemma}
+    If $X \sim (0,1)$, then $M_{X}(t) = \exp \left( \frac{t^{2}}{2} \right)$.
+\end{lemma}
+
+We can now prove the expression for the MGF of the multivariate normal distribution. We have
+\begin{align}
+    M_{\bv{X}}(\bv{t}) &= \E[e^{\bv{t}^{\top} \bv{X}}] = \E \left[ e^{\bv{t}^{\top} (\bv{B}^{\top} \bv{Y} + \bvs{\mu})} \right] = e^{\bv{t}^{\top} \bvs{\mu}} \E \left[ e^{(\bv{B} \bv{t})^{\top} \bv{Y}} \right] \notag \\
+    &= e^{\bv{t}^{\top} \bvs{\mu}} \prod_{i=1}^{p} \E \left[ e^{(\bv{b}_{i}^{\top} \bv{t}) Y_{i}} \right] = e^{\bv{t}^{\top} \bvs{\mu}} \prod_{i=1}^{p} \exp \left( \dfrac{(\bv{b}_{i}^{\top} \bv{t})^{2}}{2} \right) \notag \\
+    &= e^{\bv{t}^{\top} \bvs{\mu}} \exp \left( \dfrac{1}{2} \sum_{i=1}^{p} (\bv{b}_{i}^{\top} \bv{t})^{2} \right) = e^{\bv{t}^{\top} \bvs{\mu}} \exp \left( \dfrac{1}{2} \bv{t}^{\top} \left( \sum_{i=1}^{p} \bv{b}_{i} \bv{b}_{i}^{\top} \right) \bv{t} \right) \notag \\
+    &= e^{\bv{t}^{\top} \bvs{\mu}} \exp \left( \dfrac{1}{2} \bv{t}^{\top} \bvs{\Sigma} \bv{t} \right).
+\end{align}
+
+
+\noindent Now suppose $z = \bv{a}^{\top} \bv{X}$ where $\bv{a} \in \R^{p}$. Then, the MGF of $z$ is given by
+\begin{align}
+    M_{z}(t) = \E[e^{t z}] = \E[e^{t \bv{a}^{\top} \bv{X}}] = M_{\bv{X}}(t \bv{a}) = \exp \left( t \bv{a}^{\top} \bvs{\mu} + \dfrac{t^{2}}{2} \bv{a}^{\top} \bvs{\Sigma} \bv{a} \right).
+\end{align}
+Thus, $z \sim N(\bv{a}^{\top} \bvs{\mu}, \bv{a}^{\top} \bvs{\Sigma} \bv{a})$. Similarly, for $\bv{Z} = \bv{A} \bv{X}$ where $\bv{A}$ is a $q \times p$ matrix, we have
+\begin{align}
+    M_{\bv{Z}}(\bv{t}) = \E[e^{\bv{t}^{\top} \bv{Z}}] = \E[e^{\bv{t}^{\top} \bv{A} \bv{X}}] = M_{\bv{X}}(\bv{A}^{\top} \bv{t}) = \exp \left( \bv{t}^{\top} \bv{A} \bvs{\mu} + \dfrac{1}{2} \bv{t}^{\top} \bv{A} \bvs{\Sigma} \bv{A}^{\top} \bv{t} \right).
+\end{align}
+So, $\bv{Z} \sim N_{q}(\bv{A} \bvs{\mu}, \bv{A} \bvs{\Sigma} \bv{A}^{\top})$.
+
+
+\begin{theorem}
+    $\bv{X} \sim N_{p}(\bvs{\mu}, \bvs{\Sigma})$ if and only if every linear combination of the components of $\bv{X}$ follows univariate normal distribution with suitable parameters.    
+\end{theorem}
+\begin{proof}
+    The forward direction is already shown above. For the converse, suppose $Y = \bv{L}^{\top} \bv{X} \sim N(\bv{L}^{\top} \bvs{\mu}, \bv{L}^{\top} \bvs{\Sigma} \bv{L})$ for any $\bv{L} \in \R^{p}$. Note that the MGF of $Y$ is
+    \begin{align}
+        M_{Y}(t) = \exp \left( t \bv{L}^{\top} \bvs{\mu} + \dfrac{t^{2}}{2} \bv{L}^{\top} \bvs{\Sigma} \bv{L} \right).
+    \end{align}
+    Plugging in $t=1$, we get
+    \begin{align}
+        M_{Y}(1) = \exp \left( \bv{L}^{\top} \bvs{\mu} + \dfrac{1}{2} \bv{L}^{\top} \bvs{\Sigma} \bv{L} \right).
+    \end{align}
+    Alternatively, we have $M_{Y}(1) = \E[e^{\bv{L}^{\top} \bv{X}}] = M_{\bv{X}}(\bv{L})$. Thus, by the uniqueness property of MGFs, we must have $\bv{X} \sim N_{p}(\bvs{\mu}, \bvs{\Sigma})$.
+\end{proof}
+
+\begin{theorem}
+    Suppose $\bv{X} \sim N_{p}(\bvs{\mu}, \bvs{\Sigma})$ where we partition $\bv{X}$ as
+    \begin{align}
+        \bv{X} = \begin{pmatrix}
+            \bv{X}_{1} \\ \bv{X}_{2}
+        \end{pmatrix}
+    \end{align}
+    where $\bv{X}_{1}$ is of dimension $r$ and $\bv{X}_{2}$ is of dimension $s = p-r$. Correspondingly, we partition $\bvs{\mu}$ and $\bvs{\Sigma}$ as
+    \begin{align}
+        \bvs{\mu} = \begin{pmatrix}
+            \bvs{\mu}_{1} \\ \bvs{\mu}_{2}
+        \end{pmatrix}, \quad
+        \bvs{\Sigma} = \begin{pmatrix}
+            \bvs{\Sigma}_{11} & \bvs{\Sigma}_{12} \\
+            \bvs{\Sigma}_{21} & \bvs{\Sigma}_{22}
+        \end{pmatrix}.
+    \end{align}
+    Then $\bv{X}_{1}$ and $\bv{X}_{2}$ are independent if and only if $\bvs{\Sigma}_{12} = \bv{0}$ (or equivalently, $\bvs{\Sigma}_{21} = \bv{0}$).
+\end{theorem}
+\begin{proof}
+    The converse direction is straightforward: if $\bvs{\Sigma}_{12} = \bv{0}$, then $\abs{\bvs{\Sigma}} = \abs{\bvs{\Sigma}_{11}} \abs{\bvs{\Sigma}_{22}}$ and the PDF of $\bv{X}$ can be factored into the product of the PDFs of $\bv{X}_{1}$ and $\bv{X}_{2}$, implying independence. The forward direction is shown as follows. Suppose $\bv{X}_{1}$ and $\bv{X}_{2}$ are independent. Then, the MGF of $\bv{X}$ can be written as
+    \begin{align}
+        M_{\bv{X}}(\bv{t}) = M_{\bv{X}_{1}}(\bv{t}_{1}) M_{\bv{X}_{2}}(\bv{t}_{2})
+    \end{align}
+    where $\bv{t} = \begin{pmatrix}
+        \bv{t}_{1} \\ \bv{t}_{2}
+    \end{pmatrix}$. Plugging in the expressions for the MGFs, we have
+    \begin{align}
+        &\exp \left( \bv{t}^{\top} \bvs{\mu} + \dfrac{1}{2} \bv{t}^{\top} \bvs{\Sigma} \bv{t} \right) \notag \\
+        &= \exp \left( \bv{t}_{1}^{\top} \bvs{\mu}_{1} + \dfrac{1}{2} \bv{t}_{1}^{\top} \bvs{\Sigma}_{11} \bv{t}_{1} \right) \exp \left( \bv{t}_{2}^{\top} \bvs{\mu}_{2} + \dfrac{1}{2} \bv{t}_{2}^{\top} \bvs{\Sigma}_{22} \bv{t}_{2} \right).
+    \end{align}
+    Equating the exponents, we get
+    \begin{align}
+        \bv{t}_{1}^{\top} \bvs{\mu}_{1} + \bv{t}_{2}^{\top} \bvs{\mu}_{2} + \dfrac{1}{2} \begin{pmatrix}
+            \bv{t}_{1}^{\top} & \bv{t}_{2}^{\top}
+        \end{pmatrix} \begin{pmatrix}
+            \bvs{\Sigma}_{11} & \bvs{\Sigma}_{12} \\
+            \bvs{\Sigma}_{21} & \bvs{\Sigma}_{22}
+        \end{pmatrix} \begin{pmatrix}
+            \bv{t}_{1} \\ \bv{t}_{2}
+        \end{pmatrix} = \bv{t}_{1}^{\top} \bvs{\mu}_{1} + \dfrac{1}{2} \bv{t}_{1}^{\top} \bvs{\Sigma}_{11} \bv{t}_{1} + \bv{t}_{2}^{\top} \bvs{\mu}_{2} + \dfrac{1}{2} \bv{t}_{2}^{\top} \bvs{\Sigma}_{22} \bv{t}_{2}.
+    \end{align}
+    Simplifying, we obtain
+    \begin{align}
+        \bv{t}_{1}^{\top} \bvs{\Sigma}_{12} \bv{t}_{2} + \bv{t}_{2}^{\top} \bvs{\Sigma}_{21} \bv{t}_{1} = 0.
+    \end{align}
+    Since this holds for all $\bv{t}_{1}$ and $\bv{t}_{2}$, we must have $\bvs{\Sigma}_{12} = \bv{0}$ and $\bvs{\Sigma}_{21} = \bv{0}$.
+\end{proof}
