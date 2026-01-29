@@ -259,7 +259,105 @@ Note that nilpotents are zero divisors in a commutative ring, but the converse n
     Let $R$ be an integral domain and let $x \in R$ be nilpotent. Then, there exists some $n \in \N$ such that $x^{n} = 0$. If $x \neq 0$, then since $R$ is an integral domain, $x$ is not a zero divisor. However, this contradicts the fact that $x^{n} = 0$. Thus, we must have $x = 0$, so $R$ has no non-zero nilpotent elements.
 \end{proof}
 
+\noindent \textit{January 29th.}
 
+In an integral domain $R$, if $ab = ac$ for some $a, b, c \in R$, then either $a = 0$ or $b = c$. Let us look at some examples of integral domains.
+
+\begin{example}
+    The ring $\Z$ is an integral domain since it has no non-zero zero divisors. Similarly, the rings $\Q$, $\R$, and $\C$ are integral domains as well. More generally, any field is an integral domain. Moreover, $\Z/n\Z$ is an integral domain if and only if $n$ is prime.
+\end{example}
+
+\begin{example}
+    Note that $R$ is an integral domain if and only if $R[x]$ is an integral domain. 
+\end{example}
+
+Another small result is as follows: if $R$ is an integral domain and $R'$ is a subring of $R$ containing the unity, then $R'$ is also an integral domain. Some non-examples of integral domains include $\Z^{2}$, $C[0,1]$, $C^{\infty}[0,1]$, etc.
+
+
+
+\section{Quotient Rings}
 
 From here on, we shall assume that all rings are commutative with unity unless otherwise stated.
 
+\begin{definition}
+    Let $R$ be a ring and $I$ be an ideal of $R$. The \eax{quotient ring} $R/I$ is defined as the set of all cosets of $I$ in $R$; i.e.,
+    \begin{align}
+        R/I \defeq \{a + I : a \in R\}.
+    \end{align}
+    Addition and multiplication in $R/I$ are defined as follows: for all $a, b \in R$,
+    \begin{align}
+        (a + I) + (b + I) &\defeq (a + b) + I, \\
+        (a + I) \cdot (b + I) &\defeq (a \cdot b) + I.
+    \end{align}
+\end{definition}
+
+Of course, we must verify that these operations are well-defined. Note that $I$ is a normal subgroup of $(R, +)$ since $R$ is abelian under addition, so $R/I$ is an abelian group under addition. We verify that multiplication is well-defined as follows: let $a, a', b, b' \in R$ such that $a + I = a' + I$ and $b + I = b' + I$. Then, there exist $i_{1}, i_{2} \in I$ such that $a' = a + i_{1}$ and $b' = b + i_{2}$. Thus,
+\begin{align}
+    (a' \cdot b') + I &= ((a + i_{1}) \cdot (b + i_{2})) + I = (a \cdot b + a \cdot i_{2} + i_{1} \cdot b + i_{1} \cdot i_{2}) + I \notag \\
+    &= (a \cdot b) + I,
+\end{align}
+since $a \cdot i_{2}, i_{1} \cdot b, i_{1} \cdot i_{2} \in I$. Therefore, multiplication is well-defined. Moreover, it is easy to verify that $R/I$ is a ring with unity under these operations, where the additive identity is $0 + I$ and the multiplicative identity is $1 + I$. One also has the \eax{quotient map} naturally defined as
+\begin{align}
+    q:R \to R/I, \quad q(a) = a + I \quad \text{ for all } a \in R.
+\end{align}
+It is easy to verify that $q$ is a ring epimorphism with kernel $I$. The most common example of a quotient ring is $\Z/n\Z$, which is isomorphic to the quotient ring $\Z/(n\Z)$.
+
+\begin{example}
+    In the ring $\Q[x]$, let $I = (x^{2}-2) = (x^{2}-2)\Q$. Then, the quotient $\Q[x]/(x^{2}-2)$ is indeed a quotient ring. It is also a field, and may be written as $\Q[\sqrt{2}]$. However, the quotient ring $\R[x]/(x^{2}-2)$ is not an integral domain since $(x- \sqrt{2} + I)(x + \sqrt{2} + I) = x^{2} - 2 + I = I$.
+\end{example}
+
+We are now fit to show the isomorphism theorems for rings.
+
+\begin{theorem}[The \eax{first isomorphism theorem} for rings]
+    Let $\varphi : R \to S$ be a ring homomorphism. Let $I = \ker \varphi$. Then there exists a unique ring monomorphism $\overline{\varphi} : R/I \to S$ such that $\varphi = \overline{\varphi} \circ q$, where $q : R \to R/I$ is the quotient map. Moreover, if $\varphi$ is surjective, then $\overline{\varphi}$ is a ring isomorphism.
+\end{theorem}
+\begin{proof}
+    Define the map $\overline{\varphi} : R/I \to S$ as follows: for all $a + I \in R/I$, let
+    \begin{align}
+        \overline{\varphi}(a + I) = \varphi(a).
+    \end{align}
+    We must verify that this map is well-defined. Let $a, b \in R$ such that $a + I = b + I$. Then, there exists some $i \in I$ such that $b = a + i$. Thus,
+    \begin{align}
+        \varphi(b) = \varphi(a + i) = \varphi(a) + \varphi(i) = \varphi(a) + 0_{S} = \varphi(a),
+    \end{align}
+    so $\overline{\varphi}$ is well-defined. It is easy to verify that $\overline{\varphi}$ is a ring homomorphism. Also, for all $a \in R$,
+    \begin{align}
+        (\overline{\varphi} \circ q)(a) = \overline{\varphi}(a + I) = \varphi(a),
+    \end{align}
+    so $\varphi = \overline{\varphi} \circ q$.
+
+    Now, suppose that $\overline{\varphi}(a + I) = 0_{S}$ for some $a + I \in R/I$. Then, $\varphi(a) = 0_{S}$, so $a \in I$. Thus, $a + I = I$, which is the additive identity in $R/I$. Therefore, $\overline{\varphi}$ is injective.
+
+    Finally, if $\varphi$ is surjective, then for any $s \in S$, there exists some $a \in R$ such that $\varphi(a) = s$. Thus,
+    \begin{align}
+        \overline{\varphi}(a + I) = \varphi(a) = s,
+    \end{align}
+    so $\overline{\varphi}$ is surjective as well. Therefore, $\overline{\varphi}$ is a ring isomorphism.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be a ring and $I$ be an ideal of $R$. Then there is a bijection between the set of all ideals of $R$ containing $I$ and the set of all ideals of the quotient ring $R/I$.
+\end{proposition}
+\begin{proof}
+    We make use of the quotient map $q:R \to R/I$. Let $J$ be an ideal of $R$ such that $I \subseteq J$. The bijection is given by sending $J$ to $J/I \defeq q(J) = \{a + I : a \in J\}$, and sending $K$, an ideal of $R/I$, to $q^{-1}(K) = \{a \in R : q(a) \in K\}$. We first show that $q(J) = J/I$ is indeed an ideal of $R/I$, for $J$ an ideal of $R$ containing $I$. Let $x+I \in J/I$ and $r + I \in R/I$. Then, $(r+I)(x+I) = (r \cdot x) + I$. Since $x \in J$ and $J$ is an ideal of $R$, we have $r \cdot x \in J$, so $(r + I)(x + I) \in J/I$. Also note that for all $x + I, y + I \in J/I$, we have $(x + I) + (y + I) = (x + y) + I \in J/I$ since $x, y \in J$ and $J$ is an ideal of $R$. Thus, $J/I$ is an ideal of $R/I$.
+
+    On the other hand, we show that $q^{-1}(K)$ is an ideal of $R$ for $K$ an ideal of $R/I$. Let $x,y \in q^{-1}(K)$. Then, $q(x), q(y) \in K$, so $q(x+y) = q(x) + q(y) \in K$ since $K$ is an ideal of $R/I$. Thus, $x + y \in q^{-1}(K)$. Also, for any $r \in R$ and $x \in q^{-1}(K)$, we have $q(r), q(x) \in R/I$ and $q(x) \in K$, so $q(r \cdot x) = q(r) \cdot q(x) \in K$ since $K$ is an ideal of $R/I$. Thus, $r \cdot x \in q^{-1}(K)$. Therefore, $q^{-1}(K)$ is an ideal of $R$. Also, if $x \in I$, then $q(x) = x + I = I$, which is the additive identity in $R/I$ and thus belongs to every ideal of $R/I$. Therefore, $I \subseteq q^{-1}(K)$.
+
+    To show that the maps are inverses of each other is left as an exercise.
+\end{proof}
+
+\begin{theorem}[The \eax{second isomorphism theorem} for rings]
+    Let $R$ be a ring, and let $S \subseteq R$ be a subring containing the unity. Let $I$ be an ideal of $R$. Then, $S + I = \{s + i : s \in S, i \in I\}$ is a subring of $R$ containing the unity, $S \cap I$ is an ideal of $S$, and there is a ring isomorphism
+    \begin{align}
+        (S + I)/I \cong S/(S \cap I).
+    \end{align}
+\end{theorem}
+\begin{proof}
+    Let $\alpha,\beta \in S+I$. Then $\alpha = s+x$ and $\beta = s'+y$ for some $s,s' \in S$ and $x,y \in I$. Thus, $\alpha + \beta = (s + s') + (x + y) \in S + I$ since $S$ is a subring and $I$ is an ideal. Also, $\alpha \cdot \beta = (s + x)(s' + y) = ss' + sy + xs' + xy \in S + I$ since $ss' \in S$, $sy, xs', xy \in I$. Therefore, $S + I$ is a subring of $R$ containing the unity.
+
+    Note that the inclusion map $i:S \to R$ is a ring homomorphism. Thus, by the proposition above, $S \cap I = i^{-1}(I)$ is an ideal of $S$. Also, $I \subseteq S+I$ is an ideal of $S+I$. Now let $\varphi : S \to (S+I)/I$ be the map $\varphi = q \circ i$, where $q : S + I \to (S + I)/I$ is the quotient map. It is easy to verify that $\varphi$ is a ring homomorphism with kernel
+    \begin{align}
+        \ker \varphi = \{a \in S \mid q \circ i(a) = I\} = \{a \in S \mid a + I = I\} = S \cap I.
+    \end{align}
+    Moreover, $\varphi$ is surjective since for any $s + i + I \in (S + I)/I$ where $s \in S$ and $i \in I$, we have $\varphi(s) = s + I = s + i + I$. Thus, by the first isomorphism theorem, we have the desired isomorphism.
+\end{proof}
