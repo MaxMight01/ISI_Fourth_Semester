@@ -308,11 +308,45 @@ Note that $X$ is connected if and only if the only non-empty clopen subset of $X
     Two topological spaces $X$ and $Y$ are \eax{homeomorphic} if there exists a bijective continuous map $f:X \to Y$ such that the inverse map $f^{-1} : Y \to X$ is also continuous. Such a map $f$ is called a \eax{homeomorphism}.
 \end{definition}
 
-
+\textit{January 30th.}
 
 \begin{theorem}
     If $X_{i}$ are connected topological spaces for all $1 \leq i \leq n$, then the product space $\prod_{i=1}^{n} X_{i}$ is also connected.
 \end{theorem}
 \begin{proof}
-    
+    Note that $X_{1} \times \{b\}$ is connected for $b \in X_{2}$, since it is homeomorphic to $X_{1}$. Now, let $a \in X_{1}$ be arbitrary. Then, the set $\{a\} \times X_{2}$ is connected. Thus, the union $X_{1} \times X_{2}$ is connected, since $(X_{1} \times \{b\}) \cap (\{a\} \times X_{2}) = \{(a,b)\} \neq \emptyset$. Repeating this argument inductively, we have that $\prod_{i=1}^{n} X_{i}$ is connected.
+\end{proof}
+
+\begin{theorem}
+    If $A \subseteq X$ is connected and $A \subseteq B \subseteq \overline{A}$, then $B$ is also connected.
+\end{theorem}
+\begin{proof}
+    Assume that $B$ is disconnected. That is, there exists a clopen set $U$ in $B$ such that $B = U \cup U^{c}$. Without the loss of generality, suppose $\emptyset \neq U \cap A$ is clopen in $A$. Then $U \cap A = A$ or $A \subseteq U$. But then $\overline{A} \subseteq \overline{U} = U$, so $B \subseteq U$, a contradiction. Hence, $B$ is connected.
+\end{proof}
+
+We will now show that $\R^{\N}$ with the product topology is connected, but not with the box topology. With the product topology equipped, let $A_{n} = \{(x_{1},\ldots,x_{n},0,\ldots) \mid x_{i} \in \R\}$. Then $\R^{\N} = \bigcup_{n=1}^{\infty} A_{n}$, and each $A_{n}$ is homeomorphic to $\R^{n}$, which is connected. Moreover, $A_{n} \subseteq A_{n+1}$ for all $n \geq 1$, so by the previous theorem, $\R^{\N}$ with the product topology is connected. For the box topology, let $\R^{\N} = B \cup U$, where $B$ is the set of bounded sequences, and $U$ is the set of unbounded sequences. To show that $B$ is open, let $x = (x_{1}, x_{2}, \ldots) \in B$. Then there exists $K > 0$ such that $\abs{x_{i}} < K$ for all $i \geq 1$. Finally, $x_{i} \in (x_{1}-1, x_{1}+1) \times (x_{2}-1, x_{2}+1) \times \ldots$ is an open neighbourhood of $x$ contained in $B$, proving that $B$ is open. A similar argument shows that $U$ is open. Since both $B$ and $U$ are non-empty, they form a separation of $\R^{\N}$ with the box topology, proving that it is not connected.
+
+\begin{definition}
+    Let $a \neq b \in X$. We say that $\gamma$ is a \eax{path} between $a$ and $b$ if $\gamma : [0,1] \to X$ is continuous, with $\gamma(0) = a$ and $\gamma(1) = b$. If such a path exists, then $a$ and $b$ are said to be path connected. A topological space $X$ is \eax{path connected} if every pair of points in $X$ are path connected.
+\end{definition}
+
+\begin{lemma}
+    Supose there exists a $a_{0} \in X$ such that $a_{0}$ is path connected to every point in $X$. Then, $X$ is path connected.
+\end{lemma}
+\begin{proof}
+    Let $a,b \in X$ be arbitrary. By assumption, there exist paths $\gamma_{1} : [0,1] \to X$ and $\gamma_{2} : [0,1] \to X$ such that $\gamma_{1}(0) = a_{0}$, $\gamma_{1}(1) = a$, $\gamma_{2}(0) = a_{0}$, and $\gamma_{2}(1) = b$. Now, define the map $\gamma : [0,1] \to X$ by
+    \begin{align}
+        \gamma(t) = \begin{cases}
+            \gamma_{1}(2t) & 0 \leq t \leq \frac{1}{2}, \\
+            \gamma_{2}(2t-1) & \frac{1}{2} < t \leq 1.
+        \end{cases}
+    \end{align}
+    Then, $\gamma$ is continuous, and $\gamma(0) = a$, $\gamma(1) = b$. Thus, $a$ and $b$ are path connected. Since $a,b$ were arbitrary, $X$ is path connected.
+\end{proof}
+
+\begin{theorem}
+    If $X$ is path connected, then $X$ is connected.
+\end{theorem}
+\begin{proof}
+    Suppose $X$ is not connected. Then, there exists a separation $U,V$ of $X$ such that $U \cap V = \emptyset$. Let $a \in U$ and $b \in V$. Since $X$ is path connected, there exists a path $\gamma : [0,1] \to X$ such that $\gamma(0) = a$ and $\gamma(1) = b$. Consider the preimages $\gamma^{-1}(U)$ and $\gamma^{-1}(V)$. These sets are open in $[0,1]$, disjoint, non-empty, and their union is $[0,1]$. Thus, they form a separation of $[0,1]$, contradicting the connectedness of $[0,1]$. Hence, $X$ is connected.
 \end{proof}
