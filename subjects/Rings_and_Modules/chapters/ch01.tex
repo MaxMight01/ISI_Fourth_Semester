@@ -275,7 +275,7 @@ Another small result is as follows: if $R$ is an integral domain and $R'$ is a s
 
 
 
-\section{Quotient Rings}
+\section{Quotient Rings and Isomorphism Theorems}
 
 From here on, we shall assume that all rings are commutative with unity unless otherwise stated.
 
@@ -361,3 +361,90 @@ We are now fit to show the isomorphism theorems for rings.
     \end{align}
     Moreover, $\varphi$ is surjective since for any $s + i + I \in (S + I)/I$ where $s \in S$ and $i \in I$, we have $\varphi(s) = s + I = s + i + I$. Thus, by the first isomorphism theorem, we have the desired isomorphism.
 \end{proof}
+
+\textit{January 30th.}
+
+\begin{theorem}[The \eax{third isomorphism theorem} for rings]
+    Let $R$ be a ring, and let $J \subseteq I$ be two ideals of $R$. Then, $I/J = \{a + J : a \in I\}$ is an ideal of the quotient ring $R/J$, and there is a ring isomorphism
+    \begin{align}
+        (R/J)/(I/J) \cong R/I.
+    \end{align}
+\end{theorem}
+\begin{proof}
+    Let $q_{R} : R \to R/J$ be the quotient map, and $q_{R/J} : R/J \to (R/J)/(I/J)$ be the quotient map. Thus, the composition $\varphi = q_{R/J} \circ q_{R} : R \to (R/J)/(I/J)$ is a surjective ring homomorphism. The kernel of $\varphi$ is given by
+    \begin{align}
+        \ker \varphi = \{x \in R \mid \varphi(x) = J + I/J\} = \{x \in R \mid q_{R}(x) \in I/J\} = \{x \in R \mid x + J \in I/J\} = I.
+    \end{align}
+    Thus, by the first isomorphism theorem, we have the desired isomorphism.
+\end{proof}
+
+We look at some applications of the isomorphism theorems.
+
+\begin{example}
+    Let $I = (5) \subseteq \Z[x]$. We claim that $\Z[x]/5\Z[x] \cong (\Z/5\Z)[x]$. To see this, we make use of the first isomorphism theorem. Let $\varphi : \Z[x] \to (\Z/5\Z)[x]$ be the map defined by
+    \begin{align}
+        \varphi\left( a_{0} + a_{1}x + a_{2}x^{2} + \cdots + a_{n}x^{n} \right) = \bar{a}_{0} + \bar{a}_{1}x + \bar{a}_{2}x^{2} + \cdots + \bar{a}_{n}x^{n},
+    \end{align}
+    where $\bar{a}_{i}$ is the image of $a_{i}$ in $\Z/5\Z$ for all $0 \leq i \leq n$. It is easy to verify that $\varphi$ is a surjective ring homomorphism with kernel $5\Z[x]$. Thus, by the first isomorphism theorem, we have the desired isomorphism.
+\end{example}
+
+\begin{example}
+    Let $(x) \subseteq \Z[x]$. We claim that $\Z[x]/(x) \cong \Z$. To see this, we make use of the second isomorphism theorem. Let $S = \Z \subseteq \Z[x]$. Then, $S + (x) = \Z[x]$ since for any $f(x) \in \Z[x]$, we have $f(x) = f(0) + (f(x) - f(0)) \in S + (x)$. Also, $S \cap (x) = \{0\}$ since the only constant polynomial in $(x)$ is the zero polynomial. Thus, by the second isomorphism theorem, we have
+    \begin{align}
+        \Z[x]/(x) \cong S/(S \cap (x)) = S/\{0\} \cong \Z.
+    \end{align}
+\end{example}
+
+\begin{example}
+    Again, let $I = (x^{2}-4,2) \subseteq \Z[x]$. We claim the isomorphism
+    \begin{align}
+        \Z[x]/(x^{2}-4,2) \cong \Z/2\Z[x]/(x^{2}).
+    \end{align}
+    To see this, we make use of the third isomorphism theorem. Let $J = (2) \subseteq I$. Then, by the third isomorphism theorem, we have
+    \begin{align}
+        \Z[x]/I \cong (\Z[x]/J)/(I/J) \cong (\Z/2\Z)[x]/(x^{2}-4 + J) = (\Z/2\Z)[x]/(x^{2}),
+    \end{align}
+    since $x^{2}-4 + J = x^{2} + J$ in $(\Z/2\Z)[x]$.
+\end{example}
+
+
+\section{Prime and Maximal Ideals}
+
+\begin{definition}
+    Let $R$ be a ring. An ideal $P \subseteq R$ is called a \eax{prime ideal} if $P \neq R$ and for all $a, b \in R$ such that $a \cdot b \in P$, we have either $a \in P$ or $b \in P$.
+\end{definition}
+
+Of course, the most common example of a prime ideal is $(0_{R})$ in an integral domain $R$. Another example is $(p) = p\Z$ in $\Z$ for any prime $p$. Note that if $R$ is a field, then the only prime ideal of $R$ is $(0_{R})$.
+
+\begin{theorem}
+    Let $I$ be an ideal of a ring $R$. Then, $I$ is a prime ideal if and only if the quotient ring $R/I$ is an integral domain.
+\end{theorem}
+\begin{proof}
+    Suppose that $R/I$ is an integral domain. Let $a, b \in R$ such that $a \cdot b \in I$. Then,
+    \begin{align}
+        (a + I)(b + I) = (a \cdot b) + I = I,
+    \end{align}
+    which is the zero element in $R/I$. Since $R/I$ is an integral domain, either $a + I = I$ or $b + I = I$, which implies that either $a \in I$ or $b \in I$. Thus, $I$ is a prime ideal. If we now suppose that $I$ is a prime ideal, let $a + I, b + I \in R/I$ such that $(a+I)(b+I) = (a \cdot b) + I = I$. This implies that $a \cdot b \in I$, so either $a \in I$ or $b \in I$. Thus, either $a + I = I$ or $b + I = I$, so $R/I$ is an integral domain.
+\end{proof}
+
+One can also show that there is the natural bijection between ideals of $R/I$ and ideals of $R$ containing $I$ restricts to a bijection between prime ideals of $R/I$ and prime ideals of $R$ containing $I$.
+
+\begin{example}
+    We can use this theorem to show $(x^{2}+1)$ is a prime ideal of $\Z[x]$. Indeed, look at the ring homomorphism $\varphi : \Z[x] \to \Z[i]$ defined by $\varphi(f) = f(i)$ for all $f \in \Z[x]$. For the kernel, let $f \in \ker \varphi$. By the division algorithm, there exist unique $q, r \in \Z[x]$ such that
+    \begin{align}
+        f(x) = (x^{2}+1)q(x) + r(x),
+    \end{align}
+    where either $r(x) = 0$ or $\deg r < 2$. Plugging in $x = i$ gives $f(i) = 0 = r(i)$. The only way an at most linear polynomial $r(x)$ can be 0 at $x = i$ is if $r$ is the zero polynomial. Hence, $\ker \varphi = (x^{2}+1)$. Since $\Z[i]$ is an integral domain, by the first isomorphism theorem, we have
+    \begin{align}
+        \Z[x]/(x^{2}+1) \cong \Z[i]
+    \end{align}
+    showing that $(x^{2}+1)$ is a prime ideal of $\Z[x]$.
+\end{example}
+
+Another notion is the maximal ideal.
+
+\begin{definition}
+    Let $R$ be a ring. An ideal $M \subseteq R$ is called a \eax{maximal ideal} if $M \neq R$ and there are no ideals $I$ of $R$ such that $M \subsetneq I \subsetneq R$.
+\end{definition}
+
+That is, if $J$ is an ideal such that $M \subseteq J$, then either $J = M$ or $J = R$. For example, in $\Z$, the ideals $(p) = p\Z$ for prime $p$ are maximal ideals. Note that if $R$ is a field, then the only maximal ideal of $R$ is $(0_{R})$. 
