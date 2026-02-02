@@ -447,4 +447,28 @@ Another notion is the maximal ideal.
     Let $R$ be a ring. An ideal $M \subseteq R$ is called a \eax{maximal ideal} if $M \neq R$ and there are no ideals $I$ of $R$ such that $M \subsetneq I \subsetneq R$.
 \end{definition}
 
-That is, if $J$ is an ideal such that $M \subseteq J$, then either $J = M$ or $J = R$. For example, in $\Z$, the ideals $(p) = p\Z$ for prime $p$ are maximal ideals. Note that if $R$ is a field, then the only maximal ideal of $R$ is $(0_{R})$. 
+That is, if $J$ is an ideal such that $M \subseteq J$, then either $J = M$ or $J = R$. For example, in $\Z$, the ideals $(p) = p\Z$ for prime $p$ are maximal ideals. Note that if $R$ is a field, then the only maximal ideal of $R$ is $(0_{R})$. In fact, it may be shown that $R$ is a field if and only if $(0)$ and $R$ are the only ideals.\\
+
+\textit{February 2nd.}
+\begin{theorem}
+    Let $I$ be an ideal of a ring $R$. Then, $I$ is a maximal ideal if and only if the quotient ring $R/I$ is a field.
+\end{theorem}
+\begin{proof}
+    We work with a set of equivalences. $I \subseteq R$ is a maximal ideal \(\iff\) $\{J \mid I \subseteq J \subseteq R\} = \{I, R\}$ \(\iff\) $\{K \mid K \text{ is an ideal of } R/I\} = \{I/I, R/I\}$ \(\iff\) $R/I$ is a field.
+\end{proof}
+
+A neat corollary of this theorem is that every maximal ideal is a prime ideal. Indeed, if $M$ is a maximal ideal of $R$, then $R/M$ is a field, and thus an integral domain. Therefore, by the previous theorem, $M$ is a prime ideal. Another theorem guarantees the existence of maximal ideals.
+
+\begin{theorem}
+    Every non-zero ring has at least a maximal ideal.
+\end{theorem}
+This theorem, though true in many common cases, requires Zorn's lemma for a general proof.
+\begin{proof}
+    Let $(\Omega, \subseteq)$ be the set of all proper ideals of a ring $R$, ordered by inclusion. Note that $R \supsetneq (0) \in \Omega$, so $\Omega \neq \emptyset$. Zorn's lemma states that if every chain in $\Omega$ has an upper bound in $\Omega$, then $\Omega$ has a maximal element. Let $\cC$ be a chain in $\Omega$. We claim that $I_{\cC} = \bigcup_{I \in \cC} I$ is an upper bound of $\cC$ in $\Omega$. Certainly, for any $I \in \cC$, we have $I \subseteq J$. Also, we must verify that $I_{\cC}$ is a proper ideal of $R$.
+
+    Let $x,y \in I_{\cC}$, and $r \in R$. Then there exist two ideals $I,J \in \cC$ such that $x \in I$ and $y \in J$. Since $\cC$ is a chain, without loss of generality, suppose that $I \subseteq J$. Thus, $x,y \in J$, so $x + y \in R$ and $r \cdot x \in R$ since $J$ is an ideal of $R$. Therefore, $I_{\cC}$ is an ideal of $R$. Also, if $I_{\cC} = R$, then $1_{R} \in I_{\cC}$, so there exists some ideal $I \in \cC$ such that $1_{R} \in I$. This implies that $I = R$, which contradicts the fact that $I$ is a proper ideal. Thus, $I_{\cC}$ is a proper ideal of $R$, so $I_{\cC} \in \Omega$. Therefore, by Zorn's lemma, $\Omega$ has a maximal element, which is a maximal ideal of $R$.
+\end{proof}
+
+\begin{example}
+    In $\C[x]$, the ideal $(x)$ is maximal since $\C[x]/(x) \cong \C$, which is a field. However, $(x^{2})$ is not maximal since $(x^{2}) \subsetneq (x)$. Another reasoning is that $\C[x]/(x^{2})$ is not a field since $(x + (x^{2})) \cdot (x + (x^{2})) = x^{2} + (x^{2}) = 0 + (x^{2})$; it is not an integral domain either, so $(x^{2})$ is not even prime. In fact, the maximal ideals of $\C[x]$ are precisely of the form $(x - a)$ for some $a \in \C$.
+\end{example}
