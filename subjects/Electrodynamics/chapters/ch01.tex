@@ -459,7 +459,7 @@ Integrating over the volume $\curs{v}$, we have
 \end{align}
 Since $V$ is constant on $S$, and $\oint_{S} \bv{E} \cdot \di{\bv{a}} = 0$, the left-hand side is zero. But the right-hand side is negative since $E^{2} \geq 0$. Thus, we must have $\bv{E} = \bv{0}$ everywhere within the volume $\curs{v}$, proving uniqueness(?: proof incomplete).
 
-\section{The Method of Images}
+\subsection{The Method of Images}
 The \eax{method of images} is a mathematical technique used to solve electrostatic problems involving conductors by replacing the conductors with imaginary charges (image charges) that replicate the boundary conditions imposed by the conductors. This method simplifies the problem by allowing us to work with point charges in free space rather than dealing with complex conductor geometries directly. Consider a point charge $q$ located at a distance $d$ above an infinite grounded conducting plane $(z=0)$. We wish to find the potential $V$ at a point $P(x,y)$ in a region above the plane $(z \geq 0)$. To solve this problem using the method of images, we introduce an imaginary charge $-q$ at a distance $d$ below the plane and remove the conducting plane from the problem. The potential at point $P$ due to both the real charge $q$ and the image charge $-q$ is given by
 \begin{align}
     V(x,y,z) = \frac{q}{4 \pi \epsilon_{0} \sqrt{x^{2} + y^{2} + (z - d)^{2}}} - \frac{q}{4 \pi \epsilon_{0} \sqrt{x^{2} + y^{2} + (z + d)^{2}}}.
@@ -519,4 +519,73 @@ Let us now modify the problem slightly, by placing the conducting sphere at a po
 \begin{align}
     F = \frac{q}{4 \pi \epsilon_{0}} \left( \frac{q'}{(a-b)^{2}} + \frac{q''}{a^{2}} \right).
 \end{align}
-Finally, we consider the case where we need to fix a charge $Q$ on the conducting sphere. 
+
+
+\subsection{Solving the Laplace Equation by Separation of Variables}
+\noindent \textit{February 2nd.}
+
+Consider Laplace's equation in Cartesian coordinates;
+\begin{align}
+    \nabla^{2} V = \frac{\partial^{2} V}{\partial x^{2}} + \frac{\partial^{2} V}{\partial y^{2}} + \frac{\partial^{2} V}{\partial z^{2}} = 0
+\end{align}
+along with boundary conditions. Here, we seek solutions of the form $V(x,y,z) = X(x) Y(y) Z(z)$. First, we look at a specific example. Consider two infinite metal grounded plates at $y = 0$ and $y = a$, parallel to the $xz$-plane. Also $x = 0$ is closed off by an infinite strip of width $a$, maintained at a specific potential $V_{0}(y)$. We wish to obtain $V(x,y)$ in the space between the plates. This is essentially a two-dimensional problem due to symmetry in the $z$-direction. Thus, Laplace's equation reduces to
+\begin{align}
+    \frac{\partial^{2} V}{\partial x^{2}} + \frac{\partial^{2} V}{\partial y^{2}} = 0
+\end{align}
+subject to the boundary conditions $V(x,0) = 0 = V(x,a)$ for all $x \geq 0$, and $V(0,y) = V_{0}(y)$ for $0 \leq y \leq a$. Also, $V(x,y) \to 0$ as $x \to \infty$. We look for solutions of the form $V(x,y) = X(x) Y(y)$. Plugging this into Laplace's equation, we have
+\begin{align}
+    Y(y) \frac{\di^{2} X}{\di x^{2}} + X(x) \frac{\di^{2} Y}{\di y^{2}} = 0 \implies \frac{1}{X} \frac{\di^{2} X}{\di x^{2}} = - \frac{1}{Y} \frac{\di^{2} Y}{\di y^{2}} = k^{2}.
+\end{align}
+Thus, we have two ordinary differential equations
+\begin{align}
+    \frac{\di^{2} X}{\di x^{2}} - k^{2} X = 0, \quad \text{and} \quad \frac{\di^{2} Y}{\di y^{2}} + k^{2} Y = 0.
+\end{align}
+A solution for $X(x)$ looks like $X = A e^{kx} + B e^{-kx}$, and a solution for $Y(y)$ looks like $Y = C \sin ky + D \cos ky$. Since $V(x,y) \to 0$ as $x \to \infty$, we must have $A = 0$. Also, since $V(x,0) = 0$, we must have $D = 0$. The constraint $V(x,a) = 0$ implies that $\sin ka = 0$, giving $ka = n\pi$ for $n = 1, 2, 3, \ldots$. Finally, absorbing constants, we have
+\begin{align}
+    V(x,y) = C e^{-kx} \sin \frac{n \pi}{a}y.
+\end{align}
+However, $V_{0}(y) = C \sin \frac{n \pi}{a} y$ is not general enough to represent an arbitrary function. Since each value of $n$ gives a solution, we can superpose these solutions via linearity to obtain the general solution
+\begin{align}
+    V(x,y) = \sum_{n=1}^{\infty} C_{n} e^{-\frac{n \pi}{a} x} \sin \frac{n \pi}{a} y
+\end{align}
+with
+\begin{align}
+    V_{0}(y) = \sum_{n=1}^{\infty} C_{n} \sin \frac{n \pi}{a} y.
+\end{align}
+This is a Fourier sine series, where $\int_{0}^{a} \sin \frac{n \pi}{a} y \sin \frac{m \pi}{a} y \; \di{y} = \frac{a}{2} \delta_{nm}$. If we multiply both sides by $\sin \frac{m \pi}{a} y$ and integrate from $0$ to $a$, we have
+\begin{align}
+    \int_{0}^{a} V_{0}(y) \sin \frac{m \pi}{a} y \; \di{y} = \sum_{n=1}^{\infty} C_{n} \int_{0}^{a} \sin \frac{n \pi}{a} y \sin \frac{m \pi}{a} y \; \di{y} = \frac{a}{2} C_{m} \implies C_{m} = \frac{2}{a} \int_{0}^{a} V_{0}(y) \sin \frac{m \pi}{a} y \; \di{y}.
+\end{align}
+For example, if $V_{0}(y) = V_{0}$ (a constant), then
+\begin{align}
+    \frac{2V_{0}}{n \pi} (1 - \cos n \pi) = c_{n} = \begin{cases}
+        \frac{4 V_{0}}{n \pi}, & n \text{ odd}, \\
+        0, & n \text{ even}.
+\end{cases}
+\end{align}
+Thus, the potential between the plates is given by
+\begin{align}
+    V(x,y) = \sum_{\substack{n=1 \\ n \text{ odd}}}^{\infty} \frac{4 V_{0}}{n \pi} e^{-\frac{n \pi}{a} x} \sin \frac{n \pi}{a} y.
+\end{align}
+Now consider the case of two infinitely long grounded metal plates at $y = 0$ and $y = a$, connected at $x = \pm b$ by strips held at potential $V_{0}$. We wish to find $V(x,y)$ in the region between the plates. Here, the boundary conditions are $V(x,0) = 0 = V(x,a)$ and $V(-b,y) = V_{0} = V(b,y)$. Via separation of variables $V(x,y) = X(x) Y(y)$, we get the solution $V(x,y) = (Ae^{kx} + Be^{-kx})(C \sin ky + D \cos ky)$. Applying the boundary conditions $V(x,0) = 0$ and $V(x,a) = 0$, we have $D = 0$ and $k = \frac{n \pi}{a}$ for $n = 1, 2, 3, \ldots$. We cannot use $A = 0$, but reflection about the origin gives $V(-x,y) = V(x,y)$, so $A = B$. Thus, letting $2A$ be replaced by $A$, we have
+\begin{align}
+    V(x,y) = A \cosh \frac{n \pi}{a} x \sin \frac{n \pi}{a} y.
+\end{align}
+or the general solution as
+\begin{align}
+    V(x,y) = \sum_{n=1}^{\infty} C_{n} \cosh \frac{n \pi}{a} x \sin \frac{n \pi}{a} y.
+\end{align}Plugging $x = b$ or $x = -b$ gives
+\begin{align}
+    V_{0} = \sum_{n=1}^{\infty} C_{n} \cosh \frac{n \pi}{a} b \sin \frac{n \pi}{a} y.
+\end{align}
+Multiplying both sides by $\sin \frac{m \pi}{a} y$ and integrating from $0$ to $a$, and finally rearranging gives
+\begin{align}
+    C_{m} = \frac{2 V_{0}}{a \cosh \frac{m \pi}{a} b} \int_{0}^{a} \sin \frac{m \pi}{a} y \; \di{y} = \frac{2 V_{0}}{m \pi \cosh \frac{m \pi}{a} b} (1 - \cos m \pi) = \begin{cases}
+        \dfrac{4 V_{0}}{m \pi \cosh \frac{m \pi}{a} b}, & m \text{ odd}, \\
+        0, & m \text{ even}.
+\end{cases}
+\end{align}
+Consider another example of an infinitely long rectangular pipe with sides $a,b$ grounded but one end maintained at a potential $V_{0}(y,z)$. Here the boundary conditions are 
+\begin{align}
+    V(x,0,z) = V(x,a,z) = V(z,y,0) = V(x,y,b) = 0, \quad V(0,y,z) = V_{0}(y,z), \quad V(x,y,z) \to 0 \text{ as } x \to \infty.
+\end{align}
