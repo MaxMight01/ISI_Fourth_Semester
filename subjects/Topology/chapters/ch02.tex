@@ -350,3 +350,78 @@ We will now show that $\R^{\N}$ with the product topology is connected, but not 
 \begin{proof}
     Suppose $X$ is not connected. Then, there exists a separation $U,V$ of $X$ such that $U \cap V = \emptyset$. Let $a \in U$ and $b \in V$. Since $X$ is path connected, there exists a path $\gamma : [0,1] \to X$ such that $\gamma(0) = a$ and $\gamma(1) = b$. Consider the preimages $\gamma^{-1}(U)$ and $\gamma^{-1}(V)$. These sets are open in $[0,1]$, disjoint, non-empty, and their union is $[0,1]$. Thus, they form a separation of $[0,1]$, contradicting the connectedness of $[0,1]$. Hence, $X$ is connected.
 \end{proof}
+
+\noindent \textit{February 3rd.}
+
+Note that in the above proof we implicitly assumed the fact that $[0,1]$ is connected. To show that it is connected, we require the following lemma which is left as an exercise.
+
+\begin{lemma}
+    A topological space $X$ is connected if and only if every continuous map $f:X \to \{\pm1\}$ is constant.
+\end{lemma}
+
+\begin{theorem}
+    The interval $[0,1]$ is connected.
+\end{theorem}
+\begin{proof}
+    Suppose $f:[0,1] \to \{\pm1\}$ is continuous, and not constant. Then there exist $a,b \in [0,1]$ such that $f(a) = 1$ and $f(b) = -1$. Without loss of generality, assume $a < b$. By the intermediate value theorem, there exists some $c \in (a,b)$ such that $f(c) = 0$, contradicting the fact that the codomain of $f$ is $\{\pm1\}$. Thus, every continuous map $f:[0,1] \to \{\pm1\}$ is constant, proving that $[0,1]$ is connected.
+\end{proof}
+
+\begin{proof}[Alternate proof]
+    Suppose $U \subseteq [0,1]$ is non-empty, open, and closed in the subspace topology. Without loss of generality, let $0 \in U$ (otherwise, take $V = U^{c}$). Now define $E = \{x \in [0,1] \mid [0,x] \subseteq U\}$. Since $0 \in U$, we have $0 \in E$, so $E$ is non-empty. There now exists a natural $N \in \N$ such that $[0,\frac{1}{n}] \subseteq U$ for all $n \geq N$, so $\frac{1}{N} \in E$. Thus, $E$ is bounded above by $1$, so let $c = \sup E$. We claim that $c = 1$. Suppose not. Since $U$ is closed in $[0,1]$, we have $c \in U$. Thus, there exists some $\varepsilon > 0$ such that $(c-\varepsilon, c+\varepsilon) \cap [0,1] \subseteq U$. But since $c = \sup E$, there exists some $x \in E$ such that $c - \varepsilon < x \leq c$. Then, $[0,x] \subseteq U$, and $(c-\varepsilon, c+\varepsilon) \cap [0,1] \subseteq U$ implies that $[0, c + \frac{\varepsilon}{2}] \subseteq U$, contradicting the fact that $c$ is an upper bound for $E$. Thus, $c = 1$, so $[0,1] \subseteq U$, proving that $U = [0,1]$. Hence, $[0,1]$ is connected.
+\end{proof}
+
+\begin{example}
+    We can use to show that $GL_{n}(\R)$ is not connected. Note that the map $\det : GL_{n}(\R) \to \R \setminus \{0\}$ is continuous. Since $\R \setminus \{0\}$ is not connected, $GL_{n}(\R)$ is also not connected. Similarly, the hypersphere $S^{n} = \{x \in \R^{n+1} \mid \norm{x} = 1\}$ is connected for all $n \geq 1$, since the map $f : \R^{n+1} \setminus \{0\} \to S^{n}$ defined by $f(x) = \frac{x}{\norm{x}}$ is continuous, and $\R^{n+1} \setminus \{0\}$ is connected for all $n \geq 1$.
+\end{example}
+
+\begin{example}
+    We show that $\R$ and $\R^{2}$ cannot be homeomorphic. Suppose there exists a homeomorphism $f : \R \to \R^{2}$. Let $a \in \R$ be arbitrary, and consider the set $\R^{2} \setminus \{f(a)\}$. Note that this set is connected, since it is homeomorphic to $\R^{2} \setminus \{0\}$, which is connected. However, the set $\R \setminus \{a\}$ is not connected, since it can be separated into $(-\infty,a)$ and $(a,\infty)$. But since $f$ is a homeomorphism, the image of $\R \setminus \{a\}$ under $f$ must also be disconnected, a contradiction. Thus, no such homeomorphism exists, proving that $\R$ and $\R^{2}$ are not homeomorphic.
+\end{example}
+
+\subsection{Components}
+On a topological space $X$, define an equivalence relation $\sim$ on $X$ by $x \sim y$ if and only if there exists a connected subspace of $X$ containing both $x$ and $y$. The equivalence classes under this relation are called the \eax{component}s of $X$.
+
+\begin{theorem}
+    The components of $X$ are connected, disjoint subspaces such that their union is $X$. Any connected subspace of $X$ intersects only one component.
+\end{theorem}
+\begin{proof}
+    Let $C$ be a component of $X$. Let $x_{0} \in C$ be arbitrary. Then, by definition of the equivalence relation, for every $x \in C$, there exists a connected subspace $V_{x}$ of $X$ such that $x_{0}, x \in V_{x}$. Thus, we have
+    \begin{align}
+        C = \bigcup_{x \in C} V_{x},
+    \end{align}
+    and since each $V_{x}$ is connected and they all share the point $x_{0}$, by a previous theorem, $C$ is connected. The components are disjoint simply by the definition of an equivalence relation, and their union is $X$ since every point in $X$ is contained in some component. Finally, suppose $A \subseteq X$ is connected, and intersects two components $C_{1}$ and $C_{2}$. Then, there exist points $a_{1} \in A \cap C_{1}$ and $a_{2} \in A \cap C_{2}$. Since $A$ is connected, there exists a connected subspace of $X$ containing both $a_{1}$ and $a_{2}$. Thus, by definition of the equivalence relation, we must have $C_{1} = C_{2}$, proving that any connected subspace of $X$ intersects only one component.
+\end{proof}
+
+Thus, the components may even be called the connected components of $X$. 
+
+\begin{theorem}
+    Let $U \subseteq \R^{n}$ be an open connected set. Then, $U$ is path connected.
+\end{theorem}
+\begin{proof}
+    Fix some $x_{0} \in U$, and let $A$ be the set of all points in $U$ that are path connected to $x_{0}$. We wish to show that $A = U$. Note that $A$ is non-empty since $x_{0} \in A$. To show that $A$ is open, let $x \in A$ be arbitrary. Since $U$ is open, there exists some $\varepsilon > 0$ such that $B(x,\varepsilon) \subseteq U$. Now, for any $y \in B(x,\varepsilon)$, the line segment from $x$ to $y$ lies entirely within $B(x,\varepsilon)$, so there exists a path from $x$ to $y$. Since there also exists a path from $x_{0}$ to $x$, by concatenating these two paths, we have a path from $x_{0}$ to $y$. Thus, $y \in A$, proving that $B(x,\varepsilon) \subseteq A$. Hence, $A$ is open. To show that $A$ is closed, we look at $U \setminus A$. Let $x \in U \setminus A$ be arbitrary; there is no path from $x_{0}$ to $x$. Since $U$ is open, there exists some $\delta > 0$ such that $B(x,\delta) \subseteq U$. Now, for any $y \in B(x,\delta)$, the line segment from $x$ to $y$ lies entirely within $B(x,\delta)$, so there exists a path from $x$ to $y$. If there existed a path from $x_{0}$ to $y$, then by concatenating this path with the path from $x$ to $y$, we would have a path from $x_{0}$ to $x$, contradicting our assumption. Thus, there is no path from $x_{0}$ to $y$, so $y \in U \setminus A$. Hence, $B(x,\delta) \subseteq U \setminus A$, proving that $U \setminus A$ is open. Since $U$ is connected, and $A$ is non-empty, open, and closed in $U$, we must have $A = U$. Thus, every point in $U$ is path connected to $x_{0}$, so $U$ is path connected.
+\end{proof}
+
+More generally, we have the following result.
+
+\begin{theorem}
+    Let $X$ be a topological space that is connected. If each point $x \in X$ has an open neighbourhood that is path connected, then $X$ is path connected.
+\end{theorem}
+
+From here, we say that $X$ is locally connected at $x_{0}$ if every open neighbourhood of $x_{0}$ contains a connected open neighbourhood of $x_{0}$. If $X$ is locally connected at every point $x \in X$, then $X$ is said to be \eax{locally connected}.
+
+
+\section{Compactness}
+
+Recall that $\{A_{\alpha}\}_{\alpha \in \Lambda}$ is an open \eax{covering} of $X$ if $\bigcup_{\alpha \in \Lambda} A_{\alpha} \supseteq X$. A subcover is a subset of the covering that still covers $X$.
+
+\begin{definition}
+    A topological space $X$ is \eax{compact} if every open covering of $X$ has a finite subcovering.
+\end{definition}
+
+\begin{theorem}
+    Every compact subset of a Hausdorff space is closed.
+\end{theorem}
+\begin{proof}
+    Let $K \subseteq X$ be compact. We wish to show that $K^{c}$ is open. Let $x_{0} \in X \setminus K$. For each $y \in K$, since $X$ is Hausdorff, there exist disjoint open neighbourhoods $U_{y}$ of $x_{0}$ and $V_{y}$ of $y$. Then $\{V_{y}\}_{y \in K}$ is an open covering of $K$, so there exists a finite subcovering $\{V_{y_{i}}\}_{i=1}^{n}$. Now, let $U = \bigcap_{i=1}^{n} U_{y_{i}}$. Then, $U$ is an open neighbourhood of $x_{0}$, and for every $i$, we have $U \cap V_{y_{i}} = \emptyset$. Thus, $U \cap K = \emptyset$, proving that $x_{0} \in K^{c}$ has an open neighbourhood contained in $K^{c}$. Since $x_{0}$ was arbitrary, $K^{c}$ is open, so $K$ is closed.
+\end{proof}
+
