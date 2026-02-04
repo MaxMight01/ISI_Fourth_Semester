@@ -537,7 +537,7 @@ We now prove Osgood's theorem.
 
 
 
-\begin{theorem}\eax{Picard's theorem}
+\begin{theorem}[\eax{Picard's theorem}]
     Suppose $y' = f(x,y)$ is an ODE where $f:\cR \subseteq \R^{2} \to \R$ is a continuous function on $\cR$ satisfying a Lipschitz condition in $y$; that is, there exists some $K > 0$ such that
     \begin{align}
         \abs{f(x,s)-f(x,t)} \leq K\abs{s-t} \quad \text{ for all } (x,s),(x,t) \in \cR
@@ -555,3 +555,64 @@ We now prove Osgood's theorem.
     \end{align}
     Thus, $\norm{Ty_{1} - Ty_{2}} \leq K h \, \norm{y_{1}-y_{2}}$. Choosing $h$ such that $K h < 1$, we have that $T$ is a contraction. By the fixed point theorem, there exists a unique fixed point of $T$, which is the unique solution of the ODE passing through $(x_{0},y_{0})$.
 \end{proof}
+
+
+\noindent\textit{February 4th.}
+
+Let $U:[a,b] \to \R$ satisfy $U'(x) \leq k U(x)$ for all $x \in [a,b]$ and some $k > 0$. Moreover, suppose $U(x_{0}) = y_{0}$ for some $x_{0} \in (a,b)$. Then $U(x) \leq y_{0} e^{k(x-x_{0})}$ for all $x \geq x_{0}$. This is known as \eax{Gronwall's inequality}. To show this, consider the function
+\begin{align}
+    \varphi(x) \defeq U(x) e^{-k(x - x_{0})}.
+\end{align}
+Then,
+\begin{align}
+    \varphi'(x) = U'(x) e^{-k(x - x_{0})} - k U(x) e^{-k(x - x_{0})} = e^{-k(x - x_{0})} (U'(x) - k U(x)) \leq 0.
+\end{align}
+Thus, $\varphi$ is non-increasing, and thus $\varphi(x) \leq \varphi(x_{0}) = y_{0}$. Rearranging gives the desired result. Note that in the proof of Picard's theorem, we can use Gronwall's inequality to show uniqueness of solutions instead of the fixed point theorem.
+
+
+\section{System of ODEs}
+
+A system of first-order ODEs is a collection of equations of the form
+\begin{align}
+    \dot{y}_{i} = f_{i}(x,y_{1},\ldots,y_{n}) \quad \text{ for } i = 1, \ldots, n.
+\end{align}
+Here, $y_{i} = y_{i}(x)$ are the unknown functions, and $f_{i}:\cR \subseteq \R^{n+1} \to \R$ are given functions. We can rewrite this system in vector form as
+\begin{align}
+    \dot{Y} = f(x,Y)
+\end{align}
+where $Y = (y_{1}, \ldots, y_{n})^{T}$ and $f = (f_{1}, \ldots, f_{n})^{T}$ are both vectors. Again, we ask the same questions of existence and uniquness of solutions. Picard's theorem generalizes to systems of ODEs as follows.
+
+\begin{theorem}
+    Suppose the functon $f:\R^{n+1} \to \R^{n}$ is continuous in a neighbourhood of the point $(x_{0},Y_{0}) \in \R^{n+1}$, and each of the components of $f$ satisfy a Lipschitz condition in $Y$; that is, there exists some $K > 0$ such that
+    \begin{align}
+        \abs{f_{i}(x,Y_{1}) - f_{i}(x,Y_{2})} \leq K \, \sum_{j=1}^{n} \abs{y_{1,j} - y_{2,j}} \quad \text{ for all } (x,Y_{1}),(x,Y_{2}) \in \cR.
+    \end{align}
+    Then, there exists a unique solution $Y$ of the system of ODEs passing through $(x_{0},Y_{0})$.
+\end{theorem}
+
+\begin{proof}
+    Note that $Y = (y_{1},y_{2},\ldots,y_{n})^{T}$ is a solution of the system of ODEs if and only if it satisfies the integral equation
+    \begin{align}
+        y_{i}(x) = y_{i}(x_{0}) + \int_{x_{0}}^{x} f_{i}(s,Y(s)) \, \di{s} \quad \text{ for } i = 1, \ldots, n.
+    \end{align}
+    Define the map $T:C(I,\R^{n}) \to C(I,\R^{n})$ via
+    \begin{align}
+        \Phi = (\varphi_{1},\varphi_{2},\ldots,\varphi_{n})^{T} \mapsto \left( y_{1}(x_{0}) + \int_{x_{0}}^{x} f_{1}(s,\Phi(s)) \, \di{s}, \ldots, y_{n}(x_{0}) + \int_{x_{0}}^{x} f_{n}(s,\Phi(s)) \, \di{s} \right)^{T}
+    \end{align}
+    where $C(I,\R^{n})$ is the space of continuous functions from $I$ to $\R^{n}$ with the supremum norm $\norm{Y} = \sup_{x \in I} \sum_{i=1}^{n} \abs{y_{i}(x)}$. Thus, $Y$ is a solution of the system of ODEs if and only if $TY = Y$. We now show that $T$ is a contraction for sufficiently small $h$. Indeed, for any $\Phi = (\varphi_{1},\ldots,\varphi_{n})^{T}, \Psi = (\psi_{1},\ldots,\psi_{n})^{T} \in C(I,\R^{n})$ and any $x \in I$, we have
+    \begin{align}
+        \abs{(T\Phi)_{i}(x) - (T\Psi)_{i}(x)} &= \abs{\int_{x_{0}}^{x} (f_{i}(s,\Phi(s)) - f_{i}(s,\Psi(s))) \, \di{s}} \notag \\ &\leq \int_{x_{0}}^{x} K \sum_{j=1}^{n} \abs{\varphi_{j}(s) - \psi_{j}(s)} \, \di{s} \leq K h \, \sum_{j=1}^{n} \norm{\varphi_{j} - \psi_{j}}.
+    \end{align}
+    Hence, we choose $h$ such that $K h < 1$. By the fixed point theorem, there exists a unique fixed point of $T$, which is the unique solution of the system of ODEs passing through $(x_{0},Y_{0})$.
+\end{proof}
+Let us look at a particular example of such a system; examine
+\begin{align}
+    \dot{Y} = f(x,Y) = A(x) \cdot Y + Q(x)
+\end{align}
+where $A(x)$ is an $n \times n$ matrix whose entries are continuous functions of $x$ in $(x_{0}-h,x_{0}+h)$, and $Q(x)$ is a vector in $\R^{n}$ whose entries are continuous functions of $x$ in $(x_{0}-h,x_{0}+h)$. This is known as a \eax{linear system} of ODEs. Note that $f$ satisfies a Lipschitz condition in $Y$ on any compact subinterval since
+\begin{align}
+    \abs{f_{j}(x,Y) - f_{j}(x,U)} = \abs{\sum_{i=1}^{n} a_{ji}(x) \cdot (Y_{i}-U_{j})} \leq K \sum_{i=1}^{n} \abs{Y_{i}-U_{i}}.
+\end{align}
+Note that in the one dimensional case, that is, when $n=1$, we have $y' = A(x) \, y + Q(x)$. Suppose $y^{\ast}$ is a solution of this equation. Then, any other solution $y$ can be written as $y = y^{\ast} + z$ for some function $z$ that satisfies the homogeneous equation $z' = A(x) \, z$. Moreover, solutions of $z' = Az$ form a vector space over the real numbers of dimension $1$. Thus, a general solution looks like $y = y^{\ast} + \lambda z$ for some $\lambda \in \R$, where $z$ is a non-trivial solution of the homogeneous equation, and $y^{\ast}$ is a particular solution of the differential equation. We can lift this idea to the higher dimensions.
+
+Consider $\dot{Y} = A(x) \cdot Y + Q(x)$, as above. Suppose $Y^{\ast}$ is a particular solution of this equation. Then, any other solution $Y$ can be written as $Y = Y^{\ast} + Z$ for some function $Z$ that satisfies the homogeneous equation $\dot{Z} = A(x) \cdot Z$. Moreover, solutions of $\dot{Z} = A(x) \cdot Z$ form a vector space over the real numbers of dimension $n$. Thus, a general solution looks like $Y = Y^{\ast} + \sum_{i=1}^{n} \lambda_{i} Z_{i}$ for some $\lambda_{1}, \ldots, \lambda_{n} \in \R$, where $Z_{1}, \ldots, Z_{n}$ form a basis of the vector space of solutions of the homogeneous equation, and $Y^{\ast}$ is a particular solution of the differential equation. To show that the dimension of the vector space of solutions of the homogeneous equation is $n$, let $Z_{i}$ denote the solution such that $Z_{i}(x_{0}) = e_{i}$. Then given any other solution $Z$ such that $Z(x_{0}) = (\lambda_{1},\ldots,\lambda_{n})$, we have $Z = \sum_{i=1}^{n} \lambda_{i} Z_{i}$. Picard's theorem guarantees that this is the unique solution. Note that the functions $Z_{1}, \ldots, Z_{n}$ are linearly independent if and only if the vectors $Z_{1}(x_{0}),\ldots,Z_{n}(x_{0})$ are linearly independent if and only if for all $x \in I$, the vectors $Z_{1}(x),\ldots,Z_{n}(x)$ are linearly independent. 
