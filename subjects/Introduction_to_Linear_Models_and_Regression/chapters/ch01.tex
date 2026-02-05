@@ -278,3 +278,81 @@ So, $\bv{Z} \sim N_{q}(\bv{A} \bvs{\mu}, \bv{A} \bvs{\Sigma} \bv{A}^{\top})$.
     \end{align}
     Since this holds for all $\bv{t}_{1}$ and $\bv{t}_{2}$, we must have $\bvs{\Sigma}_{12} = \bv{0}$ and $\bvs{\Sigma}_{21} = \bv{0}$.
 \end{proof}
+
+\noindent \textit{February 5th.}
+
+For a multivariate normal vector $\bv{X} \sim N_{p}(\bvs{\mu}, \bvs{\Sigma})$, partition it as above. Let us make the transformation $\bv{X} \to \bv{Y}$ prescribed as $\bv{Y}^{(1)}_{r \times 1} = \bv{X}^{(1)}$ and $\bv{Y}^{(2)}_{(p-r) \times 1} = \bv{X}^{(2)}_{(p-r) \times 1} + \bv{B} \bv{X}^{(1)}_{r \times 1}$, where $\bv{B}$ is an appropriate matrix of constant values. This is simply the transformation given by
+\begin{align}
+    \bv{Y} = \bv{M} \bv{X}, \quad \bv{M} = \begin{pmatrix}
+        \bv{I}_{r} & \bv{0} \\
+        \bv{B} & \bv{I}_{p-r}
+    \end{pmatrix}.
+\end{align}
+Then, $\bv{Y} \sim N_{p}(\bv{M} \bvs{\mu}, \bv{M} \bvs{\Sigma} \bv{M}^{\top})$. We can choose $\bv{B}$ such that $\bvs{\Sigma}_{21} + \bv{B} \bvs{\Sigma}_{11} = \bv{0}$, which gives $\bv{B} = -\bvs{\Sigma}_{21} \bvs{\Sigma}_{11}^{-1}$. With this choice of $\bv{B}$, we have
+\begin{align}
+    \Cov(\bv{Y}) = \begin{pmatrix}
+        \bvs{\Sigma}_{11} & \bv{0} \\
+        \bv{0} & \bvs{\Sigma}_{22} - \bvs{\Sigma}_{21} \bvs{\Sigma}_{11}^{-1} \bvs{\Sigma}_{12}
+    \end{pmatrix}.
+\end{align}
+Thus, $\bv{Y}^{(1)}$ and $\bv{Y}^{(2)}$ are independent. Note that $\bv{Y}^{(2)} = \bv{X}^{(2)} - \bvs{\Sigma}_{21} \bvs{\Sigma}_{11}^{-1} \bv{X}^{(1)}$. If we define $\bv{\Sigma}_{22 \cdot 1} = \bvs{\Sigma}_{22} - \bvs{\Sigma}_{21} \bvs{\Sigma}_{11}^{-1} \bvs{\Sigma}_{12}$, then we have
+\begin{align}
+    \bv{Y}^{(1)} \sim N_{r}(\bvs{\mu}_{1}, \bvs{\Sigma}_{11}), \quad
+    \bv{Y}^{(2)} \sim N_{p-r}(\bvs{\mu}_{2} - \bvs{\Sigma}_{21} \bvs{\Sigma}_{11}^{-1} \bvs{\mu}_{1}, \bvs{\Sigma}_{22 \cdot 1}).
+\end{align}
+To find the distribution of $\bv{X}^{(1)}$ given $\bv{X}^{(2)}$, 
+we can use the fact that $\bv{Y}^{(1)}$ and $\bv{Y}^{(2)}$ are independent. We have
+\begin{align}
+    f_{\bv{X}^{(1)} \mid \bv{X}^{(2)}}(\bv{x}^{(1)} \mid \bv{x}^{(2)}) &= f_{\bv{Y}^{(1)} \mid \bv{Y}^{(2)}}(\bv{y}^{(1)} \mid \bv{y}^{(2)}) = f_{\bv{Y}^{(1)}}(\bv{y}^{(1)}) \notag\\
+    &= \dfrac{1}{(2 \pi)^{r/2} |\bvs{\Sigma}_{11}|^{1/2}} \exp \left( -\dfrac{1}{2} (\bv{y}^{(1)} - \bvs{\mu}_{1})^{\top} \bvs{\Sigma}_{11}^{-1} (\bv{y}^{(1)} - \bvs{\mu}_{1}) \right)
+\end{align}
+which can be rewritten as
+\begin{align}
+    \dfrac{1}{(2 \pi)^{r/2} |\bvs{\Sigma}_{11}|^{1/2}} \exp \left( -\dfrac{1}{2} (\bv{x}^{(1)} - (\bvs{\mu}_{1} + \bvs{\Sigma}_{12} \bvs{\Sigma}_{22}^{-1} (\bv{x}^{(2)} - \bvs{\mu}_{2})))^{\top} \bvs{\Sigma}_{11}^{-1} (\bv{x}^{(1)} - (\bvs{\mu}_{1} + \bvs{\Sigma}_{12} \bvs{\Sigma}_{22}^{-1} (\bv{x}^{(2)} - \bvs{\mu}_{2}))) \right).
+\end{align}
+Thus, $\bv{X}^{(1)} \mid \bv{X}^{(2)} = \bv{x}^{(2)} \sim N_{r}(\bvs{\mu}_{1} + \bvs{\Sigma}_{12} \bvs{\Sigma}_{22}^{-1} (\bv{x}^{(2)} - \bvs{\mu}_{2}), \bvs{\Sigma}_{11})$. For the distribution of $\bv{X}^{(2)}$ given $\bv{X}^{(1)}$, we have
+\begin{align}
+    f_{\bv{X}^{(2)} \mid \bv{X}^{(1)}}(\bv{x}^{(2)} \mid \bv{x}^{(1)}) = f_{\bv{Y}^{(2)} \mid \bv{Y}^{(1)}}(\bv{y}^{(2)} \mid \bv{y}^{(1)}) = f_{\bv{Y}^{(2)}}(\bv{y}^{(2)}) \notag\\
+    = \dfrac{1}{(2 \pi)^{(p-r)/2} |\bvs{\Sigma}_{22 \cdot 1}|^{1/2}} \exp \left( -\dfrac{1}{2} (\bv{y}^{(2)} - (\bvs{\mu}_{2} - \bvs{\Sigma}_{21} \bvs{\Sigma}_{11}^{-1} \bvs{\mu}_{1}))^{\top} (\bvs{\Sigma}_{22 \cdot 1})^{-1} (\bv{y}^{(2)} - (\bvs{\mu}_{2} - \bvs{\Sigma}_{21} \bvs{\Sigma}_{11}^{-1} \bvs{\mu}_{1})) \right)
+\end{align}
+which can be rewritten as
+\begin{align}
+    &\dfrac{1}{(2 \pi)^{(p-r)/2} |\bvs{\Sigma}_{22 \cdot 1}|^{1/2}} \exp \left( -\dfrac{1}{2} (\bv{x}^{(2)} - (\bvs{\mu}_{2} + \bvs{\Sigma}_{21} \bvs{\Sigma}_{11}^{-1} (\bv{x}^{(1)} - \bvs{\mu}_{1})))^{\top} (\bvs{\Sigma}_{22 \cdot 1})^{-1} (\bv{x}^{(2)} - (\bvs{\mu}_{2} + \bvs{\Sigma}_{21} \bvs{\Sigma}_{11}^{-1} (\bv{x}^{(1)} - \bvs{\mu}_{1}))) \right).
+\end{align}
+Thus, $\bv{X}^{(2)} \mid \bv{X}^{(1)} = \bv{x}^{(1)} \sim N_{p-r}(\bvs{\mu}_{2} + \bvs{\Sigma}_{21} \bvs{\Sigma}_{11}^{-1} (\bv{x}^{(1)} - \bvs{\mu}_{1}), \bvs{\Sigma}_{22 \cdot 1})$.
+
+\section{Dirichlet Distribution}
+
+Just like the multivariate normal distribution is a generalization of the univariate normal distribution, the Dirichlet distribution is a generalization of the univariate beta distribution. Recall that the PDF of the gamma distribution with parameters $\alpha$ and $\lambda$ is given by
+\begin{align}
+    f(x) = \begin{cases}
+        \dfrac{\lambda^{\alpha}}{\Gamma(\alpha)} x^{\alpha - 1} e^{-\lambda x}, & x > 0,\\
+        0, & \text{otherwise}
+    \end{cases}
+\end{align}
+where $\Gamma(\alpha) = \int_{0}^{\infty} x^{\alpha - 1} e^{-x} \, \di{x}$ is the gamma function, and the PDF of the beta distribution with parameters $\alpha$ and $\beta$ is given by
+\begin{align}
+    f(x) = \begin{cases}
+        \dfrac{\Gamma(\alpha + \beta)}{\Gamma(\alpha) \Gamma(\beta)} x^{\alpha - 1} (1-x)^{\beta - 1}, & x \in (0,1),\\
+        0, & \text{otherwise}.
+    \end{cases}
+\end{align}
+
+Also recall that if $X_{1}$ and $X_{2}$ are independent random variables such that $X_{1} \sim \Gamma(\alpha, 1)$ and $X_{2} \sim \Gamma(\beta, 1)$, then $X_{1} + X_{2} \sim \Gamma(\alpha + \beta, 1)$ and $\frac{X_{1}}{X_{1} + X_{2}} \sim \operatorname{Beta}(\alpha, \beta)$. We can extend this to the multivariate case as follows. Let $\bv{Y} = (Y_{1},Y_{2},\ldots,Y_{k})$ be such that $Y_{i} > 0$ for all $i$ and $\sum_{i=1}^{k} Y_{i} = 1$. Also let $\alpha_{1}, \alpha_{2}, \ldots, \alpha_{k}$ be positive parameters. Then, $\bv{Y}$ is said to have a \eax{Dirichlet distribution} with parameters $\alpha_{1}, \alpha_{2}, \ldots, \alpha_{k}$ (denoted as $\bv{Y} \sim \Dir(\bvs{\alpha})$ where $\bvs{\alpha} = (\alpha_{1}, \alpha_{2}, \ldots, \alpha_{k})$) if its PDF is given by
+\begin{align}
+    f(y) = \begin{cases}
+        \dfrac{\Gamma(\alpha_{1} + \alpha_{2} + \cdots + \alpha_{k})}{\Gamma(\alpha_{1}) \Gamma(\alpha_{2}) \cdots \Gamma(\alpha_{k})} y_{1}^{\alpha_{1} - 1} y_{2}^{\alpha_{2} - 1} \cdots y_{k}^{\alpha_{k} - 1}, & y_{i} > 0 \text{ for all } i, \sum_{i=1}^{k} y_{i} = 1,\\
+        0, & \text{otherwise}.
+    \end{cases}
+\end{align}
+If we let $X_{1}, X_{2}, \ldots, X_{k}$ be independent random variables such that $X_{i} \sim \Gamma(\alpha_{i}, 1)$ for all $i$, then the joint distribution of $X_{1}, X_{2}, \ldots, X_{k}$ is given by
+\begin{align}
+    f(x_{1}, x_{2}, \ldots, x_{k}) = \prod_{i=1}^{k} \dfrac{1}{\Gamma(\alpha_{i})} x_{i}^{\alpha_{i} - 1} e^{-x_{i}}, \quad x_{i} > 0 \text{ for all } i.
+\end{align}
+If we then let $Y_{i} = \frac{X_{i}}{\sum_{j=1}^{k} X_{j}}$ for all $i$, then $\bv{Y} = (Y_{1}, Y_{2}, \ldots, Y_{k}) \sim \Dir(\bvs{\alpha})$. The moments of the Dirichlet distribution are given by
+\begin{align}
+    \E[Y_{i}] &= \dfrac{\alpha_{i}}{\alpha_{0}}, \\
+    \Var(Y_{i}) &= \dfrac{\alpha_{i} (\alpha_{0} - \alpha_{i})}{\alpha_{0}^{2} (\alpha_{0} + 1)}, \\
+    \Cov(Y_{i}, Y_{j}) &= -\dfrac{\alpha_{i} \alpha_{j}}{\alpha_{0}^{2} (\alpha_{0} + 1)}
+\end{align}
+where $\alpha_{0} = \sum_{i=1}^{k} \alpha_{i}$.
