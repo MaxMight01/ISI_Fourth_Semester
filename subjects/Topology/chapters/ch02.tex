@@ -425,3 +425,37 @@ Recall that $\{A_{\alpha}\}_{\alpha \in \Lambda}$ is an open \eax{covering} of $
     Let $K \subseteq X$ be compact. We wish to show that $K^{c}$ is open. Let $x_{0} \in X \setminus K$. For each $y \in K$, since $X$ is Hausdorff, there exist disjoint open neighbourhoods $U_{y}$ of $x_{0}$ and $V_{y}$ of $y$. Then $\{V_{y}\}_{y \in K}$ is an open covering of $K$, so there exists a finite subcovering $\{V_{y_{i}}\}_{i=1}^{n}$. Now, let $U = \bigcap_{i=1}^{n} U_{y_{i}}$. Then, $U$ is an open neighbourhood of $x_{0}$, and for every $i$, we have $U \cap V_{y_{i}} = \emptyset$. Thus, $U \cap K = \emptyset$, proving that $x_{0} \in K^{c}$ has an open neighbourhood contained in $K^{c}$. Since $x_{0}$ was arbitrary, $K^{c}$ is open, so $K$ is closed.
 \end{proof}
 
+\begin{lemma}
+    Let $F \subseteq K$ where $F$ is closed and $K$ is compact. Then, $F$ is also compact.
+\end{lemma}
+\begin{proof}
+    Let $\{U_{\alpha}\}_{\alpha \in \Lambda}$ be an open covering of $F$. Then, $\{U_{\alpha}\}_{\alpha \in \Lambda} \cup \{K \setminus F\}$ is an open covering of $K$, so there exists a finite subcovering $\{U_{\alpha_{i}}\}_{i=1}^{n} \cup \{K \setminus F\}$. Since $F$ is not covered by $K \setminus F$, we have that $\{U_{\alpha_{i}}\}_{i=1}^{n}$ is a finite subcovering of $F$. Thus, $F$ is compact.
+\end{proof}
+
+\begin{theorem}
+    $[a,b]$ is compact for all $a < b \in \R$.
+\end{theorem}
+\begin{proof}
+    Let $\{U_{\alpha}\}_{\alpha \in \Lambda}$ be an open covering of $[a,b]$. Suppose it is not compact. Choose $a \leq a_{1} < b_{1} \leq b$ such that $I_{1} = [a_{1},b_{1}]$ has no finite subcovering, and $\abs{b_{1}-a_{1}} \leq \frac{1}{2}\abs{b-a}$. Now, choose $a_{1} \leq a_{2} < b_{2} \leq b_{1}$ such that $I_{2} = [a_{2},b_{2}]$ has no finite subcovering, and $\abs{b_{2}-a_{2}} \leq \frac{1}{2}\abs{b_{1}-a_{1}}$. Continuing this process, we have a sequence of nested closed intervals $I_{n} = [a_{n}, b_{n}]$ such that $I_{n}$ has no finite subcovering for all $n \geq 1$, and $\abs{b_{n}-a_{n}} \leq \frac{1}{2^{n-1}}\abs{b-a}$ for all $n \geq 1$. By the nested interval property, there exists some $c \in [a,b]$ such that $\sup a_{k} = c = \inf b_{k}$. Then $c \in U_{\alpha_{0}}$ for some $\alpha_{0} \in \Lambda$, since $\{U_{\alpha}\}_{\alpha \in \Lambda}$ is an open covering of $[a,b]$. Thus, there exists some $\varepsilon > 0$ such that $(c-\varepsilon, c+\varepsilon) \subseteq U_{\alpha_{0}}$. However, there exists some $N \in \N$ such that for all $n \geq N$, we have $\abs{b_{n}-a_{n}} < \varepsilon$, so $I_{N} \subseteq (c-\varepsilon, c+\varepsilon) \subseteq U_{\alpha_{0}}$. This contradicts the fact that $I_{N}$ has no finite subcovering. Hence, $[a,b]$ is compact.
+\end{proof}
+
+\begin{lemma}
+    Let $f:X \to Y$ be a continuous map. If $X$ is compact, then $f(X)$ is also compact.
+\end{lemma}
+\begin{proof}
+    Let $f(K) \subseteq \bigcup_{\alpha \in \Lambda} U_{\alpha}$ be an open covering of $f(K)$. Then, $\{f^{-1}(U_{\alpha})\}_{\alpha \in \Lambda}$ is an open covering of $K$, so there exists a finite subcovering $\{f^{-1}(U_{\alpha_{i}})\}_{i=1}^{n}$. Thus, $\{U_{\alpha_{i}}\}_{i=1}^{n}$ is a finite subcovering of $f(K)$, proving that $f(K)$ is compact.
+\end{proof}
+
+\begin{theorem}
+    Let $f:X \to Y$ be a continuous bijection. If $X$ is compact and $Y$ is Hausdorff, then $f$ is a homeomorphism.
+\end{theorem}
+\begin{proof}
+    We wish to show that the inverse map $f^{-1} : Y \to X$ is continuous. Let $V \subseteq X$ be closed. Then, since $X$ is compact, $V$ is also compact. Thus, by the previous lemma, $f(V)$ is compact. Since $Y$ is Hausdorff, $f(V)$ is closed. Hence, the preimage of every closed set under $f^{-1}$ is closed, proving that $f^{-1}$ is continuous. Thus, $f$ is a homeomorphism.
+\end{proof}
+
+\begin{theorem}
+    If $X$ and $Y$ are compact topological spaces, then the product space $X \times Y$ is also compact.
+\end{theorem}
+\begin{proof}
+    Note that for $x_{0} \in X$, $x_{0} \times Y$ is homeomorphic to $Y$, so it is compact. We need to show that if $N$ is an open set such that $x_{0} \times Y \subset N \subset X \times Y$, then there exists a neighbourhood $W$ of $x_{0}$ in $X$ such that $W \times Y \subseteq N$. Let $X \times Y = \bigcup_{\alpha} A_{\alpha}$ be an open covering of $X \times Y$. By compactness of $x_{0} \times Y$, there exists a finite subcovering $\bigcup_{i \in \Lambda_{x_{0}}} A_{\alpha_{i}}$ where $\Lambda_{x_{0}}$ is a finite index set. Then $x_{0} \times Y \subseteq W_{x_{0}} \times Y \subseteq \bigcup_{i \in \Lambda_{x_{0}}} A_{\alpha_{i}}$, where $W_{x_{0}} = \bigcap_{i \in \Lambda_{x_{0}}} \pi_{X}(A_{\alpha_{i}})$ is an open neighbourhood of $x_{0}$ in $X$. Now, for each $x \in X$, we can repeat this process to obtain an open neighbourhood $W_{x}$ of $x$ in $X$ such that $W_{x} \times Y$ is covered by a finite number of sets from the open covering. Then, $\{W_{x}\}_{x \in X}$ is an open covering of $X$, so by compactness of $X$, there exists a finite subcovering $\{W_{x_{j}}\}_{j=1}^{m}$. Thus, we have $X \times Y = \bigcup_{j=1}^{m} (W_{x_{j}} \times Y)$, and each $W_{x_{j}} \times Y$ is covered by a finite number of sets from the original open covering. Hence, $X \times Y$ has a finite subcovering, proving that it is compact.
+\end{proof}
