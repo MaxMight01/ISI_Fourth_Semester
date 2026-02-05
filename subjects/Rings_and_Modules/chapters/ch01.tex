@@ -472,3 +472,42 @@ This theorem, though true in many common cases, requires Zorn's lemma for a gene
 \begin{example}
     In $\C[x]$, the ideal $(x)$ is maximal since $\C[x]/(x) \cong \C$, which is a field. However, $(x^{2})$ is not maximal since $(x^{2}) \subsetneq (x)$. Another reasoning is that $\C[x]/(x^{2})$ is not a field since $(x + (x^{2})) \cdot (x + (x^{2})) = x^{2} + (x^{2}) = 0 + (x^{2})$; it is not an integral domain either, so $(x^{2})$ is not even prime. In fact, the maximal ideals of $\C[x]$ are precisely of the form $(x - a)$ for some $a \in \C$.
 \end{example}
+
+\subsection{Jacobson Radical and Nilradical}
+\textit{February 5th.}
+
+
+\begin{definition}
+    The \eax{Jacobson radical} of a non-zero ring $R$ is defined as
+    \begin{align}
+        \Jac(R) = \bigcap_{\substack{\mf{m} \subseteq R \\ \mf{m} \text{ is a maximal ideal}}} \mf{m}.
+    \end{align}
+    It is the interseciton of ideals, so it is also an ideal. The \eax{nilradical} of $R$ is defined as
+    \begin{align}
+        \nil(R) = \{x \in R \mid x^{n} = 0 \text{ for some } n \in \N\}.
+    \end{align}
+\end{definition}
+
+
+The following are some properties of the Jacobson radical and nilradical.
+\begin{proposition}
+    Let $R$ be a ring. Then,
+    \begin{enumerate}
+        \item $\nil(R)$ is an ideal of $R$.
+        \item $\nil(R) \subseteq \Jac(R)$.
+        \item $x \in \Jac(R)$ if and only if $1+ax$ is a unit for all $a \in R$.
+        \item $\nil(R) = \bigcap_{\substack{P \subseteq R \\ P \text{ is a prime ideal}}} P$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \begin{enumerate}
+        \item Let $x,y \in \nil(R)$ and $r \in R$. Then, there exist $m,n \in \N$ such that $x^{m} = 0$ and $y^{n} = 0$. Thus, $(x + y)^{m+n} = 0$ by the binomial theorem, so $x + y \in \nil(R)$. Also, $(r \cdot x)^{m} = r^{m} \cdot x^{m} = 0$, so $r \cdot x \in \nil(R)$. Therefore, $\nil(R)$ is an ideal of $R$.
+        \item Let $x \in \nil(R)$. Then, there exists some $n \in \N$ such that $x^{n} = 0$. Thus $x^{n}$ belongs to every ideal of $R$, so in particular, $x^{n} \in P$ for every prime ideal and $x^{n} \in \mf{m}$ for every maximal ideal. However, $x^{n} \in P$ implies that $x \in P$ since $P$ is prime, and $x^{n} \in \mf{m}$ implies that $x \in \mf{m}$ since $\mf{m}$ is prime as well. Therefore, $x$ belongs to every prime ideal and every maximal ideal, so $x \in \Jac(R)$. Hence, $\nil(R) \subseteq \Jac(R)$.
+        \item For the forward implication, let $x \in \Jac(R)$ and $a \in R$. Note that $ax$ cannot be a unit since it is contained in the (maximal) ideals $\mf{m}$. Suppose $1+ax$ is \textit{not} a unit. Then $I = (1+ax)$ is a proper ideal of $R$. If $q : R \to R/I$ is the quotient map, and $\bar{\mf{m}}$ is a maximal ideal of $R/I$, then we claim that $\mf{m} = q^{-1}(\bar{\mf{m}})$ is a maximal ideal of $R$ containing $I$. Certainly, $\mf{m}$ is an ideal of $R$ containing $I$ by the proposition above. Also, if there exists some ideal $J$ of $R$ such that $\mf{m} \subsetneq J \subsetneq R$, then $I \subseteq J \subsetneq R$, so $q(J)$ is an ideal of $R/I$ such that $\bar{\mf{m}} \subsetneq q(J) \subsetneq R/I$, contradicting the maximality of $\bar{\mf{m}}$. Thus, $\mf{m}$ is a maximal ideal of $R$. However, since $x \in \Jac(R)$, we have $x \in \mf{m}$, so $ax \in I \subseteq \mf{m}$. This implies that $1 = (1 + ax) - ax \in \mf{m}$, a contradiction. Therefore, $1 + ax$ is a unit for all $a \in R$.
+        
+        For the converse, suppose $1+ax$ is a unit for all $a \in R$. Let $\mf{m}$ be any maximal ideal of $R$. If $x \notin \mf{m}$, then the ideal $(\mf{m}, x)$ properly contains $\mf{m}$, so $(\mf{m}, x) = R$. Thus, there exist $m \in \mf{m}$ and $r \in R$ such that $1 = m + r \cdot x$. This implies that $1 - r \cdot x = m \in \mf{m}$, contradicting the fact that $1 - r \cdot x$ is a unit. Therefore, $x \in \mf{m}$. Since $\mf{m}$ was an arbitrary maximal ideal, we have $x \in \Jac(R)$.
+
+        \item It is clear that $\nil(R) \subseteq \bigcap_{P \text{ prime}} P$ since maximal ideals are prime ideals. For the converse inclusion, let $x \in \bigcap_{P \text{ prime}} P$. We claim that $x$ is nilpotent. Suppose not. Then, the set $S = \{x^{n} : n \in \N\}$ does not contain $0$. Define the set $\Omega = \{I \subseteq R \mid I \text{ is an ideal and } I \cap S = \emptyset\}$. Inclusion $\subseteq$ is a partial order on $\Omega$. Let $\cC$ be a chain in $\Omega$ and let $I = \bigcup_{J \in \cC} J$. We claim that $I$ is an upper bound of $\cC$ in $\Omega$. It is an ideal since if $z,y \in I$, then $z \in J_{1}$ and $y \in J_{2}$ with $J_{1} \subseteq J_{2}$. Thus, $z,y \in J_{1} \cup J_{2}$, so $z + y \in J_{1} \cup J_{2} \subseteq I$. Also, for any $r \in R$ and $z \in I$, we have $z \in J$ for some $J \in \cC$, so $r \cdot z \in J \subseteq I$. Therefore, $I$ is an ideal. Moreover, if $J \cap S = \emptyset$ for all $J \in \cC$ tells us $I \cap S = \emptyset$. Hence, $I$ is a valid upper bound, and Zorn's lemma guarantess the existence of a maximal $P$ in $\Omega$. We further claim that $P$ is a prime ideal of $R$. Indeed, $P \subsetneq R$ since $P \cap S = \emptyset$. Let $uv \in P$ for some $u,v \in R$. If both $u,v \notin P$, then the ideals $(P,u)$ and $(P,v)$ properly contain $P$; that is, $au + y = x^{n}$ and $bv + z = x^{m}$ for some $a,b \in R$, $y,z \in P$, and $n,m \in \N$. Thus, $(au+y)(bv+z) = x^{n+m} \in S$, but $(au+y)(bv+z) = abuv + az + by + yz \in P$ since $uv \in P$ and $y,z \in P$. This contradicts the fact that $P \cap S = \emptyset$. Therefore, either $u \in P$ or $v \in P$, so $P$ is a prime ideal. However, by construction, $x$ is in every prime ideal of $R$, so $x \in P$, contradicting the fact that $P \cap S = \emptyset$. Hence, $x$ is nilpotent, so $x \in \nil(R)$.
+    \end{enumerate}
+\end{proof}
