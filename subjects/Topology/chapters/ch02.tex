@@ -459,3 +459,32 @@ Recall that $\{A_{\alpha}\}_{\alpha \in \Lambda}$ is an open \eax{covering} of $
 \begin{proof}
     Note that for $x_{0} \in X$, $x_{0} \times Y$ is homeomorphic to $Y$, so it is compact. We need to show that if $N$ is an open set such that $x_{0} \times Y \subset N \subset X \times Y$, then there exists a neighbourhood $W$ of $x_{0}$ in $X$ such that $W \times Y \subseteq N$. Let $X \times Y = \bigcup_{\alpha} A_{\alpha}$ be an open covering of $X \times Y$. By compactness of $x_{0} \times Y$, there exists a finite subcovering $\bigcup_{i \in \Lambda_{x_{0}}} A_{\alpha_{i}}$ where $\Lambda_{x_{0}}$ is a finite index set. Then $x_{0} \times Y \subseteq W_{x_{0}} \times Y \subseteq \bigcup_{i \in \Lambda_{x_{0}}} A_{\alpha_{i}}$, where $W_{x_{0}} = \bigcap_{i \in \Lambda_{x_{0}}} \pi_{X}(A_{\alpha_{i}})$ is an open neighbourhood of $x_{0}$ in $X$. Now, for each $x \in X$, we can repeat this process to obtain an open neighbourhood $W_{x}$ of $x$ in $X$ such that $W_{x} \times Y$ is covered by a finite number of sets from the open covering. Then, $\{W_{x}\}_{x \in X}$ is an open covering of $X$, so by compactness of $X$, there exists a finite subcovering $\{W_{x_{j}}\}_{j=1}^{m}$. Thus, we have $X \times Y = \bigcup_{j=1}^{m} (W_{x_{j}} \times Y)$, and each $W_{x_{j}} \times Y$ is covered by a finite number of sets from the original open covering. Hence, $X \times Y$ has a finite subcovering, proving that it is compact.
 \end{proof}
+
+
+\textit{February 6th.}
+
+\begin{definition}
+    A collection $\cC$ of subsets of a topological space $X$ has the \eax{finite intersection property} if for every finite subcollection $\{C_{i}\}_{i=1}^{n} \subseteq \cC$, we have $\bigcap_{i=1}^{n} C_{i} \neq \emptyset$.
+\end{definition}
+
+\begin{theorem}
+    $X$ is compact if and only if every collection $\cC$ of closed subsets of $X$ with the finite intersection property satisfies $\bigcap_{C \in \cC} C \neq \emptyset$.
+\end{theorem}
+\begin{proof}
+    Suppose $X$ is compact. Let $\cC$ be a collection of closed subsets of $X$ with the finite intersection property but $\bigcap_{C \in \cC} C = \emptyset$. Then, $X = \bigcup_{C \in \cC} C^{c}$, so there exists a finite subcovering $\{C_{i}^{c}\}_{i=1}^{n}$ of $X$. This implies that $\bigcap_{i=1}^{n} C_{i} = \emptyset$, contradicting the finite intersection property. Hence, $\bigcap_{C \in \cC} C \neq \emptyset$. Conversely, assume that every collection $\cC$ of closed subsets of $X$ with the finite intersection property satisfies $\bigcap_{C \in \cC} C \neq \emptyset$, and let $\{U_{\alpha}\}_{\alpha \in \Lambda}$ be an open covering of $X$ with no finite subcovering. Then, $\{U_{\alpha}^{c}\}_{\alpha \in \Lambda}$ is a collection of closed subsets of $X$ with the finite intersection property, since for every finite subcollection $\{U_{\alpha_{i}}^{c}\}_{i=1}^{n}$, we have $\bigcap_{i=1}^{n} U_{\alpha_{i}}^{c} = \left(\bigcup_{i=1}^{n} U_{\alpha_{i}}\right)^{c} \neq \emptyset$ (if we did have $\bigcap_{i=1}^{n} U_{\alpha_{i}}^{c} = \emptyset$, then $\{U_{\alpha_{i}}\}_{i=1}^{n}$ would be a finite subcovering of $X$, contradicting our assumption). Thus, there exists some $x \in X$ such that $x \in \bigcap_{\alpha \in \Lambda} U_{\alpha}^{c}$, contradicting the fact that $\{U_{\alpha}\}_{\alpha \in \Lambda}$ is an open covering of $X$. Hence, every open covering of $X$ has a finite subcovering, proving that $X$ is compact.
+\end{proof}
+
+Recall that for a subset $A$ of a metric space $(X,d)$, the distance of $x \in X$ from $A$ is defined as $d_{A}(x) = \inf \{d(x,a) \mid a \in A\}$. The mapping $x \mapsto d_{A}(x)$ is continuous. We can also define the \eax{diameter} of $A$, when it is bounded, as $\diam(A) = \sup \{d(a,b) \mid a,b \in A\}$.
+
+\begin{lemma}[\eax{Lebesgue's number lemma}]
+    Let $\cA$ be an open convering of a compact metric space $(X,d)$. Then there exists some $\delta > 0$ such that every subset of $X$ with diameter less than $\delta$ is contained in some set $A \in \cA$.
+\end{lemma}
+Such a $\delta$ is called a \eax{Lebesgue number} of the covering $\cA$.
+\begin{proof}
+    Let $X = \bigcup_{i=1}^{k} A_{i}$, with $A_{i} \in \cA$ (assume that $A_{i} \neq X$, since it is trivial otherwise); this is possible since $\cA$ is an open covering and $X$ is compact. Define, for each $x$, $f(x) = \frac{1}{n} \sum_{i=1}^{n} d_{A_{i}^{c}}(x)$. Then, $f$ is continuous, and $f(x) > 0$ for all $x \in X$. Since $f:X \to (0,\infty)$ and $X$ is compact, $f(X)$ must be compact in $(0,\infty)$, so there exists some $\delta > 0$ such that $f(X) \subseteq [\delta, K]$. We claim that this $\delta$ is a Lebesgue number of $\cA$. Let $M$ be a subset of $X$ with $\diam(M) = \delta$. Take any $m \in M$. Then $M \subseteq B(m,\delta)$. Hence, we must show that $B(m,\delta) \subseteq A_{i}$ for some $i$. That is, we wish to show that $d_{A_{i}^{c}}(m) \geq \delta$ for some $i$. Suppose not. Then
+    \begin{align}
+        f(m) = \frac{1}{n} \sum_{i=1}^{n} d_{A_{i}^{c}}(m) < \frac{1}{n} \sum_{i=1}^{n} \delta = \delta,
+    \end{align}
+    which contradicts the fact that $f(X) \subseteq [\delta, K]$. Thus, there exists some $i$ such that $d_{A_{i}^{c}}(m) \geq \delta$, so $B(m,\delta) \subseteq A_{i}$, proving that $\delta$ is a Lebesgue number of $\cA$.
+\end{proof}
+
