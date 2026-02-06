@@ -1,4 +1,4 @@
-\chapter{INTRODUCTION TO RINGS}
+\chapter{RINGS}
 
 \textit{January 19th.}
 
@@ -511,3 +511,67 @@ The following are some properties of the Jacobson radical and nilradical.
         \item It is clear that $\nil(R) \subseteq \bigcap_{P \text{ prime}} P$ since maximal ideals are prime ideals. For the converse inclusion, let $x \in \bigcap_{P \text{ prime}} P$. We claim that $x$ is nilpotent. Suppose not. Then, the set $S = \{x^{n} : n \in \N\}$ does not contain $0$. Define the set $\Omega = \{I \subseteq R \mid I \text{ is an ideal and } I \cap S = \emptyset\}$. Inclusion $\subseteq$ is a partial order on $\Omega$. Let $\cC$ be a chain in $\Omega$ and let $I = \bigcup_{J \in \cC} J$. We claim that $I$ is an upper bound of $\cC$ in $\Omega$. It is an ideal since if $z,y \in I$, then $z \in J_{1}$ and $y \in J_{2}$ with $J_{1} \subseteq J_{2}$. Thus, $z,y \in J_{1} \cup J_{2}$, so $z + y \in J_{1} \cup J_{2} \subseteq I$. Also, for any $r \in R$ and $z \in I$, we have $z \in J$ for some $J \in \cC$, so $r \cdot z \in J \subseteq I$. Therefore, $I$ is an ideal. Moreover, if $J \cap S = \emptyset$ for all $J \in \cC$ tells us $I \cap S = \emptyset$. Hence, $I$ is a valid upper bound, and Zorn's lemma guarantess the existence of a maximal $P$ in $\Omega$. We further claim that $P$ is a prime ideal of $R$. Indeed, $P \subsetneq R$ since $P \cap S = \emptyset$. Let $uv \in P$ for some $u,v \in R$. If both $u,v \notin P$, then the ideals $(P,u)$ and $(P,v)$ properly contain $P$; that is, $au + y = x^{n}$ and $bv + z = x^{m}$ for some $a,b \in R$, $y,z \in P$, and $n,m \in \N$. Thus, $(au+y)(bv+z) = x^{n+m} \in S$, but $(au+y)(bv+z) = abuv + az + by + yz \in P$ since $uv \in P$ and $y,z \in P$. This contradicts the fact that $P \cap S = \emptyset$. Therefore, either $u \in P$ or $v \in P$, so $P$ is a prime ideal. However, by construction, $x$ is in every prime ideal of $R$, so $x \in P$, contradicting the fact that $P \cap S = \emptyset$. Hence, $x$ is nilpotent, so $x \in \nil(R)$.
     \end{enumerate}
 \end{proof}
+
+\noindent \textit{February 6th.}
+
+Let us look at some examples.
+
+\begin{example}
+    In $\Z$, $\nil(\Z) = \{0\}$ since the only nilpotent element is $0$. Also, $\Jac(\Z) = \{0\}$ since the intersection of all maximal ideals $(p)$ for prime $p$ is $\{0\}$. In the ring $\Z/6\Z$, the nilradical is $\{0\}$ even though it is not an integral domain. The Jacobson radical is $\{0\}$ as well since the maximal ideals are $(2)$ and $(3)$, whose intersection is $\{0\}$.
+\end{example}
+
+\begin{example}
+    For a non-trivial example, let us look at the ring $R = \Z/4\Z$. The nilradical of $R$ is $\{0, 2\}$ since $2^{2} = 0$ in $R$. The Jacobson radical of $R$ is also $\{0, 2\}$ since the only maximal ideal of $R$ is $(2)$. If we take $R = \Q[x,y]/(x^{2},y)$, then $\nil(R) = (x)$ since $x$ is nilpotent. The Jacobson radical of $R$ is also $(x)$.
+\end{example}
+
+
+\begin{example}
+    For an example where the Jacobson radical is strictly larger than the nilradical, consider the power series ring $R = \Q[[x]]$. If $f \in \Q[[x]]$, then $f$ is a unit if and only if the constant term of $f$ is non-zero; if $f = a_{0}(1-g)$ where $a_{0} \in \Q$ and $g \in (x)$, then $f^{-1} = a_{0}^{-1}(1-g)^{-1}$, where $(1-g)^{-1}$ is given by the geometric series expansion $(1-g)^{-1} = 1 + g + g^{2} + \cdots$. Thus, $\Jac(R) = (x)$ since $1 + ax$ is a unit for all $a \in R$. However, $\nil(R) = \{0\}$ since there are no non-zero nilpotent elements in $R$.
+\end{example}
+
+
+\section{Product of Rings}
+
+Let $R_{1},R_{2},\ldots,R_{n}$ be rings. We can define the \eax{product ring} $R_{1} \times R_{2} \times \cdots \times R_{n}$ as the set of all $n$-tuples $(r_{1}, r_{2}, \ldots, r_{n})$ where $r_{i} \in R_{i}$ for all $1 \leq i \leq n$, with addition and multiplication defined componentwise. It is easy to verify that $R_{1} \times R_{2} \times \cdots \times R_{n}$ is also a ring, and the unity is given by $(1_{R_{1}}, 1_{R_{2}}, \ldots, 1_{R_{n}})$. The \eax{projection map} $p_{i} : R_{1} \times R_{2} \times \cdots \times R_{n} \to R_{i}$ is defined by $p_{i}(r_{1}, r_{2}, \ldots, r_{n}) = r_{i}$ for all $1 \leq i \leq n$. It is, again, easy to verify that $p_{i}$ is a surjective ring homomorphism with kernel $R_{1} \times \cdots \times R_{i-1} \times \{0_{R_{i}}\} \times R_{i+1} \times \cdots \times R_{n}$. Conversely, the \eax{inclusion map} $e_{i} : R_{i} \to R_{1} \times R_{2} \times \cdots \times R_{n}$ is defined by $e_{i}(r) = (0_{R_{1}}, \ldots, 0_{R_{i-1}}, r, 0_{R_{i+1}}, \ldots, 0_{R_{n}})$ for all $r \in R_{i}$. It is easy to verify that $e_{i}$ is an injective ring homomorphism with image $\{0_{R_{1}}\} \times \cdots \times \{0_{R_{i-1}}\} \times R_{i} \times \{0_{R_{i+1}}\} \times \cdots \times \{0_{R_{n}}\}$.
+
+Regarding ideals, we have the following proposition.
+
+\begin{proposition}
+    Let $R_{1}, R_{2}, \ldots, R_{n}$ be rings. Then, every ideal of the product ring $R_{1} \times R_{2} \times \cdots \times R_{n}$ is of the form $I_{1} \times I_{2} \times \cdots \times I_{n}$ where $I_{i}$ is an ideal of $R_{i}$ for all $1 \leq i \leq n$.
+\end{proposition}
+\begin{proof}
+    Let $I$ be an ideal of $R_{1} \times R_{2} \times \cdots \times R_{n}$. For each $1 \leq i \leq n$, let $I_{i} = p_{i}(I)$. We claim that each $I_{i}$ is an ideal of $R_{i}$ and $I = I_{1} \times I_{2} \times \cdots \times I_{n}$. Let $x_{i},y_{i} \in I_{i}$ and $r_{i} \in R_{i}$. Then, there exist $x = (x_{1}, \ldots, x_{n}), y = (y_{1}, \ldots, y_{n}) \in I$ such that $p_{i}(x) = x_{i}$ and $p_{i}(y) = y_{i}$. Thus, $x + y \in I$ since $I$ is an ideal of the product ring, so $x_{i} + y_{i} = p_{i}(x+y) \in I_{i}$. Also, $r_{i} \cdot x_{i} = p_{i}(e_{i}(r_{i}) \cdot x) \in I_{i}$ since $e_{i}(r_{i}) \cdot x \in I$. Therefore, $I_{i}$ is an ideal of $R_{i}$.
+
+    Let use first show that $I \supseteq I_{1} \times I_{2} \times \cdots \times I_{n}$. Let $(a_{1}, a_{2}, \ldots, a_{n}) \in I_{1} \times I_{2} \times \cdots \times I_{n}$. Let $x^{(i)} \in I$ such that $p_{i}(x^{(i)}) = a_{i}$ for all $1 \leq i \leq n$. Then $e_{i}(1_{R_{i}}) \cdot x^{(i)} \in I$ since $I$ is an ideal of the product ring, and so $\sum_{i=1}^{n} e_{i}(1_{R_{i}}) \cdot x^{(i)} \in I$ as well. However, $\sum_{i=1}^{n} e_{i}(1_{R_{i}}) \cdot x^{(i)} = (a_{1}, a_{2}, \ldots, a_{n})$, so $(a_{1}, a_{2}, \ldots, a_{n}) \in I$. Therefore, $I \supseteq I_{1} \times I_{2} \times \cdots \times I_{n}$. For the converse inclusion $I \subseteq I_{1} \times I_{2} \times \cdots \times I_{n}$, let $(a_{1},a_{2}, \ldots, a_{n}) \in I$. Then, $a_{i} = p_{i}(a_{1}, a_{2}, \ldots, a_{n}) \in I_{i}$ for all $1 \leq i \leq n$. Thus, $(a_{1}, a_{2}, \ldots, a_{n}) \in I_{1} \times I_{2} \times \cdots \times I_{n}$. Therefore, $I = I_{1} \times I_{2} \times \cdots \times I_{n}$.
+\end{proof}
+
+We now wish to study the prime ideals of the product ring. 
+
+\begin{proposition}
+    Let $R_{1}, R_{2}, \ldots, R_{n}$ be rings. Then $I \subseteq R_{1} \times R_{2} \times \cdots \times R_{n}$ is a prime ideal if and only if $p_{i}(I) = R_{i}$ for all $1 \leq i \leq n$ except for one index $1 \leq k \leq n$ such that $p_{k}(I)$ is a prime ideal of $R_{k}$.
+\end{proposition}
+
+\begin{proof}
+    For the forward direction, let $I = I_{1} \times \cdots I_{n}$ (by the previous proposition), where $I_{i} = p_{i}(I)$ is an ideal of $R_{i}$. Note that $I$ is prime if and only if $(R_{1} \times \cdots \times R_{n})/I \cong R_{1}/I_{1} \times \cdots R_{n}/I_{n}$ is an integral domain. This implies that $R_{i}/I_{i}$ is an integral domain for one index $1 \leq k \leq n$ and $R_{i}/I_{i} \cong \{0\}$ for all $i \neq k$. It it were otherwise, we could find two indices $i \neq j$ such that $R_{i}/I_{i}$ and $R_{j}/I_{j}$ are both non-trivial, and $e_{i}(1_{R_{i}}) + I$ and $e_{j}(1_{R_{j}}) + I$ are two non-zero elements in $R_{1}/I_{1} \times \cdots R_{n}/I_{n}$ whose product is zero, contradicting the fact that $R_{1}/I_{1} \times \cdots R_{n}/I_{n}$ is an integral domain. Thus, $p_{i}(I) = I_{i} = R_{i}$ for all $i \neq k$, and $p_{k}(I) = I_{k}$ is a prime ideal of $R_{k}$.
+
+    Conversely, suppose that $p_{i}(I) = R_{i}$ for all $1 \leq i \leq n$ except for one index $1 \leq k \leq n$ such that $p_{k}(I)$ is a prime ideal of $R_{k}$. Then, $(R_{1} \times \cdots \times R_{n})/I \cong R_{1}/R_{1} \times \cdots R_{k}/p_{k}(I) \times \cdots R_{n}/R_{n} \cong R_{k}/p_{k}(I)$ is an integral domain since $p_{k}(I)$ is a prime ideal of $R_{k}$. Thus, $I$ is a prime ideal of the product ring.
+\end{proof}
+
+\subsection{Idempotents}
+
+\begin{definition}
+    Let $R$ be a ring. An element $x \in R$ is called an \eax{idempotent} if $x^{2} = x$.
+\end{definition}
+
+\begin{example}
+    Trivially, every ring has two idempotents, namely $0_{R}$ and $1_{R}$. If $R_{1}$ and $R_{2}$ are rings, then $(1,1),(0,0),(1,0),(0,1)$ are idempotents of the product ring $R_{1} \times R_{2}$.
+\end{example}
+
+\begin{proposition}
+    Let $R$ be a ring and $e \in R$ be an idempotent. Then $1-e$ is also an idempotent, and $R \cong eR \times (1-e)R$.
+\end{proposition}
+
+\begin{proof}
+    Note that $(1-e)e = e-e^{2} = 0$, and $(1-e)^{2} = (1-e)(1-e) = 1-e$. To show the isomorphism, let $\varphi : R \to eR \times (1-e)R$ be defined by $\varphi(r) = (er, (1-e)r)$ for all $r \in R$. It is easy to verify that $\varphi$ is a ring homomorphism. If we define $\psi : eR \times (1-e)R \to R$ by $\psi(x,y) = x + y$ for all $x \in eR$ and $y \in (1-e)R$, then $\psi$ is also a ring homomorphism. Moreover, $\psi \circ \varphi(r) = \psi(er, (1-e)r) = er + (1-e)r = r$ for all $r \in R$, and $\varphi \circ \psi(x,y) = \varphi(x+y) = (e(x+y), (1-e)(x+y)) = (x,y)$ for all $x \in eR$ and $y \in (1-e)R$. Thus, $\varphi$ is an isomorphism, so $R \cong eR \times (1-e)R$.
+\end{proof}
+
