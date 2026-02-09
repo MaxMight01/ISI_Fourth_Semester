@@ -575,3 +575,34 @@ We now wish to study the prime ideals of the product ring.
     Note that $(1-e)e = e-e^{2} = 0$, and $(1-e)^{2} = (1-e)(1-e) = 1-e$. To show the isomorphism, let $\varphi : R \to eR \times (1-e)R$ be defined by $\varphi(r) = (er, (1-e)r)$ for all $r \in R$. It is easy to verify that $\varphi$ is a ring homomorphism. If we define $\psi : eR \times (1-e)R \to R$ by $\psi(x,y) = x + y$ for all $x \in eR$ and $y \in (1-e)R$, then $\psi$ is also a ring homomorphism. Moreover, $\psi \circ \varphi(r) = \psi(er, (1-e)r) = er + (1-e)r = r$ for all $r \in R$, and $\varphi \circ \psi(x,y) = \varphi(x+y) = (e(x+y), (1-e)(x+y)) = (x,y)$ for all $x \in eR$ and $y \in (1-e)R$. Thus, $\varphi$ is an isomorphism, so $R \cong eR \times (1-e)R$.
 \end{proof}
 
+\noindent \textit{February 9th.}
+
+An interesting consequence is the chinese remainder theorem, which is abstracted from the original number-theoretic version. For the below theorem, we define the product of two ideals $I$ and $J$ of a ring $R$ as
+\begin{align}
+    IJ = \{a_{1}b_{1} + \cdots + a_{n}b_{n} \mid a_{i} \in I, b_{i} \in J, n \in \N\}.
+\end{align}
+One may verify that $IJ$ is an ideal of $R$. Moreover, $IJ \subseteq I \cap J$ since $a_{i}b_{i} \in I$ and $a_{i}b_{i} \in J$ for all $1 \leq i \leq n$. However, it is not necessarily the case that $IJ = I \cap J$. For example, if $R = \Z$ and $I = (2)$ and $J = (4)$, then $IJ = (8)$ but $I \cap J = (4)$. 
+
+\begin{theorem}[The \eax{chinese remainder theorem}]
+    Let $R$ be a ring, and $I_{1}, I_{2}, \ldots, I_{k}$ be ideals of $R$ which are pairwise co-maximal; that is, for all $1 \leq i \neq j \leq k$, we have $I_{i} + I_{j} = R$. Then $I_{1} \cap I_{2} \cap \cdots \cap I_{k} = I_{1} I_{2} \cdots I_{k}$. Moreover, the natural homomorphism $\varphi : R \to R/I_{1} \times R/I_{2} \times \cdots \times R/I_{k}$ defined by $\varphi(r) = (r + I_{1}, r + I_{2}, \ldots, r + I_{k})$ is surjective with kernel $I_{1} I_{2} \cdots I_{k}$, so
+    \begin{align}
+        R/(I_{1} I_{2} \cdots I_{k}) \cong R/I_{1} \times R/I_{2} \times \cdots \times R/I_{k}.
+    \end{align}
+\end{theorem}
+
+We first determine how this abstract version of the chinese remainder theorem implies the original number-theoretic version. Let $n_{1}, n_{2}, \ldots, n_{k}$ be pairwise coprime positive integers, and let $m = n_{1} n_{2} \cdots n_{k}$. Then, the ideals $(n_{1}), (n_{2}), \ldots, (n_{k})$ of $\Z$ are pairwise co-maximal since $(n_{i}) + (n_{j}) = (1)$ for all $1 \leq i \neq j \leq k$. Thus, by the chinese remainder theorem, we have
+\begin{align}
+    \Z \to \Z/n_{1}\Z \times \Z/n_{2}\Z \times \cdots \times \Z/n_{k}\Z, \quad x \mapsto (x + n_{1}\Z, x + n_{2}\Z, \ldots, x + n_{k}\Z)
+\end{align}
+is surjective with kernel $(m)$. That is, given any $(a_{1} + n_{1}\Z, a_{2} + n_{2}\Z, \ldots, a_{k} + n_{k}\Z) \in \Z/n_{1}\Z \times \Z/n_{2}\Z \times \cdots \times \Z/n_{k}\Z$, there exists some integer $x$ such that $x \equiv a_{i} \pmod{n_{i}}$ for all $1 \leq i \leq k$, and any two such integers are congruent modulo $m$. Moreover, we have the isomorphism
+\begin{align}
+    \Z/m\Z \cong \Z/n_{1}\Z \times \Z/n_{2}\Z \times \cdots \times \Z/n_{k}\Z.
+\end{align}
+
+\begin{proof}
+    We first show for $k = 2$. Let $I_{1}$ and $I_{2}$ be two ideals of $R$ such that $I_{1} + I_{2} = R$. Then, there exist $a \in I_{1}$ and $b \in I_{2}$ such that $a + b = 1$. We already know that $I_{1} I_{2} \subseteq I_{1} \cap I_{2}$, so we only need to show the converse inclusion. Let $x \in I_{1} \cap I_{2}$. Then, $x = x(a + b) = xa + xb \in I_{1} I_{2}$ since $xa \in I_{1} I_{2}$ and $xb \in I_{1} I_{2}$. Therefore, $I_{1} \cap I_{2} = I_{1} I_{2}$. We now wish to show the natural map $R \to R/I_{1} \times R/I_{2}$ defined by $r \mapsto (r + I_{1}, r + I_{2})$ is surjective with kernel $I_{1} I_{2}$. It is easy to verify that the map is a ring homomorphism. For surjectivity, since any element of $R/I_{1} \times R/I_{2}$ is of the form $(r_{1} + I_{1}, r_{2} + I_{2})$ for some $r_{1}, r_{2} \in R$, we only show that $(1+I_{1}, 0 + I_{2})$ and $(0 + I_{1}, 1 + I_{2})$ are in the image of the map. Since $a \in I_{1}$, we have $a + I_{1} = 0 + I_{1}$, so $\varphi(b) = (b + I_{1}, b + I_{2}) = (1 + I_{1}, 0 + I_{2})$. Similarly, since $b \in I_{2}$, we have $b + I_{2} = 0 + I_{2}$, so $\varphi(a) = (a + I_{1}, a + I_{2}) = (0 + I_{1}, 1 + I_{2})$. Therefore, the map is surjective. For the kernel, if $r \in R$ is such that $\varphi(r) = (r + I_{1}, r + I_{2}) = (0 + I_{1}, 0 + I_{2})$, then $r \in I_{1} \cap I_{2} = I_{1}I_{2}$. Conversely, if $r \in I_{1}I_{2}$, then $r \in I_{1} \cap I_{2}$, so $\varphi(r) = (0 + I_{1}, 0 + I_{2})$. Thus, the kernel of the map is $I_{1}I_{2}$. For arbitrary $k$, we claim that $I_{1}$ and $I_{2}\cdots I_{k}$ are co-maximal ideals. Since $I_{1}$ and $I_{j}$ are co-maximal for all $2 \leq j \leq k$, there exist $x_{j} \in I_{1}$ and $y_{j} \in I_{j}$ such that $x_{j} + y_{j} = 1$ for all $2 \leq j \leq k$. Then 
+    \begin{align}
+        (x_{2}+y_{2})(x_{3}+y_{3}) \cdots (x_{k}+y_{k}) = 1 \implies \alpha + y_{2}y_{3} \cdots y_{k} = 1
+    \end{align}
+    where $\alpha \in I_{1}$ since $x_{j} \in I_{1}$ for all $2 \leq j \leq k$, and $y_{2} \cdots y_{k} \in I_{2} \cdots I_{k}$. Thus, $I_{1}$ and $I_{2} \cdots I_{k}$ are co-maximal. Now induction can be applied on $k$ to show $I_{1} \cap I_{2} \cap \cdots \cap I_{k} = I_{1} \cap I_{2} \cdots I_{k} = I_{1} I_{2} \cdots I_{k}$. To show surjectivity of the natural map $R \to R/I_{1} \times R/I_{2} \times \cdots \times R/I_{k}$, we show $e_{j} \defeq (0 + I_{1}, \ldots, 0 + I_{j-1}, 1 + I_{j}, 0 + I_{j+1}, \ldots, 0 + I_{k})$ is in the image of the map for all $1 \leq j \leq k$. Since $I_{j}$ and $I_{1} \cdots I_{j-1} I_{j+1} \cdots I_{k}$ are co-maximal, there exist $x \in I_{j}$ and $y \in I_{1} \cdots I_{j-1} I_{j+1} \cdots I_{k}$ such that $x + y = 1$. Then $\varphi(y) = (y + I_{1}, y + I_{2}, \ldots, y + I_{k}) = e_{j}$ since $y \in I_{i}$ for all $i \neq j$ and $y + I_{j} = 1 + I_{j}$. Therefore, the natural map is surjective with kernel $I_{1}I_{2} \cdots I_{k}$, so we have the desired isomorphism $R/(I_{1} I_{2} \cdots I_{k}) \cong R/I_{1} \times R/I_{2} \times \cdots \times R/I_{k}$.
+\end{proof}
