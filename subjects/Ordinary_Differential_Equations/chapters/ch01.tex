@@ -615,4 +615,61 @@ where $A(x)$ is an $n \times n$ matrix whose entries are continuous functions of
 \end{align}
 Note that in the one dimensional case, that is, when $n=1$, we have $y' = A(x) \, y + Q(x)$. Suppose $y^{\ast}$ is a solution of this equation. Then, any other solution $y$ can be written as $y = y^{\ast} + z$ for some function $z$ that satisfies the homogeneous equation $z' = A(x) \, z$. Moreover, solutions of $z' = Az$ form a vector space over the real numbers of dimension $1$. Thus, a general solution looks like $y = y^{\ast} + \lambda z$ for some $\lambda \in \R$, where $z$ is a non-trivial solution of the homogeneous equation, and $y^{\ast}$ is a particular solution of the differential equation. We can lift this idea to the higher dimensions.
 
-Consider $\dot{Y} = A(x) \cdot Y + Q(x)$, as above. Suppose $Y^{\ast}$ is a particular solution of this equation. Then, any other solution $Y$ can be written as $Y = Y^{\ast} + Z$ for some function $Z$ that satisfies the homogeneous equation $\dot{Z} = A(x) \cdot Z$. Moreover, solutions of $\dot{Z} = A(x) \cdot Z$ form a vector space over the real numbers of dimension $n$. Thus, a general solution looks like $Y = Y^{\ast} + \sum_{i=1}^{n} \lambda_{i} Z_{i}$ for some $\lambda_{1}, \ldots, \lambda_{n} \in \R$, where $Z_{1}, \ldots, Z_{n}$ form a basis of the vector space of solutions of the homogeneous equation, and $Y^{\ast}$ is a particular solution of the differential equation. To show that the dimension of the vector space of solutions of the homogeneous equation is $n$, let $Z_{i}$ denote the solution such that $Z_{i}(x_{0}) = e_{i}$. Then given any other solution $Z$ such that $Z(x_{0}) = (\lambda_{1},\ldots,\lambda_{n})$, we have $Z = \sum_{i=1}^{n} \lambda_{i} Z_{i}$. Picard's theorem guarantees that this is the unique solution. Note that the functions $Z_{1}, \ldots, Z_{n}$ are linearly independent if and only if the vectors $Z_{1}(x_{0}),\ldots,Z_{n}(x_{0})$ are linearly independent if and only if for all $x \in I$, the vectors $Z_{1}(x),\ldots,Z_{n}(x)$ are linearly independent. 
+Consider $\dot{Y} = A(x) \cdot Y + Q(x)$, as above. Suppose $Y^{\ast}$ is a particular solution of this equation. Then, any other solution $Y$ can be written as $Y = Y^{\ast} + Z$ for some function $Z$ that satisfies the homogeneous equation $\dot{Z} = A(x) \cdot Z$. Moreover, solutions of $\dot{Z} = A(x) \cdot Z$ form a vector space over the real numbers of dimension $n$. Thus, a general solution looks like $Y = Y^{\ast} + \sum_{i=1}^{n} \lambda_{i} Z_{i}$ for some $\lambda_{1}, \ldots, \lambda_{n} \in \R$, where $Z_{1}, \ldots, Z_{n}$ form a basis of the vector space of solutions of the homogeneous equation, and $Y^{\ast}$ is a particular solution of the differential equation. To show that the dimension of the vector space of solutions of the homogeneous equation is $n$, let $Z_{i}$ denote the solution such that $Z_{i}(x_{0}) = e_{i}$. Then given any other solution $Z$ such that $Z(x_{0}) = (\lambda_{1},\ldots,\lambda_{n})$, we have $Z = \sum_{i=1}^{n} \lambda_{i} Z_{i}$. Picard's theorem guarantees that this is the unique solution. Note that the functions $Z_{1}, \ldots, Z_{n}$ are linearly independent if and only if the vectors $Z_{1}(x_{0}),\ldots,Z_{n}(x_{0})$ are linearly independent if and only if for all $x \in I$, the vectors $Z_{1}(x),\ldots,Z_{n}(x)$ are linearly independent.
+
+\subsection{Higher Order Linear Differential Equations}
+\textit{February 9th.}
+
+Given an equation of the form
+\begin{align}
+    y^{(n)} + a_{n-1}(x) y^{(n-1)} + \cdots + a_{1}(x) y' + a_{0}(x) y = q(x),
+\end{align}
+we wish to solve for $y:[x_{0}-h,x_{0}+h] \to \R$. Here, $a_{0},\ldots,a_{n-1},q$ are continuous functions on $[x_{0}-h,x_{0}+h]$. This is known as a \eax{higher order linear differential equation}. We can reduce this task to solving a system of first-order ODEs. To this end, define $z_{0} = y$, $z_{1} = y'$, $z_{2} = y''$, $\ldots$, $z_{n-1} = y^{(n-1)}$, $z_{n} = y^{(n)}$. $z_{n}$ may also be written as $q(x) - \sum_{i=0}^{n-1} a_{i}(x) z_{i}$. Then $Z = (z_{1},\ldots,z_{n})^{T}$ satisfies the system of first-order ODEs
+\begin{align}
+    \dot{Z} = A(x) \cdot Z + Q(x)
+\end{align}
+where $A$ is the $n \times n$ matrix
+\begin{align}
+    A(x) = \begin{pmatrix}
+        0 & 1 & 0 & \cdots & 0 \\
+        0 & 0 & 1 & \cdots & 0 \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        -a_{0}(x) & -a_{1}(x) & -a_{2}(x) & \cdots & -a_{n-1}(x)
+    \end{pmatrix}
+\end{align}
+and $Q(x) = (0,0,\ldots,0,q(x))^{T}$. Note that if $y$ solves the higher order linear differential equation, then $(y,y',y'',\cdots,y^{(n-1)})$ solves the system of linear ODEs, and if $Z$ solves the system of linear ODEs, then $z_{0}$ solves the higher order linear differential equation. Since the $a_{i}$'s and $q$ are continuous, there exists a unique solution $y$ such that $y(x_{0}) = b_{0}$, $y'(x_{0}) = b_{1}$, $\ldots$, $y^{(n-1)}(x_{0}) = b_{n-1}$ for any $b_{0},\ldots,b_{n-1} \in \R$. We claim that a general solution looks like
+\begin{align}
+    y = y^{\ast} + \lambda_{1} y_{1} + \cdots + \lambda_{n} y_{n}
+\end{align}
+where $y^{\ast}$ is a particular solution of the higher order linear differential equation, and $y_{1},\ldots,y_{n}$ are linearly independent solutions of the homogeneous equation. Any function of this form is a solution of the higher order linear differential equation, so we only need to show that any solution can be written in this form. Let $y$ be any solution. Then, $Z = (y,y',\ldots,y^{(n-1)})$ is a solution of the system of linear ODEs. Note that $Z = Z^{\ast} + \sum_{i=1}^{n} \lambda_{i} Z_{i}$ where $Z^{\ast}$ is a particular solution of the system of linear ODEs, and $Z_{1},\ldots,Z_{n}$ are linearly independent solutions of the homogeneous equation. Thus,
+\begin{align}
+    y = (z^{\ast})_{1} + \lambda_{1} (z_{1})_{1} + \cdots + \lambda_{n} (z_{n})_{1}
+\end{align}
+where $(z^{\ast})_{1}$ is the first component of $Z^{\ast}$, and $(z_{i})_{1}$ is the first component of $Z_{i}$. We are only left to show that $\{Z_{1},Z_{2},\ldots,Z_{n}\}$ are linearly independent if and only if $\{(z_{1})_{1},(z_{2})_{1},\ldots,(z_{n})_{1}\}$ are linearly independent. The forward direction is trivial. For the reverse direction, suppose $\{(z_{1})_{1},(z_{2})_{1},\ldots,(z_{n})_{1}\}$ are linearly independent, but $\{Z_{1},Z_{2},\ldots,Z_{n}\}$ are linearly dependent. Then, there exist some $\lambda_{1},\ldots,\lambda_{n} \in \R$, not all zero, such that $\sum_{i=1}^{n} \lambda_{i} Z_{i} = 0$. In particular, the first component of this equation gives $\sum_{i=1}^{n} \lambda_{i} (z_{i})_{1} = 0$, which is a contradiction.\\
+
+From here, we define the \eax{Wronskian} of $y_{1},\ldots,y_{n}$ as
+\begin{align}
+    W_{(y_{1},\ldots,y_{n})}(x) = \det\begin{pmatrix}
+        y_{1} & y_{2} & \cdots & y_{n} \\
+        y_{1}' & y_{2}' & \cdots & y_{n}' \\
+        \vdots & \vdots & \ddots & \vdots \\
+        y_{1}^{(n-1)} & y_{2}^{(n-1)} & \cdots & y_{n}^{(n-1)}
+    \end{pmatrix}
+\end{align}
+and we claim that if $\{y_{1},\ldots,y_{n}\}$ are solutions, then the following are equivalent:
+\begin{itemize}
+    \item $\{y_{1},\ldots,y_{n}\}$ are linearly independent as functions on $[x_{0}-h,x_{0}+h]$;
+    \item $W_{(y_{1},\ldots,y_{n})}(x) \neq 0$ for all $x \in [x_{0}-h,x_{0}+h]$;
+    \item $W_{(y_{1},\ldots,y_{n})}(x_{0}) \neq 0$ for some $x_{0} \in [x_{0}-h,x_{0}+h]$.
+\end{itemize}
+Let us focus on solving $y^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_{1}y'+a_{0}y=0$ where the $a_{i}$'s are constants. The characteristic polynomial is defined as $p(t) = t^{n} + a_{n-1} t^{n-1} + \cdots + a_{1} t + a_{0}$. Then if $\alpha \in \C$ is a zero of $P$, then $e^{\alpha x}$ olves this; indeed, \begin{align}
+    (e^{\alpha x})^{(n)} + a_{n-1} (e^{\alpha x})^{(n-1)} + \cdots + a_{1} (e^{\alpha x})' + a_{0} e^{\alpha x} = e^{\alpha x} (\alpha^{n} + a_{n-1} \alpha^{n-1} + \cdots + a_{1} \alpha + a_{0}) = 0.
+\end{align}
+Let us suppose all the zeroes of $P$ are real and distinct, say, $\alpha_{1},\ldots,\alpha_{n}$. Then, $e^{\alpha_{1} x},\ldots,e^{\alpha_{n} x}$ are linearly independent solutions of the homogeneous equation, and thus a general solution looks like $y = \lambda_{1} e^{\alpha_{1} x} + \cdots + \lambda_{n} e^{\alpha_{n} x}$ for some $\lambda_{1},\ldots,\lambda_{n} \in \R$. We can also handle the case when $P$ has repeated roots, say $\alpha_{1},\ldots,\alpha_{m}$ each with multiplicity $k_{1},\ldots,k_{m}$, respectively. Then, $e^{\alpha_{1} x}, x e^{\alpha_{1} x}, \ldots, x^{k_{1}-1} e^{\alpha_{1} x}, e^{\alpha_{2} x}, x e^{\alpha_{2} x}, \ldots,$ $ x^{k_{2}-1} e^{\alpha_{2} x}, \ldots, e^{\alpha_{m} x}, x e^{\alpha_{m} x}, \ldots, x^{k_{m}-1} e^{\alpha_{m} x}$ are linearly independent solutions of the homogeneous equation, and thus a general solution looks like
+\begin{align}
+    y = \sum_{i=1}^{m} \sum_{j=0}^{k_{i}-1} \lambda_{ij} x^{j} e^{\alpha_{i} x}.
+\end{align}
+Finally, if $P$ has complex roots, say $\alpha_{1} \in \C\setminus\R$ then $\bar{\alpha}_{1}$ is also a root. Thus, $(e^{\alpha_{1}x}+e^{\bar{\alpha}_{1}x})/2$ and $(e^{\alpha_{1}x}-e^{\bar{\alpha}_{1}x})/(2i)$ are linearly independent solutions of the homogeneous equation; we can rewrite them as $e^{ax} \cos bx$ and $e^{ax} \sin bx$ (both can be thought of as `basis' for the functions they span). Hence, if $\alpha = a+ib$ has multiplicity $k$, then $e^{ax} \cos bx, x e^{ax} \cos bx, \ldots, x^{k-1} e^{ax} \cos bx, e^{ax} \sin bx, x e^{ax} \sin bx, \ldots, x^{k-1} e^{ax} \sin bx$ are linearly independent solutions of the homogeneous equation. Thus, if $P$ has complex roots $\alpha_{1},\ldots,\alpha_{m}$ with multiplicities $k_{1},\ldots,k_{m}$, respectively, then a general solution looks like
+\begin{align}
+    y = \sum_{i=1}^{m} \sum_{j=0}^{k_{i}-1} \lambda_{ij} x^{j} e^{a_{i} x} \cos b_{i} x + \sum_{i=1}^{m} \sum_{j=0}^{k_{i}-1} \mu_{ij} x^{j} e^{a_{i} x} \sin b_{i} x.
+\end{align}
