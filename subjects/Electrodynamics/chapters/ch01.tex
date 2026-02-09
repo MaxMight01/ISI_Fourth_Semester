@@ -585,7 +585,88 @@ Multiplying both sides by $\sin \frac{m \pi}{a} y$ and integrating from $0$ to $
         0, & m \text{ even}.
 \end{cases}
 \end{align}
+
+
+\noindent \textit{February 9th.}
+
 Consider another example of an infinitely long rectangular pipe with sides $a,b$ grounded but one end maintained at a potential $V_{0}(y,z)$. Here the boundary conditions are 
 \begin{align}
-    V(x,0,z) = V(x,a,z) = V(z,y,0) = V(x,y,b) = 0, \quad V(0,y,z) = V_{0}(y,z), \quad V(x,y,z) \to 0 \text{ as } x \to \infty.
+    V(x,0,z) = V(x,a,z) = V(x,y,0) = V(x,y,b) = 0, \quad V(0,y,z) = V_{0}(y,z), \quad V(x,y,z) \to 0 \text{ as } x \to \infty.
+\end{align}
+Via separation of variables $V(x,y,z) = X(x) Y(y) Z(z)$, the general solution turns out to be
+\begin{align}
+    V(x,y,z) = \sum_{n,m} C_{n,m} e^{-\pi\sqrt{(n/a)^{2}+(m/b)^{2}} x} \sin \frac{n \pi}{a} y \sin \frac{m \pi}{b} z
+\end{align}
+We are left with the task of determining the coefficients $C_{n,m}$. Plugging in $x = 0$ gives
+\begin{align}
+    V_{0}(y,z) = \sum_{n,m} C_{n,m} \sin \frac{n \pi}{a} y \sin \frac{m \pi}{b} z.
+\end{align}
+Multiplying both sides by $\sin \frac{n' \pi}{a} y \sin \frac{m' \pi}{b} z$ and integrating from $0$ to $a$ and from $0$ to $b$, we have
+\begin{align}
+    C_{n',m'} = \frac{4}{ab} \int_{0}^{a} \int_{0}^{b} V_{0}(y,z) \sin \frac{n' \pi}{a} y \sin \frac{m' \pi}{b} z \; \di{y} \, \di{z}.
+\end{align}
+
+
+\subsection{Solving the Laplace Equation in Spherical Coordinates}
+We now look at problems dealing with spherical symmetry, rather than cartesian coordinates. The equation $\nabla^{2} V = 0$ in spherical coordinates is given by
+\begin{align}
+    \frac{1}{r^{2}} \frac{\partial}{\partial r} \left( r^{2} \frac{\partial V}{\partial r} \right) + \frac{1}{r^{2} \sin \theta} \frac{\partial}{\partial \theta}\left( \sin \theta \frac{\partial V}{\partial \theta} \right) + \frac{1}{r^{2} \sin^{2} \theta} \frac{\partial^{2} V}{\partial \phi^{2}} = 0.
+\end{align}
+Assuming azimuthal symmetry and separating variables $V(r,\theta) = R(r) \Theta(\theta)$, we have
+\begin{align}
+    \frac{1}{R} \frac{\di}{\di r} \left( r^{2} \frac{\di V}{\di r} \right) + \frac{1}{\Theta \sin \theta} \frac{\di}{\di \theta} \left( \sin \theta \frac{\di V}{\di \theta} \right) = 0.
+\end{align}
+The first term depends only on $r$, and the second term depends only on $\theta$. Thus, both terms must be equal to a constant, say $l(l+1)$. Thus, we have two ordinary differential equations
+\begin{align}
+    \frac{1}{R} \frac{\di}{\di r} \left( r^{2} \frac{\di V}{\di r} \right) = l(l+1), \quad \text{and} \quad \frac{1}{\Theta \sin \theta} \frac{\di}{\di \theta} \left( \sin \theta \frac{\di V}{\di \theta} \right) = -l(l+1).
+\end{align}
+The first of these has two linearly independent solutions $r^{l}$ and $1/r^{l+1}$; the general solution for $R$ is thus
+\begin{align}
+    R(r) = A r^{l} + \frac{B}{r^{l+1}}.
+\end{align}
+For the second equation, we can make the substitution $x = \cos \theta$, giving
+\begin{align}
+    (1-x^{2}) \frac{\di^{2} \Theta}{\di x^{2}} - 2x \frac{\di \Theta}{\di x} + l(l+1) \Theta = 0
+\end{align}
+which is known as the Legendre equation, with solution given by $P_{l}(x)$ and $Q_{l}(x)$, the Legendre functions of the first and second kind respectively. The second solution blows up at $x = \pm 1$ at $\theta = 0$ and $\theta = \pi$, so we discard it. If we require $l$ to be an integer, then $P_{l}(x)$ is a polynomial of degree $l$, known as the Legendre polynomial. For example, $P_{0}(x) = 1$, $P_{1}(x) = x$, $P_{2}(x) = \frac{1}{2} (3x^{2} - 1)$, and so on. Rodrigues' formula gives a general expression for $P_{l}(x)$ as
+\begin{align}
+    P_{l}(x) = \frac{1}{2^{l} l!} \frac{\di^{l}}{\di x^{l}} (x^{2} - 1)^{l}.
+\end{align}
+If we impose the boundary condition that $V \to 0$ as $r \to \infty$, then we must have $A = 0$. Thus, the general solution to Laplace's equation in spherical coordinates with azimuthal symmetry is given by
+\begin{align}
+    V(r,\theta) = \sum_{l=0}^{\infty} \left( A_{l} r^{l} + \frac{B_{l}}{r^{l+1}} \right) P_{l}(\cos \theta).
+\end{align}
+For example, consider when $V(\theta)$ is specified on the surface of a hollow sphere of radius $R$. We fish to find $V$ inside. Since $V$ must be finite at the origin, we must have $B_{l} = 0$ for all $l$. Thus, the solution is given by
+\begin{align}
+    V(r,\theta) = \sum_{l=0}^{\infty} A_{l} r^{l} P_{l}(\cos \theta).
+\end{align}
+Note that the Legendre polynomials are orthogonal with respect to the inner product $\int_{-1}^{1} P_{l}(x) P_{l'}(x) \; \di{x} = \frac{2}{2l+1} \delta_{l,l'}$. Thus we can determine the coefficients $A_{l}$ by multiplying both sides by $P_{l'}(\cos \theta)$ and integrating from $\theta = 0$ to $\theta = \pi$, giving
+\begin{align}
+    A_{l} = \frac{2l+1}{2 R^{l}} \int_{0}^{\pi} V_{0}(\theta) P_{l}(\cos \theta) \sin \theta \; \di{\theta}.
+\end{align}
+If we further specify $V_{0}(\theta) = k \sin^{2} \frac{\theta}{2} = \frac{k}{2} (1 - \cos \theta) = \frac{k}{2} (P_{0}(\cos \theta) - P_{1}(\cos \theta))$, then we have 
+\begin{align}
+    A_{l} = \frac{k(2l+1)}{4 R^{l}} \int_{0}^{\pi} (P_{0}(\cos \theta) - P_{1}(\cos \theta)) P_{l}(\cos \theta) \sin \theta \; \di{\theta} = \begin{cases}
+        \frac{k}{2}, & l = 0, \\
+        -\frac{k}{2R}, & l = 1, \\
+        0, & l \geq 2.
+    \end{cases}
+\end{align}
+Finally, the solution comes out to be
+\begin{align}
+    V(r,\theta) = \frac{k}{2} - \frac{k r}{2 R} \cos \theta.
+\end{align}
+If we change the problem to finding $V(r,\theta)$ for $r \geq R$, then finiteness at infinity implies that $A_{l} = 0$ for all $l$, giving
+\begin{align}
+    V(r,\theta) = \sum_{l=0}^{\infty} \frac{B_{l}}{r^{l+1}} P_{l}(\cos \theta).
+\end{align}
+Everything else proceeds similarly.
+
+Consider an uncharged metal sphere placed in an otherwise uniform electric field $\bv{E} = E_{0} \hat{\bv{z}}$. The sphere has to be an equipotential surface, so we set $V = 0$ on the surface of the sphere. Boundary conditions are $V = 0$ at $r = R$, $V = -E_{0} z$ for $r \gg R$. We had obtained the general solution to Laplace's equation in spherical coordinates with azimuthal symmetry as $V(r,\theta) = \sum_{l} (A_{l} r^{l} + B_{l}/r^{l+1}) P_{l}(\cos \theta)$. The first boundary condition implies that $A_{l} R^{l} + B_{l}/R^{l+1} = 0$ for all $l$, giving $B_{l} = - A_{l} R^{2l+1}$. Thus,
+\begin{align}
+    V(r,\theta) = \sum_{l=0}^{\infty} A_{l} \left( r^{l} - \frac{R^{2l+1}}{r^{l+1}} \right) P_{l}(\cos \theta), \quad -E_{0} r \cos \theta = \sum_{l=0}^{\infty} A_{l} r^{l} P_{l}(\cos \theta) \text{ for } r \gg R.
+\end{align}
+Since $P_{1}(\cos \theta) = \cos \theta$, we have $A_{1} = -E_{0}$, and $A_{l} = 0$ for $l \neq 1$. Thus, the potential is given by
+\begin{align}
+    V(r,\theta) = -E_{0} \left( r - \frac{R^{3}}{r^{2}} \right) \cos \theta.
 \end{align}
