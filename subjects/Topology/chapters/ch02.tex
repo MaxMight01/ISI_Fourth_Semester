@@ -488,3 +488,68 @@ Such a $\delta$ is called a \eax{Lebesgue number} of the covering $\cA$.
     which contradicts the fact that $f(X) \subseteq [\delta, K]$. Thus, there exists some $i$ such that $d_{A_{i}^{c}}(m) \geq \delta$, so $B(m,\delta) \subseteq A_{i}$, proving that $\delta$ is a Lebesgue number of $\cA$.
 \end{proof}
 
+\textit{February 10th.}
+
+\begin{theorem}
+    Suppose $X$ is a non-empty and compact Hausdorff space. If $X$ has no isolated points, then $X$ is uncountable.
+\end{theorem}
+\begin{proof}
+    Assume $X$ is as such and countable. Then, we can write $X = \{x_{1},x_{2},\ldots\}$. Note that $X$ cannot be finite. Start with $x_{1}$. Since $X$ has no isolated points, there must exist some $y \neq x_{1}$. Via the Hausdorff property, there exist disjoint open neighbourhoods $U_{1}$ of $x_{1}$ and $V_{1}$ of $y$. Moreover, $x_{i} \notin \bar{U}_{1}$, since if it were so, it would contradict the fact that $U_{1}$ and $V_{1}$ are disjoint. We now claim that there exists an open $U_{2} \subseteq U_{1}$ such that $x_{2} \notin \bar{U}_{2}$. Let $x_{2} \neq y \in U_{1}$. Then, there exist disjoint open neighbourhoods $W_{2}$ of $y$ and $W_{1}$ of $x_{2}$. Now $U_{2} = U_{1} \cap W_{2}$ is open. Moreover, $x_{2} \notin \bar{U}_{2}$, since if it were so, it would contradict the fact that $W_{1}$ and $W_{2}$ are disjoint. We can repeat this process to obtain a sequence of nested open sets $U_{1} \supseteq U_{2} \supseteq \ldots$ such that for each $n \geq 1$, we have $x_{n} \notin \bar{U}_{n}$. Rewriting, we have a sequence of nested closed sets $\bar{U}_{1} \supseteq \bar{U}_{2} \supseteq \ldots$. Also note that any finite intersection of these sets is non-empty, since $\bar{U}_{n} \supseteq \bar{U}_{m}$ for all $n < m$, and the space $X$ is compact. Thus, by the finite intersection property, we have $\bigcap_{n=1}^{\infty} \bar{U}_{n} \neq \emptyset$. Let $x \in \bigcap_{n=1}^{\infty} \bar{U}_{n}$. Then, $x \neq x_{n}$ for all $n$, since if $x = x_{n}$ for some $n$, then $x \in \bar{U}_{n}$, contradicting the fact that $x_{n} \notin \bar{U}_{n}$. This contradicts the fact that $X = \{x_{1}, x_{2}, \ldots\}$, so $X$ must be uncountable.
+\end{proof}
+
+A similar problem is to show that if $X$ is a non-empty compact Hausdorff space, and $\{A_{n}\}$ is a collection of closed sets in $X$ such that $\Int A_{n} = \emptyset$ for all $n$, then $\bigcup_{n=1}^{\infty} A_{n} \neq X$. This can be shown by a similar argument to the above proof, where we construct a sequence of nested open sets $U_{1} \supseteq U_{2} \supseteq \ldots$ such that for each $n \geq 1$, we have $A_{n} \cap \bar{U}_{n} = \emptyset$. We can then use the finite intersection property to obtain some $x \in \bigcap_{n=1}^{\infty} \bar{U}_{n}$, and show that $x$ cannot be contained in any of the sets $A_{n}$, contradicting the fact that $\bigcup_{n=1}^{\infty} A_{n} = X$. This is also known as the \eax{Baire category theorem}.
+
+
+\subsection{Sequential Compactness}
+\begin{definition}
+    A topological space $X$ is \eax{sequentially compact} if every sequence in $X$ has a convergent subsequence.
+\end{definition}
+
+For example, $[a,b] \subseteq \R$ is sequentially compact for all $a < b \in \R$, since every sequence in $[a,b]$ has a subsequence that converges to some point in $[a,b]$ via the Bolzano-Weierstrass theorem. 
+
+\begin{theorem}
+    Let $(X,d)$ be a metric space. Then, $X$ is compact if and only if $X$ is sequentially compact.
+\end{theorem}
+
+\begin{proof}[Proof of ($\Rightarrow$)]
+    Suppose $X$ is compact. Let $\{x_{n}\}$ be a sequence in $X$. We wish to show that $\{x_{n}\}$ has a convergent subsequence. If $\{x_{n}\}$ has only finitely many distinct terms, then there exists some $x \in X$ such that $x_{n} = x$ for infinitely many $n$, so the constant subsequence $x,x,x,\ldots$ converges to $x$. Otherwise, $\{x_{n}\}$ has infinitely many distinct terms; assume that $\{x_{n}\}$ as a set has no limit point, since if it did, we would be done. Thus, $A = \{x_{n}\}_{n \geq 1}$ is closed in $X$. Since $X$ is compact, $A$ is also compact. Thus, there exist open sets $\{U_{x}\}_{x \in A}$ such that $U_{x} \cap A = \{x\}$ for all $x \in A$. Then, $\{U_{x}\}_{x \in A}$ is an open covering of $A$. In particular, $X \subseteq \bigcup_{x \in A} U_{x} \cup (X \setminus A)$, so there exists a finite subcovering $\{U_{x_{i}}\}_{i=1}^{k} \cup (X \setminus A)$. Since $A$ is not covered by $X \setminus A$, we have that $\{U_{x_{i}}\}_{i=1}^{k}$ is a finite subcovering of $A$. But since $A$ is infinite, there exists some $x_{n}$ such that $x_{n} \in U_{x_{i}}$ for some $i$, contradicting the fact that $U_{x_{i}} \cap A = \{x_{i}\}$. Hence, $\{x_{n}\}$ must have a limit point, so there exists a subsequence of $\{x_{n}\}$ that converges to this limit point. Thus, $X$ is sequentially compact. 
+\end{proof}
+
+For the converse, we will show it via a few lemmas.
+
+\begin{lemma}
+    Let $X$ be a sequentially compact topological space. Then Lebegue's number lemma holds for $X$.
+\end{lemma}
+\begin{proof}
+    Let $\cA$ be an open covering of $X$. Suppose there is no Lebesgue number of $\cA$. Then, for every $n \in \N$, there exists some subset $D_{n}$ of $X$ such that $\diam(M_{n}) < \frac{1}{n}$, but $D_{n}$ is not contained in any set in $\cA$. We may assume $D_{n} = B(x_{n},1/2n)$ for some $x_{n} \in X$. Since $X$ is sequentially compact, there exists a subsequence $\{x_{n_{k}}\}$ of $\{x_{n}\}$ that converges to some point $x \in X$. Then, $x \in A$ for some $A \in \cA$, since $\cA$ is an open covering of $X$. Thus, there exists some $\varepsilon > 0$ such that $B(x,\varepsilon) \subseteq A$. However, there exists some $N \in \N$ such that for all $k \geq N$, we have $\frac{1}{2n_{k}} < \varepsilon$, so $D_{n_{k}} = B(x_{n_{k}},1/2n_{k}) \subseteq B(x,\varepsilon) \subseteq A$, contradicting the fact that $D_{n}$ is not contained in any set in $\cA$ for all $n$. Hence, there exists a Lebesgue number of $\cA$.
+\end{proof}
+
+\begin{lemma}
+    Let $(X,d)$ be a sequentially compact metric space. Then, for all $\varepsilon > 0$, the open cover $\{B(x,\varepsilon) \mid x \in X\}$ has a finite subcover.
+\end{lemma}
+\begin{proof}
+    Let $\varepsilon > 0$ be arbitrary. Suppose there is no finite subcover of $\{B(x,\varepsilon) \mid x \in X\}$. Then, for every $n \in \N$, there exists some $x_{n} \in X$ such that $x_{n} \notin \bigcup_{i=1}^{n-1} B(x_{i},\varepsilon)$. Since $X$ is sequentially compact, there exists a subsequence $\{x_{n_{k}}\}$ of $\{x_{n}\}$ that converges to some point $x \in X$. Then, there exists some $N \in \N$ such that for all $k \geq N$, we have $d(x,x_{n_{k}}) < \varepsilon$, so $x_{n_{k}} \in B(x,\varepsilon)$ for all $k \geq N$. However, since $\{x_{n}\}$ is a sequence of distinct points and $x_{n} \notin \bigcup_{i=1}^{n-1} B(x_{i},\varepsilon)$ for all $n$, we have that $x_{n_{k}} \notin \bigcup_{i=1}^{N-1} B(x_{i},\varepsilon)$ for all $k \geq N$, contradicting the fact that $x_{n_{k}} \in B(x,\varepsilon)$ for all $k \geq N$. Hence, there exists a finite subcover of $\{B(x,\varepsilon) \mid x \in X\}$.
+\end{proof}
+
+
+We may prove the converse now.
+\begin{proof}[Proof of ($\Leftarrow$)]
+    Suppose $X$ is sequentially compact. Let $\cA$ be an open covering of $X$. By Lebesgue's number lemma, there exists some $\delta > 0$ such that every subset of $X$ with diameter less than $\delta$ is contained in some set in $\cA$. By the previous lemma, there exists a finite subcover $\{B(x_{i},\delta/2)\}_{i=1}^{n}$ of $\{B(x,\delta/2) \mid x \in X\}$. Since each $B(x_{i},\delta/2)$ is contained in some set in $\cA$, we have that $\cA$ has a finite subcovering. Thus, $X$ is compact.
+\end{proof}
+
+\subsection{Local Compactness}
+
+\begin{definition}
+    A space $X$ is called locally compact at $x \in X$, if there exists an open $U$ and compact $K$ such that $x \in U \subseteq K$. The space $X$ is \eax{locally compact} if it is locally compact at every point $x \in X$.
+\end{definition}
+
+Note that if $X$ is compact, then $X$ is locally compact, since we can take $U = K = X$.
+
+\begin{theorem}
+    $X$ is locally compact and Hausdorff if and only if there exists a topological space $Y$ with $X \subseteq Y$ such that $Y \setminus X$ consists of a single point, and $Y$ is compact and Hausdorff.
+\end{theorem}
+\begin{proof}
+    Define $Y = X \cup \{\infty\}$, where $\infty$ is a symbol not in $X$. Let the topology on $Y$ be defined as follows: the open sets of $Y$ are exactly the open sets of $X$, together with the sets of the form $\{\infty\} \cup (X \setminus K)$ where $K$ is a compact subset of $X$. Let the open sets of the $X$ be of `type 1', and the sets of the form $\{\infty\} \cup (X \setminus K)$ be of `type 2'. The reader may verify that this is a valid topology on $Y$. We further claim that $Y$ is compact and Hausdorff. We first show Hausdorff; if $x,y \in X \subseteq Y$, then Hausdorffness of $X$ works. So, let $x \in X$ and $y = \infty$. Since $X$ is locally compact at $x$, there exists an open $U$ and compact $K$ such that $x \in U \subseteq K$. Then, $U$ and $\{\infty\} \cup (X \setminus K)$ are disjoint open neighbourhoods of $x$ and $\infty$, respectively. Thus, $Y$ is Hausdorff.
+
+    Now, we show compactness. Let $Y \subseteq \bigcup_{\alpha \in \Lambda_{1}} A_{\alpha}^{(1)} \cup \bigcup_{\alpha \in \Lambda_{2}} A_{\alpha}^{(2)}$ be an open covering of $Y$, where $A_{\alpha}^{(1)}$ are the type 1 open sets and $A_{\alpha}^{(2)}$ are the type 2 open sets. Since $\infty \in Y$, there exists some $\alpha_{0} \in \Lambda_{2}$ such that $\infty \in A_{\alpha_{0}}^{(2)}$. Then, $A_{\alpha_{0}}^{(2)} = \{\infty\} \cup (X \setminus K)$ for some compact $K$. Thus, $K$ is covered by $\{A_{\alpha}^{(1)}\}_{\alpha \in \Lambda_{1}}$, so there exists a finite subcovering $\{A_{\alpha_{i}}^{(1)}\}_{i=1}^{n}$ of $K$. Now, we have $Y = A_{\alpha_{0}}^{(2)} \cup \bigcup_{i=1}^{n} A_{\alpha_{i}}^{(1)}$, so there exists a finite subcovering of $Y$. Hence, $Y$ is compact.
+\end{proof}
