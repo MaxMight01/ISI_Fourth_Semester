@@ -665,7 +665,7 @@ and we claim that if $\{y_{1},\ldots,y_{n}\}$ are solutions, then the following 
 Let us focus on solving $y^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_{1}y'+a_{0}y=0$ where the $a_{i}$'s are constants. The characteristic polynomial is defined as $p(t) = t^{n} + a_{n-1} t^{n-1} + \cdots + a_{1} t + a_{0}$. Then if $\alpha \in \C$ is a zero of $P$, then $e^{\alpha x}$ olves this; indeed, \begin{align}
     (e^{\alpha x})^{(n)} + a_{n-1} (e^{\alpha x})^{(n-1)} + \cdots + a_{1} (e^{\alpha x})' + a_{0} e^{\alpha x} = e^{\alpha x} (\alpha^{n} + a_{n-1} \alpha^{n-1} + \cdots + a_{1} \alpha + a_{0}) = 0.
 \end{align}
-Let us suppose all the zeroes of $P$ are real and distinct, say, $\alpha_{1},\ldots,\alpha_{n}$. Then, $e^{\alpha_{1} x},\ldots,e^{\alpha_{n} x}$ are linearly independent solutions of the homogeneous equation, and thus a general solution looks like $y = \lambda_{1} e^{\alpha_{1} x} + \cdots + \lambda_{n} e^{\alpha_{n} x}$ for some $\lambda_{1},\ldots,\lambda_{n} \in \R$. We can also handle the case when $P$ has repeated roots, say $\alpha_{1},\ldots,\alpha_{m}$ each with multiplicity $k_{1},\ldots,k_{m}$, respectively. Then, $e^{\alpha_{1} x}, x e^{\alpha_{1} x}, \ldots, x^{k_{1}-1} e^{\alpha_{1} x}, e^{\alpha_{2} x}, x e^{\alpha_{2} x}, \ldots,$ $ x^{k_{2}-1} e^{\alpha_{2} x}, \ldots, e^{\alpha_{m} x}, x e^{\alpha_{m} x}, \ldots, x^{k_{m}-1} e^{\alpha_{m} x}$ are linearly independent solutions of the homogeneous equation, and thus a general solution looks like
+Let us suppose all the zeroes of $P$ are real and distinct, say, $\alpha_{1},\ldots,\alpha_{n}$. Then, $e^{\alpha_{1} x},\ldots,e^{\alpha_{n} x}$ are linearly independent solutions of the homogeneous equation, and thus a general solution looks like $y = \lambda_{1} e^{\alpha_{1} x} + \cdots + \lambda_{n} e^{\alpha_{n} x}$ for some $\lambda_{1},\ldots,\lambda_{n} \in \R$. We can also handle the case when $P$ has repeated roots, say $\alpha_{1},\ldots,\alpha_{m}$ each with multiplicity $k_{1},\ldots,k_{m}$, respectively. Then, $e^{\alpha_{1} x}$, $x e^{\alpha_{1} x}$, $\ldots$, $x^{k_{1}-1} e^{\alpha_{1} x}$, $e^{\alpha_{2} x}$, $x e^{\alpha_{2} x}$, $\ldots$, $x^{k_{2}-1} e^{\alpha_{2} x}$, $\ldots$, $e^{\alpha_{m} x}$, $x e^{\alpha_{m} x}$, $\ldots$, $x^{k_{m}-1} e^{\alpha_{m} x}$ are linearly independent solutions of the homogeneous equation, and thus a general solution looks like
 \begin{align}
     y = \sum_{i=1}^{m} \sum_{j=0}^{k_{i}-1} \lambda_{ij} x^{j} e^{\alpha_{i} x}.
 \end{align}
@@ -673,3 +673,67 @@ Finally, if $P$ has complex roots, say $\alpha_{1} \in \C\setminus\R$ then $\bar
 \begin{align}
     y = \sum_{i=1}^{m} \sum_{j=0}^{k_{i}-1} \lambda_{ij} x^{j} e^{a_{i} x} \cos b_{i} x + \sum_{i=1}^{m} \sum_{j=0}^{k_{i}-1} \mu_{ij} x^{j} e^{a_{i} x} \sin b_{i} x.
 \end{align}
+
+\noindent \textit{February 11th.}
+
+Of course, we are still yet to show that the functions we have listed are actually solutions. For this, we require the following lemma.
+\begin{lemma}
+    Let $q(x) = \sum_{m=0}^{n} a_{m} x^{m}$ be a polynomial, and let $f$ be an $n$-times differentiable function, and also let $\alpha \in \R$. Then
+    \begin{align}
+        \sum_{m=0}^{n} a_{m} (f(x) e^{\alpha x})^{(m)} = \sum_{k=0}^{n} \frac{1}{k!} q^{(k)}(\alpha) \cdot f^{(k)}(x) e^{\alpha x}.
+    \end{align}
+\end{lemma}
+We shall prove this later, and assume it for now. Say that $\alpha$ is a root of $q \equiv P$ of multiplicity $m$. Then, $P(\alpha) = P'(\alpha) = \cdots = P^{(m-1)}(\alpha) = 0$. Thus, to use the above lemma, we take $f(x) = x^{l}$ for $l = 0,1,\ldots,m-1$. Thus, $f^{(m)} = f^{(m+1)} = \cdots = 0$. The lemma gives
+\begin{align}
+    \sum_{m=0}^{n} a_{m} (x^{l} e^{\alpha x})^{(m)} = \sum_{k=0}^{n} \frac{1}{k!} q^{(k)}(\alpha) \cdot (x^{l})^{(k)} e^{\alpha x} = 0
+\end{align}
+since $(x^{l})^{(k)} = 0$ for all $k > l$, and $q^{(k)}(\alpha) = 0$ for all $k < m$. Thus, $x^{l} e^{\alpha x}$ is a solution of the homogeneous equation for all $l = 0,1,\ldots,m-1$. The case when $\alpha$ is a complex root can be handled similarly by taking $f(x) = \cos bx$ and $f(x) = \sin bx$. We prove the lemma now.
+
+\begin{proof}[Proof of lemma]
+    One may verify that
+    \begin{align}
+        (f(x) e^{\alpha x})^{(m)} = e^{\alpha x} \sum_{k=0}^{m} \binom{m}{k} f^{(k)}(x) \alpha^{m-k}.
+    \end{align}
+    Thus, the left hand side is
+    \begin{align}
+        \sum_{m=0}^{n} a_{m} (f(x) e^{\alpha x})^{(m)} = e^{\alpha x} \sum_{m=0}^{n} a_{m} \sum_{k=0}^{m} \binom{m}{k} f^{(k)}(x) \alpha^{m-k} = e^{\alpha x} \sum_{k=0}^{n} \frac{1}{k!} \left( \sum_{m=k}^{n} a_{m} \frac{m!}{(m-k)!} \alpha^{m-k} \right) f^{(k)}(x).
+    \end{align}
+    The inner sum is precisely $q^{(k)}(\alpha)$, and we are done.
+\end{proof}
+
+\noindent Consider the homogenous equation
+\begin{align}
+    \dot{Y} = AY
+\end{align}
+where $A$ is a constant $n \times n$ matrix. Note that if $A$ is a diagonal matrix with entries $\lambda_{1},\ldots,\lambda_{n}$, then the solutions are $Y_{i}(x) = e^{\lambda_{i} x} e_{i}$ for $i = 1,\ldots,n$. A similar reasoning shows for any upper or lower triangular matrix $A$. Now, suppose $A$ is any arbitrary matrix and that there exists an invertible matrix $P$ such that $P^{-1}AP = B$, then defining $Y = PZ$ gives $\dot{Y} = P\dot{Z}$ or $\dot{Z} = P^{-1} \dot{Y} = P^{-1} A P Z = BZ$. Thus, if we can solve the equation $\dot{Z} = BZ$, then we can solve the equation $\dot{Y} = AY$. We wish to solidify this idea.
+
+Recall that the characteristic polynomial of $A$ is defined as $\chi_{A}(x) = \det(A - xI)$, for any matrix $A \in M_{n}(\F)$. We also require the following theorem.
+
+\begin{theorem}
+    Let $A \in M_{n}(\C)$, and let $\lambda_{1},\ldots,\lambda_{m}$ be the distinct eigenvalues of $A$ with multiplicities $k_{1},\ldots,k_{m}$, respectively. Then, there exists an invertible matrix $P$ such that
+    \begin{align}
+        P^{-1} A P = \begin{pmatrix}
+            J_{k_{1}}(\lambda_{1}) & 0 & \cdots & 0 \\
+            0 & J_{k_{2}}(\lambda_{2}) & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & J_{k_{m}}(\lambda_{m})
+        \end{pmatrix}
+    \end{align}
+    where $J_{k}(\lambda)$ is the $k \times k$ Jordan block with eigenvalue $\lambda$; that is,
+    \begin{align}
+        J_{k}(\lambda) = \begin{pmatrix}
+            \lambda & 1 & 0 & \cdots & 0 \\
+            0 & \lambda & 1 & \cdots & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & 0 & \cdots & 1 \\
+            0 & 0 & 0 & \cdots & \lambda
+        \end{pmatrix}.
+    \end{align} 
+\end{theorem}
+
+In the reals, $A \in M_{n}(\R)$ can be put into the above form if $\chi_{A}$ has all real roots. Also recall that if $P$ is invertible, then $\chi_{A} = \chi_{P^{-1} A P}$. One also has the Cayley-Hamilton theorem, which states that $A$ satisfies its own characteristic polynomial; that is, $\chi_{A}(A) = 0$.
+
+\begin{definition}
+    For $A \in M_{n}(\F)$ and $\lambda \in \F$, the \eax{generalized eigenspace} of $A$ corresponding to $\lambda$ is defined as $G_{\lambda}(A) = \ker((A - \lambda I)^{n})$.
+\end{definition}
+This is, of course, a generalization of the eigenspace $E_{\lambda}(A) = \ker(A - \lambda I)$. Note that $E_{\lambda}(A) \subseteq G_{\lambda}(A)$. We have the following theorem. Further, if all eigenvalues are distinct, then $V = \bigoplus_{i=1}^{m} E_{\lambda_{i}}(A)$. We will also show that $V = \bigoplus_{i=1}^{m} G_{\lambda_{i}}(A)$, for any $A$.
