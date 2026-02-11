@@ -670,3 +670,81 @@ Since $P_{1}(\cos \theta) = \cos \theta$, we have $A_{1} = -E_{0}$, and $A_{l} =
 \begin{align}
     V(r,\theta) = -E_{0} \left( r - \frac{R^{3}}{r^{2}} \right) \cos \theta.
 \end{align}
+
+
+\noindent \textit{February 11th.}
+
+We now wish to find the surface charge density $\sigma(R,\theta)$ on the sphere. This can be obtained via
+\begin{align}
+    \sigma(R,\theta) = -\epsilon_{0} \frac{\partial V}{\partial r} \bigg|_{r=R} = 3 \epsilon_{0} E_{0} \cos \theta.
+\end{align}
+Note that this is positive for $\theta < \pi/2$ and negative for $\theta > \pi/2$, which is consistent with the fact that the electric field points in the positive $z$-direction.
+
+\section{Multipole Expansion, and the Dipole}
+
+Given a potential energy $U$, we can expand it via the Taylor expansion as
+\begin{align}
+    U(x) = U(x_{0}) + \frac{\di{U}}{\di{x}} \bigg|_{x=x_{0}} (x-x_{0}) + \frac{1}{2} \frac{\di^{2} U}{\di x^{2}} \bigg|_{x=x_{0}} (x-x_{0})^{2} + \cdots
+\end{align}
+Note that if $\di{U}/\di{x} \big|_{x=x_{0}} = 0$, then the first non-zero term in the expansion is the second derivative term, and near this equilibrium point, one can approximate $U(x) \approx \frac{1}{2} k x^{2}$; any such potential would look like a harmonic oscillator near the equilibrium point. The idea is to use this expansion to approximate the potential at large distances from the source charge distribution. 
+
+Consider the case of a \eax{dipole}, which consists of two point charges $+q$ and $-q$ separated by a distance $d$, say placed at $y = \pm d/2$ in the $xy$-plane. We wish to find the potential at a point $P$ located at a distance $r$ from the origin, making an angle $\theta$ with the positive $z$-axis. If $\curs{r}_{+}$ and $\curs{r}_{-}$ denote the distances from the positive and negative charges respectively, then the potential at $P$ is given by
+\begin{align}
+    V(\bv{r}) = \frac{q}{4 \pi \epsilon_{0}} \left( \frac{1}{\curs{r}_{+}} - \frac{1}{\curs{r}_{-}} \right).
+\end{align}
+If $r \gg d$, we can rewrite $\curs{r}_{\pm}$ as
+\begin{align}
+    \curs{r}_{\pm}^{2} = r^{2} + \frac{d^{2}}{4} \mp r d \cos \theta = r^{2} \left( 1 \mp \frac{d}{r} \cos \theta + \frac{d^{2}}{4 r^{2}} \right).
+\end{align}
+Reciprocals gives
+\begin{align}
+    \frac{1}{\curs{r}_{\pm}} \approx \frac{1}{r} \left( 1 \mp \frac{d}{r} \cos \theta \right)^{-1/2} \approx \frac{1}{r} \left( 1 \pm \frac{d}{2r} \cos \theta \right) \implies \frac{1}{\curs{r}_{+}} - \frac{1}{\curs{r}_{-}} \approx \frac{d \cos \theta}{r^{2}}.
+\end{align}
+Thus, the potential at $P$ is approximately given by
+\begin{align}
+    V(\bv{r}) = \frac{q d \cos \theta}{4 \pi \epsilon_{0} r^{2}} = \frac{\bv{p} \cdot \hat{\bv{r}}}{4 \pi \epsilon_{0} r^{2}}
+\end{align}
+where $\bv{p} = q \bv{d}$ is defined as the \eax{dipole moment} of the dipole.
+\\ \\
+Now consider the case of a charged body. The potential, of course, is given by
+\begin{align}
+    V(\bv{r}) = \int \frac{\rho(\bv{r}')}{4 \pi \epsilon_{0} \curs{r}} \; \di{V'}
+\end{align}
+where $\bcurs{r} = \bv{r} - \bv{r}'$. If $\theta'$ denotes the angle between $\bv{r}$ and $\bv{r}'$, then
+\begin{align}
+    \curs{r}^{2} = r^{2} + r'^{2} - 2rr' \cos \theta' = r^{2} \left( 1 + \frac{r'^{2}}{r^{2}} - 2 \frac{r'}{r} \cos \theta' \right).
+\end{align}
+Now define $\epsilon = (\frac{r'}{r})^{2} - 2(\frac{r'}{r}) \cos \theta'$, so that $\curs{r} = \sqrt{1 + \epsilon}$. Thus, $\frac{1}{\curs{r}} = \frac{1}{r} ( 1 + \epsilon)^{-1/2} =$
+\begin{align}
+    \frac{1}{r} \left( 1 - \frac{1}{2} \epsilon + \frac{3}{8} \epsilon^{2} - \frac{5}{16} \epsilon^{3} + \cdots \right) = \frac{1}{r} \left( 1 + \frac{r'}{r} \cos \theta' + \frac{r'^{2}}{r^{2}} \frac{3 \cos^{2} \theta' - 1}{2} + \frac{r'^{3}}{r^{3}} \frac{5 \cos^{3} \theta' - 3 \cos \theta'}{2} + \cdots \right)
+\end{align}
+where the last expression comes from rearranging the terms in the Taylor expansion. One may notice that the Legendre polynomials $P_{l}(\cos \theta')$, with $P_{0} = 1$, $P_{1}(\cos \theta') = \cos \theta'$, $P_{2}(\cos \theta') = \frac{1}{2} (3 \cos^{2} \theta' - 1)$, and so on, appear in the expansion. In fact, one has
+\begin{align}
+    \frac{1}{\curs{r}} = \frac{1}{r} \sum_{l=0}^{\infty} \left( \frac{r'}{r} \right)^{l} P_{l}(\cos \theta').
+\end{align}
+With this, the potential at $\bv{r}$ can be written as
+\begin{align}
+    V(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \sum_{n=0}^{\infty} \frac{1}{r^{n+1}} \int r'^{n} P_{n}(\cos \theta') \rho(\bv{r}') \; \di{V'}.
+\end{align}
+This is known as the \eax{multipole expansion} of the potential. The first term in the expansion is called the monopole term, and is given by $\frac{1}{4 \pi \epsilon_{0}} \frac{Q}{r}$ where $Q = \int \rho(\bv{r}') \; \di{V'}$ is the total charge. Thus, even for a very complex body, the potential at large distances looks like that of a point charge $Q$. The second term is called the dipole term, where the potential drops off as $V \sim 1/r^{2}$. Similarly, the third term is called the quadrupole term, and the fourth term is called the octupole term, and so on. If we examine the dipole term, we have
+\begin{align}
+    V(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \int r' \cos \theta' \rho(\bv{r}') \; \di{V'} = \frac{1}{4 \pi \epsilon_{0}} \hat{\bv{r}} \cdot \int \bv{r}' \rho(\bv{r}') \; \di{V'} = \frac{\hat{\bv{r}} \cdot \bv{p}}{4 \pi \epsilon_{0} r^{2}}
+\end{align}
+where $\bv{p} = \int \bv{r}' \rho(\bv{r}') \; \di{V'}$ is defined as the dipole moment of the charge distribution. This definition is a little abstract, since there is no actual dipole in the charge distribution. In particular, the dipole moment $\bv{p}$ depends heavily on the geometry of the charge distribution for a collection of point charges. In such a case, it becomes
+\begin{align}
+    \bv{p} = \sum_{i} q_{i} \bv{r}_{i}'
+\end{align}
+since $\rho(\bv{r}') = \sum_{i} q_{i} \delta(\bv{r}' - \bv{r}_{i}')$. For example, for a dipole consisting of two point charges $+q$ and $-q$ separated by a distance $d$, we have $\bv{p} = q \bv{d}$, which is consistent with our previous definition of the dipole moment. Morevoer, the monopole moment does not depend on the choice of origin, but the dipole moment does.
+
+A point charge at the origin represents a pure monopole. For a point charge shifted from the origin, say a charge $q$ shifted a distance $d$ along the positive $y$-axis, we have $Q = q$, $\bv{p} = q d \hat{\bv{y}}$.
+
+\subsection{Dipole}
+
+We have obtained the expression
+\begin{align}
+    V(r,\theta) = \frac{\hat{\bv{r}} \cdot \bv{p}}{4 \pi \epsilon_{0} r^{2}} = \frac{p \cos \theta}{4 \pi \epsilon_{0} r^{2}}.
+\end{align}
+Thus, the electric field is given by $\bv{E} = -\nabla V$, which in spherical coordinates with azimuthal symmetry is given by
+\begin{align}
+    E_{r} = -\frac{\partial V}{\partial r} = \frac{2 p \cos \theta}{4 \pi \epsilon_{0} r^{3}}, \quad E_{\theta} = -\frac{1}{r} \frac{\partial V}{\partial \theta} = \frac{p \sin \theta}{4 \pi \epsilon_{0} r^{3}}.
+\end{align}
