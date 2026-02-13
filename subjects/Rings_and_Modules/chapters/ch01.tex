@@ -678,7 +678,63 @@ Note that the gcd here may not be unique. For example, in $\Z$, the gcd of $6$ a
 \end{proof}
 
 Of course, the notion of $\gcd$ exists for $\Z$. As another example, look at this ring $\Q[x,y]$. By inspection, $1$ is a $\gcd$ of $x$ and $y$, since $1 \mid x$ and $1 \mid y$, and if $d' \in \Q[x,y]$ is such that $d' \mid x$ and $d' \mid y$, then $d' \in \Q$, so $d' \mid 1$. In fact, any $a \in \Q^{\times}$ is a $\gcd$ of $x$ and $y$.
+\\
+
+\textit{February 13th.}
 
 \begin{example}
-    Consider the rings $\Z[i]$ and $\Z[\sqrt{-3}]$. The ring $\Z[i]$ is a euclidean domain with respect to the euclidean function $N : \Z[i] \setminus \{0\} \to \Z_{\geq 0}$ defined by $N(a+bi) = a^{2} + b^{2}$ for all $a+bi \in \Z[i] \setminus \{0\}$. Thus, $\Z[i]$ is a principal ideal domain, so every irreducible element of $\Z[i]$ is prime. In particular, $1+i$ is an irreducible element of $\Z[i]$, so $1+i$ is prime. On the other hand, the ring $\Z[\sqrt{-3}]$ is not a principal ideal domain; consider $I = (2,1+\sqrt{-3})$. We show that $I \cap \Z = (2)$. Since $2 \in I$, we have $(2) \subseteq I \cap \Z$. For the converse inclusion, let $x \in I \cap \Z$. Then there exist $r,s \in \Z[\sqrt{-3}]$ such that $x = r(1+\sqrt{-3}) + 2s$. 
+    Consider the rings $\Z[i]$ and $\Z[\sqrt{-3}]$. The ring $\Z[i]$ is a euclidean domain with respect to the euclidean function $N : \Z[i] \setminus \{0\} \to \Z_{\geq 0}$ defined by $N(a+bi) = a^{2} + b^{2}$ for all $a+bi \in \Z[i] \setminus \{0\}$.
+    Indeed, given any $\alpha = a+ib, \beta = c+id \in \Z[i]$, for $a,b,c,d \in \Z$, we wish to find $\gamma,r \in \Z[i]$ such that $\alpha = \beta \gamma + r$ and either $r = 0$ or $N(r) < N(\beta)$. Consider
+    \begin{align}
+        \frac{\alpha}{\beta} = \frac{(a+ib)(c-id)}{(c+id)(c-id)} = u+iv
+    \end{align}
+    where $u,v \in \Q$. So there exist $p,q \in \Z$ such that $\abs{p-u} \leq 1/2$ and $\abs{q-v} \leq 1/2$. Thus,
+    \begin{align}
+        \alpha = \beta(u+iv) = \beta(p+iq) + \beta((u-p)+i(v-q)) = \beta(p+iq) + r
+    \end{align}
+    where $N(r) = N(\beta)N((u-p)+i(v-q)) \leq N(\beta) \frac{1}{2} < N(\beta)$. Thus, $\gamma = p+iq$ and $r = \beta((u-p)+i(v-q))$ satisfy the required condition. Therefore, $\Z[i]$ is a euclidean domain, so $\Z[i]$ is a principal ideal domain. Thus, $\Z[i]$ is a principal ideal domain, so every irreducible element of $\Z[i]$ is prime. In particular, $1+i$ is an irreducible element of $\Z[i]$, so $1+i$ is prime.
+    
+    On the other hand, the ring $\Z[\sqrt{-3}]$ is not a principal ideal domain; consider $I = (2,1+\sqrt{-3})$. We show that $I \cap \Z = (2)$. Since $2 \in I$, we have $(2) \subseteq I \cap \Z$. For the converse inclusion, let $x \in I \cap \Z$. Then, there exist $r,s \in \Z[\sqrt{-3}]$ such that $x = r(1+\sqrt{-3}) + s2$. Since $x$ is also an integer, we can write $x = \alpha(1+\sqrt{-3}) + 2 \beta$ where $\alpha \in \Z[-\sqrt{3}]$ and $\beta \in \Z$. But this means that $\alpha(1+\sqrt{-3})$ must be an integer, so taking norms gives $(x-2\beta)^{2} = \alpha\bar{\alpha}4$, so $4 \mid (x-2\beta)^{2}$, so $2 \mid x-2\beta$, so $2 \mid x$. Thus, $x \in (2)$, so $I \cap \Z = (2)$. Hence, $I \subsetneq \Z[\sqrt{-3}]$. If $I$ were principal, then $I = (a+b\sqrt{-3})$ for some $a,b \in \Z$. If $b = 0$, then $I = (a)$ implies $I = 2\Z[\sqrt{-3}]$ which makes the contradiction $1+\sqrt{-3} \notin 2\Z[\sqrt{-3}]$; $b$ has to be non-zero. We must have, as $2 \in I$, $2 = (a+b\sqrt{-3})(c+d\sqrt{-3})$ for some $c,d \in \Z$. Taking norms gives $4 = (a^{2}+3b^{2})(c^{2}+3d^{2})$. Since $b \neq 0$, $b = \pm 1$ and $a = \pm 1$ must be the only possibilities. This again must mean that $c^{2}+3d^{2} = 1$ which implies $c = \pm 1$ and $d = 0$. But this gives $2 = \pm(1 \pm \sqrt{-3})$, which is nonsense. Hence $I$ cannot be principal.
 \end{example}
+
+A more general result states that if $D \equiv 1 \pmod{4}$ and $D$ is square-free, then $\Z[\sqrt{D}]$ cannot be a principal ideal domain.
+
+
+\begin{proposition}
+    Let $R$ be a ring such that $R[x]$ is a principal ideal domain. Then $R$ is a field.
+\end{proposition}
+\begin{proof}
+    Since $R \subseteq R[x]$ is a subring, $R$ is an integral domain. Let $\varphi:R[x] \to R$ be the evaluation homomorphism defined by $\varphi(f) = f(0)$ for all $f \in R[x]$. This map is surjective. Moreover, $\ker \varphi = (x) \subseteq R[x]$. So $R[x]/(x) \cong R$, implying that $R[x]/(x)$ is an integral domain and $(x)$ is a prime ideal. We had shown that any non-zero prime ideal in a principal ideal domain is maximal, so $(x)$ is maximal. Thus, $R[x]/(x) \cong R$ is a field, so $R$ is a field.
+\end{proof}
+\begin{definition}
+    For a ring $R$, the map $N:R \to \Z_{\geq 0}$ is called a \eax{Dedekind-Hasse} norm if $N(0) = 0$, and for all $a,b \in R \setminus \{0\}$, either $b \mid a$ or there exists $0 \neq r \in (a,b)$ such that $N(r) < N(b)$.
+\end{definition}
+
+\begin{proposition}
+    If $R$ is an integral domain that admits a Dedekind-Hasse norm, then $R$ is a principal ideal domain. The converse also holds.
+\end{proposition}
+
+\begin{proof}
+    Let $I \subseteq R$ be an ideal. Let $x \in I\setminus\{0\}$ be such that $N(x)$ is the least among $\{N(y) \mid y \in I, y \neq 0\}$. $(x) \subseteq I$ is clear. Let $y \in I\setminus\{0\}$. So either $x \mid y$ or there exists $0 \neq r \in (x,y)$ such that $N(r) < N(x)$. This, however, is a contradiction to the choice of $x$. Hence $x \mid y$ and $y \in (x)$. Thus, $I = (x)$ is principal. 
+\end{proof}
+
+
+\begin{example}
+    The ring $\Z[(1+\sqrt{-19})/2]$ is a principal ideal domain but not a euclidean domain. Note that $N:\Z[\omega=(1+\sqrt{-19})/2]\setminus\{0\} \to \Z_{\geq 0}$ defined by $a+b\omega \mapsto a^{2}+ab+5b^{2}$ is a Dedekind-Hasse norm.
+\end{example}
+
+\begin{proposition}
+    Let $R$ be a euclidean domain but not a field. Then it contains a `\eax{universal side divisor}'; that is, there exists a non-zero non-unit $u \in R$ such that for all non-zero $x \in R$, there exists $q \in R$ satisfying that $r=x-qu$ is either $0$ or a unit 
+\end{proposition}
+
+\begin{proof}
+    Let $u \in \R\setminus\{0\}$ be such that $N(u)$ is least among all non-zero non-unit elements of $R$. We claim that $u$ satisfies this property. Let $x \in R\setminus\{0\}$. Then there exist $q,r \in R$ such that $x = qu+r$ satisfying either $r = 0$ or $N(r) < N(u)$. Since $u$ is a non-unit, $N(u) > 0$, so $N(r) < N(u)$ implies that $r$ is a unit. Thus, $r = x-qu$ is either $0$ or a unit, so the claim holds.
+\end{proof}
+
+One may check that $\Z[(1+\sqrt{-19})/2]$ has no universal side division, and $\pm 1$ are the only units in the ring.
+
+\begin{definition}
+    Let $R$ be an integral domain. We say that $R$ is a \eax{unique factorization domain} if for all non-zero non-unit $x \in R$, $x$ can be written as $x = p_{1} \cdots p_{n}$ for some $n \geq 1$ and $p_{i}$ irreducibles, and if $x = p_{1} \cdots p_{n} = q_{1} \cdots q_{m}$ for some $m \geq 1$ and irreducibles $q_{j}$, then $n = m$ and, after reordering, $p_{i} = u_{i} q_{i}$ for some unit $u_{i}$ for all $1 \leq i \leq n$.
+\end{definition}
+
+For example, both $\Z$ and $k[x]$ where $k$ is a field are UFDs. As a small definition, $x,y \in R$ are termed \eax{associates} if $x = uy$ for some unit $u \in R$. Again, in $\Z$, $-n$ and $n$ are associates, and in $\Q[x]$, $f$ and $cf$ for some $c \in \Q^{\times}$ are associates. Lastly, in $\Z[i]$, $n,-n, ni, -ni$ are all associates for any $n \in \Z$. Thus the above definition is saying that the factorization of $x$ into irreducibles is unique up to reordering and up to associates. For non-examples, $\Z[\sqrt{5}]$ is an integral domain but not a unique factorization domain since $-4 = -2 \cdot 2 = (1+\sqrt{5})(1-\sqrt{5})$ are two distinct factorizations of $-4$ into irreducibles, and the irreducibles $2, 1+\sqrt{5}, 1-\sqrt{5}$ are not associates of each other. 
