@@ -738,8 +738,6 @@ since $\rho(\bv{r}') = \sum_{i} q_{i} \delta(\bv{r}' - \bv{r}_{i}')$. For exampl
 
 A point charge at the origin represents a pure monopole. For a point charge shifted from the origin, say a charge $q$ shifted a distance $d$ along the positive $y$-axis, we have $Q = q$, $\bv{p} = q d \hat{\bv{y}}$.
 
-\subsection{Dipole}
-
 We have obtained the expression
 \begin{align}
     V(r,\theta) = \frac{\hat{\bv{r}} \cdot \bv{p}}{4 \pi \epsilon_{0} r^{2}} = \frac{p \cos \theta}{4 \pi \epsilon_{0} r^{2}}.
@@ -747,4 +745,58 @@ We have obtained the expression
 Thus, the electric field is given by $\bv{E} = -\nabla V$, which in spherical coordinates with azimuthal symmetry is given by
 \begin{align}
     E_{r} = -\frac{\partial V}{\partial r} = \frac{2 p \cos \theta}{4 \pi \epsilon_{0} r^{3}}, \quad E_{\theta} = -\frac{1}{r} \frac{\partial V}{\partial \theta} = \frac{p \sin \theta}{4 \pi \epsilon_{0} r^{3}}.
+\end{align}
+
+
+\section{Electric Fields in Matter}
+\textit{February 16th.}
+
+Recall that a conductor, by definition, is a material that contains free charges that can move under the influence of an electric field. On the other hand, we have \eax{dielectric}s or \eax{insulator}s, which have bound charges. Upon applying an electric field $\bv{E}$ to a dielectric, the positive and negative charges in the dielectric are displaced in opposite directions, giving rise to an induced dipole moment. This phenomenon is known as polarization.
+
+To solidify our theory, we work with a very crude model of an atom, consisting of a positive charge $+q$ as the nucleus, and a negative electron cloud with charge $-q$ surrounding the nucleus. The electron cloud is not a point charge, but rather a uniform distribution of charge on a sphere of radius $a$ centred at the nucleus. Now suppose we apply an electric field $\bv{E}$ to this atom. Equilibrium conditions give $E_{\text{ext}} = E_{e}$, where $E_{\text{ext}}$ is the external electric field, and $E_{e}$ is the electric field due to the induced dipole moment. If the nucleus is displaced by a distance $d$ from the centre of the electron cloud, then
+\begin{align}
+    E_{e} = \frac{1}{4 \pi \epsilon_{0}} \frac{qd}{a^{3}} = E.
+\end{align}
+Note that the induced dipole moment is given by $\bv{p} = \alpha \bv{E}$, where $\alpha$ is called the \eax{atomic polarizability}. In our crude model, we get $\alpha = 4 \pi \epsilon_{0} a^{3} = 3\epsilon_{0} \curs{v}$ where $\curs{v}$ is the volume of the electron cloud. Again, this is a very crude model, and assumptions such as the uniform distribution of charge on the electron cloud are not very realistic. In reality, the induced dipole moment may sometimes not even be aligned with $\bv{E}$, and polarizability depends on the direction of the applied electric field. Thus, $\alpha$ is actually a tensor, and we have $\bv{p} = \alpha \bv{E}$ where $\alpha$ is a $3 \times 3$ matrix. For now, we only work with scalar polarizability.
+
+Now consider a dielectric material consisting of many atoms. We may model it as a collection of many tiny dipoles. We introduce the vector $\bv{P}$, called the \eax{polarization}, which is defined as the dipole moment per unit volume. Recall that for a single dipole, the potential at a point $\bv{r}$ is given by $V(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \frac{\bv{p} \cdot \hat{\bv{r}}}{r^{2}}$. For our case, we can generlize this to
+\begin{align}
+    V(\bv{r}) = \int_{\curs{v}} \frac{\hat{\bcurs{r}} \cdot \bv{P}}{4 \pi \epsilon_{0} \curs{r}^{2}} \; \di{V'}.
+\end{align}
+Of course, we can stop here, but we can also rewrite this in a more suggestive form. We know that
+\begin{align}
+    \nabla (\frac{1}{\curs{r}}) = - \frac{\hat{\bcurs{r}}}{\curs{r}^{2}}.
+\end{align}
+Using $\curs{r} = \sqrt{(x-x')^{2}+(y-y')^{2}+(z-z')^{2}}$, we can verify this by direct differentiation. Note that $\nabla ' (\frac{1}{\curs{r}}) = \frac{\hat{\bcurs{r}}}{\curs{r}^{2}}$, where $\nabla '$ denotes differentiation with respect to the primed coordinates. Using this, we get
+\begin{align}
+    V(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \int_{\curs{v}} \bv{P} \cdot \nabla' \left( \frac{1}{\curs{r}} \right) \; \di{V'} = \frac{1}{4 \pi \epsilon_{0}} \int_{\curs{v}} \nabla' \cdot \left( \frac{\bv{P}}{\curs{r}} \right) \; \di{V'} - \frac{1}{4 \pi \epsilon_{0}} \int_{\curs{v}} \frac{\nabla' \cdot \bv{P}}{\curs{r}} \; \di{V'}.
+\end{align}
+Via the divergence theorem, we have
+\begin{align}
+    V(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \oint_{S} \frac{\bv{P}}{\curs{r}} \cdot \di{\bv{a}} - \frac{1}{4 \pi \epsilon_{0}} \int_{\curs{v}} \frac{\nabla' \cdot \bv{P}}{\curs{r}} \; \di{V'}.
+\end{align}
+Thus, the potential can be thought of as the potential due to a surface charge density $\sigma_{b} = \bv{P} \cdot \hat{\bv{n}}$ and a volume charge density $\rho_{b} = -\nabla \cdot \bv{P}$. Finally, we get
+\begin{align}
+    V(\bv{r}) = \frac{1}{4 \pi \epsilon_{0}} \oint_{S} \frac{\sigma_{b}}{\curs{r}} \; \di{a} + \frac{1}{4 \pi \epsilon_{0}} \int_{\curs{v}} \frac{\rho_{b}}{\curs{r}} \; \di{V'}.
+\end{align}
+
+
+For an example, consider a uniformly polarized sphere of radius $R$ with polarization $\bv{P} = P_{0} \hat{\bv{z}}$. The surface charge density is given by $\sigma_{b} = \bv{P} \cdot \hat{\bv{n}} = P_{0} \cos \theta$, and the volume charge density is given by $\rho_{b} = -\nabla \cdot \bv{P} = 0$. Thus, the potential at a point for which $r \leq R$ is given by
+\begin{align}
+    V(r,\theta) = \sum_{l=0}^{\infty} A_{l} r^{l} P_{l}(\cos \theta),
+\end{align}
+and for which $r \geq R$ is given by
+\begin{align}
+    V(r,\theta) = \sum_{l=0}^{\infty} B_{l} r^{-(l+1)} P_{l}(\cos \theta).
+\end{align}
+Demanding continuity of $V$ at $r = R$ gives $B_{l} = A_{l} R^{2l+1}$. Moreover, the discontinuity of the electric field at $r = R$ gives
+\begin{align}
+    \left( \frac{\partial V_{\text{out}}}{\partial r} - \frac{\partial V_{\text{in}}}{\partial r} \right)_{r=R} = -\frac{\sigma_{b}}{\epsilon_{0}} = -\frac{P_{0} \cos \theta}{\epsilon_{0}}.
+\end{align}
+Solving via utilising the orthogonality of the Legendre polynomials gives $A_{1} = \frac{P_{0}}{3 \epsilon_{0}}$, and $A_{l} = 0$ for $l \neq 1$. Thus, the potential is given by
+\begin{align}
+    V(r,\theta) = \begin{cases}
+        \dfrac{P_{0} r \cos \theta}{3 \epsilon_{0}}, & r \leq R, \\
+        \dfrac{P_{0} R^{3} \cos \theta}{3 \epsilon_{0} r^{2}}, & r \geq R.
+    \end{cases}
 \end{align}
