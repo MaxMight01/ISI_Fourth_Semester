@@ -731,9 +731,72 @@ Recall that the characteristic polynomial of $A$ is defined as $\chi_{A}(x) = \d
     \end{align} 
 \end{theorem}
 
-In the reals, $A \in M_{n}(\R)$ can be put into the above form if $\chi_{A}$ has all real roots. Also recall that if $P$ is invertible, then $\chi_{A} = \chi_{P^{-1} A P}$. One also has the Cayley-Hamilton theorem, which states that $A$ satisfies its own characteristic polynomial; that is, $\chi_{A}(A) = 0$.
+In the reals, $A \in M_{n}(\R)$ can be put into the above form if $\chi_{A}$ has all real roots. Also recall that if $P$ is invertible, then $\chi_{A} = \chi_{P^{-1} A P}$. One also has the Cayley-Hamilton theorem, which states that $A$ satisfies its own characteristic polynomial; that is, $\chi_{A}(A) = 0$.\\
+
+\textit{February 16th.}
 
 \begin{definition}
-    For $A \in M_{n}(\F)$ and $\lambda \in \F$, the \eax{generalized eigenspace} of $A$ corresponding to $\lambda$ is defined as $G_{\lambda}(A) = \ker((A - \lambda I)^{n})$.
+    For $A \in M_{n}(\F)$ and $\lambda \in \F$, the \eax{generalized eigenspace} of $A$ corresponding to $\lambda$ is defined as $G_{\lambda}(A) = \ker((A - \lambda I)^{n})$, when this space is non-trivial. Such as $\lambda$ for which $G_{\lambda}(A)$ is non-trivial is called a \eax{generalized eigenvalue} of $A$.
 \end{definition}
-This is, of course, a generalization of the eigenspace $E_{\lambda}(A) = \ker(A - \lambda I)$. Note that $E_{\lambda}(A) \subseteq G_{\lambda}(A)$. We have the following theorem. Further, if all eigenvalues are distinct, then $V = \bigoplus_{i=1}^{m} E_{\lambda_{i}}(A)$. We will also show that $V = \bigoplus_{i=1}^{m} G_{\lambda_{i}}(A)$, for any $A$.
+This is, of course, a generalization of the eigenspace $E_{\lambda}(A) = \ker(A - \lambda I)$. Note that $E_{\lambda}(A) \subseteq G_{\lambda}(A)$.
+
+\begin{definition}
+    Let $A \in M_{n}(\F)$ be nilpotent; that is, $A^{k} = 0$ for some $k \in \N$. A \eax{Jordan basis} for $A$ is a basis of $V \cong \F^{n}$ of the form $\{A^{m_{1}-1} v_{1},\ldots,A^{2}v_{1},Av_{1},v_{1},\ldots,A^{m_{r}-1} v_{r},\ldots,A^{2}v_{r},Av_{r},v_{r}\}$ satisfying $A^{m_{i}} v_{i} = 0$ for all $i = 1,\ldots,r$.
+\end{definition}
+A similar definition works for a nilpotent $T:V \to V$. For such a $T$, the matrix representation of $T$ with respect to a Jordan basis is a block diagonal matrix with blocks of the form
+\begin{align}
+    J_{m_{i}}(0) = \begin{pmatrix}
+        0 & 1 & 0 & \cdots & 0 \\
+        0 & 0 & 1 & \cdots & 0 \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \cdots & 1 \\
+        0 & 0 & 0 & \cdots & 0
+    \end{pmatrix}.
+\end{align}
+Thus, for a nilpotent $A$, finding a Jordan basis is equivalent to writing $A$ in Jordan form. We have the following theorem.
+
+\begin{theorem}
+    Every nilpotent $A \in M_{n}(\F)$ is similar to a matrix in Jordan form.
+\end{theorem}
+
+\begin{proof}
+    We will show this for an operator $T:V \to V$ where $V$ is an $n$-dimensional vector space over $\F$. We proceed by induction on $n$. Assume that any nilpotent map $S:W \to W$ for $\dim W < n$ has a Jordan basis. If $T \equiv 0$, then any basis of $V$ is a Jordan basis for $T$. If $T \not\equiv 0$, then $1 \leq \dim T(V) \leq n-1$. Moreover, $T(V)$ is $T$-invariant. So $T|_{T(V)} : T(V) \to T(V)$ is still nilpotent. By the inductive hypothesis, $T|_{T(V)}$ has a Jordan basis $\cB = \{T^{m_{1}-1} v_{1},\ldots,Tv_{1},v_{1},\ldots,T^{m_{k}-1}v_{k},\ldots,Tv_{k},v_{k}\}$ where $T^{m_{i}} v_{i} = 0$ for all $i = 1,\ldots,k$. We wish to extend $\cB$ to a Jordan basis of $V$. Let $w_{j} \in V$ be such that $Tw_{j} = v_{j}$. Then $\tilde{\cB} = \cB \cup \{w_{1},\ldots,w_{k}\}$ is linearly independent (show this). Now, further extend $\tilde{\cB} \cup \{u_{1},\ldots,u_{r}\}$ to a basis of $V$. Note that $Tu_{1} = T\tilde{v}_{1}$ for some $\tilde{v}_{1} \in \tilde{\cB}$, and $Tu_{2} = T\tilde{v}_{2}$ for some $\tilde{v}_{2} \in \tilde{\cB}$, and so on. Define $\tilde{w}_{1} \defeq \tilde{v}_{1}-u_{1} \in \ker T$. Then, $T\tilde{w}_{1} = T\tilde{v}_{1} - Tu_{1} = 0$. Similarly, define $\tilde{w}_{2} \defeq \tilde{v}_{2}-u_{2}$, and so on. Then, $\{\tilde{w}_{1},\ldots,\tilde{w}_{r}\}$ is linearly independent since $\{\tilde{v}_{1},\ldots,\tilde{v}_{r}\}$ is linearly independent. Finally, $\{\tilde{w}_{1},\ldots,\tilde{w}_{r}\} \cup \cB \cup \{w_{1},\ldots,w_{k}\}$ is a Jordan basis for $T$.
+\end{proof}
+
+\begin{lemma}
+    If $\lambda_{1},\lambda_{2},\ldots,\lambda_{m}$ are distinct generalized eigenvalues of $A$, then $G_{\lambda_{1}}(A),\ldots,G_{\lambda_{m}}(A)$ are linearly independent subspaces of $V$.
+\end{lemma}
+
+\begin{proof}
+    It suffices to show that if $w_{1}+w_{2}+\cdots+w_{m} = 0$ where $w_{i} \in G_{\lambda_{i}}(A)$ for all $i = 1,\ldots,m$, then $w_{1} = w_{2} = \cdots = w_{m} = 0$. Suppose so, and that $w_{1} \neq 0$. So $(T-\lambda_{1}I)^{n} w_{1} = 0$, and there exists the smallest possible $k$ such that $(T-\lambda_{1}I)^{k+1} w_{1} = 0$. Then $(T-\lambda_{1} I)^{k} w_{1} \neq 0$, and $T((T-\lambda_{1}I)^{k} w_{1}) = \lambda_{1}((T-\lambda_{1}I)^{k} w_{1})$. Therefore,
+    \begin{align}
+        (T-\lambda_{1}I)^{k} (T-\lambda_{2}I)^{n} \cdots (T-\lambda_{m})^{n} (w_{1}+w_{2}+\cdots+w_{m}) = (\lambda_{1}-\lambda_{2})^{n} \cdots (\lambda_{1}-\lambda_{m})^{n} (T-\lambda_{1}I)^{k} w_{1} = 0
+    \end{align}
+    which implies that $(T-\lambda_{1}I)^{k} w_{1} = 0$, a contradiction. Hence, $w_{1} = 0$. By a similar argument, $w_{2} = w_{3} = \cdots = w_{m} = 0$.
+\end{proof}
+
+\begin{proposition}
+    The following hold true.
+    \begin{itemize}
+        \item Each $G_{\lambda_{i}}(A)$ is $A$-invariant;
+        \item $(A-\lambda_{i}I) \big|_{G_{\lambda_{i}}(A)}$ is nilpotent;
+        \item $V = \bigoplus_{i=1}^{m} G_{\lambda_{i}}(A)$.
+    \end{itemize}
+\end{proposition}
+
+\begin{proof}
+    \begin{itemize}
+        \item Let $v \in G_{\lambda_{i}} = \ker (T-\lambda_{i} I)^{n}$. Then, $(T-\lambda_{i}I)^{n} (Tv) = T(T-\lambda_{i}I)^{n} v = 0$. Hence, $Tv \in G_{\lambda_{i}}$.
+        \item Let $v \in G_{\lambda_{i}}$. Then, $(T-\lambda_{i}I)^{n} ((T-\lambda_{i}I) v) = (T-\lambda_{i}I) (T-\lambda_{i}I)^{n} v = 0$. Hence, $(T-\lambda_{i}I) v \in G_{\lambda_{i}}$ for all $v \in G_{\lambda_{i}}$. Moreover, $(T-\lambda_{i}I)^{n} \big|_{G_{\lambda_{i}}} = 0$ since $G_{\lambda_{i}} = \ker (T-\lambda_{i}I)^{n}$.
+        \item We show this by induction on the dimension of $V$. We can write $V = \ker(T-\lambda_{1}I)^{n} (T-\lambda_{1}I)^{n}V$. Note that $\ker(T-\lambda_{1}I)^{n} = G_{\lambda_{1}}$ and that $(T-\lambda_{1}I)^{n}V$ is $T$-invariant. Moreover, $\dim (T-\lambda_{1}I)^{n}V < \dim V$. We write $\tilde{T} = T|_{(T-\lambda_{1}I)^{n}V} : (T-\lambda_{1}I)^{n}V \to (T-\lambda_{1}I)^{n}V$. If $\alpha_{1},\alpha_{2},\ldots,\alpha_{k}$ are the distinct generalized eigenvalues of $\tilde{T}$, then $\alpha_{1},\alpha_{2},\ldots,\alpha_{k}$ are also generalized eigenvalues of $T$ since $\tilde{T}$ is a restriction of $T$. Moreover, $\alpha_{1},\alpha_{2},\ldots,\alpha_{k}$ are distinct from $\lambda_{1}$ since $\tilde{T} - \lambda_{1}I$ is injective. By the inductive hypothesis, we have $(T-\lambda_{1}I)^{n}V = \bigoplus_{i=1}^{k} G_{\alpha_{i}}(\tilde{T})$. Hence, $V = G_{\lambda_{1}} \oplus \bigoplus_{i=1}^{k} G_{\alpha_{i}}(\tilde{T})$. We can repeat this process for each $G_{\alpha_{i}}(\tilde{T})$ until we have exhausted all the generalized eigenvalues of $T$.
+    \end{itemize}
+\end{proof}
+
+In fact, using the above theorem, lemma, and proposition, we have the following theorem.
+
+\begin{theorem}
+    A Jordan form exists for any linear operator.
+\end{theorem}
+\begin{proof}
+    Let $T:V \to V$ be a linear operator. If $T$ is nilpotent, then we are done. Otherwise, let $\lambda_{1},\ldots,\lambda_{m}$ be the distinct generalized eigenvalues of $T$. Then, $V = \bigoplus_{i=1}^{m} G_{\lambda_{i}}(T)$, and $(T-\lambda_{i}I) \big|_{G_{\lambda_{i}}(T)}$ is nilpotent for all $i = 1,\ldots,m$. Hence, there exists a Jordan basis $\cB_{i}$ for $(T-\lambda_{i}I) \big|_{G_{\lambda_{i}}(T)}$ for all $i = 1,\ldots,m$. Finally, $\cB = \bigcup_{i=1}^{m} \cB_{i}$ is a Jordan basis for $T$.
+\end{proof}
