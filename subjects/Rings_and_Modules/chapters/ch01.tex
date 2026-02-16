@@ -737,4 +737,34 @@ One may check that $\Z[(1+\sqrt{-19})/2]$ has no universal side division, and $\
     Let $R$ be an integral domain. We say that $R$ is a \eax{unique factorization domain} if for all non-zero non-unit $x \in R$, $x$ can be written as $x = p_{1} \cdots p_{n}$ for some $n \geq 1$ and $p_{i}$ irreducibles, and if $x = p_{1} \cdots p_{n} = q_{1} \cdots q_{m}$ for some $m \geq 1$ and irreducibles $q_{j}$, then $n = m$ and, after reordering, $p_{i} = u_{i} q_{i}$ for some unit $u_{i}$ for all $1 \leq i \leq n$.
 \end{definition}
 
-For example, both $\Z$ and $k[x]$ where $k$ is a field are UFDs. As a small definition, $x,y \in R$ are termed \eax{associates} if $x = uy$ for some unit $u \in R$. Again, in $\Z$, $-n$ and $n$ are associates, and in $\Q[x]$, $f$ and $cf$ for some $c \in \Q^{\times}$ are associates. Lastly, in $\Z[i]$, $n,-n, ni, -ni$ are all associates for any $n \in \Z$. Thus the above definition is saying that the factorization of $x$ into irreducibles is unique up to reordering and up to associates. For non-examples, $\Z[\sqrt{5}]$ is an integral domain but not a unique factorization domain since $-4 = -2 \cdot 2 = (1+\sqrt{5})(1-\sqrt{5})$ are two distinct factorizations of $-4$ into irreducibles, and the irreducibles $2, 1+\sqrt{5}, 1-\sqrt{5}$ are not associates of each other. 
+For example, both $\Z$ and $k[x]$ where $k$ is a field are UFDs. As a small definition, $x,y \in R$ are termed \eax{associates} if $x = uy$ for some unit $u \in R$. Again, in $\Z$, $-n$ and $n$ are associates, and in $\Q[x]$, $f$ and $cf$ for some $c \in \Q^{\times}$ are associates. Lastly, in $\Z[i]$, $n,-n, ni, -ni$ are all associates for any $n \in \Z$. Thus the above definition is saying that the factorization of $x$ into irreducibles is unique up to reordering and up to associates. For non-examples, $\Z[\sqrt{5}]$ is an integral domain but not a unique factorization domain since $-4 = -2 \cdot 2 = (1+\sqrt{5})(1-\sqrt{5})$ are two distinct factorizations of $-4$ into irreducibles, and the irreducibles $2, 1+\sqrt{5}, 1-\sqrt{5}$ are not associates of each other.\\ 
+
+\textit{February 16th.}
+
+\begin{example}
+    As a more concrete example of a non-UFD, consider the quotient ring $\bar{R} = \Q[x,y,z,w]/(xy-zw)$. Suppose $\bar{x} = \bar{f} \bar{g}$ for some $\bar{f}, \bar{g} \in \bar{R}$. Then $x - fg \in (xy-zw)$ unless $x - fg = 0$. Since $xy-zw$ is irreducible in $\Q[x,y,z,w]$, we must have $x \mid f$ or $x \mid g$. If $x \mid f$, then $\bar{f}$ is a unit in $\bar{R}$, so $\bar{x}$ is irreducible. Similarly, if $x \mid g$, then $\bar{g}$ is a unit in $\bar{R}$, so $\bar{x}$ is irreducible. Thus, $\bar{x}$ is irreducible. By symmetry, $\bar{y}, \bar{z}, \bar{w}$ are also irreducible. However, we have the two distinct factorizations $\bar{x}\bar{y} = \bar{z}\bar{w}$ into irreducibles, and the irreducibles $\bar{x}, \bar{y}, \bar{z}, \bar{w}$ are not associates of each other since they are all of degree one. Therefore, $\bar{R}$ is not a unique factorization domain.
+\end{example}
+
+\begin{theorem}
+    Let $R$ be a principal ideal domain. Then $R$ is a unique factorization domain.
+\end{theorem}
+\begin{proof}
+    Let $x \in R$ be a non-zero non-unit. We show that $x$ can be written as a product of irreducibles. Let $\mf{m}$ be a maximal ideal of $R$ containing $(x)$. Since $R$ is a principal ideal domain, $\mf{m} = (p_{1})$ for some $p_{1} \in R$. Thus, $p_{1}$ is a prime element, so $p_{1}$ is irreducible. If $x = p_{1} x_{1}$ for some $x_{1} \in R$, then we can repeat the process for $x_{1}$. If $x_{1}$ is a unit, then we are done. Else, we can repeat the process for $x_{1}$ to get a prime element $p_{2}$ such that $x_{1} = p_{2} x_{2}$ for some $x_{2} \in R$. We can keep repeating this process; we claim that it must terminate after finitely many steps. If not, then we have an infinite sequence of ideals $(x) \subsetneq (x_{1}) \subsetneq (x_{2}) \subsetneq \cdots$. Let $I = \bigcup_{n \geq 0} (x_{n})$. Then $I$ is an ideal of $R$. Since $R$ is a principal ideal domain, $I = (y)$ for some $y \in R$. Thus, $y \in I$ implies that $y \in (x_{r})$ for some $r \geq 0$, so $y = ux_{r}$ for some $u \in R$. Also, $x_{r} = p_{r+1}x_{r+1}$ for some $p_{r+1} \in R$ and $x_{r+1} \in R$, so $y = u p_{r+1} x_{r+1}$. Also, since $x_{r+1} = vy$ for some $v \in R$, we have $y = u p_{r+1} vy$, so $(1 - up_{r+1}v)y = 0$. Since $R$ is an integral domain and $y \neq 0$, we must have $up_{r+1}v = 1$, so $p_{r+1}$ is a unit, contradicting the fact that $p_{r+1}$ is a prime element. Therefore, the process must terminate after finitely many steps, so $x$ can be written as a product of irreducibles (note that the last terminating unit may be absorbed into the previous prime element to make it irreducible).
+
+    To show uniquness upto reordering, and associates, let $x = p_{1} \cdots p_{n} = q_{1} \cdots q_{m}$ for some $m \geq 1$ and irreducibles $q_{j}$. Since $p_{1}$ is irreducible and $R$ is a principal ideal domain, $p_{1}$ is prime, so $p_{1} \mid q_{1} \cdots q_{m}$ implies that $p_{1} \mid q_{i_{1}}$ for some $1 \leq i_{1} \leq m$. Since $q_{i_{1}}$ is irreducible, $p_{1}$ and $q_{i_{1}}$ are associates, so $p_{1} = u_{1} q_{i_{1}}$ for some unit $u_{1}$. We can reorder the $q_{j}$'s so that $i_{1} = 1$, giving us $p_{1} = u_{1} q_{1}$. Cancellation gives us $p_{2} \cdots p_{n} = u_{1} q_{2} \cdots q_{m}$; we can repeat the same process to get $p_{2} = u_{2} q_{2}$ for some unit $u_{2}$, and so on. After repeating this process, we get $p_{i} = u_{i} q_{i}$ for some unit $u_{i}$ for all $1 \leq i \leq n$. By symmetry argument, we also get $q_{j} = v_{j} p_{j}$ for some unit $v_{j}$ for all $1 \leq j \leq m$. Thus, $n = m$ and $p_{i} = u_{i} q_{i}$ for some unit $u_{i}$ for all $1 \leq i \leq n$, so the factorization of $x$ into irreducibles is unique up to reordering and up to associates.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be a unique factorization domain. Then an element is irreducible if and only if it is prime.
+\end{proposition}
+\begin{proof}
+    We already know that every prime element is irreducible in any integral domain. For the converse, let $x$ be an irreducible element of $R$. Let $x \mid ab$ for some $a,b \in R$. There then exists some $y \in R$ such that $ab = xy$. Let $a = p_{1}\cdots p_{n}$ and $b = q_{1} \cdots q_{m}$, and $y = r_{1} \cdots r_{k}$ be the factorizations of $a,b,y$ into irreducibles. Then $p_{1} \cdots p_{n} q_{1} \cdots q_{m} = r_{1} \cdots r_{k} x$. Since $x$ is irreducible, $x$ must be an associate of some $p_{i}$ or some $q_{j}$, so $x \mid a$ or $x \mid b$. Thus, $x$ is prime.
+\end{proof}
+
+\begin{theorem}
+    Let $R$ be a principal ideal domain. Then $R$ has a Dedekind-Hasse norm.
+\end{theorem}
+
+\begin{proof}
+    Let $x \in R\setminus\{0\}$. Define $N : R\setminus\{0\} \to \Z_{\geq 0}$ as follows: if $x$ is a unit, $N(x) = 1$. Otherwise, write $x = p_{1} \cdots p_{n}$ for some $n \geq 1$ and irreducibles $p_{i}$, and define $N(x) = 2^{n}$. Verify that $N$ is a Dedekind-Hasse norm. 
+\end{proof}
