@@ -537,7 +537,7 @@ We may prove the converse now.
     Suppose $X$ is sequentially compact. Let $\cA$ be an open covering of $X$. By Lebesgue's number lemma, there exists some $\delta > 0$ such that every subset of $X$ with diameter less than $\delta$ is contained in some set in $\cA$. By the previous lemma, there exists a finite subcover $\{B(x_{i},\delta/2)\}_{i=1}^{n}$ of $\{B(x,\delta/2) \mid x \in X\}$. Since each $B(x_{i},\delta/2)$ is contained in some set in $\cA$, we have that $\cA$ has a finite subcovering. Thus, $X$ is compact.
 \end{proof}
 
-\subsection{Local Compactness}
+\subsection{Local Compactness and Compactification}
 
 \begin{definition}
     A space $X$ is called locally compact at $x \in X$, if there exists an open $U$ and compact $K$ such that $x \in U \subseteq K$. The space $X$ is \eax{locally compact} if it is locally compact at every point $x \in X$.
@@ -553,3 +553,15 @@ Note that if $X$ is compact, then $X$ is locally compact, since we can take $U =
 
     Now, we show compactness. Let $Y \subseteq \bigcup_{\alpha \in \Lambda_{1}} A_{\alpha}^{(1)} \cup \bigcup_{\alpha \in \Lambda_{2}} A_{\alpha}^{(2)}$ be an open covering of $Y$, where $A_{\alpha}^{(1)}$ are the type 1 open sets and $A_{\alpha}^{(2)}$ are the type 2 open sets. Since $\infty \in Y$, there exists some $\alpha_{0} \in \Lambda_{2}$ such that $\infty \in A_{\alpha_{0}}^{(2)}$. Then, $A_{\alpha_{0}}^{(2)} = \{\infty\} \cup (X \setminus K)$ for some compact $K$. Thus, $K$ is covered by $\{A_{\alpha}^{(1)}\}_{\alpha \in \Lambda_{1}}$, so there exists a finite subcovering $\{A_{\alpha_{i}}^{(1)}\}_{i=1}^{n}$ of $K$. Now, we have $Y = A_{\alpha_{0}}^{(2)} \cup \bigcup_{i=1}^{n} A_{\alpha_{i}}^{(1)}$, so there exists a finite subcovering of $Y$. Hence, $Y$ is compact.
 \end{proof}
+
+\noindent \textit{February 17th.}
+
+This movtivates the following definition.
+
+\begin{definition}
+    Let $X$ be a topological space, and $Y$ a compact space. $Y$ is termed a \eax{compactification} of $X$ if $X$ is a dense subspace of $Y$.
+\end{definition}
+
+In general, there are many ways to construct compactifications of a given space $X$. The simplest one is the \eax{one-point compactification}, which we observed in the above proof; if $X$ is locally compact and Hausdorff, then we can construct a compactification $Y$ of $X$ by adding a single point $\infty$ to $X$, and defining the topology on $Y$ as exactly the open sets of $X$ together with the sets of the form $\{\infty\} \cup (X \setminus K)$ where $K$ is a compact subset of $X$.
+
+Suppose $f:X_{1} \to X_{2}$ is a continuous map between two locally compact Hausdorff spaces. Let $X_{1}^{+}$ and $X_{2}^{+}$ be the one-point compactifications of $X_{1}$ and $X_{2}$, respectively. Then, we can extend $f$ to a continuous map $f^{+} : X_{1}^{+} \to X_{2}^{+}$ by defining $f^{+}(x) = f(x)$ for all $x \in X_{1}$, and $f^{+}(\infty) = \infty$. The reader may verify that this is a well-defined continuous map. One can also show that $f^{+}$ is continuous if and only if $f^{-1}(K)$ is compact for every compact $K \subseteq X_{2}$. Moreover, if $f$ is a homeomorphism, then so is $f^{+}$.
