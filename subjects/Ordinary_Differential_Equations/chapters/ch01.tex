@@ -800,3 +800,54 @@ In fact, using the above theorem, lemma, and proposition, we have the following 
 \begin{proof}
     Let $T:V \to V$ be a linear operator. If $T$ is nilpotent, then we are done. Otherwise, let $\lambda_{1},\ldots,\lambda_{m}$ be the distinct generalized eigenvalues of $T$. Then, $V = \bigoplus_{i=1}^{m} G_{\lambda_{i}}(T)$, and $(T-\lambda_{i}I) \big|_{G_{\lambda_{i}}(T)}$ is nilpotent for all $i = 1,\ldots,m$. Hence, there exists a Jordan basis $\cB_{i}$ for $(T-\lambda_{i}I) \big|_{G_{\lambda_{i}}(T)}$ for all $i = 1,\ldots,m$. Finally, $\cB = \bigcup_{i=1}^{m} \cB_{i}$ is a Jordan basis for $T$.
 \end{proof}
+
+\noindent \textit{March 2nd.}
+
+Let us solve $\dot{X} = AX$ as a linear system where $A \in M_{n}(\R)$. We apply Picard's iterations starting with $X_{0}(t) \equiv X_{0}$. Then
+\begin{align}
+    X_{1}(t) = X_{0} + \int_{0}^{t} A X_{0} \, ds = X_{0} + t A X_{0}.
+\end{align}
+Repeating this process gives
+\begin{align}
+    X_{2}(t) = X_{0} + \int_{0}^{t} A(X_{0} + s A X_{0}) \, ds = X_{0} + t A X_{0} + \frac{t^{2}}{2!} A^{2} X_{0}.
+\end{align}
+Continuing this process, we get $X_{n} \to X$ where $X(t) = \sum_{n=0}^{\infty} \frac{t^{n}}{n!} A^{n} X_{0}$ defined to be $e^{tA} X_{0}$. We claim that given any $B \in M_{n}(\R)$, $e^{B} \in M_{n}(\R)$ is well-defined.
+
+\begin{proof}
+    Let $M \defeq \max_{i,j} \abs{B_{ij}}$. Then, $(nM)^{2} \geq nM^{2} \geq \max_{i,j} \abs{(B^{2})_{ij}}$. By induction, we have $\max_{i,j} \abs{(B^{m})_{ij}} \leq (nM)^{m}$ for all $m \in \N$. If we fix $i,j$, then
+    \begin{align}
+        \abs{\sum_{n=N}^{\infty} \frac{(B^{m})_{ij}}{m!}} \leq \sum_{m=N}^{\infty} \frac{(nM)^{m}}{m!} \to 0
+    \end{align}
+    since the series $\sum_{m=0}^{\infty} \frac{(nM)^{m}}{m!}$ converges. Hence, $e^{B}$ is well-defined.
+\end{proof}
+
+Having shown that $e^{tA}$ is well-defined, $X(t) = e^{tA} X_{0}$ is a solution of $\dot{X} = AX$ with $X(0) = X_{0}$. Let us discuss more on exponentials of matrices. Suppose $A$ is a Jordan block with eigenvalue $\lambda$; that is, \begin{align}
+    A = \begin{pmatrix}
+        \lambda & 1 & 0 & \cdots & 0 \\
+        0 & \lambda & 1 & \cdots & 0 \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \cdots & 1 \\
+        0 & 0 & 0 & \cdots & \lambda
+    \end{pmatrix}.
+\end{align}
+Then, $A = \lambda I + N$ where $N$ is a nilpotent matrix. Hence, $e^{tA} = e^{t\lambda I + tN} = e^{t\lambda I} e^{tN}$ since $\lambda I$ and $N$ commute. Moreover, $e^{t\lambda I} = e^{t\lambda} I$. Finally, $e^{tN}$ is a finite sum since $N$ is nilpotent. In particular, if $N$ is the $n \times n$ nilpotent Jordan block, then
+\begin{align}
+    e^{tN} = I + tN + \frac{t^{2}}{2!} N^{2} + \cdots + \frac{t^{n-1}}{(n-1)!} N^{n-1} = \begin{pmatrix}
+        1 & t & \frac{t^{2}}{2!} & \cdots & \frac{t^{n-1}}{(n-1)!} \\
+        0 & 1 & t & \cdots & \frac{t^{n-2}}{(n-2)!} \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \cdots & t \\
+        0 & 0 & 0 & \cdots & 1
+    \end{pmatrix}.
+\end{align}
+Thus, if $A$ is a Jordan block with eigenvalue $\lambda$, then
+\begin{align}
+    e^{tA} = e^{t\lambda} \begin{pmatrix}
+        1 & t & \frac{t^{2}}{2!} & \cdots & \frac{t^{n-1}}{(n-1)!} \\
+        0 & 1 & t & \cdots & \frac{t^{n-2}}{(n-2)!} \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \cdots & t \\
+        0 & 0 & 0 & \cdots & 1
+    \end{pmatrix}.
+\end{align}
+If $A$ is in Jordan form, then $e^{tA}$ is a block diagonal matrix where the blocks are of the form $e^{tJ_{k}(\lambda)}$. Finally, if $A$ is any arbitrary matrix and that there exists an invertible matrix $P$ such that $P^{-1}AP = B$, then $e^{tA} = P e^{tB} P^{-1}$. Hence, we can compute $e^{tA}$ for any arbitrary matrix $A$ by putting $A$ into Jordan form. Thus, any such ODE $\dot{X} = AX$ can be easily solved by putting $A$ into Jordan form. 
