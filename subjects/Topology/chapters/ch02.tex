@@ -565,3 +565,68 @@ This movtivates the following definition.
 In general, there are many ways to construct compactifications of a given space $X$. The simplest one is the \eax{one-point compactification}, which we observed in the above proof; if $X$ is locally compact and Hausdorff, then we can construct a compactification $Y$ of $X$ by adding a single point $\infty$ to $X$, and defining the topology on $Y$ as exactly the open sets of $X$ together with the sets of the form $\{\infty\} \cup (X \setminus K)$ where $K$ is a compact subset of $X$.
 
 Suppose $f:X_{1} \to X_{2}$ is a continuous map between two locally compact Hausdorff spaces. Let $X_{1}^{+}$ and $X_{2}^{+}$ be the one-point compactifications of $X_{1}$ and $X_{2}$, respectively. Then, we can extend $f$ to a continuous map $f^{+} : X_{1}^{+} \to X_{2}^{+}$ by defining $f^{+}(x) = f(x)$ for all $x \in X_{1}$, and $f^{+}(\infty) = \infty$. The reader may verify that this is a well-defined continuous map. One can also show that $f^{+}$ is continuous if and only if $f^{-1}(K)$ is compact for every compact $K \subseteq X_{2}$. Moreover, if $f$ is a homeomorphism, then so is $f^{+}$.
+
+\section{Countability}
+\textit{March 3rd.}
+
+\begin{definition}
+    $X$ has a \eax{countable basis} at $x \in X$ if there exists a countable collection $\{U_{n}\}_{n \geq 1}$ of open neighbourhoods of $x$ such that for every open neighbourhood $V$ of $x$, there exists some $n$ such that $U_{n} \subseteq V$. If $X$ has a countable basis at every point, then $X$ is said to be \eax{first countable}.
+\end{definition}
+
+For example, any metric space is first countable, since for each $x \in X$, the collection $\{B(x,1/n)\}_{n \geq 1}$ is a countable basis at $x$.
+
+\begin{lemma}
+    If $X$ is first countable and $A \subseteq X$, then for every $x \in \bar{A}$, there exists a sequence $\{x_{n}\}$ in $A$ such that $x_{n} \to x$.
+\end{lemma}
+
+\begin{proof}
+    Let $\{B_{n}\}_{n \geq 1}$ be a countable basis at $x$. Note that $B_{1} \supseteq B_{1} \cap B_{2} \supseteq \cdots \supseteq \{x\}$ is a sequence of nested open neighbourhoods of $x$. Since $x \in \bar{A}$ and $x \in B_{1} \cap \cdots \cap B_{k}$ for all $k \geq 1$, we have that $A \cap (B_{1} \cap \cdots \cap B_{k}) \neq \emptyset$ for all $k$. Thus, we can choose some $x_{n} \in A \cap (B_{1} \cap \cdots \cap B_{n})$ for each $n$. Then, $\{x_{n}\}$ is a sequence in $A$ such that $x_{n} \to x$, since for every open neighbourhood $V$ of $x$, there exists some $N$ such that $B_{1} \cap \cdots \cap B_{N} \subseteq V$, so for all $n \geq N$, we have $x_{n} \in B_{1} \cap \cdots \cap B_{N} \subseteq V$. Hence, the result holds.
+\end{proof}
+
+\begin{definition}
+    $X$ is \eax{second countable} if $X$ has a countable basis, that is, there exists a countable collection $\{U_{n}\}_{n \geq 1}$ of open sets such that for every open set $V$, there exists some $n$ such that $U_{n} \subseteq V$.
+\end{definition}
+
+For example, $\R^{n}$ is second countable; the collection $\{B(q,1/n) \mid q \in \Q^{n}, n \geq 1\}$ is a countable basis of $\R^{n}$. For $\R^{\N}$ with the product topology, the collection $\{\prod_{i=1}^{\infty} U_{i} \mid U_{i} = \R \text{ for all but finitely many } i, U_{i} = B(q_{i},1/n) \text{ for some } q_{i} \in \Q, n \geq 1\}$ is a countable basis of $\R^{\N}$.
+
+\begin{lemma}
+    If $X$ is second countable, then any discrete subspace of $X$ is countable.
+\end{lemma}
+
+\begin{proof}
+    Let $A$ be a discrete subspace of $X$. Then, for each $a \in A$, there exists an open neighbourhood $U_{a}$ of $a$ such that $U_{a} \cap A = \{a\}$. Since $X$ is second countable, there exists a countable basis $\{V_{n}\}_{n \geq 1}$ of $X$. For each $a \in A$, there exists some $n$ such that $V_{n} \subseteq U_{a}$. Thus, we can define a map $\varphi : A \to \N$ by $\varphi(a) = n$ where $n$ is the least natural number such that $V_{n} \subseteq U_{a}$. We claim that $\varphi$ is injective. Let $a,b \in A$ such that $\varphi(a) = \varphi(b) = n$. Then, we have $V_{n} \subseteq U_{a}$ and $V_{n} \subseteq U_{b}$, so $V_{n} \subseteq U_{a} \cap U_{b}$. However, since $U_{a} \cap A = \{a\}$ and $U_{b} \cap A = \{b\}$, we have that $(U_{a} \cap U_{b}) \cap A = (U_{a} \cap A) \cap (U_{b} \cap A) = \{a\} \cap \{b\}$, so if $a \neq b$, then $(U_{a} \cap U_{b}) \cap A = \emptyset$, contradicting the fact that $V_{n} \subseteq U_{a} \cap U_{b}$ and $V_{n} \cap A$ is non-empty (since if it were empty, then there would be no least natural number such that $V_{n} \subseteq U_{a}$). Hence, we must have $a = b$, proving that $\varphi$ is injective. Thus, there exists an injection from the discrete subspace $A$ to $\N$, so $A$ is countable.
+\end{proof}
+
+\begin{lemma}
+    The following hold true.
+    \begin{itemize}
+        \item If $X$ is first countable, then any subspace of $X$ is first countable.
+        \item If $X_{i}$'s are first countable, then so is $\prod_{i=1}^{\infty} X_{i}$ with the product topology.
+        \item The above two statements also hold if we replace `first countable' with `second countable'.
+    \end{itemize}
+\end{lemma}
+
+\begin{proof}
+    The first statement is straightforward and is left to the reader. For the second statement, let $X = \prod_{i=1}^{\infty} X_{i}$ with the product topology, and let $\{B_{ji}\}_{j \geq 1}$ be a countable basis at $x_{i} \in X_{i}$ for each $i$. Look at
+    \begin{align}
+        \cB = \{\prod_{i=1}^{\infty} U_{i} \mid U_{i} = B_{ji} \text{ for some } j \text{ and finitely many } i\text{; } U_{i} = X_{i} \text{ for all other } i\}.
+    \end{align}
+    We claim that $\cB$ is a countable basis at $x = (x_{1}, x_{2}, \ldots)$. Let $U$ be an open neighbourhood of $x$. Then, there exists some basic open set $\prod_{i=1}^{\infty} U_{i}$ such that $x \in \prod_{i=1}^{\infty} U_{i} \subseteq U$, where $U_{i}$ is an open neighbourhood of $x_{i}$ for each $i$. Since $\{B_{ji}\}_{j \geq 1}$ is a countable basis at $x_{i}$, there exists some $j$ such that $B_{ji} \subseteq U_{i}$ for each $i$. Thus, we have $\prod_{i=1}^{\infty} B_{ji} \subseteq \prod_{i=1}^{\infty} U_{i} \subseteq U$, so $\cB$ is a countable basis at $x$. Hence, the product space $\prod_{i=1}^{\infty} X_{i}$ is first countable. A similar argument works for second countability.
+\end{proof}
+
+\begin{theorem}
+    Suppose $X$ has a countable basis. Then, every open cover of $X$ has a countable subcover. Moreover, there exists a countable dense subset of $X$.
+\end{theorem}
+A topological space satisfying the fact that every open cover has a countable subcover is called a \eax{Lindel\"of space}. A topological space with a countable dense subset is called a \eax{separable space}.
+\begin{proof}
+    Let $\{U_{\alpha}\}_{\alpha \in \Lambda}$ be an open cover of $X$, and let $B_{1},B_{2},\ldots$ be a countable basis. Pick some $i_{1}$ such that $B_{i_{1}} \subseteq U_{\alpha_{1}}$ for some $\alpha$ indexed as $\alpha_{1}$. Then rule out all $B_{i} \subseteq U_{\alpha_{i}}$ from the list indexed by $\N$. Continue this process to get $U_{\alpha_{1}},U_{\alpha_{2}},\ldots$. Then $X = \bigcup_{i \in \N} U_{\alpha_{i}}$ since $X = \bigcup B_{i}$. This shows the first statement.
+
+    For the second statement, let $x_{n} \in B_{n}$ for all $n$, and let $D = \{x_{n} \mid n \in \N\}$. Then $D$ is countable; we claim that $D$ is dense. For any $x \in X$, and $U$ an open neighbourhood of $x$, there exists some $B_{i}$ contained in $U$ since $B_{i}$ is a basis. Since $x_{i} \in B_{i}$, $U \cap D \neq \emptyset$ so $x \in \bar{D}$.
+\end{proof}
+
+\begin{lemma}
+    A metric space $(X,d)$ is Linde\"of if and only if it is separale if and only if it is second countable.
+\end{lemma}
+\begin{proof}
+    Let $(X,d)$ be separable. Suppose $D = \{x_{n}\}_{n \geq 1}$ is dense in $X$. Then $\cB = \{B(x_{n},\frac{1}{m}) \mid m,n \geq 1\}$ is a countable basis.
+\end{proof}
