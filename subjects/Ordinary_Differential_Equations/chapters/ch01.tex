@@ -801,6 +801,8 @@ In fact, using the above theorem, lemma, and proposition, we have the following 
     Let $T:V \to V$ be a linear operator. If $T$ is nilpotent, then we are done. Otherwise, let $\lambda_{1},\ldots,\lambda_{m}$ be the distinct generalized eigenvalues of $T$. Then, $V = \bigoplus_{i=1}^{m} G_{\lambda_{i}}(T)$, and $(T-\lambda_{i}I) \big|_{G_{\lambda_{i}}(T)}$ is nilpotent for all $i = 1,\ldots,m$. Hence, there exists a Jordan basis $\cB_{i}$ for $(T-\lambda_{i}I) \big|_{G_{\lambda_{i}}(T)}$ for all $i = 1,\ldots,m$. Finally, $\cB = \bigcup_{i=1}^{m} \cB_{i}$ is a Jordan basis for $T$.
 \end{proof}
 
+\subsection{Exponential}
+
 \noindent \textit{March 2nd.}
 
 Let us solve $\dot{X} = AX$ as a linear system where $A \in M_{n}(\R)$. We apply Picard's iterations starting with $X_{0}(t) \equiv X_{0}$. Then
@@ -850,4 +852,37 @@ Thus, if $A$ is a Jordan block with eigenvalue $\lambda$, then
         0 & 0 & 0 & \cdots & 1
     \end{pmatrix}.
 \end{align}
-If $A$ is in Jordan form, then $e^{tA}$ is a block diagonal matrix where the blocks are of the form $e^{tJ_{k}(\lambda)}$. Finally, if $A$ is any arbitrary matrix and that there exists an invertible matrix $P$ such that $P^{-1}AP = B$, then $e^{tA} = P e^{tB} P^{-1}$. Hence, we can compute $e^{tA}$ for any arbitrary matrix $A$ by putting $A$ into Jordan form. Thus, any such ODE $\dot{X} = AX$ can be easily solved by putting $A$ into Jordan form. 
+If $A$ is in Jordan form, then $e^{tA}$ is a block diagonal matrix where the blocks are of the form $e^{tJ_{k}(\lambda)}$. Finally, if $A$ is any arbitrary matrix and that there exists an invertible matrix $P$ such that $P^{-1}AP = B$, then $e^{tA} = P e^{tB} P^{-1}$. Hence, we can compute $e^{tA}$ for any arbitrary matrix $A$ by putting $A$ into Jordan form. Thus, any such ODE $\dot{X} = AX$ can be easily solved by putting $A$ into Jordan form.
+\\ \\
+\textit{March 4th.}
+
+We now restrict to $n = 2$ for $\dot{X} = AX$, which has the solution $e^{tA}X_{0}$. If $A$ is diagonalizable over $\R$, then we can pick an eigenbasis $\{v_{1},v_{2}\}$ for $\R^{2}$ corresponding to the eigenvalues $\lambda_{1}$ and $\lambda_{2}$, respectively. Then, $e^{tA} v_{1} = e^{\lambda_{1} t} v_{1}$ and $e^{tA} v_{2} = e^{\lambda_{2} t} v_{2}$, and thus $e^{tA}$ is a diagonal matrix with entries $e^{\lambda_{1} t}$ and $e^{\lambda_{2} t}$ with respect to the basis $\{v_{1},v_{2}\}$. Any solution will then look like $X(t) = a e^{\lambda_{1} t} v_{1} + b e^{\lambda_{2} t} v_{2}$ for some $a,b \in \R$. We look at cases now.
+
+\begin{enumerate}
+    \item $\det A = 0$: Without the loss of generality, assume $\lambda_{1} = 0$ and $\lambda_{2} \neq 0$. Then $X(t) = av_{1} + be^{\lambda_{2} t} v_{2}$. If $\lambda_{2} > 0$, then $\lim_{t \to \infty} \norm{X(t)} = \infty$ and if $\lambda_{2} < 0$, then $\lim_{t \to \infty} X_{t} = av_{1}$.The phase portrait here is a  From here, we say that the system is \eax{stable} if $X_{t}$ is bounded for all $t$, \eax{unstable} if $\lim_{t \to \infty} \norm{X(t)} = \infty$, and \eax{asymptotically stable} if $\lim_{t \to \infty} X(t) = (0,0)$.
+    
+    \item $\lambda_{1}, \lambda_{2} > 0$: Here, let $x = ae^{\lambda_{1} t}$ and $y = be^{\lambda_{2} t}$ so that $X(t) = xv_{1} + yv_{2}$. For now, let us assume $v_{1} = e_{1}$ and $v_{2} = e_{2}$, the standard basis vectors. From here, we get
+    \begin{align}
+        y^{\lambda_{1}/\lambda_{2}} = \left( \frac{b^{\lambda_{1}/\lambda_{2}}}{a} \right)x
+    \end{align}
+    which represents different curves for different values of $\lambda_{1}$ and $\lambda_{2}$. In particular, for $\lambda_{2} = 2$ and $\lambda_{1} = 1$, we get $y = \left( \frac{b^{2}}{a} \right) x^{2}$, which is a parabola. This is an unstable system since $\lim_{t \to \infty} \norm{X(t)} = \infty$. The point $(0,0)$ is termed an \eax{unstable node} since all trajectories are moving away from it.
+
+    \item $\lambda_{1},\lambda_{2} < 0$: Here, we get the same curves as in the previous case, but the system is asymptotically stable since $\lim_{t \to \infty} X(t) = (0,0)$. The point $(0,0)$ is termed a \eax{stable node} since all trajectories are moving towards it.
+    
+    \item (wlog) $\lambda_{1} > 0 > \lambda_{2}$: Here, we get the same curves as in the previous cases, but the system is unstable since $\lim_{t \to \infty} \norm{X(t)} = \infty$. The point $(0,0)$ is termed a \eax{saddle point} since all trajectories are moving away from it except those on the line spanned by $v_{2}$.
+\end{enumerate}
+
+If $A$ is not diagonalizable over $\R$, then $A$ has complex conjugate eigenvalues $\lambda$ and $\bar{\lambda}$. Say, $\lambda = \alpha + i\beta$ where $\alpha,\beta \in \R$ and $\beta \neq 0$. Let $u = (u_{1}, u_{2})$ be an eigenvector in $\C^{2}$ corresponding to the eigenvalue $\lambda$. Then $Au = (\alpha + i \beta) u$. Taking the real and imaginary parts gives us $A \Re (u) = \alpha \Re (u) - \beta \Im (u)$ and $A \Im (u) = \alpha \Im (u) + \beta \Re (u)$. Note that both $v_{1} = \Re (u)$ and $v_{2} = \Im (u)$ are linearly independent vectors over $\R$. If $v_{1} = e_{1}$ and $v_{2} = e_{2}$, then $A$ is represented by the matrix $\begin{pmatrix}
+    \alpha & \beta \\
+    -\beta & \alpha
+\end{pmatrix}$ with respect to the basis $\{v_{1},v_{2}\}$. Hence, $A = \alpha I + \beta B$ where $B = \begin{pmatrix}
+    0 & 1 \\
+    -1 & 0
+\end{pmatrix}$. In this case,
+\begin{align}
+    e^{tA} = e^{t\alpha I + t\beta B} = e^{t\alpha I} e^{t\beta B} = e^{t\alpha} \begin{pmatrix}
+        \cos \beta t & \sin \beta t \\
+        -\sin \beta t & \cos \beta t
+    \end{pmatrix}.
+\end{align}
+For when $\alpha = 0$, the phase portrait is a circle, and the system is stable. For when $\alpha > 0$, the phase portrait is a spiral moving away from the origin, and the system is unstable. For when $\alpha < 0$, the phase portrait is a spiral moving towards the origin, and the system is asymptotically stable. The sign of $\beta$ determines the direction of the spiral; if $\beta > 0$, then the spiral is counterclockwise, and if $\beta < 0$, then the spiral is clockwise. 
