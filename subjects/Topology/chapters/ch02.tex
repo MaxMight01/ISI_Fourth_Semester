@@ -630,3 +630,24 @@ A topological space satisfying the fact that every open cover has a countable su
 \begin{proof}
     Let $(X,d)$ be separable. Suppose $D = \{x_{n}\}_{n \geq 1}$ is dense in $X$. Then $\cB = \{B(x_{n},\frac{1}{m}) \mid m,n \geq 1\}$ is a countable basis.
 \end{proof}
+
+\textit{March 5th.}
+
+\begin{example}
+    Let us study the example of the lower limit topology $\R_{l}$ with basis $\{[a,b) \mid a < b \in \R\}$. $\R_{l}$ is first countable, since for each $x \in \R$, the collection $\{[x,x+1/n) \mid n \geq 1\}$ is a countable basis at $x$. We show that is it \textit{not} second countable. Suppose $\{U_{n}\}_{n \geq 1}$ is a countable basis of $\R_{l}$. Then, for each $x \in \R$, there exists some $n$ such that $[x,x+1) \subseteq U_{n}$. Thus, we can define a map $\varphi : \R \to \N$ by $\varphi(x) = n$ where $n$ is the least natural number such that $[x,x+1) \subseteq U_{n}$. This is an injection, since if $\varphi(x) = \varphi(y) = n$, then $[x,x+1) \subseteq U_{n}$ and $[y,y+1) \subseteq U_{n}$, so $U_{n} \cap [\min\{x,y\},\max\{x,y\}+1) \neq \emptyset$, contradicting the fact that $U_{n}$ is open in $\R_{l}$ and $[x,x+1)$ and $[y,y+1)$ are disjoint. Hence, there exists an injection from $\R$ to $\N$, which is a contradiction. Thus, $\R_{l}$ is not second countable. $\R_{l}$ is separable since $\Q$ is dense in $\R_{l}$.
+\end{example}
+
+For Lindel\"of, we discuss how one shows a space $X$ is Lindel\"of. Note that every open covering consisting of basis elements has a countable subcovering. The proof of this mimics the proof of the fact that secound countability implies Lindel\"of. Hence, this statement can be used to show that a space $X$ is Lindel\"of. For $\R_{l}$ specifically, let $\{[a_{\alpha},b_{\alpha})\}_{\alpha \in \Lambda}$ be an open covering of $\R_{l}$, consisting of basis elements. That is, $\R_{l} = \bigcup_{\alpha \in \Lambda} [a_{\alpha},b_{\alpha})$. Now define $\cC = \bigcup_{\alpha \in \Lambda} (a_{\alpha},b_{\alpha})$; we claim that $\R_{l} \setminus \cC$ is countable. Let $x \in \R_{l} \setminus \cC$. Then, $x \in [a_{\alpha},b_{\alpha})$ for some $\alpha$, so $x = a_{\alpha}$, since if $x > a_{\alpha}$, then $x \in (a_{\alpha},b_{\alpha})$, contradicting the fact that $x \notin \cC$. Now for each $\alpha$, pick a rational $q_{x}$ in $(a_{\alpha},b_{\alpha})$; this is possible since $(a_{\alpha},b_{\alpha})$ is non-empty. We claim that the map $x \mapsto q_{x}$ is injective. Let $x,y \in \R_{l} \setminus \cC$ such that $q_{x} = q_{y}$. Then, there exist $\alpha$ and $\beta$ such that $x = a_{\alpha}$ and $y = a_{\beta}$, so $q_{x} = q_{y} \in (a_{\alpha},b_{\alpha}) \cap (a_{\beta},b_{\beta})$, contradicting the fact that $[a_{\alpha},b_{\alpha})$ and $[a_{\beta},b_{\beta})$ are disjoint. Hence, there exists an injection from $\R_{l} \setminus \cC$ to $\Q$, so $\R_{l} \setminus \cC$ is countable. From here, we can find a countable subcovering of $\R_{l} \setminus \cC$ by picking $[a_{\alpha},b_{\alpha})$ for each $x \in \R_{l} \setminus \cC$, and we can find a countable subcovering of $\cC$ since $\cC$ is an open covering of $\R_{l}$ in the usual topology, so there exists a countable subcovering of $\R_{l}$, proving that $\R_{l}$ is Lindel\"of.
+
+\begin{definition}
+    Suppose $X$ is a topological space where all singletons are closed. $X$ is termed \eax{regular} if every pair $(x,F)$ where $x \in X$ and $F$ is a closed set such that $x \notin F$, has disjoint open neighbourhoods. Note that regular implies Hausdorff. $X$ is termed \eax{normal} if every pair $(F_{1},F_{2})$ where $F_{1}$ and $F_{2}$ are disjoint closed sets, has disjoint open neighbourhoods. Note that normal implies regular.
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be a topological space such that singletons are closed. $X$ is regular if and only if for all $x \in X$ and open neighbourhood $U$ of $x$, there exists an open neighbourhood $V$ of $x$ such that $\bar{V} \subseteq U$. $X$ is normal if and only if for all closed $F$ and open neighbourhood $U$ of $F$, there exists an open neighbourhood $V$ of $F$ such that $\bar{V} \subseteq U$.
+\end{theorem}
+
+
+\begin{proof}
+    Assume that $X$ is regular. Let $x \in X$ and $U$ be an open neighbourhood of $x$. Since $X$ is regular, there exist disjoint open neighbourhoods $V$ of $x$ and $W$ of $X \setminus U$. Then $V \subseteq X \setminus W$, so $\bar{V} \subseteq \overline{X \setminus W} = X \setminus W \subseteq U$. Conversely, assume that for all $x \in X$ and open neighbourhood $U$ of $x$, there exists an open neighbourhood $V$ of $x$ such that $\bar{V} \subseteq U$. Let $x \in X$ and $F$ be a closed set such that $x \notin F$. Then, $X \setminus F$ is an open neighbourhood of $x$, so there exists an open neighbourhood $V$ of $x$ such that $\bar{V} \subseteq X \setminus F$. Then, $V$ and $X \setminus \bar{V}$ are disjoint open neighbourhoods of $x$ and $F$, respectively, proving that $X$ is regular.
+\end{proof}
