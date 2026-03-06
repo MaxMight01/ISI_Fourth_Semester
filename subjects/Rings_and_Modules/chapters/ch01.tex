@@ -846,3 +846,67 @@ An important example of a multiplicative subset of a ring $R$ is to choose $S = 
 \end{proof}
 
 Let $R$ be an integral domain, and let $S_{x} = \{1,x,x^{2},\ldots\}$ and $S_{y} = \{1,y,y^{2},\ldots\}$ for some $x,y \in R$. Also let $S_{xy} = \{1,xy,x^{2}y^{2},\ldots\}$. Then, we have $S_{x}^{-1}R \subseteq S_{xy}^{-1}R$.
+\\ \\
+\noindent \textit{March 6th.}
+
+Recall that we define the quotient map as follows: given any ring homomorphism $\varphi : R \to A$ such that $I \subseteq \ker \varphi$ for $I$ an ideal of $R$, then there exists a unique map $\bar{\varphi}:R/I \to A$ such that $\bar{\varphi} \circ q = \varphi$, via $\bar{\varphi}(r + I) = \varphi(r)$. One can also define the quotient ring as follows.
+
+\begin{definition}
+    A quotient of a ring $R$ by an ideal $I$ is a ring homomorphism $q : R \to B$ such that for any ring homomorphism $\varphi : R \to A$ with $I \subseteq \ker \varphi$, there exists a unique ring homomorphism $\bar{\varphi} : B \to A$ satisfying $\bar{\varphi} \circ q = \varphi$.
+\end{definition}
+
+\begin{theorem}[The \eax{universal property of localization}]
+    Let $R$ be a ring and $S$ a multiplicative subset. Also let $f : R \to A$ be a ring homomorphism such that $f(s)$ is a unit in $A$ for all $s \in S$. Then there exists a unique homomorphism $\bar{f} : S^{-1}R \to A$ such that $\bar{f} \circ \varphi = f$, where $\varphi : R \to S^{-1}R$ is the localization map.
+\end{theorem}
+
+\begin{proof}
+    We define $\bar{f} : S^{-1}R \to A$ as $\bar{f} ( \frac{r}{s}) = f(s)^{-1} f(r)$. This $\bar{f}$ is well-defined; to show this let $\frac{r}{s} = \frac{r'}{s'}$. That is, there exists $u \in S$ such that $u(s'r - sr') = 0$. Thus,
+    \begin{align}
+        f(u) (f(s')f(r) - f(s)f(r')) = 0 \implies f(s') f(r) = f(s) f(r') \implies \bar{f}(\frac{r}{s}) = \bar{f}(\frac{r'}{s'})
+    \end{align}
+    since $u,s,s' \in S$ are all mapped to units in $A$. To show $\bar{f}$ is a ring homomorphism, we first have
+    \begin{align}
+        \bar{f}(\frac{r_{1}}{s_{1}} + \frac{r_{2}}{s_{2}}) = \bar{f}(s_{1}s_{2})^{-1} f(s_{2}r_{1} + s_{1}r_{2}) = f(s_{1})^{-1} f(r_{1}) + f(s_{2})^{-1} f(r_{2}) = \bar{f}(\frac{r_{1}}{s_{1}}) + \bar{f}(\frac{r_{2}}{s_{2}}).
+    \end{align}
+    Similarly, one can show multiplication. For uniqueness, let $g : S^{-1}R \to A$ be a ring homomorphism such that $g \circ \varphi = f$. Then $g(\frac{r}{s}) = g(\frac{r}{1}) g(\frac{1}{s}) = g \circ \varphi(r) (g \circ \varphi(s))^{-1} = f(r) f(s)^{-1} = \bar{f}(\frac{r}{s})$ showing $g = \bar{f}$.
+\end{proof}
+
+We look at some applications of localization.
+
+\begin{proposition}
+    Let $R$ be an integral domain and $K$ be a field. Moreover, let $i:R \to K$ be an injective ring homomorphism. Then $i$ extends to an injective ring homomorphism $\tilde{\iota} : \mathrm{frac}(R) \to K$. In other words, if $R \subseteq K$, then $\mathrm{frac}(R) \subseteq K$.
+\end{proposition}
+Here, recall that $\mathrm{frac}(R)$ is the field of fractions of an integral domain $R$; its the localization of $R$ with $R \setminus \{0\}$ chosen as the multiplicative subset.
+\begin{proof}
+    Note that $i(s)$ is a unit in $K$ for all $s \neq 0$. By the universal property, there exists a unique ring homomorphism $\tilde{\iota} : \mathrm{frac}(R) \to K$ such that $\tilde{\iota} \circ \varphi = i$, with $\varphi$ being the localization map. Thus, $\tilde{\iota} (\frac{r}{1}) = i(r)$ for all $r \in R$. Moreover, $\tilde{\iota} : \mathrm{frac}(R) \to K$ is also injective; we have
+    \begin{align}
+        \tilde{\iota}(\frac{r}{s}) = 0 \implies \tilde{\iota}(\frac{r}{1}) = i(r) = 0 \implies r = 0 \implies \frac{r}{s} = \frac{0}{1}
+    \end{align}
+    since $i$ is injective.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be a ring and $a \in R$. Then,
+    \begin{align}
+        R[X] / (aX-1) \cong R[\frac{1}{a}]
+    \end{align}
+    via the map $r \mapsto \frac{r}{1}$ for all $r \in R$ and $X \mapsto \frac{1}{a}$.
+\end{proposition}
+
+\begin{proof}
+    Define the map $\alpha: R[X] \to S^{-1}R = R[\frac{1}{a}]$ via $f(X) \mapsto f(\frac{1}{a})$. Let $I = (aX - 1)$. Note that $\alpha (aX - 1) = \frac{a}{1} \cdot \frac{1}{a} - \frac{1}{1} = 0$, so $(aX - 1) \subseteq \ker \alpha$. Thus, we have a ring homomorphism $\bar{\alpha}: R[X]/I \to S^{-1}R$ such that $\bar{\alpha} \circ q = \alpha$, $q$ being the quotient map; $\bar{\alpha} (f(X) + I) = f(\frac{1}{a})$. We now give a map in the other direction; let $f : R \to R[X]/I$ be the map defined by $f(r) = r + I$. Note that $S = \{1,a,a^{2},\ldots\}$; each $a^{n}$ is mapped to the unit $a^{n} + I$ with inverse $X^{n} + I$. Thus, by the universal property of localization, there exists a unique ring homomorphism $\bar{f} : S^{-1} R \to R[X]/(aX - 1)$ such that $\bar{f} \circ \varphi = f$. We show that $\bar{\alpha}$ and $\bar{f}$ are inverses of each other. To this end, see that
+    \begin{align}
+        \bar{f} \circ \bar{\alpha} (g(X) + I) = \bar{f} \circ \alpha (g(X)) = \bar{f} \circ g(\frac{1}{a}) = (b_{n}+I) \bar{f}(\frac{1}{a^{n}}) + (b_{n-1}+I) \bar{f}(\frac{1}{a^{n-1}}) + \cdots (b_{0}+I)
+    \end{align}
+    which is $(b_{n}+I)(X^{n}+I) + \cdots + (b_{1}+I)(X+I) + b_{0}+I = (b_{n}X^{n} + b_{n-1}X^{n-1} + \cdots + b_{0}) + I = g(X) + I$. Similarly, one can show that the $\bar{\alpha} \circ \bar{f}$.
+\end{proof}
+
+\subsection{Local Ring}
+
+\begin{definition}
+    A ring is called a \eax{local ring} if it has a unique maximal ideal.
+\end{definition}
+
+Of course, a trivial example is fields; the unique maximal ideal is $\{0\}$. In the ring of power series $k[[X]]$, $(X)$ is the unique maximal ideal making $k[[X]]$ a local ring for a field $k$. $\Z/p^{r}\Z$ is a local ring with $p\Z/p^{r}\Z$ the unique maximal ideal.
+
+For a more particular example, let $R \subseteq \C(X)$ be the subring of the field of complex rational functions defined as follows: $R = \{f(X)/g(X) \mid f(X),g(X) \in \C[X] \text{ and } g(0) \neq 0 \}$. One can verify that this is a ring; it is the ring of rational functions from $\C$ to $\C$ which is defined at $0$. Since such a function is continuous in its domain, it is locally define at $0$. In fact, $R$ is a local ring with the maximal ideal consisting of those rational functions $h$ such that $h(0) = 0$.
