@@ -885,4 +885,12 @@ If $A$ is not diagonalizable over $\R$, then $A$ has complex conjugate eigenvalu
         -\sin \beta t & \cos \beta t
     \end{pmatrix}.
 \end{align}
-For when $\alpha = 0$, the phase portrait is a circle, and the system is stable. For when $\alpha > 0$, the phase portrait is a spiral moving away from the origin, and the system is unstable. For when $\alpha < 0$, the phase portrait is a spiral moving towards the origin, and the system is asymptotically stable. The sign of $\beta$ determines the direction of the spiral; if $\beta > 0$, then the spiral is counterclockwise, and if $\beta < 0$, then the spiral is clockwise. 
+For when $\alpha = 0$, the phase portrait is a circle, and the system is stable. For when $\alpha > 0$, the phase portrait is a spiral moving away from the origin, and the system is unstable. For when $\alpha < 0$, the phase portrait is a spiral moving towards the origin, and the system is asymptotically stable. The sign of $\beta$ determines the direction of the spiral; if $\beta > 0$, then the spiral is counterclockwise, and if $\beta < 0$, then the spiral is clockwise.
+\\ \\
+\noindent \textit{March 9th.}
+
+Note that $\tau \defeq \tr A = \lambda_{1} + \lambda_{2}$ and $\Delta \defeq \det A = \lambda_{1} \lambda_{2}$. Hence, we get
+\begin{align}
+    \lambda_{1},\lambda_{2} = \frac{\tau \pm \sqrt{\tau^{2} - 4\Delta}}{2}.
+\end{align}
+Plotting $\tau$ on the $y$-axis against $\Delta$ on the $x$-axis gives three regions: the region $\tau^{2} < 4\Delta$ corresponds to the case when $A$ is not diagonalizable over $\R$, the region $\tau^{2} > 4\Delta$ corresponds to the case when $A$ is diagonalizable over $\R$, and the parabolic curve $\tau^{2} = 4\Delta$ corresponds to the case when $A$ has both eigenvalues equal. Further regions can be drawn by considering the signs of $\tau$ and $\Delta$. For instance, $\Delta < 0$ gives the case of saddle points, $\tau^{2} < 4 \Delta$ with $\Delta > 0$ gives an unstable spiral, and $\tau^{2} < 4 \Delta$ with $\Delta < 0$ gives a stable spiral. The region $\tau^{2} > 4 \Delta$ with $\Delta > 0$ and $\tau > 0$ gives an unstable node, and the region $\tau^{2} > 4 \Delta$ with $\Delta > 0$ and $\tau < 0$ gives a stable node. Finally, the region $\tau^{2} > 4 \Delta$ with $\Delta = 0$ gives a degenerate node.
