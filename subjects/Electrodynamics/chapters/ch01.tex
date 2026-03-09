@@ -822,4 +822,27 @@ As an example, consider the case of a metal sphere of radius $a$ surrounded by a
 \begin{align}
     V = -\int_{\infty}^{0} \bv{E} \cdot \di{\bv{l}} = -\int_{\infty}^{b} \bv{E} \cdot \di{\bv{l}} - \int_{b}^{a} \bv{E} \cdot \di{\bv{l}} = \frac{Q}{4 \pi} \left( \frac{1}{\epsilon_{0} b} + \frac{1}{\epsilon a} - \frac{1}{\epsilon b} \right).
 \end{align}
-For bound charges, $\bv{P} = \epsilon_{0} \chi_{e} \bv{E}$ gives $\rho_{b} = -\nabla \cdot \bv{P} = 0$ and $\sigma_{b} = \bv{P} \cdot \hat{\bv{n}} = \frac{\epsilon_{0} \chi_{e} Q}{4 \pi \epsilon b^{2}}$ on the outer surface of the dielectric, and $\sigma_{b} = -\frac{\epsilon_{0} \chi_{e} Q}{4 \pi \epsilon a^{2}}$ on the inner surface of the dielectric. Note that the bound charge on the inner surface is negative, which is consistent with the fact that the electric field points in the positive $r$-direction. 
+For bound charges, $\bv{P} = \epsilon_{0} \chi_{e} \bv{E}$ gives $\rho_{b} = -\nabla \cdot \bv{P} = 0$ and $\sigma_{b} = \bv{P} \cdot \hat{\bv{n}} = \frac{\epsilon_{0} \chi_{e} Q}{4 \pi \epsilon b^{2}}$ on the outer surface of the dielectric, and $\sigma_{b} = -\frac{\epsilon_{0} \chi_{e} Q}{4 \pi \epsilon a^{2}}$ on the inner surface of the dielectric. Note that the bound charge on the inner surface is negative, which is consistent with the fact that the electric field points in the positive $r$-direction.
+\\ \\
+\noindent \textit{March 9th.}
+
+Note that $\nabla \times \bv{E}$ gives $\nabla \times \bv{D} = \nabla \times \bv{P}$ which is generally non-zero. From here, we get $\oint \bv{D} \cdot \di{\bv{l}} = \oint \bv{P} \cdot \di{\bv{l}}$.
+
+\subsubsection{The Capacitor}
+A \eax{capacitor} consists of two parallel plates, with a dielectric filled between them. One plate is positively charged with $+Q$, and the other with $-Q$. For a vacuum between the plates, electric field is given as
+\begin{align}
+    E = \frac{\sigma}{\epsilon_{0}} = \frac{Q}{\epsilon_{0} A}
+\end{align}
+where $A$ is the area of the plate. Thus the potential is given by $V = Ed = \frac{\sigma d}{\epsilon_{0}}$ where $d$ is the distance between the plates. From here, the \eax{capacitance} of the capacitor is then defined to \begin{align}
+    C = \frac{Q}{V} = \frac{\epsilon_{0} A}{d}.
+\end{align}
+For the case with the space is filled with a linear dielectric of relative permittivity of $\epsilon_{r}$, a similar working shows the new capacitance to be \begin{align}
+    C = \epsilon_{r} C_{\text{vac}}.
+\end{align}
+
+\subsubsection{Boundary Value Problems}
+Here, we have
+\begin{align}
+    \rho_{b} = - \nabla \cdot \bv{P} = - \nabla \cdot \left( \frac{\epsilon_{0} \chi_{e}}{\epsilon} \right) \bv{D} = \implies \rho_{b} = - \left( \frac{\chi_{e}}{1 + \chi_{e}} \right) \rho_{f}.
+\end{align}
+Thus, for a linear dielectric, $\rho_{b} \propto \rho_{f}$. In particular, if the free charge is not embedded in the dielectric, then $\rho = 0$; the entire bound charge resides on the surface.
