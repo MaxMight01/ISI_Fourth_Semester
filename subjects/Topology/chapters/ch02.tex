@@ -679,3 +679,30 @@ Note that normal implies regular implies Hausdorff. For metric spaces, we have t
 \begin{proof}
     We first show that a compact Hausdorff space $X$ is regular. Let $x \in X$ and $F$ be a closed set such that $x \notin F$. For each $y \in F$, there exist disjoint open neighbourhoods $U_{y}$ of $y$ and $V_{y}$ of $x$. Then, $\{U_{y}\}_{y \in F}$ is an open covering of $F$, so there exists a finite subcovering $\{U_{y_{i}}\}_{i=1}^{n}$ of $F$. Then, $\bigcup_{i=1}^{n} U_{y_{i}}$ and $\bigcap_{i=1}^{n} V_{y_{i}}$ are disjoint open neighbourhoods of $F$ and $x$, respectively, proving that $X$ is regular. To show that $X$ is normal, let $F_{1}$ and $F_{2}$ be two disjoint closed sets. For each $x \in F_{1}$, there exist disjoint open neighbourhoods $U_{x}$ of $x$ and $V_{x}$ of $F_{2}$. Then, $\{U_{x}\}_{x \in F_{1}}$ is an open covering of $F_{1}$, so there exists a finite subcovering $\{U_{x_{i}}\}_{i=1}^{n}$ of $F_{1}$. Then, $\bigcup_{i=1}^{n} U_{x_{i}}$ and $\bigcap_{i=1}^{n} V_{x_{i}}$ are disjoint open neighbourhoods of $F_{1}$ and $F_{2}$, respectively, proving that $X$ is normal.
 \end{proof}
+
+
+\textit{March 10th.}
+
+\begin{theorem}[\eax{Urysohn's lemma}]
+    Let $X$ be a normal space, and $A$ and $B$ be two disjoint closed sets. Then, there exists a continuous function $f:X \to [0,1]$ such that $f(A) = \{0\}$ and $f(B) = \{1\}$.
+\end{theorem}
+
+\begin{proof}
+    Define $Q = \Q \cap [0,1]$. Enumerate $Q$ as $Q = \{0,1,r_{2},r_{3},\ldots\}$ and define $Q_{n}$ to be the first $n$ many elements of $Q$. Thus, $Q_{1} \subseteq Q_{2} \subseteq \cdots$ and $\bigcup_{n=1}^{\infty} Q_{n} = Q$. Note that $U_{1} = X \setminus B$ is open and $A \subseteq U_{1}$. By normality, there exists an open $U_{0}$ such that $A \subseteq U_{0} \subseteq \bar{U}_{0} \subseteq U_{1}$. Now suppose we have defined $U_{p}$ for all $p \in Q_{n}$ such that $A \subseteq U_{p} \subseteq \bar{U}_{p} \subseteq U_{q}$ for all $p < q$ in $Q_{n}$. Let $r$ be the next element in $Q$ after $Q_{n}$. We claim that there exist $p,q \in Q_{n}$ such that $p < r < q$, with no other element of $Q_{n}$ between $p$ and $q$. If not, then either there is no element of $Q_{n}$ less than $r$, or there is no element of $Q_{n}$ greater than $r$, or there are infinitely many elements of $Q_{n}$ less than $r$, or there are infinitely many elements of $Q_{n}$ greater than $r$. The first two cases cannot happen since $0,1 \in Q_{n}$. The last two cases cannot happen since $Q_{n}$ is finite. Thus, there exist $p,q \in Q_{n}$ such that $p < r < q$, with no other element of $Q_{n}$ between $p$ and $q$. By the definition of the $U_{i}$'s, we get $\bar{U}_{p} \subseteq U_{r} \subseteq \bar{U}_{r} \subseteq U_{q}$. Thus, we can define $U_{r}$ to be an open set such that $\bar{U}_{p} \subseteq U_{r} \subseteq \bar{U}_{r} \subseteq U_{q}$, which is possible by normality. By induction, we can define $U_{p}$ for all $p \in Q$ such that $A \subseteq U_{p} \subseteq \bar{U}_{p} \subseteq U_{q}$ for all $p < q$ in $Q$. Now, we can define a function $f:X \to [0,1]$ by $f(x) = \inf\{p \in Q \mid x \in U_{p}\}$. Note that $f(x)$ is well-defined since $\{p \in Q \mid x \in U_{p}\}$ is bounded below by $0$ (and above by $1$). So $f(X) \subseteq [0,1]$. Since $A \subseteq U_{0}$, $0 \in Q(a)$ for all $a \in A$ giving $f(A) = \{0\}$. Since $B \subseteq X \setminus U_{1}$, $Q(x) = \emptyset$ for all $x \in B$, so $f(B) = \{1\}$. Finally, we show that $f$ is continuous; note two observations. Observation $\alpha$: $x \in \bar{U}_{r} \implies x \in U_{s} \text{ for all } s > r \implies f(x) \leq r$. Observation $\beta$: $x \notin U_{r} \implies x \notin U_{s} \text{ for all } s < r \implies f(x) \geq r$. Now given any $(c,d) \subseteq \R$, we wish to show that $f^{-1}(c,d)$ is open. Let $x_{0} \in f^{-1}(c,d)$. Then there exist $r,s \in \Q$ such that $r < f(x_{0}) < s$ and $r > c$ and $s < d$. By observation $\alpha$, we have $x_{0} \in \bar{U}_{r}$, so there exists an open neighbourhood $V$ of $x_{0}$ such that $V \subseteq U_{r}$. By observation $\beta$, we have $x_{0} \notin U_{s}$, so there exists an open neighbourhood $W$ of $x_{0}$ such that $W \cap U_{s} = \emptyset$. Then, we have $V \cap W \subseteq U_{r} \cap (X \setminus U_{s}) \subseteq f^{-1}(c,d)$, so $f^{-1}(c,d)$ is open. Hence, $f$ is continuous.
+\end{proof}
+
+\begin{theorem}
+    If $X$ is compact and Hausdorff, then it is normal. If $X$ is locally compact and Hausdorff, then it is regular.
+\end{theorem}
+
+\begin{theorem}
+    Every regular second countable space is normal.
+\end{theorem}
+\begin{proof}
+    Suppose $A$ and $B$ are disjoint closed sets of a regular second countable space $X$. Let $\cB = \{B_{n}\}_{n \geq 1}$ be a countable basis of $X$. For each $a \in A$, there exists an open neighbourhood $U_{a}$ of $a$ with $U_{a} \cap B = \emptyset$. By regularity, there exists an open neighbourhood $V_{a}$ of $a$ such that $a \in V_{a} \subseteq \bar{V}_{a} \subseteq U_{a}$. note that there also exists $B_{a} \in \cB$ such that $a \in B_{a} \subseteq V_{a}$. Then, $\{B_{a}\}_{a \in A}$ is an open covering of $A$, so there exists a countable subcovering $\{U_{n}\}_{n \geq 1}$ of $A$. Similarly, we can find $\{V_{n}\}_{n \geq 1}$, a collection of basis elements, that cover $B$. 
+such that $V_{n} \cap A = \emptyset$ for all $n \geq 1$. Now define
+\begin{align}
+    U' = \bigcup_{n=1}^{\infty} (U_{n} \setminus \bigcup_{m=1}^{n} \bar{V}_{m}), \quad V' = \bigcup_{n=1}^{\infty} (V_{n} \setminus \bigcup_{m=1}^{n} \bar{U}_{m}).
+\end{align}
+Then $U'$ and $V'$ are disjoint open sets with $A \subseteq U'$ and $B \subseteq V'$, proving that $X$ is normal.
+\end{proof}
