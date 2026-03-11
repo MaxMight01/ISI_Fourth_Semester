@@ -894,3 +894,34 @@ Note that $\tau \defeq \tr A = \lambda_{1} + \lambda_{2}$ and $\Delta \defeq \de
     \lambda_{1},\lambda_{2} = \frac{\tau \pm \sqrt{\tau^{2} - 4\Delta}}{2}.
 \end{align}
 Plotting $\tau$ on the $y$-axis against $\Delta$ on the $x$-axis gives three regions: the region $\tau^{2} < 4\Delta$ corresponds to the case when $A$ is not diagonalizable over $\R$, the region $\tau^{2} > 4\Delta$ corresponds to the case when $A$ is diagonalizable over $\R$, and the parabolic curve $\tau^{2} = 4\Delta$ corresponds to the case when $A$ has both eigenvalues equal. Further regions can be drawn by considering the signs of $\tau$ and $\Delta$. For instance, $\Delta < 0$ gives the case of saddle points, $\tau^{2} < 4 \Delta$ with $\Delta > 0$ gives an unstable spiral, and $\tau^{2} < 4 \Delta$ with $\Delta < 0$ gives a stable spiral. The region $\tau^{2} > 4 \Delta$ with $\Delta > 0$ and $\tau > 0$ gives an unstable node, and the region $\tau^{2} > 4 \Delta$ with $\Delta > 0$ and $\tau < 0$ gives a stable node. Finally, the region $\tau^{2} > 4 \Delta$ with $\Delta = 0$ gives a degenerate node.
+
+\subsection{Non-Linear Systems}
+\noindent \textit{March 11th.}
+
+We are now concerned with ODEs of the form $\dot{X} = f(X)$, with $f$ a $C^{1}$-function. Consider the case when $X = (X_{1},X_{2})$. To obtain the phase portrait of the system, we pull some features of the ODE which will help in the sketching. First, the fixed points of the system are the points $X$ such that $f(X) = 0$. Nullclines, which curves where $\dot{X}_{1} = 0$ or $\dot{X}_{2} = 0$, are also useful; they partition $\R^{2}$ into regions where $\dot{X}_{1} \gtrless 0$ and $\dot{X}_{2} \gtrless 0$, which gives us the direction of the trajectories in each region. We may also consider \eax{closed orbit}s; a non-constant solution $X(t)$ satisfying $X(t+T) = X(t)$ for some $T > 0$. Further, an \eax{isolated closed orbit} is a closed orbit such that there exists an $\epsilon > 0$ such that any other closed orbit $Y(t)$ satisfies $\norm{X(t) - Y(t)} > \epsilon$ for some $t$; there is no other closed orbit within $\epsilon$-distance of $X(t)$.
+
+\subsubsection{Linearization Around a Fixed Point}
+Suppose $(x_{0},y_{0})$ is a fixed point of $\dot{X} = f(X)$; that is, $f(x_{0},y_{0}) = 0$. We can write $f(X) = f(x,y) = (f_{1}(x,y), f_{2}(x,y))$. Then, we can write
+\begin{align}
+    f(x_{0}+h,y_{0}+k) \approx \begin{pmatrix}
+        \partial_{1} f_{1} & \partial_{2} f_{1} \\ \partial_{1} f_{2} & \partial_{2} f_{2}
+    \end{pmatrix}_{(x_{0},y_{0})} \begin{pmatrix}
+        h \\ k
+    \end{pmatrix}
+\end{align}
+Linearization, however, doesn't always capture the local behaviour around a fixed point. For instance, consider the system $\dot{X} = f(X)$ where $f(x,y) = (-y + ax(x^{2}+y^{2}), x + ay (x^{2}+y^{2}))$ for some $a \in \R$. Then, $(0,0)$ is a fixed point of the system. The Jacobian matrix of $f$ at $(0,0)$ is $\begin{pmatrix}
+    0 & -1 \\
+    1 & 0
+\end{pmatrix}$. Converting to polar coordinates, however, suggests a spiral behaviour around the origin, which is not captured by the linearization. In particular, we have $\dot{r} = ar^{3}$ and $\dot{\theta} = 1$. Hence, if $a > 0$, then the system is unstable, and if $a < 0$, then the system is asymptotically stable. 
+
+\begin{definition}
+    We say that a center point $(x_{0},y_{0})$ of $\dot{X} = f(X)$ is \eax{hyperbolic} if the following holds: let $\dot{Z} = AZ$ be the linear approximation of $\dot{X} = f(X)$ at $(x_{0},y_{0})$. Then $\Re \lambda \neq 0$ for all eigenvalues $\lambda$ of $A$.
+\end{definition}
+
+\begin{definition}
+    Two solutions $X(t)$ and $Y(t)$ of $\dot{X} = f(X)$ are \eax{topological conjugates} if there exists a homeomorphism from an open neighborhood of the trajectory of $X(t)$ to an open neighborhood of the trajectory of $Y(t)$ such that the homeomorphism sends the trajectory of $X(t)$ to the trajectory of $Y(t)$ and preserves the direction of time.
+\end{definition}
+
+\begin{theorem}[\eax{Hartman-Grobman theorem}]
+    Suppose $\dot{X} = f(X)$ and $f \in c^{1}$. Say $p \in \R^{2}$ is a hyperbolic center point and let $\dot{Z} = AZ$ be the linear approximation of $\dot{X} = f(X)$ at $p$. Then, there exists an open neighborhood $U$ of $p$ such that the flow of $\dot{X} = f(X)$ restricted to $U$ is topologically conjugate to the flow of $\dot{Z} = AZ$ restricted to some open neighborhood of the origin, with $p$ mapped to the origin.
+\end{theorem}
