@@ -1,0 +1,17 @@
+\chapter{DYNAMICS}
+
+We are now concerned with the dynamics of charges and currents in the presence of electromagnetic fields. We will first discuss the motion of a single charge in an electromagnetic field, and then move on to the dynamics of continuous charge and current distributions. Recall that one had the \eax{magnetic field} $\bv{B}$ which led to the \eax{magnetic force} $\bv{F}_{\text{mag}} = q \bv{v} \times \bv{B}$ on a charge $q$ moving with velocity $\bv{v}$, and the electric field $\bv{E}$ which led to the electric force $\bv{F}_{\text{elec}} = q \bv{E}$ on a charge $q$. The total force on a charge $q$ in the presence of both electric and magnetic fields is given by the \eax{Lorentz force}:
+\begin{align}
+\bv{F} = q (\bv{E} + \bv{v} \times \bv{B}).
+\end{align}
+If we look at the pure magnetic force, note that the work done is simply $\di{W} = \bv{F}_{\text{mag}} \cdot \di{\bv{l}} = \bv{F}_{\text{mag}} \cdot \bv{v} \di{t} = 0$ since $\bv{F}_{\text{mag}}$ and $\bv{v}$ are perpendicular; we can state this as a theorem.
+
+\begin{theorem}
+    Magnetic fields do no work.
+\end{theorem}
+
+Recall that we also define the \eax{electric current} $I$ as the rate of flow of charge $\di{q}/\di{t}$. We can now modify the Lorentz force law; suppose we have a wire with charge $\lambda$ per unit length flowing with velocity $\bv{v}$, then the current is given by $I = \di{q}/\di{t} = \lambda \di{l}/\di{t} = \lambda v$. From here, current is promoted to a vector $\bv{I} = \lambda \bv{v}$. Thus,
+\begin{align}
+    \bv{F} = \int \di{q} (\bv{v} \times \bv{B}) = \int \lambda \di{l} (\bv{v} \times \bv{B}) = \int \di{l} (\bv{I} \times \bv{B}).
+\end{align}
+Suppose we have a rectangular loop of wire of side length $l$ carrying a current $I$, half-immersed in a perpendicular magnetic field $\bv{B}$; it also upholds a weight $mg$ attached to the other side of the loop. The magnetic force on the loop is given by $\bv{F} = \int \di{l} (\bv{I} \times \bv{B}) = I l B$, and the weight is given by $mg$. For the loop to be in equilibrium, we must have $I l B = mg$, or $I = mg/Bl$. What happens if we increase the current $I$, leading to $I > mg/Bl?$ The loop will be lifted up, and the weight will be lifted up as well. Say it has moved upwards by a distance $h$. But doesn't this imply that $W_{\text{mag}} = IBlh$, a non-zero work done by the magnetic field? When the loop is rising, the charges in the wire also acquire a vertical component of velocity, as well as the horizontal. The magnetic force on the charges is given by $\bv{F} = q (\bv{v} \times \bv{B})$, and the work done is given by $\di{W} = \bv{F} \cdot \di{\bv{l}} = q (\bv{v} \times \bv{B}) \cdot \di{\bv{l}}$. Since $\bv{v}$ and $\di{\bv{l}}$ are parallel, we have $\di{W} = 0$. The question is, where does the work come from? In fact, to maintain the current $I$ in the loop, we need to have a power source, such as a battery, which does work on the charges to maintain the current. The work done by the battery is given by $W_{\text{battery}} = IBlh$. The mechanical analogy is of a block sliding down a frictionless incline; the normal reaction force does no work, but adds an opposing horizontal force to the block, which is balanced by the component of the weight of the block along the incline. 

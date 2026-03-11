@@ -846,3 +846,17 @@ Here, we have
     \rho_{b} = - \nabla \cdot \bv{P} = - \nabla \cdot \left( \frac{\epsilon_{0} \chi_{e}}{\epsilon} \right) \bv{D} = \implies \rho_{b} = - \left( \frac{\chi_{e}}{1 + \chi_{e}} \right) \rho_{f}.
 \end{align}
 Thus, for a linear dielectric, $\rho_{b} \propto \rho_{f}$. In particular, if the free charge is not embedded in the dielectric, then $\rho = 0$; the entire bound charge resides on the surface.
+\\ \\
+\textit{March 11th.}
+
+In such a case, the condition on the boundary becomes
+\begin{align}
+    \epsilon_{\text{above}} E^{\perp}_{\text{above}} - \epsilon_{\text{below}} E^{\perp}_{\text{below}} = \sigma_{f}, \quad \epsilon_{\text{above}} \frac{\partial E_{\text{above}}}{\partial r} - \epsilon_{\text{below}} \frac{\partial E_{\text{below}}}{\partial r} = 0.
+\end{align}
+Let us utilize this in an example; consider a sphere of homogenous linear dielectric material with permittivity $\epsilon$ and radius $R$ placed in a uniform electric field $\bv{E} = E_{0} \hat{\bv{z}}$. We wish to find the field inside and outside the sphere. We can derive a few conditions:
+\begin{itemize}
+    \item $V_{\text{in}}(R,\theta) = V_{\text{out}}(R,\theta)$, since the potential is continuous at the boundary.
+    \item $\epsilon \frac{\partial V_{\text{in}}}{\partial r} \big|_{r=R} = \epsilon_{0} \frac{\partial V_{\text{out}}}{\partial r} \big|_{r=R}$, since $\sigma_{f} = 0$.
+    \item $V_{\text{out}}(r,\theta) \to -E_{0} z = -E_{0} r \cos \theta$ as $r \to \infty$, since the field at large distances should be the same as the applied field.
+\end{itemize}
+Using $V_{\text{in}}(r,\theta) = \sum_{l=0}^{\infty} A_{l} r^{l} P_{l}(\cos \theta)$ and $V_{\text{out}}(r,\theta) = \sum_{l=0}^{\infty} B_{l} r^{-(l+1)} P_{l}(\cos \theta)$, we can solve for the coefficients $A_{l}$ and $B_{l}$ using the above conditions. We get $A_{l}R^{l} = \frac{B_{l}}{R^{l+1}}$ for $l \neq 1$, and $A_{1} R = \frac{B_{1}}{R^{2}} - E_{0}R$ for $l = 1$. The first and third conditions combine to give $A_{l} = B_{l} = 0$ for $l \neq 1$; second conidition further gives $A_{1} = \frac{-3}{\epsilon_{r}+2} E_{0}$ and $B_{1} = \frac{\epsilon_{r}-1}{\epsilon_{r}+2} E_{0} R^{3}$. Thus, the potential may be found, and so the electric field.
