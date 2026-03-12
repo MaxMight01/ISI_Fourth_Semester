@@ -910,3 +910,36 @@ Here, recall that $\mathrm{frac}(R)$ is the field of fractions of an integral do
 Of course, a trivial example is fields; the unique maximal ideal is $\{0\}$. In the ring of power series $k[[X]]$, $(X)$ is the unique maximal ideal making $k[[X]]$ a local ring for a field $k$. $\Z/p^{r}\Z$ is a local ring with $p\Z/p^{r}\Z$ the unique maximal ideal.
 
 For a more particular example, let $R \subseteq \C(X)$ be the subring of the field of complex rational functions defined as follows: $R = \{f(X)/g(X) \mid f(X),g(X) \in \C[X] \text{ and } g(0) \neq 0 \}$. One can verify that this is a ring; it is the ring of rational functions from $\C$ to $\C$ which is defined at $0$. Since such a function is continuous in its domain, it is locally define at $0$. In fact, $R$ is a local ring with the maximal ideal consisting of those rational functions $h$ such that $h(0) = 0$.
+\\
+
+\textit{March 12th.}
+
+\begin{proposition}
+    Let $R$ be a ring and $P$ be a prime ideal of $R$. Set $S = R \setminus P$. Then $S^{-1}R$ is a local ring with unique maximal ideal $PS^{-1}R = \{\frac{r}{s} \mid r \in P,\; s \in R \setminus P\}$.
+\end{proposition}
+\begin{proof}
+    Note that it is enough to show that $PS^{-1}R$ is an ideal and $\alpha \in S^{-1}R \setminus PS^{-1}R$ is a unit. To show that $PS^{-1}R$ is an ideal, let $\frac{r_{1}}{s_{1}},\frac{r_{2}}{s_{2}} \in PS^{-1}R$, so that $r_{1},r_{2} \in P$ and $s_{1},s_{2} \in R \setminus P$. Then $s_{2}r_{1}+s_{1}r_{2} \in P$ since $P$ is and ideal, and $s_{1}s_{2} \in R \setminus P$. Thus, $\frac{s_{2}r_{1}+s_{1}r_{2}}{s_{1}s_{2}} \in PS^{-1}R$. Also if $\frac{R}{s} \in S^{-1}R$, then $\frac{rr_{1}}{ss_{1}} \in PS^{-1}R$. Hence $PS^{-1}R$ is an ideal of $S^{-1}R$. Now let $\alpha = \frac{r}{s} \in S^{-1}R \setminus PS^{-1}R$. Since $\alpha \notin PS^{-1}R$, $r \notin P$. This means that $r \in R \setminus P = S$, so $\frac{s}{r} \in S^{-1}R$ is the multiplicative inverse of $\alpha$. Thus, $S^{-1}R$ is a local ring with unique maximal ideal $PS^{-1}R$.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be a ring $\mf{m}$ be a maximal ideal of $R$. Then the following are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+        \item $R$ is a local ring.
+        \item The set of non-units of $R$ form the ideal $\mf{m}$.
+        \item $1+x$ is a unit for all $x \in \mf{m}$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    $(i) \implies (ii)$: Let $J$ be the set of non-units of $R$. Note that $\mf{m} \subseteq J$ since $\mf{m}$ is a proper ideal. Let $x \in J$. Since $x$ is not a unit, there exists a maximal ideal $\mf{m}'$ containing $x$. Since $R$ is a local ring, $\mf{m}' = \mf{m}$, so $x \in \mf{m}$. Thus, $J \subseteq \mf{m}$, so $J = \mf{m}$.
+    
+    $(ii) \implies (iii)$: If $x \in \mf{m}$ and $1+x$ is not a unit, then $1+x \in \mf{m}$. But then $1 = (1+x) - x \in \mf{m}$, contradicting the fact that $\mf{m}$ is a proper ideal. Thus, $1+x$ is a unit for all $x \in \mf{m}$.
+
+    $(iii) \implies (i)$: Let $x \in \mf{m}$. Then $ax \in \mf{m}$ for all $a \in R$, and thus $1 + ax$ is a unit in $R$ for all $a \in R$. Hence, $x \in \Jac(R)$. Finally, we have $\mf{m} \subseteq \Jac(R)$ and so, $\mf{m} = \Jac(R)$ since $\Jac(R) \subseteq \mf{m}$ for any maximal ideal $\mf{m}$. Thus, $R$ is a local ring.
+\end{proof}
+
+We look at some examples of using these propositions to construct local rings.
+
+\begin{example}
+    Let $R = \Z$ and $P = (3)$. Then $S = \Z \setminus (3) = \{1,2,4,5,7,8,\ldots\}$ and $S^{-1}R$ is the ring $\Z_{(3)} = \{\frac{a}{b} \mid a,b \in \Z, \; 3 \nmid b\}$, which is a local ring with unique maximal ideal $\{\frac{a}{b} \mid a,b \in \Z, \; 3 \nmid b, \; 3 | a\}$.
+\end{example}
