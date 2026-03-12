@@ -706,3 +706,14 @@ such that $V_{n} \cap A = \emptyset$ for all $n \geq 1$. Now define
 \end{align}
 Then $U'$ and $V'$ are disjoint open sets with $A \subseteq U'$ and $B \subseteq V'$, proving that $X$ is normal.
 \end{proof}
+
+\textit{March 12th.}
+
+\begin{theorem}
+    Every regular second countable space is a metric space.
+\end{theorem}
+\begin{proof}
+    Let $X$ be a regular second countable space, and $\cB = \{B_{n}\}_{n \geq 1}$ be a countable basis of $X$. Define $\cA = \{(n,m) \in \N^{2} \mid \bar{B}_{n} \subseteq B_{m}\}$. Note that $\cA$ cannot be empty; pick $x_{m} \in B_{m}$. By regularity, there exists an open $V$ such that $x_{m} \in V \subseteq \bar{V} \subseteq B_{m}$. Since $\cB$ is a basis, there exists some $n$ such that $x_{m} \in B_{n} \subseteq V$, so $\bar{B}_{n} \subseteq \bar{V} \subseteq B_{m}$, giving $(n,m) \in \cA$. Now, by Urysohn's lemma, there exists a continuous function $g_{n,m} : X \to [0,1]$ such that $g_{n,m}(\bar{B}_{n}) = \{0\}$ and $g_{n,m}(X \setminus B_{m}) = \{1\}$ for each $(n,m) \in \cA$. Hence, we can extract a sequence of functions $\{f_{n}\}_{n \geq 1}$ from the $g$'s such that for all $x$ and open nieghbourhoods $U$ of $x$, there exists some $n$ such that $f_{n}(X \setminus U) = \{0\}$ and $f_{n}(x) > 0$.
+
+    We now define a mapping $F: X \to \R^{\N}$ ($\R^{\N}$ equipped with the product topology) defined as $F(x) = (f_{1}(x),f_{2}(x),\ldots)$. We claim that $F$ is an embedding, that is, $X \cong F(X)$. Note that $F$ is continuous since each $f_{n}$ is continuous. We show that $F$ is injective. Let $x,y \in X$ such that $F(x) = F(y)$. Then, for all $n$, we have $f_{n}(x) = f_{n}(y)$. Given any open neighbourhood $U$ of $x$, there exists some $n$ such that $f_{n}(X \setminus U) = \{0\}$ and $f_{n}(x) > 0$. Since $f_{n}(y) = f_{n}(x) > 0$, we have that $y \notin X \setminus U$, so $y \in U$. Since this holds for all open neighbourhoods of $x$, we have that $y \in \{x\}$, so $x = y$. Thus, $F$ is injective. We now wish to show that if $U$ is open in $X$, then $F(U) \subseteq F(X)$ and $F(U)$ is open in $F(X)$. Suppose $x_{0} \in U$, or $F(x_{0}) \in F(U)$. By the above, there exists a natural $n$ such that $f_{n}(x_{0}) > 0$ and $f_{n}(X \setminus U) = \{0\}$. Set $V = \R \times \cdots \times \R \times (0,\infty) \times R \cdots$. This is open in the product topology of $\R^{\N}$. Clearly, $F(x_{0}) \in V \cap F(X)$. We claim that $V \cap F(X) \subseteq F(U)$. Take $F(x) \in V$. If $x \notin U$, then $f_{n}(x) = 0$, contradicting the fact that $F(x) \in V$. Thus, $x \in U$, so $F(x) \in F(U)$, proving that $V \cap F(X) \subseteq F(U)$. Hence, $F(U)$ is open in $F(X)$, so $F$ is an embedding. Since $F(X)$ is a subspace of $\R^{\N}$, which is a metric space, we have that $F(X)$ is a metric space, so $X$ is a metric space.
+\end{proof}
