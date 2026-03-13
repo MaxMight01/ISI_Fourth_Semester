@@ -943,3 +943,54 @@ We look at some examples of using these propositions to construct local rings.
 \begin{example}
     Let $R = \Z$ and $P = (3)$. Then $S = \Z \setminus (3) = \{1,2,4,5,7,8,\ldots\}$ and $S^{-1}R$ is the ring $\Z_{(3)} = \{\frac{a}{b} \mid a,b \in \Z, \; 3 \nmid b\}$, which is a local ring with unique maximal ideal $\{\frac{a}{b} \mid a,b \in \Z, \; 3 \nmid b, \; 3 | a\}$.
 \end{example}
+
+\section{Polynomials and Gauss Lemma}
+
+Gauss lemma can refer to several results; the one Gauss originally proved is the following: let $f(X) \in \Z[X]$ be a polynomial such that $p \nmid f(X)$ for all primes $p$. If $f(X) = g(X) h(X)$ in $\Q[X]$ then there exists a factorization $f(X) = G(X) H(X)$ in $\Z[X]$ such that $\deg(g) = \deg(G)$ and $\deg(h) = \deg(H)$. We will see this result as a corollary of several sequence of results, which are also called Gauss lemma.
+
+\begin{definition}
+    Let $R$ be a ring which admits a $\gcd$ function (for example, a UDF). For $f(X) \in R[X]$, we define the \eax{content} of $f(X)$ as $c(f) = \gcd(a_{0},a_{1},\ldots,a_{n})$ where $f(X) = a_{n}X^{n} + \cdots + a_{1}X + a_{0}$. Note that $c = c(f)$ holds if and only if $uc = c(f)$ for all units $u \in R$. A polynomial $f(X)$ is called \eax{primitive} if $c(f) = 1$.
+\end{definition}
+
+As an example, $2X-1$ is a primitive polynomial in $\Z[X]$ since $c(2X-1) = 1$. On the other hand, $2X+2$ is not a primitive polynomial in $\Z[X]$ since $c(2X+2) = 2$. Note that if $f(X) \in R[X]$ is a non-zero polynomial, then $f(X) = c(f) f_{0}(X)$ for some primitive polynomial $f_{0}(X)$; indeed, we can take $f_{0}(X) = \frac{1}{c(f)} f(X)$.
+
+The first version of Gauss lemma is the following.
+\begin{lemma}[Gauss lemma, version 1]
+    Let $R$ be a UFD and $f(x),g(x) \in R[X]$. Then $c(fg) = c(f) c(g)$.
+\end{lemma}
+\begin{lemma}[Gauss lemma, version 2]
+    Let $R$ be a UFD and $K = \mathrm{frac}(R)$ be its field of fractions. Let $f(X) \in R[X] \subseteq K[X]$. If $f(X) = g(X) h(X)$ for some $g(X),h(X) \in K[X]$, then $f(X)$ can be factored as $f(X) = G(X) H(X)$ for some $G(X),H(X) \in R[X]$ such that $\deg(G) = \deg(g)$ and $\deg(H) = \deg(h)$.
+\end{lemma}
+
+One can easily see that the statement at the beginning of this section is a corollary of the second version of Gauss lemma. The following version of Gauss lemma, a corollary of the second version, is the most widely used version of Gauss lemma.
+
+\begin{corollary}[Gauss lemma, version 3]
+    Let $R$ be a UFD and $K = \mathrm{frac}(R)$ be its field of fractions. A primitive polynomial $f(X) \in R[X]$ is irreducible in $R[X]$ if and only if it is irreducible in $K[X]$.
+\end{corollary}
+
+We first begin with the proof of this corollary.
+\begin{proof}[Proof of Gauss lemma, version 3 from version 2]
+    For the forward implication, let $f(X) \in R[X]$ be a primitive polynomial which is irreducible in $R[X]$, and suppose $f(X) = g(X) h(X)$ for some $g(X),h(X) \in K[X]$. By version 2 of Gauss lemma, there exist some $G(X),H(X) \in R[X]$ such that $f(X) = G(X) H(X)$ and $\deg(G) = \deg(g) \geq 1$ and $\deg(H) = \deg(h) \geq 1$. Hence, $G$ and $H$ are non-units in $R[X]$, contradicting the irreducibility of $f(X)$ in $R[X]$. For the converse implication, assume $f(X)$ is irreducible in $K[X]$, and suppose $f(X) = G(X) H(X)$ for some $G(X),H(X) \in R[X]$. Since $f(X)$ is irreducible in $K[X]$, either $G(X)$ or $H(X)$ is a constant polynomial; let's say $G(X)$ is a constant polynomial. Then $f(X) = cH(X)$ for some $c \in R$. Since $f(X)$ is primitive, we must have $c \mid c(f) = 1$, so $c$ is a unit in $R$. Thus, $f(X)$ is irreducible in $R[X]$.
+\end{proof}
+
+We now prove the second verion.
+\begin{proof}[Proof of Gauss lemma, version 2 from version 1]
+    Let $f(X) \in R[X]$ be a polynomial such that $f(X) = g(X) h(X)$ with $g(X), h(X) \in K[X]$. Note that since each coefficient of $g(X)$ and $h(X)$ is a fraction, we can find some $\beta$ (possibly, the product of all denominators of coefficients of $g(X)$) and $\alpha$ (similarly pick $\alpha$) such that $G_{1}(X) = \beta g(X)$ and $H_{1}(X) = \alpha h(X)$ are in $R[X]$. Then $\alpha \beta f(X) = G_{1}(X) H_{1}(X)$, so $c(\alpha \beta f(X)) = \alpha \beta c(f) = c(G_{1}) c(H_{1})$. So $f(X) = c(f) F(X)$ where $F(X) \in R[X]$. Similarly, $G_{1}(X) = c(G_{1}) G(X)$ and $H_{1}(X) = c(H_{1}) H(X)$ for some $G,H \in R[X]$. Thus, $c(f) F(X) = c(G_{1}) c(H_{1}) G(X) H(X)$, so $F(X) = u G(X) H(X)$ where $u \in R$ is a unit. Hence, $u c(f) G(X), H(X) \in R[X]$ and $f(X) = c(F) F(X)$, with $\deg (u c (f) G(X)) = \deg (G(X)) = \deg(g(X))$ and $\deg(H(X)) = \deg(h(X))$.
+\end{proof}
+
+Finally, we prove the first version of Gauss lemma.
+\begin{proof}[Proof of Gauss lemma, version 1]
+    Let $f(X), g(X) \in R[X]$, and $h(X) = f(X) g(X)$. Let $f(X) = c(f) F(X)$, $g(X) = c(g) G(X)$, $h(X) = c(h) H(X)$ where $F(X),G(X),H(X) \in R[X]$.
+    Then $c(h) H(X) = c(f) c(g) F(X) G(X)$, so Note that $c(f) c(g)$ divides all coefficients of $h(X)$, so $c(f) c(g) \mid c(h)$. Let $c(f) c(g) = p_{1} \cdots p_{n}$ where $p_{i}$'s are irreducible in $R$ and $c(h) = p_{1} \cdots p_{n} q_{1} \cdots q_{m}$ where $q_{j}$'s are irreducible in $R$, and $m,n \geq 0$. If $m \neq 0$, then $q_{1}$ exists and $q_{1} \mid c(h)$, so that $p_{1} \cdots p_{n} q_{1} \mid c(h) H(X) = c(f) c(g) F(X) G(X)$. Thus $q_{1} \mid F(X) G(X)$ since $c(f) c(g) = p_{1} \cdots p_{n}$. Let $i_{0}$ be the smallest index $i$ such that $q_{1} \nmid b_{i_{0}}$ and let $j_{0}$ be the smallest index $j$ such that $q_{1} \nmid c_{j_{0}}$. Now look at the coefficient $a$ of $X^{i_{0}+j_{0}}$ in $F(X)G(X)$. Then $q_{1} \mid a$. But $a = b_{i_{0}}c_{j_{0}} + b_{i_{0}-1} c_{j_{0}+1} + \cdots + b_{0} c_{j_{0}+i_{0}} + b_{i_{0}+1}c_{j_{0}-1} + \cdots b_{i_{0}+j_{0}} c_{0} = b_{i_{0}} c_{j_{0}} + \text{(terms divisible by $q_{1}$)}$. Since $q_{1} \nmid b_{i_{0}}$ and $q_{1} \nmid c_{j_{0}}$, $q_{1} \nmid b_{i_{0}} c_{j_{0}}$, so $q_{1} \nmid a$, a contradiction since $q_{1}$ is a prime. Thus, $m = 0$, so $c(h) = c(f) c(g)$.
+\end{proof}
+
+\begin{example}
+    Let $f(X,Y) \in \C[X,Y]$ be $f(X,Y) = 2X^{3}Y + 3X^{2} + 7XY + 4$. Then $f(X,Y)$ is also in $\C(X)[Y]$, where $\C(X)$ is the formal power series field in $X$ over $\C$. Note that $f(X,Y) = (2X^3+7X) Y + (3X^2 + 4)$ is irreducible in $\C(X)[Y]$ since it is linear in $Y$. One can verify that $\gcd(2X^{3}+7X, 3X^{2}+4) = 1$ so $f(X,Y)$ is primitive in $\C[X][Y]$. By Gauss lemma, $f(X,Y)$ is irreducible in $\C[X][Y] = \C[X,Y]$.
+\end{example}
+
+\begin{theorem}
+    Let $R$ be a UFD. Then $R[X]$ is also a UFD.
+\end{theorem}
+\begin{proof}
+    Let $f(X) \in R[X]$, and write $f(X) = c(f) F(X)$ for some primitive $F(X) \in R[X]$ and $c(f) \in R$. Since $R$ is a UFD, we have $c(f) = p_{1} \cdots p_{r}$ for some irreducibles $p_{i} \in R$. Let $K = \mathrm{frac}(R)$. Then $F(X) \in K[X]$. But $K[X]$ is a euclidean domain, and hence a UFD; hence, $F(X) = g_{1}(X) \cdots g_{n}(X)$ where $g_{i}(X) \in K[X]$ are irreducible polynomials. By the second version of Gauss lemma, $F(X) = G_{1}(X) \cdots G_{n}(X)$ where $G_{i}(X) \in R[X]$, and $G_{i} = \alpha_{i} g_{i}$ for some $\alpha_{i} \in K^{\times}$. Also, $1 = c(F) = c(G_{1}) \cdots c(G_{n})$ implies $G_{i}$'s are primitive polynomials and, so, irreducile polynomials in $K[X]$. Therefore, $G_{i}(X)$ are irreducible in $R[X]$ by version 3 of Gauss lemma. So $f(X) = p_{1} \cdots p_{r} G_{1}(X) \cdots G_{n}(X)$. Suppose $f(X) = q_{!} \cdots q_{t}$ for $q_{i}$ irreduciles in $R[X]$. Note that $c(f) = c(q_{1}) \cdots c(q_{t})$ by the first version of Gauss lemma. Let $q_{i}(X) = c(q_{i}) Q_{i}(X)$ where $Q_{i}(X) \in R[x]$ are primitive. Since $q_{1}(X)$ is irreducible, either $c(q_{i})$ or $Q_{i}(X)$ is a unit, that is, $q_{i}(X)$ is primitive or $q_{i}(X)$ is a constant polynomial. After reordering, we may assume $q_{1},\ldots,q_{s}$ are constant polynomials and $q_{s+1}(X),\ldots,q_{t}(X)$ are non-constant primitive polynomials. So $c(f) = c(q_{1}) \cdots c(q_{r}) = q_{1} \cdots q_{s}$ and $q_{i}$ are irreducible constants in $R[X]$ and hence irreducible in $R$. Since $R$ is a UFD, $r = s$ and $p_{i}$'s are associate to $q_{i}$'s after reordering. Thus, $f(X) = c(f) F(X) = q_{s+1}(X) \cdots q_{t}(X) (q_{1} \cdots q_{s})$ so $F(X) = q_{s+1}(X) \cdots q_{t}(X) = G_{1}(X) \cdots G_{n}(X)$ in $R[X] \subseteq K[X]$. Since $K[X]$ is a UFD, after reordering, $n = t-s$ and $G_{i}(X) = u_{i} q_{s+i}(X)$ for some units $u_{i} \in K^{\times}$. Of course, these may not be units in $R$; let $u_{i} = \frac{a_{i}}{b_{i}}$ for some $a_{i},b_{i} \in R$ with $b_{i} \neq 0$. Then $b_{i}G_{i}(X) = a_{i}q_{s+i}(X)$ which implies $c(B_{i} G_{i}(X)) = c(a_{i} q_{s+i}(X))$ showing $a_{i}$ and $b_{i}$ are associates, or that $\frac{a_{i}}{b_{i}}$ is a unit in $R$.
+\end{proof}
