@@ -14,4 +14,59 @@ Recall that we also define the \eax{electric current} $I$ as the rate of flow of
 \begin{align}
     \bv{F} = \int \di{q} (\bv{v} \times \bv{B}) = \int \lambda \di{l} (\bv{v} \times \bv{B}) = \int \di{l} (\bv{I} \times \bv{B}).
 \end{align}
-Suppose we have a rectangular loop of wire of side length $l$ carrying a current $I$, half-immersed in a perpendicular magnetic field $\bv{B}$; it also upholds a weight $mg$ attached to the other side of the loop. The magnetic force on the loop is given by $\bv{F} = \int \di{l} (\bv{I} \times \bv{B}) = I l B$, and the weight is given by $mg$. For the loop to be in equilibrium, we must have $I l B = mg$, or $I = mg/Bl$. What happens if we increase the current $I$, leading to $I > mg/Bl?$ The loop will be lifted up, and the weight will be lifted up as well. Say it has moved upwards by a distance $h$. But doesn't this imply that $W_{\text{mag}} = IBlh$, a non-zero work done by the magnetic field? When the loop is rising, the charges in the wire also acquire a vertical component of velocity, as well as the horizontal. The magnetic force on the charges is given by $\bv{F} = q (\bv{v} \times \bv{B})$, and the work done is given by $\di{W} = \bv{F} \cdot \di{\bv{l}} = q (\bv{v} \times \bv{B}) \cdot \di{\bv{l}}$. Since $\bv{v}$ and $\di{\bv{l}}$ are parallel, we have $\di{W} = 0$. The question is, where does the work come from? In fact, to maintain the current $I$ in the loop, we need to have a power source, such as a battery, which does work on the charges to maintain the current. The work done by the battery is given by $W_{\text{battery}} = IBlh$. The mechanical analogy is of a block sliding down a frictionless incline; the normal reaction force does no work, but adds an opposing horizontal force to the block, which is balanced by the component of the weight of the block along the incline. 
+Suppose we have a rectangular loop of wire of side length $l$ carrying a current $I$, half-immersed in a perpendicular magnetic field $\bv{B}$; it also upholds a weight $mg$ attached to the other side of the loop. The magnetic force on the loop is given by $\bv{F} = \int \di{l} (\bv{I} \times \bv{B}) = I l B$, and the weight is given by $mg$. For the loop to be in equilibrium, we must have $I l B = mg$, or $I = mg/Bl$. What happens if we increase the current $I$, leading to $I > mg/Bl?$ The loop will be lifted up, and the weight will be lifted up as well. Say it has moved upwards by a distance $h$. But doesn't this imply that $W_{\text{mag}} = IBlh$, a non-zero work done by the magnetic field? When the loop is rising, the charges in the wire also acquire a vertical component of velocity, as well as the horizontal. The magnetic force on the charges is given by $\bv{F} = q (\bv{v} \times \bv{B})$, and the work done is given by $\di{W} = \bv{F} \cdot \di{\bv{l}} = q (\bv{v} \times \bv{B}) \cdot \di{\bv{l}}$. Since $\bv{v}$ and $\di{\bv{l}}$ are parallel, we have $\di{W} = 0$. The question is, where does the work come from? In fact, to maintain the current $I$ in the loop, we need to have a power source, such as a battery, which does work on the charges to maintain the current. The work done by the battery is given by $W_{\text{battery}} = IBlh$. The mechanical analogy is of a block sliding down a frictionless incline; the normal reaction force does no work, but adds an opposing horizontal force to the block, which is balanced by the component of the weight of the block along the incline.
+\\ \\
+\textit{March 16th.}
+
+Now suppose we have a surface carrying a \eax{surface current density} defined as $\bv{K} = \di{\bv{I}}/\di{l}_{\perp}$, where $\di{l}_{\perp}$ is the length element perpendicular to the direction of the current. We may also write $\bv{K} = \sigma \bv{v}$, where $\sigma$ is the charge per unit area. Hence, the force on a surface current density is given by
+\begin{align}
+    \bv{F} = \int (\bv{v} \times \bv{B}) \sigma \, \di{a} = \int (\bv{K} \times \bv{B})\, \di{a}.
+\end{align}
+Finally, we can also define a \eax{volume current density} $\bv{J} = \di{\bv{I}}/\di{a}_{\perp}$, where $\di{a}_{\perp}$ is the area element perpendicular to the direction of the current. We can also write $\bv{J} = \rho \bv{v}$, where $\rho$ is the charge per unit volume. Hence, the force on a volume current density is given by
+\begin{align}
+    \bv{F} = \int (\bv{v} \times \bv{B}) \rho \, \di{V} = \int (\bv{J} \times \bv{B})\, \di{V}.
+\end{align}
+Suppose we have a current crossing a given surface $S$. The current crossing the surface is given by $I = \int_{S} \bv{J} \cdot \di{\bv{a}} = \int_{S} J \di{a}_{\perp}$, where $\di{a}_{\perp}$ is the area element perpendicular to the direction of the current. Now suppose that the surface $S$ were closed. Then, divergence theorem tells us
+\begin{align}
+    \oint_{S} \bv{J} \cdot \di{\bv{a}} = \int_{\curs{v}} \nabla \cdot \bv{J} \, \di{V}.
+\end{align}
+Note that the current here is essentially the rate of flow of charge leaving the volume $\curs{v}$ enclosed by the surface $S$. Hence, we must have
+\begin{align}
+    -\frac{\di{}}{\di{t}} \int_{\curs{v}} \rho \, \di{V} = \oint_{S} \bv{J} \cdot \di{\bv{a}} = \int_{\curs{v}} \nabla \cdot \bv{J} \, \di{V}.
+\end{align}
+Since this must hold for any arbitrary volume $\curs{v}$, and using the fact that $\frac{\di{}}{\di{t}} \int_{\curs{v}} \rho \, \di{V} = \int_{\curs{v}} \frac{\partial{\rho}}{\partial{t}} \, \di{V}$, we get
+\begin{align}
+    \frac{\partial{\rho}}{\partial{t}} + \nabla \cdot \bv{J} = 0.
+\end{align}
+This is the \eax{continuity equation} for electric charge. It is a statement of the conservation of electric charge, and it tells us that the rate of change of charge density in a given volume is equal to the negative of the divergence of the current density. In other words, if there is a net outflow of current from a given volume, then the charge density in that volume must decrease, and vice versa. The continuity equation is a fundamental equation in electrodynamics, and it is satisfied by all physical processes involving electric charge and current.
+
+\section{Biot-Savart Law}
+
+We wish to translate some of the laws regarding electrostatics to the case of electrodynamics, or magnetostatics. Note that just as electrostatics arises from the study of stationary charges, magnetostatics arises from the study of steady currents, since this implies $\frac{\partial{\rho}}{\partial{t}} = 0$ and $\nabla \cdot \bv{J} = 0$. We will now derive the analogue of Coulomb's law for magnetostatics, which is known as the \eax{Biot-Savart law}. It states this:
+\begin{align}
+    \bv{B}(\bv{r}) = \frac{\mu_{0}}{4 \pi} \int \frac{I \, \di{\bv{l}'} \times \hat{\bcurs{r}}}{\curs{r}^{2}},
+\end{align}
+where $\hat{\bcurs{r}}$ is the unit vector pointing from the current element $\di{\bv{l}'}$ to the point $\bv{r}$ where we want to calculate the magnetic field, and $\curs{r}$ is the distance between the current element and the point $\bv{r}$. It is the magnetic cfield produced at a point $\bv{r}$ by a current $I$ flowing through a wire. Here, $\mu_{0}$ is the \eax{permeability of free space}, with value $\mu_{0} = 4 \pi \times 10^{-7} \, \text{N/A}^2$. The units of $\bv{B}$ are thus Tesla (T), where $1 \, \text{T} = 1 \, \text{N/A m}$. It can be seen as an inverse-square law phenomenon, but is actually more complex than that, since the direction of the magnetic field is given by the cross product $\di{\bv{l}'} \times \hat{\bcurs{r}}$.
+\\
+
+As a concrete example, let us calculate the magnetic field at a distance of $s$ from a long straight wire carrying a current $I$. We can choose our coordinate system such that the wire lies along the $z$-axis, and the point where we want to calculate the magnetic field is at a distance $s$ from the wire in the $x$-direction. The current element $\di{\bv{l}'}$ can be written as $\di{z'} \hat{\bv{z}}$, and the unit vector $\hat{\bcurs{r}}$ can be written as $\frac{s \hat{\bv{x}} - z' \hat{\bv{z}}}{\sqrt{s^2 + z'^2}}$. Hence, we have
+\begin{align}
+\bv{B}(\bv{r}) &= \frac{\mu_{0}}{4 \pi} \int_{-\infty}^{\infty} \frac{I \, \di{z'} \hat{\bv{z}} \times \frac{s \hat{\bv{x}} - z' \hat{\bv{z}}}{\sqrt{s^2 + z'^2}}}{s^2 + z'^2} = \frac{\mu_{0} I s}{4 \pi} \int_{-\infty}^{\infty} \frac{\di{z'}}{(s^2 + z'^2)^{3/2}} \hat{\bv{y}} = \frac{\mu_{0} I}{2 \pi s} \hat{\bv{y}}.
+\end{align}
+From here, we can calculate the force between two long straight wires carrying currents $I_{1}$ and $I_{2}$, separated by a distance $d$. The magnetic field produced by the first wire at the location of the second wire is given by $B = \frac{\mu_{0} I_{1}}{2 \pi d}$. The force on the second wire due to this magnetic field is given by $F = I_{2}B \int \di{l}$. The second wire is also infinitely long, so we can instead write the force per unit length as
+\begin{align}
+    f = \frac{\di{F}}{\di{l}} = I_{2}B = \frac{\mu_{0} I_{1} I_{2}}{2 \pi d}.
+\end{align}
+Let us find the divergence of the magnetic field. A little bit of vector calculus gives us
+\begin{align}
+    \nabla \cdot \bv{B}(\bv{r}) = \frac{\mu_{0}}{4 \pi} \int \nabla \cdot \left( \frac{\bv{J} \times \hat{\bcurs{r}}}{\curs{r}^{2}} \right) \, \di{V} = 0,
+\end{align}
+since $\nabla \cdot (\bv{A} \times \bv{B}) = \bv{B} \cdot (\nabla \times \bv{A}) - \bv{A} \cdot (\nabla \times \bv{B})$, and $\nabla \times \hat{\bcurs{r}} = 0$ and $\nabla \times \bv{J} = 0$ for steady currents. Hence, we have the following result: The magnetic field is divergence-free, or equivalently, there are no magnetic monopoles. This is a fundamental result in magnetostatics, and it tells us that the magnetic field lines are always closed loops, and they never begin or end at any point in space. This is in contrast to the electric field, which can have sources and sinks (positive and negative charges). The absence of magnetic monopoles is a fundamental symmetry of nature, and it has been confirmed by numerous experiments. For the curl of the magnetic field, vector calculus again gives us
+\begin{align}
+    \nabla \times \bv{B}(\bv{r}) = \frac{\mu_{0}}{4 \pi} \int \nabla \times \left( \frac{\bv{J} \times \hat{\bcurs{r}}}{\curs{r}^{2}} \right) \, \di{V} = \mu_{0} \bv{J}(\bv{r}),
+\end{align}
+where we have used the fact that $\nabla \times \left( \frac{\hat{\bcurs{r}}}{\curs{r}^{2}} \right) = 4 \pi \delta(\bv{r} - \bv{r}')$. This is known as \eax{Ampère's law}, and it tells us that the curl of the magnetic field is proportional to the current density. In other words, currents are the sources of magnetic fields, just as charges are the sources of electric fields. If we integrate both sides of Ampère's law over a surface $S$ with boundary $\partial S$, we get
+\begin{align}
+    \oint \bv{B} \cdot \di{\bv{l}} = \int_{S} (\nabla \times \bv{B}) \cdot \di{\bv{a}} = \mu_{0} \int_{S} \bv{J} \cdot \di{\bv{a}} = \mu_{0} I_{\text{enc}},
+\end{align}
+where $I_{\text{enc}}$ is the current enclosed by the loop $\partial S$. This is the integral form of Ampère's law, and it is often more useful for calculating magnetic fields in situations with high symmetry. 
