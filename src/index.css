@@ -1,0 +1,215 @@
+/* ============================================
+   FLAT DESIGN SYSTEM — MATHEMATICS AESTHETIC
+   ============================================ */
+
+:root {
+  /* Light Mode — Default */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f3f4f6;
+  --bg-tertiary: #e5e7eb;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-tertiary: #9ca3af;
+  
+  /* Accent Colors */
+  --accent-primary: #3b82f6;
+  --accent-primary-hover: #2563eb;
+  --accent-secondary: #10b981;
+  --accent-secondary-hover: #059669;
+  --accent-tertiary: #f59e0b;
+  --accent-tertiary-hover: #d97706;
+  --accent-quaternary: #8b5cf6;
+  
+  /* Semantic */
+  --border-color: #e5e7eb;
+  --error: #ef4444;
+  
+  /* Decorative (low opacity for geometric shapes) */
+  --deco-primary: rgba(59, 130, 246, 0.08);
+  --deco-secondary: rgba(16, 185, 129, 0.08);
+  --deco-tertiary: rgba(245, 158, 11, 0.08);
+  --deco-quaternary: rgba(139, 92, 246, 0.08);
+  
+  /* Math symbols decoration opacity */
+  --math-symbol-opacity: 0.04;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  
+  --accent-primary: #60a5fa;
+  --accent-primary-hover: #93c5fd;
+  --accent-secondary: #34d399;
+  --accent-secondary-hover: #6ee7b7;
+  --accent-tertiary: #fbbf24;
+  --accent-tertiary-hover: #fcd34d;
+  --accent-quaternary: #a78bfa;
+  
+  --border-color: #334155;
+  --error: #f87171;
+  
+  --deco-primary: rgba(96, 165, 250, 0.1);
+  --deco-secondary: rgba(52, 211, 153, 0.1);
+  --deco-tertiary: rgba(251, 191, 36, 0.1);
+  --deco-quaternary: rgba(167, 139, 250, 0.1);
+  
+  --math-symbol-opacity: 0.06;
+}
+
+/* ============================================
+   BASE RESET & TYPOGRAPHY
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Typography Scale — Geometric & Bold */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
+}
+
+h1 { font-size: 2.75rem; font-weight: 800; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+
+/* Links */
+a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--accent-primary-hover);
+}
+
+/* Focus States — High Contrast (no shadows) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Buttons — Flat with Scale Transform */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 0.875rem 1.75rem;
+  background-color: var(--accent-primary);
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: all 0.2s;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--accent-primary-hover);
+  transform: scale(1.05);
+}
+
+button:active:not(:disabled) {
+  transform: scale(1);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Inputs — Flat Style */
+input,
+textarea {
+  font-family: inherit;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 0.75em 1em;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  background-color: var(--bg-primary);
+  border-color: var(--accent-primary);
+}
+
+/* Scrollbar — Minimal */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--text-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+

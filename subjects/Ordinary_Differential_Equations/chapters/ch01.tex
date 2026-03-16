@@ -1,0 +1,927 @@
+\chapter{AN INTRODUCTION}
+
+
+\section{The Wave Equation}
+\textit{January 5th.}
+
+The story of ordinary differential equations (ODEs) begins with Newton in the 17th century, where he laid the foundations of classical mechanics and formulated the laws of motion. During this time, he also (co)developed calculus, which provided the mathematical framework necessary to describe change and motion. Thus came about the first ordinary differential equations, which were used to model the motion of moving bodies.
+
+Around the mid-18th century, questions were asked regarding the vibration of strings. Let us focus on such a string of length $L$ fixed at both ends, and place a coordinate system from $0$ to $L$ along the string. At a time $t$, the string may be displaced from its equilibrium position by a small amount $u(x,t)$ at a point $x$ along the string. We wish to understand this $u(x,t)$.
+
+Consider a small segment of the string between $x$ and $x + \Delta x$. The tension in the string at $x$ is given by $T(x,t)$, and at $x + \Delta x$ it is given by $T(x + \Delta x, t)$. The vertical components of these tensions are $V(x,t) = T(x,t) \sin \theta$ and $V(x + \Delta x, t) = T(x + \Delta x, t) \sin (\theta + \Delta \theta)$ respectively, where $\theta$ is the angle the string makes with the horizontal axis at point $x$. Thus, using Newton's second law, the net vertical force on the segment is given by
+\begin{align}
+    V(x + \Delta x, t) - V(x,t) = \rho \Delta x \, u_{tt}(\bar{x},t),
+\end{align}
+where $\rho$ is the linear mass density of the string. Dividing by $\Delta x$ and taking the limit as $\Delta x \to 0$, we obtain
+\begin{align}
+    \partial_{x} V(x,t) = \rho \, u_{tt}(x,t).
+\end{align}
+The horizontal components of the tension must balance out giving us $H(x,t) = H(x + \Delta x, t)$, where $H(x,t) = T(x,t) \cos \theta$ and $H(x + \Delta x, t) = T(x + \Delta x, t) \cos (\theta + \Delta \theta)$. Since $V(x,t) = H(x,t) \tan \theta$ and $\tan \theta$ can be approximated as
+\begin{align}
+    \tan \theta \approx \frac{u(x + \Delta x, t) - u(x,t)}{\Delta x} = \partial_{x} u(x,t),
+\end{align}
+we have
+\begin{align}
+    V(x,t) = \partial_{x} u(x,t) \, H(x,t) = H_{0} \, \partial_{x} u(x,t).
+\end{align}
+Plugging this in to the earlier equation, we get
+\begin{align}
+    \partial_{x} (H_{0} \, \partial_{x} u(x,t)) = \rho \, u_{tt}(x,t) \implies \frac{H_{0}}{\rho} \, u_{xx}(x,t) = u_{tt}(x,t).
+\end{align}
+This is known as the wave equation, and it models the vibrations of the string. We drop the constants for now; we wish to now solve $u_{xx} = u_{tt}$ with boundary conditions $u(0,t) = 0$ and $u(L,t) = 0$ for all $t \geq 0$, and initial conditions $u(x,0) = f(x)$ and $u_{t}(x,0) = 0$ for all $x \in [0,L]$.
+
+We make the assumption that $u(x,t) = v(x) \, w(t)$, that the variables can be separated. Plugging this in, we get $u_{tt}(x,t) = v(x) \, w''(t)$ and $u_{xx}(x,t) = v''(x) \, w(t)$. Thus,
+\begin{align}
+    v''(x) \, w(t) = v(x) \, w''(t) \implies \frac{v''(x)}{v(x)} = \frac{w''(t)}{w(t)}.
+\end{align}
+Since the variables are independent on both sides, this ratio must be a constant $\lambda \in \R$. We look at functions that satisfy $v''(x) = \lambda \, v(x)$. If $\lambda > 0$, then functions of the form $v(x) = A e^{\sqrt{\lambda} x} + B e^{-\sqrt{\lambda} x}$ satisfy the equation. $\lambda = 0$ gives functions of the form $v(x) = Ax + B$ and $\lambda < 0$ gives functions of the form $v(x) = A \sin (\sqrt{-\lambda} x) + B \cos (\sqrt{-\lambda} x)$. Let us say $\lambda = -1$. Let us show that the only solutions of $v'' + v = 0$ are of this form $A \sin x + B \cos x$ for some $A,B \in \R$.
+
+Suppose $g$ is a solution of $v'' + v = 0$. Let's assume that $g(0) = B$ and $g'(0) = A$. Consider the function $h(x) = g(x) - (A \sin x + B \cos x)$. We have $h(0) = 0$ and $h'(0) = 0$. Also, $h''(x) + h(x) = 0$. Define $\Psi = (h')^{2} + h^{2}$. This gives
+\begin{align}
+    \Psi' = 2 h' h'' + 2 h h'= 2 h' (h'' + h) = 0.
+\end{align}
+Thus, $\Psi$ is constant. Since $\Psi(0) = (h'(0))^{2} + (h(0))^{2} = 0$, we have $\Psi(x) = 0$ for all $x$ which gives $h \equiv 0$; $g$ must be of the form $A \sin x + B \cos x$. The same argument works for all $\lambda < 0$.
+
+If we let $\lambda < 0$, then the boundary conditions become $V(0) = 0$ and $V(L) = 0$. Since $V$ must be of the form $V(x) = A \sin (\sqrt{-\lambda} x) + B \cos (\sqrt{-\lambda} x)$, we have $V(0) = B = 0$. Thus, $V(x) = A \sin (\sqrt{-\lambda} x)$. The second boundary condition gives us $V(L) = A \sin (\sqrt{-\lambda} L) = 0$. For a non-trivial solution, we must have $\sin (\sqrt{-\lambda} L) = 0$, which gives us $\sqrt{-\lambda} L = n \pi$ for some $n \in \N$. Thus, $\lambda = - n^{2} \pi^{2} / L^{2}$. From the same ratio equation, we also obtain
+\begin{align}
+    w(t) = a \sin ( \frac{n\pi}{L} t) + b \cos ( \frac{n \pi}{L} t).
+\end{align}
+The initial condition $w'(0) = 0$ gives us $a = 0$. Having obtained $v$ and $w$, we found a solution of the wave equation as
+\begin{align}
+    u_{n}(x,t) = c_{n} \sin ( \frac{n \pi}{L} x) \cos ( \frac{n \pi}{L} t).
+\end{align}
+Note that if $\phi$ and $\psi$ are two different solutions of the wave equation, then so is any linear combination of the two. Thus, we can combine all these solutions to get
+\begin{align}
+    u(x,t) = \sum_{n \geq 1} c_{n} \sin ( \frac{n \pi}{L} x) \cos ( \frac{n \pi}{L} t).
+\end{align}
+It can be shown that the infinite summation above makes sense. In fact, every solution is of this form(!). Assuming this statement, let us use the initial condition $u(x,0) = f(x)$ to determine the coefficients $c_{n}$. We have
+\begin{align}
+    f(x) = \sum_{n \geq 1} c_{n} \sin ( \frac{n \pi}{L} x).
+\end{align}
+This is known as the Fourier sine series of $f$. The coefficients can be determined using the orthogonality of the sine functions. Multiplying both sides by $\sin ( \frac{m \pi}{L} x)$ and integrating from $0$ to $L$, we get
+\begin{align}
+    c_{m} = \frac{2}{L} \int_{0}^{L} f(x) \sin (\frac{m \pi}{L} x) \, \di{x}.
+\end{align}
+A similar approach is used in two dimensions, where instead of a string of length $L$, there is a drum (membrane) $\Omega$ of boundary $\Gamma$. Here, the wave equation satisfies $\partial_{tt} u = \Delta u$, where $\Delta$ is the Laplacian operator. The boundary conditions are $u(x,t) = 0$ for all $x \in \Gamma$ and $t \geq 0$, and the initial conditions are $u(x,0) = f(x)$ and $u_{t}(x,0) = 0$ for all $x \in \Omega$. 
+
+\subsection{(Ordinary) Differential Equations}
+
+A general theme of the subject is that we have a system that evolves with time. The evolution of this function is encoded in differential equations, and vice versa. We wish to understand this evolution, or to determine solutions of the differential equations; we wish to determine their existence, uniqueness, and even explicit forms. Finally, we also look at how the system and solutions depend on initial conditions.
+
+To put it explicitly, a \eax{differential equation} is of the form $F(t,f',f'',\cdots,f^{(n)}) = 0$, where $t$ is an independent variable and $f$ is a function of $t$.
+\\ \\
+\textit{January 7th.}
+
+Note that at the moment, we are not assuming anything about the `expression' function $F$; it could be linear or non-linear, explicit or implicit, algebraic or transcendental, continuous or discontinuous, and so on. The highest order of derivative appearing in the expression is called the \eax{order} of the differential equation.
+
+\begin{example}
+    $y''' + t \sin (y') + y = 0$ is a third-order differential equation. Here, $t$ is the independent variable and $y$ is the dependent variable.
+\end{example}
+
+Natural questions arise; does a solution exist? Is it unique? For how long does it exist? How does it depend on initial conditions? We divert our attention first to \eax{first-order differential equation}s, i.e., those of the form $F(t,y,y') = 0$.
+
+
+It may be noted that a solution may not even exist for a given differential equation. A simple example is given by $(y')^{2} + 1 = 0$. Thus, a solution need not always exist. Also note that even if a solution exists, it may not be unique. For example, consider the differential equation $(y' - 2)(y' + 2) = 0$; both $y = 2t$ and $y = -2t$ are solutions satisfying the same initial condition $y(0) = 0$. Finally, let us see an example where a solution exists and is unique, but only for a limited time. Consider the differential equation $y' = y^{2}$ with the initial condition $y(0) = 1$. The solution is given by $y(t) = \frac{1}{1 - t}$, which exists and is unique for $t \in (-\infty, 1)$, but blows up as $t \to 1$.
+\subsection{First-Order ODEs}
+
+Let us consider first-order ODEs of the form
+\begin{align}
+    \dot{y} = f(t,y).
+\end{align}
+If we assume that the variables can be separated, that is, $f(t,y) = w(y) \, v(t)$ for some functions $w$ and $v$, then we can rewrite this as
+\begin{align}
+    \frac{1}{w(y)} \, \dot{y} = v(t) \implies \frac{\di{y}}{w(y)} = v(t) \, \di{t}.
+\end{align}
+If $W$ is an antiderivative of $1/w$, and $V$ is an antiderivative of $v$, then we have
+\begin{align}
+    W(y(t)) = V(t) + C,
+\end{align}
+for some constant $C \in \R$. This gives us an implicit solution of the differential equation. If $W$ is invertible, then we can make it explicit. Of course, this calculation is completely formal. For a more rigorous treatment,
+\begin{align}
+    \frac{1}{w(y)} \frac{\di{y}}{\di{t}} = v(t) \implies \frac{\di{}}{\di{t}} W(y(t)) = \frac{\di{}}{\di{t}} V(t) \implies W(y(t)) = V(t) + C.
+\end{align}
+
+This is an algebraic point of view; given $F(t,y,y') = 0$, we solve for $y$. There is also a geometric point of view. Recall that a \eax{curve} in $\R^{n}$ is a continuous function $\gamma : [0,1] \to \R^{n}$. If $\gamma$ is $k$-times differentiable, then we say that $\gamma$ is a $C^{k}$ curve. A \eax{vector field} on $S \subseteq \R^{n}$ is a function $V: S \to \R^{n}$. Again, it is termed continuous or $C^{k}$ if the function is continuous or $k$-times differentiable respectively. We may also have a time-dependent vector field $V: S \times [0,\infty) \to \R^{n}$. An \eax{integral curve} of a vector field $V$ on $S$ is a cruve $\gamma:[0,1] \to S$ such that
+\begin{align}
+    \dot{\gamma}(t) = V(\gamma(t)).
+\end{align}
+If $V$ is time-dependent, then the integral curve satisfies
+\begin{align}
+    \dot{\gamma}(t) = V(\gamma(t),t).
+\end{align}
+Thus, given a first-order ODE $\dot{y} = f(t,y)$, we can think of $f$ as a time-dependent vector field on $\R$, and solutions of the ODE are integral curves of this vector field. We can also define $V(y,t) = (1, f(t,y))$ as a vector field on $\R^{2}$, and solutions of the ODE correspond to integral curves of this vector field, and are of the form $(t,y(t))$. We can impose certain regularity conditions on $f$ to ensure existence and uniqueness of solutions.
+
+\begin{enumerate}[label=(\roman*)]
+    \item Note that at least continuity of $f$ is required to ensure the existence of a solution; if $f$ is not continuous, like in the case of
+    \begin{align}
+        f(y,t) = \begin{cases}
+            1 &\text{if } t \in [0,1], \\
+            0 & \text{if } t > 1,
+        \end{cases},
+    \end{align}
+    then there is no solution of the ODE $\dot{y} = f(t,y)$ with the initial condition $y(0) = 0$.
+    \item However, continuity alone does not guarantee uniqueness of solutions. For example, consider the ODE $\dot{y} = \sqrt{\abs{y}}$ with the initial condition $y(0) = 0$. Then both $y(t) = 0$ and $y(t) = \1_{[0,\infty)}(t) \, \frac{t^{2}}{4}$ are solutions.
+\end{enumerate}
+
+\begin{example}
+    Let us look at the case of a model for population growth of bacteria. Let $P(t)$ be the population at time $t$. A simple model given by the differential equation
+    \begin{align}
+        \frac{\di{P}}{\di{t}} = aP \left( 1 - \frac{P}{N} \right)
+    \end{align}
+    where $a$ and $P$ are appropriate constants. Here, $N$ is the carrying capacity of the environment. When $P$ is small, the population grows approximately exponentially, but as $P$ approaches $N$, the growth rate slows down and eventually stops when $P = N$. This is known as the logistic growth model. One can easily solve the ODE $\dot{y} = y(1-y)$ using the method of separation of variables to obtain
+    \begin{align}
+        y(t) = \frac{a_{0} e^{t}}{1 + a_{0} e^{t}},
+    \end{align}
+    where $a_{0} = y(0) / (1 - y(0))$. This solution approaches $1$ as $t \to \infty$, which corresponds to the carrying capacity in the original model. One can also analyze the long-term behaviour, dependence of initial conditions, etc.~without explicitly solving the ODE; this is the concern of dynamics, which will be studied towards the end of the course.
+\end{example}
+
+\section{Exact Equations}
+
+Consider a first-order ODE of the form
+\begin{align}
+    M(x,y) + N(x,y) \, \frac{\di{y}}{\di{x}} = 0, \quad \text{ that is, } M(x,y) \, \di{x} + N(x,y) \, \di{y} = 0.
+\end{align}
+Such an ODE of the form $M \, \di{x} + N \, \di{y} = 0$ is said to be \eax{exact} if there exists a function $g(x,y)$ such that $\partial_{x} g(x,y) = M(x,y)$ and $\partial_{y} g(x,y) = N(x,y)$. In this case, the solutions of the ODE are given by $g(x,y) = C$ for some constant $C \in \R$. If there does exist such a function $g$, then we must have
+\begin{align}
+    \frac{\partial M}{\partial y} = \frac{\partial N}{\partial x}.
+\end{align}
+In fact, the converse is also true; if the above holds, then such a function $g$ exists and the equation is exact.
+
+A vector field $V$ on $\R^{n}$ is termed a \eax{conservative vector field} if there exists a scalar \eax{potential function} $\varphi : \R^{n} \to \R$ such that $V = \nabla \varphi$. Thus, a first-order ODE $M \, \di{x} + N \, \di{y} = 0$ is exact if and only if the vector field $V(x,y) = (M(x,y), N(x,y))$ is conservative with potential function $g$.
+
+\subsubsection{Review of Multivariate Calculus}
+\textit{January 12th.}
+
+Recall that $f:(a,b) \to \R$ is differentiable at $p \in (a,b)$ if the limit
+\begin{align}
+    \lim_{h \to 0} \frac{f(p+h) - f(p)}{h}
+\end{align}
+exists; this limit is denoted by $f'(p)$. If we define
+\begin{align}
+    \epsilon_{p}(h) \defeq f(p+h) - f(p) - f'(p) \, h,
+\end{align}
+the error term, then we have
+\begin{align}
+    f(p+h) = f(p) + f'(p) \, h + \epsilon_{p}(h).
+\end{align}
+Here, $\lim_{h \to 0} \epsilon_{p}(h) = 0$. Moreover, $\lim_{h \to 0} \frac{1}{h} \epsilon_{p}(h) = 0$, to indicate this, we write $\epsilon_{p}(h) = \lilo(h)$ as $h \to 0$. This is known as the little-o notation. Thus, we have
+\begin{align}
+    f(p+h) = f(p) + f'(p) \, h + \lilo(h) \quad \text{ as } h \to 0.
+\end{align}
+This is the linear approximation of $f$ at $p$. If $f$ is differentiable at every point of $(a,b)$, then we say that $f$ is differentiable on $(a,b)$. If $f'$ is continuous on $(a,b)$, then we say that $f$ is continuously differentiable on $(a,b)$, or $f \in C^{1}(a,b)$. Let's say $f \in C^{1}(a,b)$, and say the second derivative of $f$ exists at $p \in (a,b)$. Similar to above, one can show that
+\begin{align}
+    f(p+h) = f(p) + f'(p) \, h + \frac{f''(p)}{2} \, h^{2} + \lilo(h^{2}) \quad \text{ as } h \to 0.
+\end{align}
+If a function $f$ is infinitely differentiable, that is, all its derivatives exist, then we say that $f$ is a smooth function, or $f \in C^{\infty}(a,b)$. There is another class of funcitons known as analytic functions. A function $f$ is said to be analytic at $p \in (a,b)$ if there exists a power series $\sum_{n=0}^{\infty} a_{n} (x - p)^{n}$ that converges to $f(x)$ for all $x$ in some neighbourhood of $p$. If $f$ is analytic at every point of $(a,b)$, then we say that $f$ is analytic on $(a,b)$. It can be shown that if $f$ is analytic at $p$, then $f$ is infinitely differentiable at $p$, and the coefficients of the power series are given by
+\begin{align}
+    a_{n} = \frac{f^{(n)}(p)}{n!}.
+\end{align}
+However, the converse is not true; there exist smooth functions that are not analytic. For example, consider the function
+\begin{align}
+    f(x) = \begin{cases}
+        e^{-1/x} &\text{if } x > 0, \\
+        0 & \text{if } x \leq 0.
+    \end{cases}
+\end{align}
+Here, 0 is the only problematic point. It can be shown that $f$ is infinitely differentiable at $0$, and $f^{(n)}(0) = 0$ for all $n \geq 0$. Thus, the Taylor series of $f$ at $0$ is identically $0$, which does not converge to $f(x)$ for any $x > 0$. Thus, $f$ is not analytic at $0$.
+
+Suppose $f:(a,b) \to \R$ is analytic. Assume there exists a sequence of distinct points $(x_{n})_{n\geq 1} \subseteq (a,b)$ such that $x_{n} \to p \in (a,b)$ and $f(x_{n}) = 0$ for all $n \geq 1$. Then, it can be shown that $f$ is identically $0$ in some neighbourhood of $p$. If $f$ is analytic on the whole interval $(a,b)$, then $f$ is identically $0$ on $(a,b)$. 
+
+\begin{proof}
+    Let $f(x) = \sum_{n \geq 0} a_{n} (x-p)^{n}$, and let $N = \min \{n \geq 0 \mid a_{n} \neq 0\}$. Assume that $f$ is not identically $0$; thus $N$ is finite. Thus, $f$ must be of the form
+    \begin{align}
+        f(x) = a_{N}(x-p)^{N} + a_{N+1}(x-p)^{N+1} + \cdots = (x-p)^{N} \left( a_{N} + a_{N+1}(x-p) + \cdots \right).
+    \end{align}
+    Since $a_{N} \neq 0$, the term in the parentheses is non-zero in some neighbourhood of $p$. Thus, $f(x) = 0$ implies that $(x-p)^{N} = 0$, that is, $x = p$. This contradicts the assumption that there exists a sequence of distinct points $(x_{n})_{n\geq 1}$ converging to $p$ such that $f(x_{n}) = 0$ for all $n \geq 1$.
+\end{proof}
+
+Let us now move to higher dimensions. A function $g:\R^{2} \to \R^{2}$ is said to be differentiable at a point $p = (x_{0},y_{0})$ if there exists a linear operator $T_{p}:\R^{2} \to \R^{2}$ such that
+\begin{align}
+    \frac{\norm{g(x_{0}+h,y_{0}+k) - g(x_{0},y_{0}) - T_{p}(h,k)}}{\norm{(h,k)}} \to 0 \quad \text{ as } (h,k) \to (0,0).
+\end{align}
+The linear operator, if it exists, as a matrix is given by
+\begin{align}
+    T_{p} = \begin{bmatrix}
+        \partial_{x} g_{1}(p) & \partial_{y} g_{1}(p) \\
+        \partial_{x} g_{2}(p) & \partial_{y} g_{2}(p)
+    \end{bmatrix},
+\end{align}
+where $g = (g_{1}, g_{2})$. Thus, by a similar calculation as before, we have
+\begin{align}
+    g(x_{0}+h,y_{0}+k) = g(x_{0},y_{0}) + T_{p}(h,k) + \lilo(\norm{(h,k)}) \quad \text{ as } (h,k) \to (0,0).
+\end{align}
+For a function $f:\R^{2} \to \R$, differentiability at $p$ is defined similarly, and one would have
+\begin{align}
+    f(x_{0}+h,y_{0}+k) = f(x_{0},y_{0}) + \partial_{x} f(p) \, h + \partial_{y} f(p) \, k + \lilo(\norm{(h,k)}) \quad \text{ as } (h,k) \to (0,0).
+\end{align}
+Now suppose $\tilde{f}:\R^{2} \to \R^{2}$ is an affine map defined as
+\begin{align}
+    \tilde{f}(x,y) = (c_{1},c_{2}) + A(x,y).
+\end{align}
+Such a map is invertible if and only if $A$ is invertible. Recall the inverse function theorem; if $f:\R^{2} \to \R^{2}$ is a $C^{1}$ function, and the derivative of $f$ at $p$, $Df(p)$, is invertible, then there exist neighbourhoods $U$ of $p$ and $V$ of $f(p)$ such that $f:U \to V$ is a bijection. In such a case, $f$ can be seen as an approximate affine map near $p$. Also recall the implicit function theorem: let $f:\R^{2} \to \R$ be a $C^{1}$ function. Suppose $f(x_{0},y_{0}) = 0$ and $\partial_{x} f(x_{0},y_{0}) \neq 0$. Then locally at $(x_{0},y_{0})$, that is, in an open neighbourhood $U$ of $(x_{0},y_{0})$, there is a $C^{1}$ function $r$ such that
+\begin{align}
+    Z_{U} = \{(x,y) \in U \mid f(x,y) = 0\} = \{(r(t), t) \mid t \in I\},
+\end{align}
+for some open interval $I$ containing $y_{0}$. We are now interested in level sets of $C^{1}$ function $f:\R^{2} \to \R$. For any $l \in \R$, the level set of $f$ at $l$ is defined as
+\begin{align}
+    E_{l} = \{(x,y) \in \R^{2} \mid f(x,y) = l\}.
+\end{align}
+For example, level sets of the function $f(x,y) = x^{2} + y^{2}$ are circles centred at the origin. For the function $f(x,y) = x^{2} - y^{2}$, the level sets are hyperbolas. We claim this: suppose $f$ is such that $\nabla f \neq 0$ on $\R^{2}$. Then for any $l \in \R$, the level set $E_{l}$ is a 1-manifold in $\R^{2}$. A 1-manifold in $\R^{2}$ is a set $S$ that locally looks like $\R$. That is, for every point $p$ in the set, there exists a neighbourhood $U$ of $p$ such that $U \cap S$ is homeomorphic to an open interval in $\R$. To this claim, assume $l = 0$ (otherwise, we can look at $f - l$). Let $p = (x_{0},y_{0}) \in E_{0}$. Since $\nabla f(p) \neq 0$, at least one of $\partial_{x} f(p)$ or $\partial_{y} f(p)$ is non-zero. Assume $\partial_{y} f(p) \neq 0$. By the implicit function theorem, there exists a neighbourhood $U$ of $p$ and an open interval $I$ containing $y_{0}$ such that
+\begin{align}
+    U \cap E_{0} = \{(r(t), t) \mid t \in I\},
+\end{align}
+for some $C^{1}$ function $r:I \to \R$. The map $\phi: I \to U \cap E_{0}$ defined as $\phi(t) = (r(t), t)$ is a homeomorphism, which shows that $E_{0}$ is a 1-manifold. The case when $\partial_{x} f(p) \neq 0$ is similar. Suppose $f:\R^{2} \to \R$ is a $C^{1}$ function such that $\nabla f \neq 0$ on $\R^{2}$. Then the gradient vector field $\nabla f(p)$ at a point $p$ is orthogonal to the level set of $f$ passing through $p$. Let us move back to exact equations.
+
+\subsubsection{Back to Exact Equations}
+
+\begin{example}
+    Consider the ODE
+    \begin{align}
+        e^{y} \di{x} + (x e^{y} + 2y) \di{y} = 0.
+    \end{align}
+    Verify that this equation is exact. Thus, solutions are given by $g(x,y) = C$ for some constant $C \in \R$, where
+    \begin{align}
+        g(x,y) = x e^{y} + y^{2}.
+    \end{align}
+    The solutions are level curves of $g$. Note that $\nabla g(x,y) = (e^{y}, x e^{y} + 2y)$. Since $e^{y} > 0$ for all $y \in \R$, we have $\nabla g(x,y) \neq 0$ for all $(x,y) \in \R^{2}$. Thus, the level sets of $g$ are 1-manifolds in $\R^{2}$.
+\end{example}
+
+We wish to show the converse that if $\partial_{y} M = \partial_{x} N$, then the equation is exact.
+
+\begin{proof}
+    We wish to find a function $g$ such that $\partial_{x} g = M$ and $\partial_{y} g = N$. Suppose we had fuond such a $g$. Then, we would have
+    \begin{align}
+        \partial_{x} g = M \implies g(x,y) = \int_{0}^{x} M \di{x} + \psi(y).
+    \end{align}
+    The partial with respect to $y$ gives
+    \begin{align}
+        N(x,y) = \partial_{y} g(x,y) = \int_{0}^{x} \partial_{y} M \di{x} + \psi'(y).
+    \end{align}
+    Thus, we obtain
+    \begin{align}
+        \psi'(y) = N(x,y) - \int_{0}^{x} \partial_{y} M(s,y) \di{s}.
+    \end{align}
+    Differentiating with respect to $x$ gives $\partial_{x} N(x,y) - \partial_{y} M(x,y) = 0$, which holds by assumption. Thus, $\psi'(y)$ is indeed a function of $y$ alone.
+\end{proof}
+
+So far, we have shown that $M \di{x} + N \di{y} = 0$ is exact with solution $g$, if and only if $F = (M,N)$ is a conservative vector field with respect to the potential function $g$. Moreover, solutions of the exact equation are level sets of $g$.
+
+\subsection{Integrating Factors}
+\textit{January 14th.}
+
+Look at the equation
+\begin{align}
+    y \di{x} + (x^{2}y - x) \di{y} = 0.
+\end{align}
+This equation is not exact. However, if we multiply both sides by $\mu(x,y) = 1/x^{2}$, we get
+\begin{align}
+    \frac{y}{x^{2}} \di{x} + \left(y - \frac{1}{x}\right) \di{y} = 0,
+\end{align}
+which is exact. Thus, solutions are given by $g(x,y) = C$ for some constant $C \in \R$, $g(x,y) = \frac{y^{2}}{2} - \frac{y}{x}$. Such a term $\mu(x,y)$ is known as an \eax{integrating factor}. We are now to characterize the equations that admit integrating factors.
+
+We claim that if $M$ and $N$ satisfy any one of the following conditions---
+\begin{itemize}
+    \item $\dfrac{\partial_{y} M - \partial_{x} N}{N} \equiv \phi(x)$ is a function of $x$ alone, or
+    \item $\dfrac{-\partial_{y} M + \partial_{x} N}{M} \equiv \psi(y)$ is a function of $y$ alone,
+\end{itemize}
+then there exists an integrating factor $\mu(x,y)$, which is
+\begin{align}
+    \mu(x,y) \equiv \mu(x) = e^{\displaystyle\int_{x_{0}}^{x} \phi(t) \, \di{t}} \quad \text{ or } \quad \mu(x,y) \equiv \mu(y) = e^{\displaystyle\int_{y_{0}}^{y} \psi(s) \, \di{s}},
+\end{align}
+respectively, for some $x_{0}, y_{0} \in \R$.
+
+\begin{example}
+    Suppose we are given the equation
+    \begin{align}
+        e^{x} \, \di{x} + (e^{x} \cot y + 2 y \csc y) \, \di{y} = 0.
+    \end{align}
+    This equation is not exact. However, we have
+    \begin{align}
+        \frac{-\partial_{y} M + \partial_{x} N}{M} = \frac{-0 + e^{x} \cot y}{e^{x}} = \cot y,
+    \end{align}
+    which is a function of $y$ alone. Thus, an integrating factor is given by
+    \begin{align}
+        \mu(y) = e^{\int \cot y \, \di{y}} = e^{\log \sin y} = \sin y.
+    \end{align}
+    Multiplying both sides of the original equation by $\sin y$, we get
+    \begin{align}
+        e^{x} \sin y \, \di{x} + (e^{x} \cos y + 2 y) \, \di{y} = \di{\left( e^{x} \sin y + y^{2} \right)} = 0,
+    \end{align}
+    which is exact.
+\end{example}
+
+We now prove the claim.
+
+\begin{proof}
+    We show a sequence of equivalences; $\mu$ is an integrating factor if and only if $\mu M \, \di{x} + \mu N \, \di{y} = 0$ is exact, which is true if and only if $\partial_{y}(\mu M) = \partial_{x}(\mu N)$, which is true if and only if
+    \begin{align}
+        \partial_{y} \mu \, M + \mu \partial_{y} M = \partial_{x} \mu \, N + \mu \partial_{x} N
+    \end{align}
+    which occurs if and only if
+    \begin{align}
+        \mu (\partial_{y} M - \partial_{x} N) = \partial_{x} \mu \, N - \partial_{y} \mu \, M.
+    \end{align}
+    If we assume that $\mu \equiv \mu(x)$, then $\partial_{y} \mu = 0$, and we have
+    \begin{align}
+        \mu (\partial_{y} M - \partial_{x} N) = \partial_{x} \mu \, N \implies \frac{\partial_{x} \mu}{\mu} = \frac{\partial_{y} M - \partial_{x} N}{N} = \phi(x).
+    \end{align}
+    Here, the left side is $\frac{\di{}}{\di{x}} \log \mu(x)$, and thus we have $\mu(x) = e^{\int_{x_{0}}^{x} \phi(t) \, \di{t}}$. The case when $\mu \equiv \mu(y)$ is similar.
+\end{proof}
+
+\section{Linear Equations and Homogeneous Equations}
+
+A first-order ODE of the form
+\begin{align}
+    y' + A(x) \, y = B(x)
+\end{align}
+is said to be a \eax{linear equation}, where $A$ and $B$ are continuous functions. In such a case, an integrating factor is given by
+\begin{align}
+    \mu(x) = e^{\displaystyle\int_{x_{0}}^{x} A(s) \, \di{s}}.
+\end{align}
+
+Multiplying both sides of the equation by $\mu(x)$, we get
+\begin{align}
+    \mu(x) \, y' + \mu(x) \, A(x) \, y = \mu(x) \, B(x) \implies \frac{\di{}}{\di{x}} (\mu(x) \, y) = \mu(x) \, B(x).
+\end{align}
+
+\begin{example}
+    Consider the linear ODE
+    \begin{align}
+        y' + y = (2xe^{-x} + x^{2}).
+    \end{align}
+    Here, $A(x) = 1$ and $B(x) = 2xe^{-x} + x^{2}$. An integrating factor is given by
+    \begin{align}
+        \mu(x) = e^{\int 1 \, \di{x}} = e^{x}.
+    \end{align}
+    Introducing this into the equation, we get
+    \begin{align}
+        e^{x} \, y' + e^{x} \, y = 2x + x^{2} e^{x} \implies \frac{\di{}}{\di{x}} (e^{x} \, y) = 2x + x^{2} e^{x}.
+    \end{align}
+    Integrating both sides, we get
+    \begin{align}
+        e^{x} \, y = \int (2x + x^{2} e^{x}) \, \di{x} = 2(x - 1) e^{x} + x^{2} e^{x} + C.
+    \end{align}
+\end{example}
+
+Finally, for first order ODEs, we are left with discussing equations of the form
+\begin{align}
+    M \, \di{x} + N \, \di{y} = 0,
+\end{align}
+where $M$ and $N$ are homogeneous functions of the same degree. That is, $M(tx,ty) = t^{k} M(x,y)$ and $N(tx,ty) = t^{k} N(x,y)$ for some $k \in \N$ and all $t > 0$. If we rewrite this equation as
+\begin{align}
+    y' = -\frac{M(x,y)}{N(x,y)} = f(x,y),
+\end{align}
+then we have $f(x,y)$ being homogenous of degree $0$, that is, $f(tx,ty) = f(x,y)$ for all $t > 0$. In such a case, the equation is termed a \eax{homogeneous equation}. Moreover, $f$ can be expressed as a function of the ratio $y/x$ alone via $f(x,y) \equiv f(1,y/x)$. If we set $z = y/x$, then $y = zx$ and $y' = z'x + z$. Thus, we have
+\begin{align}
+    z'x + z = f(1,z) \implies z' = \frac{f(1,z) - z}{x}.
+\end{align}
+This is a separable equation in $z$ and $x$, which can be solved to obtain $z(x)$, and thus $y(x) = z(x) \, x$.
+
+\begin{example}
+    Take a look at the equation
+    \begin{align}
+        x^{2} y' - 3xy - 2y^{2} = 0.
+    \end{align}
+    Here, $M(x,y) = -3xy - 2y^{2}$ and $N(x,y) = x^{2}$ are homogeneous functions of degree $2$. Rewriting, we have
+    \begin{align}
+        y' = \frac{3xy + 2y^{2}}{x^{2}} = \frac{3z + 2z^{2}}{1} = f(1,z),
+    \end{align}
+    where $z = y/x$. Thus, we have
+    \begin{align}
+        z' = \frac{f(1,z) - z}{x} = \frac{2z^{2} + 2z}{x}.
+    \end{align}
+    Separation of variables gives
+    \begin{align}
+        \frac{\di{z}}{2z^{2} + 2z} = \frac{\di{x}}{x} \implies \frac{1}{2} \log \abs{\frac{z}{z+1}} = \log \abs{x} + C \implies \frac{z}{z+1} = C_{1} x^{2}.
+    \end{align}
+    Back-substituting for $z$, we get
+    \begin{align}
+        \frac{y}{y+x} = C_{1} x^{2} \implies y = \frac{C_{1} x^{3}}{1 - C_{1} x^{2}}.
+    \end{align}
+\end{example}
+
+\section{Existence and Uniqueness Theorems}
+
+We now are focussed on when solutions of first-order ODEs exist and are unique. The first of these is the Peano existence theorem.
+
+\begin{theorem}[\eax{Peano existence theorem}]
+    Let $D = (x_{1}, x_{2}) \times (y_{1}, y_{2}) \subseteq \R^{2}$ be an open rectangle, and let $f:D \to \R$ be a continuous function. Also suppose $(x_{0},y_{0}) \in D$. Then, there exists a solution $y$ for $y' = f(x,y)$ in a neighbourhood of $x_{0}$ with the initial condition $y(x_{0}) = y_{0}$.
+\end{theorem}
+
+Note that this theorem only guarantees solutions in a neighbourhood of $x_{0}$. Moreover, it does not guarantee uniqueness of solutions. Another important theorem is that of Arzelà-Ascoli.
+
+\begin{theorem}[\eax{Arzelà-Ascoli theorem}]
+    Suppose $\cF = \{f : [a,b] \to \R\}$ is a family of continuous functions on $[a,b]$ such that $\cF$ satisfies the following two conditions:
+    \begin{itemize}
+        \item \eax{uniform boundedness}: there exists $M > 0$ such that $\abs{f(x)} \leq M$ for all $f \in \cF$ and all $x \in [a,b]$.
+        \item \eax{equicontinuity}: for every $\epsilon > 0$, there exists $\delta > 0$ such that for all $f \in \cF$ and all $x, y \in [a,b]$ with $\abs{x - y} < \delta$, we have $\abs{f(x) - f(y)} < \epsilon$.
+    \end{itemize}
+    Then every sequence $(f_{n})_{n \geq 1} \subseteq \cF$ has a subsequence $(f_{n_{k}})_{k \geq 1}$ that converges uniformly to a continuous function $f:[a,b] \to \R$.
+\end{theorem}
+
+
+\subsubsection{A Brief Detour}
+\textit{January 19th.}
+
+Let $X$ be a metric space with metric $d$. A collection of open sets $(U_{\alpha})_{\alpha \in \Lambda}$ is said to be an \eax{open cover} of $X$ if $\bigcup_{\alpha \in \Lambda} U_{\alpha} \supseteq X$. A metric space $X$ is said to be \eax{compact} if every open cover of $X$ admits a finite subcover; that is, for every open cover $(U_{\alpha})_{\alpha \in \Lambda}$ of $X$, there exists a finite subset $\{\alpha_{1}, \ldots, \alpha_{n}\} \subseteq \Lambda$ such that $\bigcup_{i=1}^{n} U_{\alpha_{i}} \supseteq X$. A subset $K \subseteq X$ is said to be compact if $K$ is compact as a metric space with the induced metric from $X$. A subset $A \subseteq X$ is said to be \eax{sequentially compact} if every sequence $(x_{n})_{n \geq 1} \subseteq A$ has a subsequence that converges to a point in $A$. It can be shown that a subset $K \subseteq X$ is compact if and only if $K$ is sequentially compact.
+
+Note that $C[0,1]$ is a linear space. A norm on $C[0,1]$ is the supremum norm defined as $\norm{f} \defeq \sup_{x \in [0,1]} \abs{f(x)}$. With this norm, $C[0,1]$ is a metric space with the metric $d(f,g) = \norm{f-g}$. Thus, restated, the Arzelà-Ascoli theorem says that the closure of a subset $\cF \subseteq C[0,1]$ is sequentially compact if and only if $\cF$ is uniformly bounded and equicontinuous. The theorem precisely characterizes the compact subsets of $C[0,1]$. We now prove this theorem.
+
+\begin{proof}[Proof of Arzelà-Ascoli theorem]
+    Let $\delta_{1}$ be such that equicontinuity holds for $\epsilon = \frac{1}{2}$. Split the domain $[0,1]$ into subintervals of length less than $\delta_{1}$, and split the range $[-M,M]$ into intervals of length less than $\frac{1}{2}$. Thus, we have a grid on $[0,1] \times [-M,M]$. Call this `Step 1'. For a function $f$, let its shape at Step 1 be the collection of rectangles in the grid that $f$ intersects. Since there are only finitely many possible shapes at Step 1, there is at least one shape, say $S_{1}$, such that infinitely many functions in the sequence $(f_{n})_{n \geq 1}$ have shape $S_{1}$. Let $f_{n_{1}}$ be the function with the least index among these. Now choose $\epsilon = \frac{1}{4}$, and let $\delta_{2}$ be such that equicontinuity holds. Split the domain $[0,1]$ into subintervals of length less than $\delta_{2}$, and split the range $[-M,M]$ into intervals of length less than $\frac{1}{4}$. This gives a finer grid on $[0,1] \times [-M,M]$. Call this `Step 2'. Then there is again a shape $S_{2}$ at Step 2 such that infinitely many functions in the sequence $(f_{n_{k}})_{k \geq 1}$ have shape $S_{2}$. Let $f_{n_{2}}$ be the function with the least index among these. Continuing in this manner, we obtain a subsequence $(f_{n_{k}})_{k \geq 1}$ such that all functions in this subsequence have the same shape at Step $k$. We claim that this subsequence converges uniformly to a continuous function $f:[0,1] \to \R$. Indeed, for any $\epsilon > 0$, choose $N$ such that $\frac{1}{2^{N}} < \epsilon$. For any $m,n \geq N$ and any $x \in [0,1]$, since $f_{n}$ and $f_{m}$ have the same shape at Step $N$, we have $\abs{f_{n}(x) - f_{m}(x)} < \frac{1}{2^{N-1}} < \epsilon$. This shows that $(f_{n_{k}})_{k \geq 1}$ is uniformly Cauchy, and thus converges uniformly to some function $f:[0,1] \to \R$. Since each $f_{n_{k}}$ is continuous, and the convergence is uniform, $f$ is also continuous.
+\end{proof}
+
+\noindent \textit{January 27th.}
+
+We now prove the Peano existence theorem.
+
+\begin{proof}[Proof of Peano existence theorem]
+    Let $D$ be the open rectangle $(a,b) \times (c,d)$. Since $f$ is continuous on the compact set $\overline{D}$, there exists an $M > 0$ such that $\abs{f(x,y)} \leq M$ for all $(x,y) \in D$. The idea here is to construct a sequence of approximate solutions that converges to a solution of the ODE via Arzelà-Ascoli. For any $\epsilon > 0$, define a function $y_{\epsilon}$ precisely as follows: on $[x_{0},x_{1}]$ where $x_{1} = x_{0} + \epsilon$, it is exactly the line segment through $(x_{0},y_{0})$ with slope $f(x_{0},y_{0})$. On $[x_{1},x_{2}]$ where $x_{2} = x_{1} + \epsilon$, it is exactly the line segment through $(x_{1},y_{\epsilon}(x_{1}))$ with slope $f(x_{1},y_{\epsilon}(x_{1}))$. Continuing in this manner, we define $y_{\epsilon}$ on $[x_{0}, x_{0} + n \epsilon]$ for all $n$ such that $x_{0} + n \epsilon \leq b$. We can similarly define $y_{\epsilon}$ on $[x_{0}-n\epsilon,x_{0}]$. Note that since $\abs{f(x,y)} \leq M$, we have
+    \begin{align}
+        \abs{y_{\epsilon}(x) - y_{\epsilon}(x_{0})} \leq \abs{y_{0} - y_{\epsilon}(x_{1})} + \abs{y_{\epsilon}(x_{1}) - y_{\epsilon}(x_{2})} + \cdots + \abs{y_{\epsilon}(x_{n-1}) - y_{\epsilon}(x)} \leq M \abs{x - x_{0}}.
+    \end{align}
+    Now consider the family $\{y_{\epsilon} : \epsilon > 0\}$. This family is uniformly bounded since $\abs{y_{\epsilon}(x)} \leq \abs{y_{0}} + M \abs{x - x_{0}}$ for all $x \in [a,b]$ and all $\epsilon > 0$. This family is also equicontinuous since for any $\epsilon > 0$ and any $x,y \in [a,b]$, we have
+    \begin{align}
+        \abs{y_{\epsilon}(x) - y_{\epsilon}(y)} \leq M \abs{x - y}.
+    \end{align}
+    By Arzelà-Ascoli, there exists a sequence $(y_{\epsilon_{n}})_{n \geq 1}$ that converges uniformly to a continuous function $y:[a,b] \to \R$. We now show that $y$ is a solution of the ODE with the initial condition. It suffices to show that for any $u \in [a,b]$ and $v = y(x)$, one has $y'(u) = f(u,v)$. That is, we wish to show
+    \begin{align}
+        \lim_{h \to 0} \frac{y(u+h) - y(u)}{h} = f(u,v).
+    \end{align}
+    To this end, let $(y_{1/n_{k}})_{k \geq 1}$ be the subsequence converging to $y$, where we have taken $\epsilon_{n} = 1/n$. Fix some $h \neq 0$ such that $u + h \in [a,b]$. There exists some $k_{0} \gg 1$ such that for all $k \geq k_{0}$, we have $\abs{y_{1/n_{k}}(x) - y(x)} \leq h$. That is, the graph of $y_{1/n_{k}}$ on $[u-h,u+h]$ lies inside $[u-h,u+h] \times [v-2Mh, v+2Mh]$. This is due to the fact that $\abs{y_{1/n_{k}}(\tilde{u}) - y_{1/n_{k}}(u)} \leq M \abs{\tilde{u} - u} \leq Mh$ implies
+    \begin{align}
+        \abs{y_{1/n_{k}}(\tilde{u}) - v} \leq \abs{y_{1/n_{k}}(\tilde{u}) - y_{1/n_{k}}(u)} + \abs{y_{1/n_{k}}(u) - y(u)} \leq 2Mh.
+    \end{align}
+    Via this construction, we obtain
+    \begin{align}
+        \frac{y_{1/n_{k}}(u+h)-y_{1/n_{k}}(u)}{h} = f(\tilde{u},\tilde{v}) = f(u,v) + \mathrm{O}(h).
+    \end{align}
+    Letting $k \to \infty$, we have
+    \begin{align}
+        \frac{y(u+h)-y(u)}{h} = f(u,v) + \mathrm{O}(h).
+    \end{align}
+    Finally, letting $h \to 0$, we obtain the desired result.
+\end{proof}
+
+\noindent \textit{January 28th.}
+
+\begin{theorem}[\eax{Osgood's theorem}]
+    Let $y' = f(x,y)$ be an ODE where $f:\cR \subseteq \R^{2} \to \R$ is a continuous function satisfying
+    \begin{align}
+        \abs{f(x,y_{1})-f(x,y_{2})} \leq \varphi(\abs{y_{1}-y_{2}}) \quad \text{ for all } (x,y_{1}),(x,y_{2}) \in \cR.
+    \end{align}
+    Here, $\varphi:\R \to \R$ is a continuous function such that $\varphi > 0$ on $(0,\infty)$, and $\int_{0}^{c} \frac{1}{\varphi(s)} \, \di{s} = \infty$ for some $c > 0$. Then, there is at most one solution of the ODE passing through any point in $(x_{0},y_{0}) \in \cR$.
+\end{theorem}
+
+Before diving into the proof, we study $\varphi$ satisfying the conditions in Osgood's theorem. Note that $\varphi$ is positive and continuous on $(0,\infty)$. Thus, $\frac{1}{\varphi}$ is also continuous on $(0,\infty)$. The condition $\int_{0}^{c} \frac{1}{\varphi(s)} \, \di{s} = \infty$ implies that $\frac{1}{\varphi}$ is not integrable near $0$. For example, $\varphi(s) = s^{\alpha}$ for $\alpha \geq 1$ satisfies this condition. Moreover, the condition of non-integrability near $0$, positivity, and continuity imply that $\varphi(0) = 0$.
+
+A useful lemma before the proof is the following.
+\begin{lemma}
+    Suppose $g,h:(-\epsilon,\epsilon) \to \R$ are differentiable functions such that $g(0) = h(0)$ and $g' > h'$ on $(-\epsilon,\epsilon)$. Then, $g(x) > h(x)$ for all $x \in (0,\epsilon)$ and $g(x) < h(x)$ for all $x \in (-\epsilon,0)$.
+\end{lemma}
+\begin{proof}
+    Look at $f = g-h$. Then, $f(0) = 0$. By the fundamental theorem of calculus, for any $x \in (0,\epsilon)$, we have
+    \begin{align}
+        g(x) - h(x) = f(x) = \int_{0}^{x} (g'-h')(s) \, \di{s} > 0.
+    \end{align}
+    Similarly, for any $x \in (-\epsilon,0)$, we have
+    \begin{align}
+        g(x) - h(x) = f(x) = \int_{0}^{x} (g'-h')(s) \, \di{s} < 0.
+    \end{align}
+\end{proof}
+
+
+We now prove Osgood's theorem.
+
+\begin{proof}[Proof of Osgood's theorem]
+    Suppose $y_{1}$ and $y_{2}$ are two different solutions of the ODE passing through $(x_{0},y_{0})$; that is $y_{1}(x_{0}) = y_{0} = y_{2}(x_{0})$. Since $y_{1} \neq y_{2}$, there exists some $x_{1} > x_{0}$ such that $y_{1}(x_{1}) > y_{2}(x_{1})$, without loss of generality. Let $z(x) = y_{1}(x) - y_{2}(x)$. Then, $z(x_{0}) = 0$ and $z(x_{1}) > 0$. Moreover,
+    \begin{align}
+        z'(x) = y_{1}'(x) - y_{2}'(x) = f(x,y_{1}(x)) - f(x,y_{2}(x)) \leq \varphi(\abs{y_{1}(x)-y_{2}(x)}) = \varphi(\abs{z(x)}) < 2\varphi(\abs{z(x)})
+    \end{align}
+    whenever $z(x) \neq 0$. Now compare $z$ with $v$ where $v'(x) = 2 \varphi(v(x))$ and $v(x_{1}) = z(x_{1}) > 0$. For now, assume $\varphi(x) = x$. Then, $v'(x) = 2 v(x)$, or $v(x) = v(x_{1})e^{-2(x_{1}-x)}$. Thus, we have $v(x_{1}) = z(x_{1})$ and $v'(x_{1}) = 2 v(x_{1}) > z'(x_{1})$ (and thus, $v' > z'$ in a neighbourhood of $x_{1}$). Observe that $z(x_{0}) = 0$ and $v(x_{0}) > 0$. If $p \defeq \min \{x > x_{0} \mid v(x) = z(x)\}$, then $v > z$ on $[x_{0},p]$. However, from the lemma, it follows that $v < z$ to the left of $p$, which is a contradiction. Thus, $y_{1} = y_{2}$.
+
+    If $q$ is any point in the domain where $v(q) = z(q)$ and $v'(q) > z'(q)$, then by the same argument as above, we reach a contradiction. To complete the proof, we need to work with a general $\varphi$, instead of just $\varphi(x) = x$. To this end, note that if $v'(x) = 2 \varphi(v(x))$, then
+    \begin{align}
+        \Phi(v(x)) \defeq \int_{v(x)}^{v(x_{1})} \frac{1}{\varphi(s)} \, \di{s} = 2 (x_{1} - x).
+    \end{align}
+    Note that $\Phi$ is well-defined since $\varphi > 0$ on $(0,\infty)$. Also, $\Phi$ is strictly decreasing since its derivative is $-\frac{1}{\varphi} < 0$. Thus, $\Phi$ is invertible. Thus,
+    \begin{align}
+        v(x) = \Phi^{-1}(2 (x_{1} - x)).
+    \end{align}
+\end{proof}
+
+\begin{theorem}[The \eax{fixed point theorem}]
+    Suppose $(X,d)$ is a complete metric space, and $T:X \to X$ is a contraction; that is, there exists $ c \in (0,1)$ such that
+    \begin{align}
+        d(T(x),T(y)) \leq c \, d(x,y) \quad \text{ for all } x,y \in X.
+    \end{align}
+    Then, there exists a unique fixed point $x_{0} \in X$ such that $T(x_{0}) = x_{0}$.
+\end{theorem}
+
+
+\begin{proof}
+    We first show uniqueness. Suppose $\tilde{x}$ and $\tilde{y}$ are two distinct fixed points. Then,
+    \begin{align}
+        d(\tilde{x},\tilde{y}) = d(T(\tilde{x}),T(\tilde{y})) \leq c \, d(\tilde{x},\tilde{y})
+    \end{align}
+    which is a contradiction since $c < 1$. Thus, the fixed point is unique. For existence, pick any $x_{1} \in X$, and define a sequence $(x_{n})_{n \geq 1}$ via $x_{n+1} = T(x_{n})$. We claim that this sequence is Cauchy. Indeed, for any natural $n$,
+    \begin{align}
+        d(x_{n+1},x_{n}) = d(T(x_{n}),T(x_{n-1})) \leq c \, d(x_{n},x_{n-1}) \leq c^{n-1} d(x_{2},x_{1}).
+    \end{align}
+    Thus, for any $m > n$,
+    \begin{align}
+        d(x_{n},x_{m}) \leq d(x_{n},x_{n+1}) + \cdots + d(x_{m-1},x_{m}) \leq d(x_{2},x_{1}) (c^{n-1} + c^{n} + \cdots) = \frac{d(x_{2},x_{1}) c^{n-1}}{1-c}.
+    \end{align}
+    Thus, $(x_{n})_{n \geq 1}$ is Cauchy, and thus converges to some $x_{\infty} \in X$ since $X$ is complete. Finally, simply applying $T$ and taking limits gives $T(x_{\infty}) = x_{\infty}$.
+\end{proof}
+
+
+
+\begin{theorem}[\eax{Picard's theorem}]
+    Suppose $y' = f(x,y)$ is an ODE where $f:\cR \subseteq \R^{2} \to \R$ is a continuous function on $\cR$ satisfying a Lipschitz condition in $y$; that is, there exists some $K > 0$ such that
+    \begin{align}
+        \abs{f(x,s)-f(x,t)} \leq K\abs{s-t} \quad \text{ for all } (x,s),(x,t) \in \cR
+    \end{align}
+    and where $\cR$ is a closed rectangle containing the point $(x_{0},y_{0})$. Then, there exists a unique solution of the ODE passing through $(x_{0},y_{0})$.
+\end{theorem}
+\begin{proof}
+    Integrating the ODE gives $y(x) = y(x_{0}) + \int_{x_{0}}^{x} f(s,y(s)) \, \di{s}$. Note that $y$ is a solution of the ODE if and only if it satisfies this integral equation. Over the interval $I = [x_{0}-h,x_{0}+h]$ for some $h > 0$, define the space $C(I)$ of continuous functions on $I$ with the supremum norm $\norm{y} = \sup_{x \in I} \abs{y(x)}$. Define the map $T:C(I) \to C(I)$ via
+    \begin{align}
+        (Ty)(x) = y_{0} + \int_{x_{0}}^{x} f(s,y(s)) \, \di{s}.
+    \end{align}
+    Note that $y$ is a solution of the ODE if and only if $Ty = y$. We now show that $T$ is a contraction for sufficiently small $h$. Indeed, for any $y_{1},y_{2} \in C(I)$ and any $x \in I$, we have
+    \begin{align}
+        \abs{(Ty_{1})(x) - (Ty_{2})(x)} = \abs{\int_{x_{0}}^{x} (f(s,y_{1}(s)) - f(s,y_{2}(s))) \, \di{s}} \leq \int_{x_{0}}^{x} K \abs{y_{1}(s) - y_{2}(s)} \, \di{s} \leq K h \, \norm{y_{1}-y_{2}}.
+    \end{align}
+    Thus, $\norm{Ty_{1} - Ty_{2}} \leq K h \, \norm{y_{1}-y_{2}}$. Choosing $h$ such that $K h < 1$, we have that $T$ is a contraction. By the fixed point theorem, there exists a unique fixed point of $T$, which is the unique solution of the ODE passing through $(x_{0},y_{0})$.
+\end{proof}
+
+
+\noindent\textit{February 4th.}
+
+Let $U:[a,b] \to \R$ satisfy $U'(x) \leq k U(x)$ for all $x \in [a,b]$ and some $k > 0$. Moreover, suppose $U(x_{0}) = y_{0}$ for some $x_{0} \in (a,b)$. Then $U(x) \leq y_{0} e^{k(x-x_{0})}$ for all $x \geq x_{0}$. This is known as \eax{Gronwall's inequality}. To show this, consider the function
+\begin{align}
+    \varphi(x) \defeq U(x) e^{-k(x - x_{0})}.
+\end{align}
+Then,
+\begin{align}
+    \varphi'(x) = U'(x) e^{-k(x - x_{0})} - k U(x) e^{-k(x - x_{0})} = e^{-k(x - x_{0})} (U'(x) - k U(x)) \leq 0.
+\end{align}
+Thus, $\varphi$ is non-increasing, and thus $\varphi(x) \leq \varphi(x_{0}) = y_{0}$. Rearranging gives the desired result. Note that in the proof of Picard's theorem, we can use Gronwall's inequality to show uniqueness of solutions instead of the fixed point theorem.
+
+
+\section{System of ODEs}
+
+A system of first-order ODEs is a collection of equations of the form
+\begin{align}
+    \dot{y}_{i} = f_{i}(x,y_{1},\ldots,y_{n}) \quad \text{ for } i = 1, \ldots, n.
+\end{align}
+Here, $y_{i} = y_{i}(x)$ are the unknown functions, and $f_{i}:\cR \subseteq \R^{n+1} \to \R$ are given functions. We can rewrite this system in vector form as
+\begin{align}
+    \dot{Y} = f(x,Y)
+\end{align}
+where $Y = (y_{1}, \ldots, y_{n})^{T}$ and $f = (f_{1}, \ldots, f_{n})^{T}$ are both vectors. Again, we ask the same questions of existence and uniquness of solutions. Picard's theorem generalizes to systems of ODEs as follows.
+
+\begin{theorem}
+    Suppose the functon $f:\R^{n+1} \to \R^{n}$ is continuous in a neighbourhood of the point $(x_{0},Y_{0}) \in \R^{n+1}$, and each of the components of $f$ satisfy a Lipschitz condition in $Y$; that is, there exists some $K > 0$ such that
+    \begin{align}
+        \abs{f_{i}(x,Y_{1}) - f_{i}(x,Y_{2})} \leq K \, \sum_{j=1}^{n} \abs{y_{1,j} - y_{2,j}} \quad \text{ for all } (x,Y_{1}),(x,Y_{2}) \in \cR.
+    \end{align}
+    Then, there exists a unique solution $Y$ of the system of ODEs passing through $(x_{0},Y_{0})$.
+\end{theorem}
+
+\begin{proof}
+    Note that $Y = (y_{1},y_{2},\ldots,y_{n})^{T}$ is a solution of the system of ODEs if and only if it satisfies the integral equation
+    \begin{align}
+        y_{i}(x) = y_{i}(x_{0}) + \int_{x_{0}}^{x} f_{i}(s,Y(s)) \, \di{s} \quad \text{ for } i = 1, \ldots, n.
+    \end{align}
+    Define the map $T:C(I,\R^{n}) \to C(I,\R^{n})$ via
+    \begin{align}
+        \Phi = (\varphi_{1},\varphi_{2},\ldots,\varphi_{n})^{T} \mapsto \left( y_{1}(x_{0}) + \int_{x_{0}}^{x} f_{1}(s,\Phi(s)) \, \di{s}, \ldots, y_{n}(x_{0}) + \int_{x_{0}}^{x} f_{n}(s,\Phi(s)) \, \di{s} \right)^{T}
+    \end{align}
+    where $C(I,\R^{n})$ is the space of continuous functions from $I$ to $\R^{n}$ with the supremum norm $\norm{Y} = \sup_{x \in I} \sum_{i=1}^{n} \abs{y_{i}(x)}$. Thus, $Y$ is a solution of the system of ODEs if and only if $TY = Y$. We now show that $T$ is a contraction for sufficiently small $h$. Indeed, for any $\Phi = (\varphi_{1},\ldots,\varphi_{n})^{T}, \Psi = (\psi_{1},\ldots,\psi_{n})^{T} \in C(I,\R^{n})$ and any $x \in I$, we have
+    \begin{align}
+        \abs{(T\Phi)_{i}(x) - (T\Psi)_{i}(x)} &= \abs{\int_{x_{0}}^{x} (f_{i}(s,\Phi(s)) - f_{i}(s,\Psi(s))) \, \di{s}} \notag \\ &\leq \int_{x_{0}}^{x} K \sum_{j=1}^{n} \abs{\varphi_{j}(s) - \psi_{j}(s)} \, \di{s} \leq K h \, \sum_{j=1}^{n} \norm{\varphi_{j} - \psi_{j}}.
+    \end{align}
+    Hence, we choose $h$ such that $K h < 1$. By the fixed point theorem, there exists a unique fixed point of $T$, which is the unique solution of the system of ODEs passing through $(x_{0},Y_{0})$.
+\end{proof}
+Let us look at a particular example of such a system; examine
+\begin{align}
+    \dot{Y} = f(x,Y) = A(x) \cdot Y + Q(x)
+\end{align}
+where $A(x)$ is an $n \times n$ matrix whose entries are continuous functions of $x$ in $(x_{0}-h,x_{0}+h)$, and $Q(x)$ is a vector in $\R^{n}$ whose entries are continuous functions of $x$ in $(x_{0}-h,x_{0}+h)$. This is known as a \eax{linear system} of ODEs. Note that $f$ satisfies a Lipschitz condition in $Y$ on any compact subinterval since
+\begin{align}
+    \abs{f_{j}(x,Y) - f_{j}(x,U)} = \abs{\sum_{i=1}^{n} a_{ji}(x) \cdot (Y_{i}-U_{j})} \leq K \sum_{i=1}^{n} \abs{Y_{i}-U_{i}}.
+\end{align}
+Note that in the one dimensional case, that is, when $n=1$, we have $y' = A(x) \, y + Q(x)$. Suppose $y^{\ast}$ is a solution of this equation. Then, any other solution $y$ can be written as $y = y^{\ast} + z$ for some function $z$ that satisfies the homogeneous equation $z' = A(x) \, z$. Moreover, solutions of $z' = Az$ form a vector space over the real numbers of dimension $1$. Thus, a general solution looks like $y = y^{\ast} + \lambda z$ for some $\lambda \in \R$, where $z$ is a non-trivial solution of the homogeneous equation, and $y^{\ast}$ is a particular solution of the differential equation. We can lift this idea to the higher dimensions.
+
+Consider $\dot{Y} = A(x) \cdot Y + Q(x)$, as above. Suppose $Y^{\ast}$ is a particular solution of this equation. Then, any other solution $Y$ can be written as $Y = Y^{\ast} + Z$ for some function $Z$ that satisfies the homogeneous equation $\dot{Z} = A(x) \cdot Z$. Moreover, solutions of $\dot{Z} = A(x) \cdot Z$ form a vector space over the real numbers of dimension $n$. Thus, a general solution looks like $Y = Y^{\ast} + \sum_{i=1}^{n} \lambda_{i} Z_{i}$ for some $\lambda_{1}, \ldots, \lambda_{n} \in \R$, where $Z_{1}, \ldots, Z_{n}$ form a basis of the vector space of solutions of the homogeneous equation, and $Y^{\ast}$ is a particular solution of the differential equation. To show that the dimension of the vector space of solutions of the homogeneous equation is $n$, let $Z_{i}$ denote the solution such that $Z_{i}(x_{0}) = e_{i}$. Then given any other solution $Z$ such that $Z(x_{0}) = (\lambda_{1},\ldots,\lambda_{n})$, we have $Z = \sum_{i=1}^{n} \lambda_{i} Z_{i}$. Picard's theorem guarantees that this is the unique solution. Note that the functions $Z_{1}, \ldots, Z_{n}$ are linearly independent if and only if the vectors $Z_{1}(x_{0}),\ldots,Z_{n}(x_{0})$ are linearly independent if and only if for all $x \in I$, the vectors $Z_{1}(x),\ldots,Z_{n}(x)$ are linearly independent.
+
+\subsection{Higher Order Linear Differential Equations}
+\textit{February 9th.}
+
+Given an equation of the form
+\begin{align}
+    y^{(n)} + a_{n-1}(x) y^{(n-1)} + \cdots + a_{1}(x) y' + a_{0}(x) y = q(x),
+\end{align}
+we wish to solve for $y:[x_{0}-h,x_{0}+h] \to \R$. Here, $a_{0},\ldots,a_{n-1},q$ are continuous functions on $[x_{0}-h,x_{0}+h]$. This is known as a \eax{higher order linear differential equation}. We can reduce this task to solving a system of first-order ODEs. To this end, define $z_{0} = y$, $z_{1} = y'$, $z_{2} = y''$, $\ldots$, $z_{n-1} = y^{(n-1)}$, $z_{n} = y^{(n)}$. $z_{n}$ may also be written as $q(x) - \sum_{i=0}^{n-1} a_{i}(x) z_{i}$. Then $Z = (z_{1},\ldots,z_{n})^{T}$ satisfies the system of first-order ODEs
+\begin{align}
+    \dot{Z} = A(x) \cdot Z + Q(x)
+\end{align}
+where $A$ is the $n \times n$ matrix
+\begin{align}
+    A(x) = \begin{pmatrix}
+        0 & 1 & 0 & \cdots & 0 \\
+        0 & 0 & 1 & \cdots & 0 \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        -a_{0}(x) & -a_{1}(x) & -a_{2}(x) & \cdots & -a_{n-1}(x)
+    \end{pmatrix}
+\end{align}
+and $Q(x) = (0,0,\ldots,0,q(x))^{T}$. Note that if $y$ solves the higher order linear differential equation, then $(y,y',y'',\cdots,y^{(n-1)})$ solves the system of linear ODEs, and if $Z$ solves the system of linear ODEs, then $z_{0}$ solves the higher order linear differential equation. Since the $a_{i}$'s and $q$ are continuous, there exists a unique solution $y$ such that $y(x_{0}) = b_{0}$, $y'(x_{0}) = b_{1}$, $\ldots$, $y^{(n-1)}(x_{0}) = b_{n-1}$ for any $b_{0},\ldots,b_{n-1} \in \R$. We claim that a general solution looks like
+\begin{align}
+    y = y^{\ast} + \lambda_{1} y_{1} + \cdots + \lambda_{n} y_{n}
+\end{align}
+where $y^{\ast}$ is a particular solution of the higher order linear differential equation, and $y_{1},\ldots,y_{n}$ are linearly independent solutions of the homogeneous equation. Any function of this form is a solution of the higher order linear differential equation, so we only need to show that any solution can be written in this form. Let $y$ be any solution. Then, $Z = (y,y',\ldots,y^{(n-1)})$ is a solution of the system of linear ODEs. Note that $Z = Z^{\ast} + \sum_{i=1}^{n} \lambda_{i} Z_{i}$ where $Z^{\ast}$ is a particular solution of the system of linear ODEs, and $Z_{1},\ldots,Z_{n}$ are linearly independent solutions of the homogeneous equation. Thus,
+\begin{align}
+    y = (z^{\ast})_{1} + \lambda_{1} (z_{1})_{1} + \cdots + \lambda_{n} (z_{n})_{1}
+\end{align}
+where $(z^{\ast})_{1}$ is the first component of $Z^{\ast}$, and $(z_{i})_{1}$ is the first component of $Z_{i}$. We are only left to show that $\{Z_{1},Z_{2},\ldots,Z_{n}\}$ are linearly independent if and only if $\{(z_{1})_{1},(z_{2})_{1},\ldots,(z_{n})_{1}\}$ are linearly independent. The forward direction is trivial. For the reverse direction, suppose $\{(z_{1})_{1},(z_{2})_{1},\ldots,(z_{n})_{1}\}$ are linearly independent, but $\{Z_{1},Z_{2},\ldots,Z_{n}\}$ are linearly dependent. Then, there exist some $\lambda_{1},\ldots,\lambda_{n} \in \R$, not all zero, such that $\sum_{i=1}^{n} \lambda_{i} Z_{i} = 0$. In particular, the first component of this equation gives $\sum_{i=1}^{n} \lambda_{i} (z_{i})_{1} = 0$, which is a contradiction.\\
+
+From here, we define the \eax{Wronskian} of $y_{1},\ldots,y_{n}$ as
+\begin{align}
+    W_{(y_{1},\ldots,y_{n})}(x) = \det\begin{pmatrix}
+        y_{1} & y_{2} & \cdots & y_{n} \\
+        y_{1}' & y_{2}' & \cdots & y_{n}' \\
+        \vdots & \vdots & \ddots & \vdots \\
+        y_{1}^{(n-1)} & y_{2}^{(n-1)} & \cdots & y_{n}^{(n-1)}
+    \end{pmatrix}
+\end{align}
+and we claim that if $\{y_{1},\ldots,y_{n}\}$ are solutions, then the following are equivalent:
+\begin{itemize}
+    \item $\{y_{1},\ldots,y_{n}\}$ are linearly independent as functions on $[x_{0}-h,x_{0}+h]$;
+    \item $W_{(y_{1},\ldots,y_{n})}(x) \neq 0$ for all $x \in [x_{0}-h,x_{0}+h]$;
+    \item $W_{(y_{1},\ldots,y_{n})}(x_{0}) \neq 0$ for some $x_{0} \in [x_{0}-h,x_{0}+h]$.
+\end{itemize}
+Let us focus on solving $y^{(n)}+a_{n-1}y^{(n-1)}+\cdots+a_{1}y'+a_{0}y=0$ where the $a_{i}$'s are constants. The characteristic polynomial is defined as $p(t) = t^{n} + a_{n-1} t^{n-1} + \cdots + a_{1} t + a_{0}$. Then if $\alpha \in \C$ is a zero of $P$, then $e^{\alpha x}$ olves this; indeed, \begin{align}
+    (e^{\alpha x})^{(n)} + a_{n-1} (e^{\alpha x})^{(n-1)} + \cdots + a_{1} (e^{\alpha x})' + a_{0} e^{\alpha x} = e^{\alpha x} (\alpha^{n} + a_{n-1} \alpha^{n-1} + \cdots + a_{1} \alpha + a_{0}) = 0.
+\end{align}
+Let us suppose all the zeroes of $P$ are real and distinct, say, $\alpha_{1},\ldots,\alpha_{n}$. Then, $e^{\alpha_{1} x},\ldots,e^{\alpha_{n} x}$ are linearly independent solutions of the homogeneous equation, and thus a general solution looks like $y = \lambda_{1} e^{\alpha_{1} x} + \cdots + \lambda_{n} e^{\alpha_{n} x}$ for some $\lambda_{1},\ldots,\lambda_{n} \in \R$. We can also handle the case when $P$ has repeated roots, say $\alpha_{1},\ldots,\alpha_{m}$ each with multiplicity $k_{1},\ldots,k_{m}$, respectively. Then, $e^{\alpha_{1} x}$, $x e^{\alpha_{1} x}$, $\ldots$, $x^{k_{1}-1} e^{\alpha_{1} x}$, $e^{\alpha_{2} x}$, $x e^{\alpha_{2} x}$, $\ldots$, $x^{k_{2}-1} e^{\alpha_{2} x}$, $\ldots$, $e^{\alpha_{m} x}$, $x e^{\alpha_{m} x}$, $\ldots$, $x^{k_{m}-1} e^{\alpha_{m} x}$ are linearly independent solutions of the homogeneous equation, and thus a general solution looks like
+\begin{align}
+    y = \sum_{i=1}^{m} \sum_{j=0}^{k_{i}-1} \lambda_{ij} x^{j} e^{\alpha_{i} x}.
+\end{align}
+Finally, if $P$ has complex roots, say $\alpha_{1} \in \C\setminus\R$ then $\bar{\alpha}_{1}$ is also a root. Thus, $(e^{\alpha_{1}x}+e^{\bar{\alpha}_{1}x})/2$ and $(e^{\alpha_{1}x}-e^{\bar{\alpha}_{1}x})/(2i)$ are linearly independent solutions of the homogeneous equation; we can rewrite them as $e^{ax} \cos bx$ and $e^{ax} \sin bx$ (both can be thought of as `basis' for the functions they span). Hence, if $\alpha = a+ib$ has multiplicity $k$, then $e^{ax} \cos bx, x e^{ax} \cos bx, \ldots, x^{k-1} e^{ax} \cos bx, e^{ax} \sin bx, x e^{ax} \sin bx, \ldots, x^{k-1} e^{ax} \sin bx$ are linearly independent solutions of the homogeneous equation. Thus, if $P$ has complex roots $\alpha_{1},\ldots,\alpha_{m}$ with multiplicities $k_{1},\ldots,k_{m}$, respectively, then a general solution looks like
+\begin{align}
+    y = \sum_{i=1}^{m} \sum_{j=0}^{k_{i}-1} \lambda_{ij} x^{j} e^{a_{i} x} \cos b_{i} x + \sum_{i=1}^{m} \sum_{j=0}^{k_{i}-1} \mu_{ij} x^{j} e^{a_{i} x} \sin b_{i} x.
+\end{align}
+
+\noindent \textit{February 11th.}
+
+Of course, we are still yet to show that the functions we have listed are actually solutions. For this, we require the following lemma.
+\begin{lemma}
+    Let $q(x) = \sum_{m=0}^{n} a_{m} x^{m}$ be a polynomial, and let $f$ be an $n$-times differentiable function, and also let $\alpha \in \R$. Then
+    \begin{align}
+        \sum_{m=0}^{n} a_{m} (f(x) e^{\alpha x})^{(m)} = \sum_{k=0}^{n} \frac{1}{k!} q^{(k)}(\alpha) \cdot f^{(k)}(x) e^{\alpha x}.
+    \end{align}
+\end{lemma}
+We shall prove this later, and assume it for now. Say that $\alpha$ is a root of $q \equiv P$ of multiplicity $m$. Then, $P(\alpha) = P'(\alpha) = \cdots = P^{(m-1)}(\alpha) = 0$. Thus, to use the above lemma, we take $f(x) = x^{l}$ for $l = 0,1,\ldots,m-1$. Thus, $f^{(m)} = f^{(m+1)} = \cdots = 0$. The lemma gives
+\begin{align}
+    \sum_{m=0}^{n} a_{m} (x^{l} e^{\alpha x})^{(m)} = \sum_{k=0}^{n} \frac{1}{k!} q^{(k)}(\alpha) \cdot (x^{l})^{(k)} e^{\alpha x} = 0
+\end{align}
+since $(x^{l})^{(k)} = 0$ for all $k > l$, and $q^{(k)}(\alpha) = 0$ for all $k < m$. Thus, $x^{l} e^{\alpha x}$ is a solution of the homogeneous equation for all $l = 0,1,\ldots,m-1$. The case when $\alpha$ is a complex root can be handled similarly by taking $f(x) = \cos bx$ and $f(x) = \sin bx$. We prove the lemma now.
+
+\begin{proof}[Proof of lemma]
+    One may verify that
+    \begin{align}
+        (f(x) e^{\alpha x})^{(m)} = e^{\alpha x} \sum_{k=0}^{m} \binom{m}{k} f^{(k)}(x) \alpha^{m-k}.
+    \end{align}
+    Thus, the left hand side is
+    \begin{align}
+        \sum_{m=0}^{n} a_{m} (f(x) e^{\alpha x})^{(m)} = e^{\alpha x} \sum_{m=0}^{n} a_{m} \sum_{k=0}^{m} \binom{m}{k} f^{(k)}(x) \alpha^{m-k} = e^{\alpha x} \sum_{k=0}^{n} \frac{1}{k!} \left( \sum_{m=k}^{n} a_{m} \frac{m!}{(m-k)!} \alpha^{m-k} \right) f^{(k)}(x).
+    \end{align}
+    The inner sum is precisely $q^{(k)}(\alpha)$, and we are done.
+\end{proof}
+
+\noindent Consider the homogenous equation
+\begin{align}
+    \dot{Y} = AY
+\end{align}
+where $A$ is a constant $n \times n$ matrix. Note that if $A$ is a diagonal matrix with entries $\lambda_{1},\ldots,\lambda_{n}$, then the solutions are $Y_{i}(x) = e^{\lambda_{i} x} e_{i}$ for $i = 1,\ldots,n$. A similar reasoning shows for any upper or lower triangular matrix $A$. Now, suppose $A$ is any arbitrary matrix and that there exists an invertible matrix $P$ such that $P^{-1}AP = B$, then defining $Y = PZ$ gives $\dot{Y} = P\dot{Z}$ or $\dot{Z} = P^{-1} \dot{Y} = P^{-1} A P Z = BZ$. Thus, if we can solve the equation $\dot{Z} = BZ$, then we can solve the equation $\dot{Y} = AY$. We wish to solidify this idea.
+
+Recall that the characteristic polynomial of $A$ is defined as $\chi_{A}(x) = \det(A - xI)$, for any matrix $A \in M_{n}(\F)$. We also require the following theorem.
+
+\begin{theorem}
+    Let $A \in M_{n}(\C)$, and let $\lambda_{1},\ldots,\lambda_{m}$ be the distinct eigenvalues of $A$ with multiplicities $k_{1},\ldots,k_{m}$, respectively. Then, there exists an invertible matrix $P$ such that
+    \begin{align}
+        P^{-1} A P = \begin{pmatrix}
+            J_{k_{1}}(\lambda_{1}) & 0 & \cdots & 0 \\
+            0 & J_{k_{2}}(\lambda_{2}) & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & J_{k_{m}}(\lambda_{m})
+        \end{pmatrix}
+    \end{align}
+    where $J_{k}(\lambda)$ is the $k \times k$ Jordan block with eigenvalue $\lambda$; that is,
+    \begin{align}
+        J_{k}(\lambda) = \begin{pmatrix}
+            \lambda & 1 & 0 & \cdots & 0 \\
+            0 & \lambda & 1 & \cdots & 0 \\
+            \vdots & \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & 0 & \cdots & 1 \\
+            0 & 0 & 0 & \cdots & \lambda
+        \end{pmatrix}.
+    \end{align} 
+\end{theorem}
+
+In the reals, $A \in M_{n}(\R)$ can be put into the above form if $\chi_{A}$ has all real roots. Also recall that if $P$ is invertible, then $\chi_{A} = \chi_{P^{-1} A P}$. One also has the Cayley-Hamilton theorem, which states that $A$ satisfies its own characteristic polynomial; that is, $\chi_{A}(A) = 0$.\\
+
+\textit{February 16th.}
+
+\begin{definition}
+    For $A \in M_{n}(\F)$ and $\lambda \in \F$, the \eax{generalized eigenspace} of $A$ corresponding to $\lambda$ is defined as $G_{\lambda}(A) = \ker((A - \lambda I)^{n})$, when this space is non-trivial. Such as $\lambda$ for which $G_{\lambda}(A)$ is non-trivial is called a \eax{generalized eigenvalue} of $A$.
+\end{definition}
+This is, of course, a generalization of the eigenspace $E_{\lambda}(A) = \ker(A - \lambda I)$. Note that $E_{\lambda}(A) \subseteq G_{\lambda}(A)$.
+
+\begin{definition}
+    Let $A \in M_{n}(\F)$ be nilpotent; that is, $A^{k} = 0$ for some $k \in \N$. A \eax{Jordan basis} for $A$ is a basis of $V \cong \F^{n}$ of the form $\{A^{m_{1}-1} v_{1},\ldots,A^{2}v_{1},Av_{1},v_{1},\ldots,A^{m_{r}-1} v_{r},\ldots,A^{2}v_{r},Av_{r},v_{r}\}$ satisfying $A^{m_{i}} v_{i} = 0$ for all $i = 1,\ldots,r$.
+\end{definition}
+A similar definition works for a nilpotent $T:V \to V$. For such a $T$, the matrix representation of $T$ with respect to a Jordan basis is a block diagonal matrix with blocks of the form
+\begin{align}
+    J_{m_{i}}(0) = \begin{pmatrix}
+        0 & 1 & 0 & \cdots & 0 \\
+        0 & 0 & 1 & \cdots & 0 \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \cdots & 1 \\
+        0 & 0 & 0 & \cdots & 0
+    \end{pmatrix}.
+\end{align}
+Thus, for a nilpotent $A$, finding a Jordan basis is equivalent to writing $A$ in Jordan form. We have the following theorem.
+
+\begin{theorem}
+    Every nilpotent $A \in M_{n}(\F)$ is similar to a matrix in Jordan form.
+\end{theorem}
+
+\begin{proof}
+    We will show this for an operator $T:V \to V$ where $V$ is an $n$-dimensional vector space over $\F$. We proceed by induction on $n$. Assume that any nilpotent map $S:W \to W$ for $\dim W < n$ has a Jordan basis. If $T \equiv 0$, then any basis of $V$ is a Jordan basis for $T$. If $T \not\equiv 0$, then $1 \leq \dim T(V) \leq n-1$. Moreover, $T(V)$ is $T$-invariant. So $T|_{T(V)} : T(V) \to T(V)$ is still nilpotent. By the inductive hypothesis, $T|_{T(V)}$ has a Jordan basis $\cB = \{T^{m_{1}-1} v_{1},\ldots,Tv_{1},v_{1},\ldots,T^{m_{k}-1}v_{k},\ldots,Tv_{k},v_{k}\}$ where $T^{m_{i}} v_{i} = 0$ for all $i = 1,\ldots,k$. We wish to extend $\cB$ to a Jordan basis of $V$. Let $w_{j} \in V$ be such that $Tw_{j} = v_{j}$. Then $\tilde{\cB} = \cB \cup \{w_{1},\ldots,w_{k}\}$ is linearly independent (show this). Now, further extend $\tilde{\cB} \cup \{u_{1},\ldots,u_{r}\}$ to a basis of $V$. Note that $Tu_{1} = T\tilde{v}_{1}$ for some $\tilde{v}_{1} \in \tilde{\cB}$, and $Tu_{2} = T\tilde{v}_{2}$ for some $\tilde{v}_{2} \in \tilde{\cB}$, and so on. Define $\tilde{w}_{1} \defeq \tilde{v}_{1}-u_{1} \in \ker T$. Then, $T\tilde{w}_{1} = T\tilde{v}_{1} - Tu_{1} = 0$. Similarly, define $\tilde{w}_{2} \defeq \tilde{v}_{2}-u_{2}$, and so on. Then, $\{\tilde{w}_{1},\ldots,\tilde{w}_{r}\}$ is linearly independent since $\{\tilde{v}_{1},\ldots,\tilde{v}_{r}\}$ is linearly independent. Finally, $\{\tilde{w}_{1},\ldots,\tilde{w}_{r}\} \cup \cB \cup \{w_{1},\ldots,w_{k}\}$ is a Jordan basis for $T$.
+\end{proof}
+
+\begin{lemma}
+    If $\lambda_{1},\lambda_{2},\ldots,\lambda_{m}$ are distinct generalized eigenvalues of $A$, then $G_{\lambda_{1}}(A),\ldots,G_{\lambda_{m}}(A)$ are linearly independent subspaces of $V$.
+\end{lemma}
+
+\begin{proof}
+    It suffices to show that if $w_{1}+w_{2}+\cdots+w_{m} = 0$ where $w_{i} \in G_{\lambda_{i}}(A)$ for all $i = 1,\ldots,m$, then $w_{1} = w_{2} = \cdots = w_{m} = 0$. Suppose so, and that $w_{1} \neq 0$. So $(T-\lambda_{1}I)^{n} w_{1} = 0$, and there exists the smallest possible $k$ such that $(T-\lambda_{1}I)^{k+1} w_{1} = 0$. Then $(T-\lambda_{1} I)^{k} w_{1} \neq 0$, and $T((T-\lambda_{1}I)^{k} w_{1}) = \lambda_{1}((T-\lambda_{1}I)^{k} w_{1})$. Therefore,
+    \begin{align}
+        (T-\lambda_{1}I)^{k} (T-\lambda_{2}I)^{n} \cdots (T-\lambda_{m})^{n} (w_{1}+w_{2}+\cdots+w_{m}) = (\lambda_{1}-\lambda_{2})^{n} \cdots (\lambda_{1}-\lambda_{m})^{n} (T-\lambda_{1}I)^{k} w_{1} = 0
+    \end{align}
+    which implies that $(T-\lambda_{1}I)^{k} w_{1} = 0$, a contradiction. Hence, $w_{1} = 0$. By a similar argument, $w_{2} = w_{3} = \cdots = w_{m} = 0$.
+\end{proof}
+
+\begin{proposition}
+    The following hold true.
+    \begin{itemize}
+        \item Each $G_{\lambda_{i}}(A)$ is $A$-invariant;
+        \item $(A-\lambda_{i}I) \big|_{G_{\lambda_{i}}(A)}$ is nilpotent;
+        \item $V = \bigoplus_{i=1}^{m} G_{\lambda_{i}}(A)$.
+    \end{itemize}
+\end{proposition}
+
+\begin{proof}
+    \begin{itemize}
+        \item Let $v \in G_{\lambda_{i}} = \ker (T-\lambda_{i} I)^{n}$. Then, $(T-\lambda_{i}I)^{n} (Tv) = T(T-\lambda_{i}I)^{n} v = 0$. Hence, $Tv \in G_{\lambda_{i}}$.
+        \item Let $v \in G_{\lambda_{i}}$. Then, $(T-\lambda_{i}I)^{n} ((T-\lambda_{i}I) v) = (T-\lambda_{i}I) (T-\lambda_{i}I)^{n} v = 0$. Hence, $(T-\lambda_{i}I) v \in G_{\lambda_{i}}$ for all $v \in G_{\lambda_{i}}$. Moreover, $(T-\lambda_{i}I)^{n} \big|_{G_{\lambda_{i}}} = 0$ since $G_{\lambda_{i}} = \ker (T-\lambda_{i}I)^{n}$.
+        \item We show this by induction on the dimension of $V$. We can write $V = \ker(T-\lambda_{1}I)^{n} (T-\lambda_{1}I)^{n}V$. Note that $\ker(T-\lambda_{1}I)^{n} = G_{\lambda_{1}}$ and that $(T-\lambda_{1}I)^{n}V$ is $T$-invariant. Moreover, $\dim (T-\lambda_{1}I)^{n}V < \dim V$. We write $\tilde{T} = T|_{(T-\lambda_{1}I)^{n}V} : (T-\lambda_{1}I)^{n}V \to (T-\lambda_{1}I)^{n}V$. If $\alpha_{1},\alpha_{2},\ldots,\alpha_{k}$ are the distinct generalized eigenvalues of $\tilde{T}$, then $\alpha_{1},\alpha_{2},\ldots,\alpha_{k}$ are also generalized eigenvalues of $T$ since $\tilde{T}$ is a restriction of $T$. Moreover, $\alpha_{1},\alpha_{2},\ldots,\alpha_{k}$ are distinct from $\lambda_{1}$ since $\tilde{T} - \lambda_{1}I$ is injective. By the inductive hypothesis, we have $(T-\lambda_{1}I)^{n}V = \bigoplus_{i=1}^{k} G_{\alpha_{i}}(\tilde{T})$. Hence, $V = G_{\lambda_{1}} \oplus \bigoplus_{i=1}^{k} G_{\alpha_{i}}(\tilde{T})$. We can repeat this process for each $G_{\alpha_{i}}(\tilde{T})$ until we have exhausted all the generalized eigenvalues of $T$.
+    \end{itemize}
+\end{proof}
+
+In fact, using the above theorem, lemma, and proposition, we have the following theorem.
+
+\begin{theorem}
+    A Jordan form exists for any linear operator.
+\end{theorem}
+\begin{proof}
+    Let $T:V \to V$ be a linear operator. If $T$ is nilpotent, then we are done. Otherwise, let $\lambda_{1},\ldots,\lambda_{m}$ be the distinct generalized eigenvalues of $T$. Then, $V = \bigoplus_{i=1}^{m} G_{\lambda_{i}}(T)$, and $(T-\lambda_{i}I) \big|_{G_{\lambda_{i}}(T)}$ is nilpotent for all $i = 1,\ldots,m$. Hence, there exists a Jordan basis $\cB_{i}$ for $(T-\lambda_{i}I) \big|_{G_{\lambda_{i}}(T)}$ for all $i = 1,\ldots,m$. Finally, $\cB = \bigcup_{i=1}^{m} \cB_{i}$ is a Jordan basis for $T$.
+\end{proof}
+
+\subsection{Exponential}
+
+\noindent \textit{March 2nd.}
+
+Let us solve $\dot{X} = AX$ as a linear system where $A \in M_{n}(\R)$. We apply Picard's iterations starting with $X_{0}(t) \equiv X_{0}$. Then
+\begin{align}
+    X_{1}(t) = X_{0} + \int_{0}^{t} A X_{0} \, ds = X_{0} + t A X_{0}.
+\end{align}
+Repeating this process gives
+\begin{align}
+    X_{2}(t) = X_{0} + \int_{0}^{t} A(X_{0} + s A X_{0}) \, ds = X_{0} + t A X_{0} + \frac{t^{2}}{2!} A^{2} X_{0}.
+\end{align}
+Continuing this process, we get $X_{n} \to X$ where $X(t) = \sum_{n=0}^{\infty} \frac{t^{n}}{n!} A^{n} X_{0}$ defined to be $e^{tA} X_{0}$. We claim that given any $B \in M_{n}(\R)$, $e^{B} \in M_{n}(\R)$ is well-defined.
+
+\begin{proof}
+    Let $M \defeq \max_{i,j} \abs{B_{ij}}$. Then, $(nM)^{2} \geq nM^{2} \geq \max_{i,j} \abs{(B^{2})_{ij}}$. By induction, we have $\max_{i,j} \abs{(B^{m})_{ij}} \leq (nM)^{m}$ for all $m \in \N$. If we fix $i,j$, then
+    \begin{align}
+        \abs{\sum_{n=N}^{\infty} \frac{(B^{m})_{ij}}{m!}} \leq \sum_{m=N}^{\infty} \frac{(nM)^{m}}{m!} \to 0
+    \end{align}
+    since the series $\sum_{m=0}^{\infty} \frac{(nM)^{m}}{m!}$ converges. Hence, $e^{B}$ is well-defined.
+\end{proof}
+
+Having shown that $e^{tA}$ is well-defined, $X(t) = e^{tA} X_{0}$ is a solution of $\dot{X} = AX$ with $X(0) = X_{0}$. Let us discuss more on exponentials of matrices. Suppose $A$ is a Jordan block with eigenvalue $\lambda$; that is, \begin{align}
+    A = \begin{pmatrix}
+        \lambda & 1 & 0 & \cdots & 0 \\
+        0 & \lambda & 1 & \cdots & 0 \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \cdots & 1 \\
+        0 & 0 & 0 & \cdots & \lambda
+    \end{pmatrix}.
+\end{align}
+Then, $A = \lambda I + N$ where $N$ is a nilpotent matrix. Hence, $e^{tA} = e^{t\lambda I + tN} = e^{t\lambda I} e^{tN}$ since $\lambda I$ and $N$ commute. Moreover, $e^{t\lambda I} = e^{t\lambda} I$. Finally, $e^{tN}$ is a finite sum since $N$ is nilpotent. In particular, if $N$ is the $n \times n$ nilpotent Jordan block, then
+\begin{align}
+    e^{tN} = I + tN + \frac{t^{2}}{2!} N^{2} + \cdots + \frac{t^{n-1}}{(n-1)!} N^{n-1} = \begin{pmatrix}
+        1 & t & \frac{t^{2}}{2!} & \cdots & \frac{t^{n-1}}{(n-1)!} \\
+        0 & 1 & t & \cdots & \frac{t^{n-2}}{(n-2)!} \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \cdots & t \\
+        0 & 0 & 0 & \cdots & 1
+    \end{pmatrix}.
+\end{align}
+Thus, if $A$ is a Jordan block with eigenvalue $\lambda$, then
+\begin{align}
+    e^{tA} = e^{t\lambda} \begin{pmatrix}
+        1 & t & \frac{t^{2}}{2!} & \cdots & \frac{t^{n-1}}{(n-1)!} \\
+        0 & 1 & t & \cdots & \frac{t^{n-2}}{(n-2)!} \\
+        \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0 & 0 & 0 & \cdots & t \\
+        0 & 0 & 0 & \cdots & 1
+    \end{pmatrix}.
+\end{align}
+If $A$ is in Jordan form, then $e^{tA}$ is a block diagonal matrix where the blocks are of the form $e^{tJ_{k}(\lambda)}$. Finally, if $A$ is any arbitrary matrix and that there exists an invertible matrix $P$ such that $P^{-1}AP = B$, then $e^{tA} = P e^{tB} P^{-1}$. Hence, we can compute $e^{tA}$ for any arbitrary matrix $A$ by putting $A$ into Jordan form. Thus, any such ODE $\dot{X} = AX$ can be easily solved by putting $A$ into Jordan form.
+\\ \\
+\textit{March 4th.}
+
+We now restrict to $n = 2$ for $\dot{X} = AX$, which has the solution $e^{tA}X_{0}$. If $A$ is diagonalizable over $\R$, then we can pick an eigenbasis $\{v_{1},v_{2}\}$ for $\R^{2}$ corresponding to the eigenvalues $\lambda_{1}$ and $\lambda_{2}$, respectively. Then, $e^{tA} v_{1} = e^{\lambda_{1} t} v_{1}$ and $e^{tA} v_{2} = e^{\lambda_{2} t} v_{2}$, and thus $e^{tA}$ is a diagonal matrix with entries $e^{\lambda_{1} t}$ and $e^{\lambda_{2} t}$ with respect to the basis $\{v_{1},v_{2}\}$. Any solution will then look like $X(t) = a e^{\lambda_{1} t} v_{1} + b e^{\lambda_{2} t} v_{2}$ for some $a,b \in \R$. We look at cases now.
+
+\begin{enumerate}
+    \item $\det A = 0$: Without the loss of generality, assume $\lambda_{1} = 0$ and $\lambda_{2} \neq 0$. Then $X(t) = av_{1} + be^{\lambda_{2} t} v_{2}$. If $\lambda_{2} > 0$, then $\lim_{t \to \infty} \norm{X(t)} = \infty$ and if $\lambda_{2} < 0$, then $\lim_{t \to \infty} X_{t} = av_{1}$.The phase portrait here is a  From here, we say that the system is \eax{stable} if $X_{t}$ is bounded for all $t$, \eax{unstable} if $\lim_{t \to \infty} \norm{X(t)} = \infty$, and \eax{asymptotically stable} if $\lim_{t \to \infty} X(t) = (0,0)$.
+    
+    \item $\lambda_{1}, \lambda_{2} > 0$: Here, let $x = ae^{\lambda_{1} t}$ and $y = be^{\lambda_{2} t}$ so that $X(t) = xv_{1} + yv_{2}$. For now, let us assume $v_{1} = e_{1}$ and $v_{2} = e_{2}$, the standard basis vectors. From here, we get
+    \begin{align}
+        y^{\lambda_{1}/\lambda_{2}} = \left( \frac{b^{\lambda_{1}/\lambda_{2}}}{a} \right)x
+    \end{align}
+    which represents different curves for different values of $\lambda_{1}$ and $\lambda_{2}$. In particular, for $\lambda_{2} = 2$ and $\lambda_{1} = 1$, we get $y = \left( \frac{b^{2}}{a} \right) x^{2}$, which is a parabola. This is an unstable system since $\lim_{t \to \infty} \norm{X(t)} = \infty$. The point $(0,0)$ is termed an \eax{unstable node} since all trajectories are moving away from it.
+
+    \item $\lambda_{1},\lambda_{2} < 0$: Here, we get the same curves as in the previous case, but the system is asymptotically stable since $\lim_{t \to \infty} X(t) = (0,0)$. The point $(0,0)$ is termed a \eax{stable node} since all trajectories are moving towards it.
+    
+    \item (wlog) $\lambda_{1} > 0 > \lambda_{2}$: Here, we get the same curves as in the previous cases, but the system is unstable since $\lim_{t \to \infty} \norm{X(t)} = \infty$. The point $(0,0)$ is termed a \eax{saddle point} since all trajectories are moving away from it except those on the line spanned by $v_{2}$.
+\end{enumerate}
+
+If $A$ is not diagonalizable over $\R$, then $A$ has complex conjugate eigenvalues $\lambda$ and $\bar{\lambda}$. Say, $\lambda = \alpha + i\beta$ where $\alpha,\beta \in \R$ and $\beta \neq 0$. Let $u = (u_{1}, u_{2})$ be an eigenvector in $\C^{2}$ corresponding to the eigenvalue $\lambda$. Then $Au = (\alpha + i \beta) u$. Taking the real and imaginary parts gives us $A \Re (u) = \alpha \Re (u) - \beta \Im (u)$ and $A \Im (u) = \alpha \Im (u) + \beta \Re (u)$. Note that both $v_{1} = \Re (u)$ and $v_{2} = \Im (u)$ are linearly independent vectors over $\R$. If $v_{1} = e_{1}$ and $v_{2} = e_{2}$, then $A$ is represented by the matrix $\begin{pmatrix}
+    \alpha & \beta \\
+    -\beta & \alpha
+\end{pmatrix}$ with respect to the basis $\{v_{1},v_{2}\}$. Hence, $A = \alpha I + \beta B$ where $B = \begin{pmatrix}
+    0 & 1 \\
+    -1 & 0
+\end{pmatrix}$. In this case,
+\begin{align}
+    e^{tA} = e^{t\alpha I + t\beta B} = e^{t\alpha I} e^{t\beta B} = e^{t\alpha} \begin{pmatrix}
+        \cos \beta t & \sin \beta t \\
+        -\sin \beta t & \cos \beta t
+    \end{pmatrix}.
+\end{align}
+For when $\alpha = 0$, the phase portrait is a circle, and the system is stable. For when $\alpha > 0$, the phase portrait is a spiral moving away from the origin, and the system is unstable. For when $\alpha < 0$, the phase portrait is a spiral moving towards the origin, and the system is asymptotically stable. The sign of $\beta$ determines the direction of the spiral; if $\beta > 0$, then the spiral is counterclockwise, and if $\beta < 0$, then the spiral is clockwise.
+\\ \\
+\noindent \textit{March 9th.}
+
+Note that $\tau \defeq \tr A = \lambda_{1} + \lambda_{2}$ and $\Delta \defeq \det A = \lambda_{1} \lambda_{2}$. Hence, we get
+\begin{align}
+    \lambda_{1},\lambda_{2} = \frac{\tau \pm \sqrt{\tau^{2} - 4\Delta}}{2}.
+\end{align}
+Plotting $\tau$ on the $y$-axis against $\Delta$ on the $x$-axis gives three regions: the region $\tau^{2} < 4\Delta$ corresponds to the case when $A$ is not diagonalizable over $\R$, the region $\tau^{2} > 4\Delta$ corresponds to the case when $A$ is diagonalizable over $\R$, and the parabolic curve $\tau^{2} = 4\Delta$ corresponds to the case when $A$ has both eigenvalues equal. Further regions can be drawn by considering the signs of $\tau$ and $\Delta$. For instance, $\Delta < 0$ gives the case of saddle points, $\tau^{2} < 4 \Delta$ with $\Delta > 0$ gives an unstable spiral, and $\tau^{2} < 4 \Delta$ with $\Delta < 0$ gives a stable spiral. The region $\tau^{2} > 4 \Delta$ with $\Delta > 0$ and $\tau > 0$ gives an unstable node, and the region $\tau^{2} > 4 \Delta$ with $\Delta > 0$ and $\tau < 0$ gives a stable node. Finally, the region $\tau^{2} > 4 \Delta$ with $\Delta = 0$ gives a degenerate node.
+
+\subsection{Non-Linear Systems}
+\noindent \textit{March 11th.}
+
+We are now concerned with ODEs of the form $\dot{X} = f(X)$, with $f$ a $C^{1}$-function. Consider the case when $X = (X_{1},X_{2})$. To obtain the phase portrait of the system, we pull some features of the ODE which will help in the sketching. First, the fixed points of the system are the points $X$ such that $f(X) = 0$. Nullclines, which curves where $\dot{X}_{1} = 0$ or $\dot{X}_{2} = 0$, are also useful; they partition $\R^{2}$ into regions where $\dot{X}_{1} \gtrless 0$ and $\dot{X}_{2} \gtrless 0$, which gives us the direction of the trajectories in each region. We may also consider \eax{closed orbit}s; a non-constant solution $X(t)$ satisfying $X(t+T) = X(t)$ for some $T > 0$. Further, an \eax{isolated closed orbit} is a closed orbit such that there exists an $\epsilon > 0$ such that any other closed orbit $Y(t)$ satisfies $\norm{X(t) - Y(t)} > \epsilon$ for some $t$; there is no other closed orbit within $\epsilon$-distance of $X(t)$.
+
+\subsubsection{Linearization Around a Fixed Point}
+Suppose $(x_{0},y_{0})$ is a fixed point of $\dot{X} = f(X)$; that is, $f(x_{0},y_{0}) = 0$. We can write $f(X) = f(x,y) = (f_{1}(x,y), f_{2}(x,y))$. Then, we can write
+\begin{align}
+    f(x_{0}+h,y_{0}+k) \approx \begin{pmatrix}
+        \partial_{1} f_{1} & \partial_{2} f_{1} \\ \partial_{1} f_{2} & \partial_{2} f_{2}
+    \end{pmatrix}_{(x_{0},y_{0})} \begin{pmatrix}
+        h \\ k
+    \end{pmatrix}
+\end{align}
+Linearization, however, doesn't always capture the local behaviour around a fixed point. For instance, consider the system $\dot{X} = f(X)$ where $f(x,y) = (-y + ax(x^{2}+y^{2}), x + ay (x^{2}+y^{2}))$ for some $a \in \R$. Then, $(0,0)$ is a fixed point of the system. The Jacobian matrix of $f$ at $(0,0)$ is $\begin{pmatrix}
+    0 & -1 \\
+    1 & 0
+\end{pmatrix}$. Converting to polar coordinates, however, suggests a spiral behaviour around the origin, which is not captured by the linearization. In particular, we have $\dot{r} = ar^{3}$ and $\dot{\theta} = 1$. Hence, if $a > 0$, then the system is unstable, and if $a < 0$, then the system is asymptotically stable. 
+
+\begin{definition}
+    We say that a center point $(x_{0},y_{0})$ of $\dot{X} = f(X)$ is \eax{hyperbolic} if the following holds: let $\dot{Z} = AZ$ be the linear approximation of $\dot{X} = f(X)$ at $(x_{0},y_{0})$. Then $\Re \lambda \neq 0$ for all eigenvalues $\lambda$ of $A$.
+\end{definition}
+
+\begin{definition}
+    Two solutions $X(t)$ and $Y(t)$ of $\dot{X} = f(X)$ are \eax{topological conjugates} if there exists a homeomorphism from an open neighborhood of the trajectory of $X(t)$ to an open neighborhood of the trajectory of $Y(t)$ such that the homeomorphism sends the trajectory of $X(t)$ to the trajectory of $Y(t)$ and preserves the direction of time.
+\end{definition}
+
+\begin{theorem}[\eax{Hartman-Grobman theorem}]
+    Suppose $\dot{X} = f(X)$ and $f \in c^{1}$. Say $p \in \R^{2}$ is a hyperbolic center point and let $\dot{Z} = AZ$ be the linear approximation of $\dot{X} = f(X)$ at $p$. Then, there exists an open neighborhood $U$ of $p$ such that the flow of $\dot{X} = f(X)$ restricted to $U$ is topologically conjugate to the flow of $\dot{Z} = AZ$ restricted to some open neighborhood of the origin, with $p$ mapped to the origin.
+\end{theorem}

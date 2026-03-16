@@ -1,0 +1,150 @@
+/* ============================================
+   PDF VIEWER — FLAT DESIGN
+   ============================================ */
+
+.pdf-viewer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background-color: var(--bg-primary);
+  border-radius: 10px;
+  padding: 1.5rem;
+  max-width: 100%;
+  transition: background-color 0.3s;
+}
+
+.pdf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.pdf-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.pdf-icon {
+  width: 48px;
+  height: 48px;
+  background-color: var(--accent-tertiary);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pdf-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.pdf-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  background-color: var(--accent-primary);
+  color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.pdf-download-btn:hover {
+  background-color: var(--accent-primary-hover);
+  transform: scale(1.05);
+  color: white;
+}
+
+.pdf-container {
+  width: 100%;
+  aspect-ratio: 8.5 / 11;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: var(--bg-secondary);
+  min-height: 75vh;
+}
+
+.pdf-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Focus States */
+.pdf-download-btn:focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .pdf-viewer {
+    padding: 1rem;
+  }
+  
+  .pdf-icon {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .pdf-header h2 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .pdf-viewer {
+    padding: 0.875rem;
+    gap: 1rem;
+  }
+
+  .pdf-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .pdf-title-group {
+    gap: 0.75rem;
+  }
+  
+  .pdf-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .pdf-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .pdf-header h2 {
+    font-size: 1rem;
+  }
+
+  .pdf-download-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.75rem 1.25rem;
+  }
+  
+  .pdf-container {
+    min-height: 60vh;
+    border-radius: 6px;
+  }
+}

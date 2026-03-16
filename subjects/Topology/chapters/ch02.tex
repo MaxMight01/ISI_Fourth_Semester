@@ -1,0 +1,746 @@
+\chapter{MAPPINGS}
+
+\section{Continuous Functions}
+Recall the definition of a continuous function on $\R$; a function $f :\R \to \R$ was said to be continuous at a point $x \in \R$ if for every $\varepsilon > 0$, there exists a $\delta > 0$ such that
+\begin{align}
+    \abs{f(x) - f(y)} < \varepsilon \text{ whenever } \abs{x - y} < \delta.
+\end{align}
+
+We can abstract this definition to metric spaces as follows.
+\begin{definition}
+    A function $f : (X,d_{X}) \to (Y,d_{Y})$ between two metric spaces is said to be \eax{continuous} at a point $x \in X$ if for every $\varepsilon > 0$, there exists a $\delta > 0$ such that
+    \begin{align}
+        d_{Y}(f(x), f(y)) < \varepsilon \text{ whenever } d_{X}(x,y) < \delta.
+    \end{align}
+    It is continuous at every point of $X$ if it is continuous at each $x \in X$.
+\end{definition}
+
+Also recall that a function $f : \R \to \R$ was continuous at $x \in \R$ if and only if for every open set $V \subseteq \R$ containing $f(x)$, the preimage $f^{-1}(V)$ is an open set in $\R$ containing $x$. We can use this characterization to define continuity in topological spaces.
+
+\begin{definition}
+    A function $f : (X,\tau_{X}) \to (Y,\tau_{Y})$ between two topological spaces is said to be \eax{continuous} at a point $x \in X$ if for every open set $V \in \tau_{Y}$ containing $f(x)$, the preimage $f^{-1}(V)$ is an open set in $\tau_{X}$ containing $x$. That is,
+    \begin{align}
+        \forall V \in \tau_{Y}, f(x) \in V \implies x \in f^{-1}(V) \in \tau_{X}.
+    \end{align}
+    It is continuous at every point of $X$ if it is continuous at each $x \in X$. That is,
+    \begin{align}
+        \forall V \in \tau_{Y} \implies f^{-1}(V) \in \tau_{X}.
+    \end{align}
+\end{definition}
+
+The above statement can be made more tight via bases: $f$ is continuous if and only if the preimage of every basis element of $Y$ is an open set in $X$.
+
+\begin{lemma}
+    A function $f: (X,d_{X}) \to (Y,d_{Y})$ between two metric spaces is continuous if and only if $f:(X,\tau_{X}) \to (Y,\tau_{Y})$ is continuous, where $\tau_{X}$ and $\tau_{Y}$ are the topologies induced by the metrics $d_{X}$ and $d_{Y}$ respectively.
+\end{lemma}
+
+\begin{proof}
+    Suppose $f: (X,d_{X}) \to (Y,d_{Y})$ is continuous. Let $V \in \tau_{Y}$ be an open set in $Y$. Then, for every $y \in V$, there exists an $\varepsilon_{y} > 0$ such that $B_{Y}(y,\varepsilon_{y}) \subseteq V$. Since $f$ is continuous, for every $x \in f^{-1}(V)$, there exists a $\delta_{x} > 0$ such that
+    \begin{align}
+        f(B_{X}(x,\delta_{x})) \subseteq B_{Y}(f(x),\varepsilon_{f(x)}) \subseteq V.
+    \end{align}
+    Thus, $B_{X}(x,\delta_{x}) \subseteq f^{-1}(V)$. Hence, $f^{-1}(V)$ is open in $X$ and so $f:(X,\tau_{X}) \to (Y,\tau_{Y})$ is continuous.
+
+    For the converse, suppose $f:(X,\tau_{X}) \to (Y,\tau_{Y})$ is continuous. That is, for every open set $V \in \tau_{Y}$, the preimage $f^{-1}(V)$ is an open set in $\tau_{X}$. Let $\varepsilon > 0$ be given. Consider the open ball $B_{Y}(f(x),\varepsilon) \in \tau_{Y}$. Since $f$ is continuous, $f^{-1}(B_{Y}(f(x),\varepsilon))$ is open in $X$ and contains $x$. Thus, there exists a $\delta > 0$ such that $B_{X}(x,\delta) \subseteq f^{-1}(B_{Y}(f(x),\varepsilon))$. Hence, for every $y \in B_{X}(x,\delta)$, we have
+    \begin{align}
+        f(y) \in B_{Y}(f(x),\varepsilon),
+    \end{align}
+    proving that $f: (X,d_{X}) \to (Y,d_{Y})$ is continuous.
+\end{proof}
+
+
+
+\begin{lemma}
+    Let $(X,\tau)$ be a topological space and let $A \subseteq X$. Then the following hold.
+    \begin{enumerate}[label=(\roman*)]
+        \item For every sequence $(a_{n})_{n \in \N} \subseteq A$, if $a_{n} \to x$ in $X$, then $x \in \overline{A}$. That is, if $x \in U$ for some open set $U \in \tau$, there exists a $N(U) \equiv N \in \N$ such that $a_{n} \in A \cap U$ for all $n \geq N$.
+        \item The converse holds if $X$ is a metric space.
+        \item In general, the converse need not hold.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    We prove the second statement only. Suppose $x \in \overline{A}$. Then $B(x, \frac{1}{n}) \cap A \neq \emptyset$ for every $n \in \N$. Thus, we can choose $a_{n} \in B(x, \frac{1}{n}) \cap A$ for each $n \in \N$. Then, for every $\varepsilon > 0$, there exists a $N \equiv N(\varepsilon) \in \N$ such that $\frac{1}{N} < \varepsilon$. Thus, for every $n \geq N$, we have
+    \begin{align}
+        d(a_{n}, x) < \frac{1}{n} \leq \frac{1}{N} < \varepsilon,
+    \end{align}
+    proving that $a_{n} \to x$ in $X$.
+\end{proof}
+
+There is a third definition for metric spaces. A function $f:(X,d_{X}) \to (Y,d_{Y})$ between two metric spaces is said to be \eax{continuous} at a point $x \in X$ if for every sequence $(x_{n})_{n \in \N} \subseteq X$ such that $x_{n} \to x$ in $X$, we have $f(x_{n}) \to f(x)$ in $Y$. In fact, the open-set definition implies the sequential definition.
+
+\begin{proof}
+    Assume the open-set definition of continuity. Let $(x_{n})_{n \in \N} \subseteq X$ be a sequence such that $x_{n} \to x$ in $X$. Let $\varepsilon > 0$ be given. Consider the open ball $B_{Y}(f(x),\varepsilon) \in \tau_{Y}$. Since $f$ is continuous, $f^{-1}(B_{Y}(f(x),\varepsilon))$ is open in $X$ and contains $x$. Thus, there exists a $\delta > 0$ such that $B_{X}(x,\delta) \subseteq f^{-1}(B_{Y}(f(x),\varepsilon))$. Since $x_{n} \to x$ in $X$, there exists a $N \equiv N(\delta) \in \N$ such that for every $n \geq N$, we have
+    \begin{align}
+        x_{n} \in B_{X}(x,\delta) \implies f(x_{n}) \in B_{Y}(f(x),\varepsilon),
+    \end{align}
+    proving that $f(x_{n}) \to f(x)$ in $Y$.
+\end{proof}
+
+For metric spaces, the sequential definition also implies the open-set definition.
+
+\begin{example}
+    Recall $\R_{l}$, which was generated from the basis $\cB = \{[a,b) : a < b, a,b \in \R\}$. Consider the identity function $f : \R \to \R_{l}$, with $x \mapsto x$. Then $[0,1)$ is open in $\R_{l}$, but its preimage under $f$ is $[0,1)$, which is not open in $\R$.  
+\end{example}
+
+
+\begin{theorem}
+    Let $f:(X,\tau_{X}) \to (Y,\tau_{Y})$ be a function between two topological spaces. Then the following are equivalent.
+    \begin{enumerate}[label=(\roman*)]
+        \item $f$ is (open-set) continuous.
+        \item For every closed $C \subseteq Y$, the preimage $f^{-1}(C)$ is closed in $X$.
+        \item For every $A \subseteq X$, we have $f(\overline{A}) \subseteq \overline{f(A)}$.
+        \item For all $f(x) \in V$ with $V \in \tau_{Y}$, there exists $U \in \tau_{X}$ such that $x \in U$ and $f(U) \subseteq V$.
+    \end{enumerate}
+\end{theorem}
+
+\textit{January 20th.}
+
+\begin{proof}
+    We first show that (i) and (ii) are equivalent. Suppose $C$ is closed in $Y$. Then, $Y \setminus C$ is open in $Y$. Since $f$ is continuous, the preimage $f^{-1}(Y \setminus C)$ is open in $X$. But,
+    \begin{align}
+        f^{-1}(Y \setminus C) = X \setminus f^{-1}(C).
+    \end{align}
+    Thus, $f^{-1}(C)$ is closed in $X$. One can follow the converse argument to show that (ii) implies (i).
+
+    For (i) implies (iii), let $A \subseteq X$ and let $x \in \overline{A}$. Let $V$ be an open neighbourhood of $f(x)$ in $Y$. Since $f$ is continuous, $f^{-1}(V)$ is an open neighbourhood of $x$ in $X$. Thus, $f^{-1}(V) \cap A \neq \emptyset$. Let $a \in f^{-1}(V) \cap A$. Then, $f(a) \in V$ and $f(a) \in f(A)$. Since $V$ was arbitrary, we must have $V \cap f(A) \neq \emptyset$. Thus, $f(x) \in \overline{f(A)}$, proving that $f(\overline{A}) \subseteq \overline{f(A)}$. For (iii) implies (ii), let $V$ be a closed set in $Y$. Then
+    \begin{align}
+        f^{-1}(V) \subseteq X \implies f(\overline{f^{-1}(V)}) \subseteq \overline{f(f^{-1}(V))} \subseteq \overline{V} = V
+    \end{align}
+    which tells us $\overline{f^{-1}(V)} \subseteq f^{-1}(V)$, proving that $f^{-1}(V)$ is closed in $X$.
+
+    For (i) implies (iv), let $f(x) \in V$ with $V \in \tau_{Y}$. Since $f$ is continuous, $f^{-1}(V)$ is open in $X$ and contains $x$. Thus, we can take $U = f^{-1}(V)$, proving (iv). For (iv) implies (i), let $V \in \tau_{Y}$. For every $x \in f^{-1}(V)$, we have $f(x) \in V$. By (iv), there exists an open set $U_{x} \in \tau_{X}$ such that $x \in U_{x}$ and $f(U_{x}) \subseteq V$. Thus, taking the union over all $x \in f^{-1}(V)$ gives $\bigcup_{x \in f^{-1}(V)} U_{x} = f^{-1}(V)$, proving that $f^{-1}(V)$ is open in $X$.
+\end{proof}
+
+
+\subsection{Rules of Continuous Functions}
+
+Note that the constant function $f : X \to Y$ defined by $f(x) = y_{0}$ for some fixed $y_{0} \in Y$ is continuous. Also, the identity function $\id_{X} : X \to X$ defined by $\id_{X}(x) = x$ is continuous.
+
+Let $X$ be a topological space, and $A$ be a subset of $X$ with the subspace topology. Then the inclusion map $i : A \hookrightarrow X$ defined by $i(a) = a$ is continuous. If $f: X \to Y$ and $g : Y \to Z$ are continuous functions between topological spaces, then the composition $g \circ f : X \to Z$ defined by $(g \circ f)(x) = g(f(x))$ is also continuous.
+
+\begin{theorem}
+    Let $f_{1}:Z \to X$ and $f_{2}:Z \to Y$ be functions between topological spaces. Then the function $f : Z \to X \times Y$ defined by $f(z) = (f_{1}(z), f_{2}(z))$ is continuous if and only if both $f_{1}$ and $f_{2}$ are continuous.
+\end{theorem}
+It is important to note that a function $f: X \to Y$ is continuousif and only if $f^{-1}(B)$ is open in $X$ for every basis element $B$ of $Y$.
+\begin{proof}
+    For the forward implication, it is enough to show that $f^{-1}(U \times V) = f_{1}^{-1}(U) \cap f_{2}^{-1}(V)$ is open in $Z$, where $U$ and $V$ are open sets in $X$ and $Y$ respectively. $f$ is continuous implies that $f^{-1}(U \times V)$ is open in $Z$. In particular, both $f_{1}^{-1}(U)$ and $f_{2}^{-1}(V)$ are open in $Z$, proving that both $f_{1}$ and $f_{2}$ are continuous.
+
+    Conversely, suppose both $f_{1}$ and $f_{2}$ are continuous. Let $U \times V$ be a basis element of $X \times Y$, where $U$ and $V$ are open sets in $X$ and $Y$ respectively. By continuity of $f_{1}$ and $f_{2}$, both $f_{1}^{-1}(U)$ and $f_{2}^{-1}(V)$ are open in $Z$. Thus $f^{-1}(U \times V) = f_{1}^{-1}(U) \cap f_{2}^{-1}(V)$ is open in $Z$, proving that $f$ is continuous.
+\end{proof}
+
+\begin{lemma}
+    Let $(X,d)$ be a metric space, and let $f: X \to \R$ be a continuous function. Suppose $f(x) \neq 0$ for some $x \in X$. Then there exists $r > 0$ such that $f(y) \neq 0$ for all $y \in B(x,r)$. Moreover, the map $g:B(x,r) \to \R$ defined by $g(y) = \frac{1}{f(y)}$ is continuous.
+\end{lemma}
+
+\begin{proof}
+    Suppose such an $r$ does not exist. Then for every natural $n \in \N$, there exists a point $x_{n} \in B(x, \frac{1}{n})$ such that $f(x_{n}) = 0$. Thus, the sequence $(x_{n})_{n \in \N}$ converges to $x$ in $X$. Since $f$ is continuous, the sequence $(f(x_{n}))_{n \in \N}$ converges to $f(x)$ in $\R$. But $f(x_{n}) = 0$ for all $n \in \N$, so $(f(x_{n}))_{n \in \N}$ is the constant sequence $0$, which converges to $0$. Thus, we must have $f(x) = 0$, a contradiction. Hence, there exists $r > 0$ such that $f(y) \neq 0$ for all $y \in B(x,r)$.
+
+    To show continuity of $g$, let $(y_{n})_{n \geq 1} \subseteq B(x,r)$ be a sequence such that $y_{n} \to y$ in $B(x,r)$. Since $f$ is continuous, we have $f(y_{n}) \to f(y)$ in $\R$. Since $f(y) \neq 0$, there exists a natural $N \in \N$ such that for every $n \geq N$, we have $f(y_{n}) \neq 0$. Thus, for every $n \geq N$, we have $g(y_{n}) = \frac{1}{f(y_{n})}$. Since the function $h : \R \setminus \{0\} \to \R$ defined by $h(t) = \frac{1}{t}$ is continuous, we have $g(y_{n}) = h(f(y_{n})) \to h(f(y)) = g(y)$ in $\R$, proving that $g$ is continuous.
+\end{proof}
+
+For a metric space $(X,d)$, we define $C(X,\R)$ to be the set of all continuous functions from $X$ to $\R$. It can be easily seen that $C(X,\R)$ is a vector space over $\R$ under pointwise addition and scalar multiplication. Moreover, if we define multiplication of functions pointwise, then $C(X,\R)$ is an algebra over $\R$. An example is any polynomial map $p:\R^{n} \to \R$; in such a case, $p \in C(\R^{n},\R)$.
+
+If we denote $M_{2}(\R)$ to be the set of all $2 \times 2$ real matrices, then matrices can be viewed as points in $\R^{4}$, and the same Euclidean topology can be induced on $M_{2}(\R)$. Thus, we can consider continuous functions from $M_{2}(\R)$ to $\R$. An example is the determinant function $\det : M_{2}(\R) \to \R$ defined by $(a,b,c,d) \mapsto ad-bc$, which is a polynomial map and hence continuous. Since this is a continuous map, and $\R\setminus \{0\}$ is open in $\R$, the preimage $\det^{-1}(\R \setminus \{0\})$ is open in $M_{2}(\R)$. But $\det^{-1}(\R \setminus \{0\})$ is precisely the set of all invertible $2 \times 2$ real matrices $GL_{2}(\R)$. Thus, we have shown that $GL_{2}(\R)$ is an open subset of $M_{2}(\R)$. The set $SL_{2}(\R)$ of all $2 \times 2$ real matrices with determinant $1$, however, is closed in $M_{2}(\R)$, since it is the preimage of the closed set $\{1\}$ under the continuous determinant function.
+
+\begin{example}
+    Let us classify all $f:\R \to \R$ that are continuous and are also group homomorphisms. Since $f$ is continuous, we only need to determine $f$  $\R$ to $\R$ are of the form $f(x) = \lambda x$ for some fixedon the rationals. Let $\lambda \defeq f(1)$. Then, for every $m \in \Z$, $f(m) = m f(1) = m \lambda$. For every $n \in \N$, we have $n f(\frac{m}{n}) = f(n \cdot \frac{m}{n}) = f(m) = m \lambda$, so $f(\frac{m}{n}) = \frac{m}{n} \lambda$. Thus, for every rational number $q$, we have $f(q) = q \lambda$. Since the rationals are dense in $\R$ and $f$ is continuous, we must have $f(x) = x \lambda$ for all real numbers $x$. Thus, all continuous group homomorphisms from $\lambda \in \R$.
+\end{example}
+
+
+\section{Product Topology}
+\noindent\textit{January 22nd.}
+
+The concept of the product topology can be extended to arbitrary products. Let $\{(X_{n}, \tau_{n}) \mid n \geq 1\}$ be a collection of topological spaces. Consider the Cartesian product
+\begin{align}
+    \prod_{n=1}^{\infty} X_{n} = \{(x_{1}, x_{2}, \ldots) \mid x_{n} \in X_{n} \text{ for all } n \geq 1\}.
+\end{align}
+The product topology on $\prod_{n=1}^{\infty} X_{n}$ is the topology generated by the basis
+\begin{align}
+    \cB = \{U_{1} \times U_{2} \times \ldots \mid U_{n} \in \tau_{n} \text{ for all } n \geq 1,\; U_{i} \neq \emptyset \text{ for finitely many } i\}.
+\end{align}
+We require that $U_{i} \neq \emptyset$ for only finitely many $i$ to ensure that this is still a basis. This is known as the box topology. If this restriction were not in place, then the fact that countable intersections of open sets may not be open would imply that this is not a topology. A second option is to use the basis
+\begin{align}
+    \cB = \{U_{1} \times U_{2} \times \ldots \mid U_{n} \in \tau_{n} \text{ for all } n \geq 1,\; U_{i} = X_{i} \text{ for all but finitely many } i\}.
+\end{align}
+This is known as the product topology. Note that for finite products, both definitions coincide. In the infinite case, the product topology is more interesting than the box topology. The product topology also extends to a collection of topological spaces indexed by an arbitrary set, such as $\{(X_{\alpha}, \tau_{\alpha}) \mid \alpha \in \Lambda\}$ for some set $\Lambda$.
+
+\begin{lemma}
+    If $\{(X_{n}, \tau_{n}) \mid n \geq 1\}$ is a collection of Hausdorff topological spaces, then the product space $\prod_{n=1}^{\infty} X_{n}$ with the product topology is also Hausdorff.
+\end{lemma}
+\begin{proof}
+    Let $x = (x_{1}, x_{2}, \ldots)$ and $y = (y_{1}, y_{2}, \ldots)$ be two distinct points in $\prod_{n=1}^{\infty} X_{n}$. Then, there exists some $k \geq 1$ such that $x_{k} \neq y_{k}$. Since $X_{k}$ is Hausdorff, there exist disjoint open sets $U_{k}, V_{k} \in \tau_{k}$ such that $x_{k} \in U_{k}$ and $y_{k} \in V_{k}$. Now, consider the open sets
+    \begin{align}
+        U = X_{1} \times X_{2} \times \ldots \times U_{k} \times X_{k+1} \times \ldots,
+    \end{align}
+    and
+    \begin{align}
+        V = X_{1} \times X_{2} \times \ldots \times V_{k} \times X_{k+1} \times \ldots.
+    \end{align}
+    Then, $U$ and $V$ are open in the product topology, and they are disjoint since $U_{k}$ and $V_{k}$ are disjoint. Moreover, $x \in U$ and $y \in V$, proving that $\prod_{n=1}^{\infty} X_{n}$ is Hausdorff.
+\end{proof}
+
+\begin{lemma}
+    The function $f:Z \to \prod_{n=1}^{\infty} X_{n}$ defined by $f(z) = (f_{1}(z), f_{2}(z), \ldots)$ is continuous if and only if each component function $f_{n} : Z \to X_{n}$ is continuous for all $n \geq 1$. Here, $\prod_{n=1}^{\infty} X_{n}$ is equipped with the product topology.
+\end{lemma}
+\begin{proof}
+    For the forward implication, let $n \geq 1$ be given. Consider an open set $U_{n} \in \tau_{n}$. Then, the set
+    \begin{align}
+        U = X_{1} \times X_{2} \times \ldots \times U_{n} \times X_{n+1} \times \ldots
+    \end{align}
+    is open in the product topology. Since $f$ is continuous, the preimage $f^{-1}(U)$ is open in $Z$. But,
+    \begin{align}
+        f^{-1}(U) = f_{n}^{-1}(U_{n}),
+    \end{align}
+    proving that $f_{n}$ is continuous.
+
+    Conversely, suppose each component function $f_{n}$ is continuous for all $n \geq 1$. Let $U = U_{1} \times U_{2} \times \ldots$ be a basis element of the product topology, where $U_{n} \in \tau_{n}$ for all $n \geq 1$ and $U_{i} = X_{i}$ for all but finitely many $i$. Then,
+    \begin{align}
+        f^{-1}(U) = \bigcap_{n=1}^{\infty} f_{n}^{-1}(U_{n}) = \bigcap_{i=1}^{k} f_{i}^{-1}(U_{i}),
+    \end{align}
+    where $k$ is such that $U_{i} = X_{i}$ for all $i > k$. Since each $f_{i}$ is continuous, each $f_{i}^{-1}(U_{i})$ is open in $Z$. Thus, $f^{-1}(U)$ is open in $Z$, proving that $f$ is continuous.
+\end{proof}
+
+Note that the above lemma does not hold if the product topology is replaced by the box topology. Consider the function $f : \R \to \R^{\N}$ defined by $f(x) = (x,x,x,\ldots)$. Each component function $f_{n} : \R \to \R$ defined by $f_{n}(x) = x$ is continuous. However, $f$ is not continuous when $\R^{\N}$ is equipped with the box topology. To see this, consider the open set $(-1,1) \times (-\frac{1}{2}, \frac{1}{2}) \times (-\frac{1}{3}, \frac{1}{3}) \times \ldots$ in the box topology. The preimage under $f$ is $\{0\}$, which is not open in $\R$. Thus, $f$ is not continuous. However, the continuity of $f$ implies the continuity of each component function $f_{n}$, so the converse implication still holds for the box topology.
+\\ \\
+\textit{January 23rd.}
+
+Consider $(\R,\bar{d})$ where $\bar{d}(x,y) = \min\{\abs{x-y}, 1\}$. This metric generates the usual topology on $\R$. Then, on $\R^{\N} = \prod_{n=1}^{\infty} \R$, we can consider the metric
+\begin{align}
+    \rho(x,y) = \sup_{n \geq 1} \bar{d}(x_{n}, y_{n}),
+\end{align}
+where $x = (x_{1}, x_{2}, \ldots)$ and $y = (y_{1}, y_{2}, \ldots)$. One can verify this is a metric. The topology generated by the metric space $(\R^{\N},\rho)$ is termed the \eax{uniform topology} on $\R^{\N}$. We now wish to determine the relationship between the uniform topology, product topology, and box topology on $\R^{\N}$. To determine this, we consider a few results.
+
+\begin{lemma}
+    $B_{\rho}(x,\varepsilon) \subsetneq \prod_{n=1}^{\infty} (x_{i}-\varepsilon,x_{i}+\varepsilon)$ for every $x = (x_{1}, x_{2}, \ldots) \in \R^{\N}$ and $(1 > )\varepsilon > 0$.
+\end{lemma}
+\begin{proof}
+    Let $y = (y_{1}, y_{2}, \ldots) \in B_{\rho}(x,\varepsilon)$. Then, by definition of $\rho$, we have $\bar{d}(x_{n}, y_{n}) < \varepsilon$ for all $n \geq 1$. Since $\varepsilon < 1$, this implies that $\abs{x_{n} - y_{n}} < \varepsilon$ for all $n \geq 1$. Thus, $y \in \prod_{n=1}^{\infty} (x_{i}-\varepsilon,x_{i}+\varepsilon)$, proving that $B_{\rho}(x,\varepsilon) \subseteq \prod_{n=1}^{\infty} (x_{i}-\varepsilon,x_{i}+\varepsilon)$.
+
+    To see that the inclusion is strict, consider the point $z = (z_{1}, z_{2}, \ldots)$ defined by $z_{i} = x_{i} - \varepsilon + \frac{1}{n+i}$ for all $i \geq 1$, for $n >> 1$ large enough. Then, $z \in \prod_{n=1}^{\infty} (x_{i}-\varepsilon,x_{i}+\varepsilon)$, but $\sup_{i \geq 1} \bar{d}(x_{i}, z_{i}) = \varepsilon$, so $z \notin B_{\rho}(x,\varepsilon)$. Thus, the inclusion is strict.
+\end{proof}
+
+\begin{lemma}
+    On $\R^{\N}$, the product topology is strictly coarser than the uniform topology, which is strictly coarser than the box topology.
+\end{lemma}
+\begin{proof}
+    We first show that $(x-\varepsilon,x+\varepsilon) \times \R \times \R \times \cdots$ is open in the uniform topology. Let $y = (y_{1}, y_{2}, \ldots) \in (x-\varepsilon,x+\varepsilon) \times \R \times \R \times \cdots$. Then, there exists a $\delta > 0$ such that $(y_{1}-\delta,y_{1}+\delta) \subseteq (x-\varepsilon,x+\varepsilon)$. Thus, $B(y,\delta) \subseteq (x-\varepsilon,x+\varepsilon) \times \R \times \R \times \cdots$, proving that this set is open in the uniform topology. Since basis elements of the product topology are finite intersections of such sets, they are also open in the uniform topology. Thus, the product topology is coarser than the uniform topology.
+\end{proof}
+
+\textit{January 27th.}
+
+\begin{theorem}
+    On $\R^{\N}$, with $D(x,y) \defeq \sup_{n \geq 1} \frac{\bar{d}(x_{n},y_{n})}{n}$ where $\bar{d}(x,y) = \min\{\abs{x-y}, 1\}$, the topology induced by $D$ is the product topology.
+\end{theorem}
+
+\begin{proof}
+    For the forward implication, we wish to show that given an open ball $B_{D}(x,\varepsilon)$, and $y \in B_{D}(x,\varepsilon)$, that there exists a set $U$ open in the product topology such that $y \in U \subseteq B_{D}(x,\varepsilon)$. Choose $N \in \N$ such that $\frac{1}{N} < \frac{\varepsilon}{4}$. Now we claim that
+    \begin{align}
+        (x_{1} - \frac{\varepsilon}{3}, x_{1} + \frac{\varepsilon}{3}) \times (x_{2} - \frac{\varepsilon}{3}, x_{2} + \frac{\varepsilon}{3}) \times \cdots \times (x_{N+1} - \frac{\varepsilon}{3}, x_{N+1} + \frac{\varepsilon}{3}) \times \R \times \R \times \cdots \subseteq B_{D}(x,\varepsilon).
+    \end{align}
+    To this end, let $y = (y_{1}, y_{2}, \ldots)$ be in the left-hand side. Then for every $1 \leq i \leq N-1$, we have $\abs{y_{i}-x_{i}} < \frac{2\varepsilon}{3}$, so $\bar{d}(x_{i},y_{i})/i \leq \bar{d}(x_{i},y_{i}) < \frac{2\varepsilon}{3} < \varepsilon$. Moreover, for all $i \geq N$, $\bar{d}(x_{i},y_{i})/i \leq 1/i \leq 1/N < \frac{\varepsilon}{4} < \varepsilon$. Thus, $\sup_{i \geq 1} \bar{d}(x_{i},y_{i})/i = D(x,y) \leq \frac{2\varepsilon}{3} < \varepsilon$, proving the claim. Hence, we have found an open set in the product topology containing $x$ and contained in $U$.
+
+    For the converse, let $U = \prod_{i \in \N} U_{i}$ be open in the product topology, where $U_{i}$ is open in $\R$ for all $i \geq 1$ and $U_{i} = \R$ for all but finitely many $i$. It is enough to containment for these sets, since they form a basis for the product topology. Thus, we wish to show that given any $x \in U$, there exists an $\varepsilon > 0$ such that $B_{D}(x,\varepsilon) \subseteq U$. Let $\alpha$ denote an arbitrary index such that $U_{\alpha} \neq \R$ (there are only finitely many such indices). Let $x \in U$. Then $x_{\alpha} \in U_{\alpha}$, so there exists $\varepsilon_{\alpha} > 0$ such that $(x_{\alpha} - \varepsilon_{\alpha}, x_{\alpha} + \varepsilon_{\alpha}) \subseteq U_{\alpha}$. Now, let $\varepsilon = \min_{\alpha} \frac{\varepsilon_{\alpha}}{\alpha}$, where the minimum is taken over all indices $\alpha$ such that $U_{\alpha} \neq \R$. We claim that this $\varepsilon$ works. To see this, let $y = (y_{1}, y_{2}, \ldots) \in B_{D}(x,\varepsilon)$. Then, for every index $\alpha$ such that $U_{\alpha} \neq \R$, we have
+    \begin{align}
+        \abs{y_{\alpha} - x_{\alpha}} \leq \bar{d}(x_{\alpha},y_{\alpha}) < \alpha \varepsilon \leq \varepsilon_{\alpha},
+    \end{align}
+    so $y_{\alpha} \in (x_{\alpha} - \varepsilon_{\alpha}, x_{\alpha} + \varepsilon_{\alpha}) \subseteq U_{\alpha}$. For all other indices $\beta$ such that $U_{\beta} = \R$, we have $y_{\beta} \in U_{\beta}$ trivially. Thus, $y \in U$, proving that $B_{D}(x,\varepsilon) \subseteq U$.
+\end{proof}
+
+The box topology, however, is not metrizable. 
+
+\begin{lemma}
+    The box topology on $\R^{\N}$ is not metrizable.
+\end{lemma}
+To show this, recall that in a metric space if $A$ is a subset of a metric space $(X,d)$, and $(a_{n})_{n \geq 1}$ is a sequence in $A$ that converges to some $x \in X$, then $x \in \overline{A}$. The converse also holds in metric spaces. 
+
+\begin{proof}
+    Let $A = \{(x_{1}, x_{2}, \ldots) \mid x_{i} > 0 \text{ for all } i \geq 1\} \subseteq \R^{\N}$ with the box topology. Note that $A$ is open in the box topology. Now consider the point $x = (0,0,0,\ldots) \in \R^{\N}$. We claim that $x \in \overline{A}$. To see this, let $U = U_{1} \times U_{2} \times \ldots$ be an open neighbourhood of $x$ in the box topology. Then, for each $i \geq 1$, there exists $\varepsilon_{i} > 0$ such that $(-\varepsilon_{i}, \varepsilon_{i}) \subseteq U_{i}$. Now, consider the point $y = (y_{1}, y_{2}, \ldots)$ defined by $y_{i} = \frac{\varepsilon_{i}}{2} > 0$ for all $i \geq 1$. Then, $y \in A \cap U$, proving that every open neighbourhood of $x$ intersects $A$. Thus, $x \in \overline{A}$.
+    However, there does not exist a sequence $(a_{n})_{n \geq 1} \subseteq A$ such that $a_{n} \to x$ in the box topology. To see this, suppose such a sequence exists. Then, for each $i \geq 1$, consider the open neighbourhood $U^{(i)} = U_{1}^{(i)} \times U_{2}^{(i)} \times \ldots$ of $x$ defined by
+    \begin{align}
+        U_{j}^{(i)} = \begin{cases}
+            (-\frac{1}{i}, \frac{1}{i}) & j = i, \\
+            \R & j \neq i.
+        \end{cases}
+    \end{align}
+    Since $a_{n} \to x$ in the box topology, there exists a natural $N_{i} \in \N$ such that for every $n \geq N_{i}$, we have $a_{n} \in U^{(i)}$. In particular, this implies that for every $n \geq N_{i}$, the $i$-th coordinate of $a_{n}$ satisfies $\abs{(a_{n})_{i}} < \frac{1}{i}$. Now, consider the sequence of natural numbers $(N_{i})_{i \geq 1}$. Since this is an increasing sequence, we have $N_{i} \leq N_{j}$ for all $j \geq i$. Thus, for every $j \geq i$, we have $\abs{(a_{N_{j}})_{i}} < \frac{1}{i}$. In particular, this implies that $(a_{N_{j}})_{i} \geq 0$ for all $j \geq i$, since $a_{N_{j}} \in A$. Thus, for each fixed $i \geq 1$, the sequence $((a_{N_{j}})_{i})_{j \geq i}$ is a sequence of non-negative real numbers that converges to $0$. However, this does not guarantee that the entire sequence $(a_{n})_{n \geq 1}$ converges to $x$ in the box topology, since the convergence must hold uniformly across all coordinates. This contradicts our assumption that such a sequence exists. Hence, there does not exist a sequence $(a_{n})_{n \geq 1} \subseteq A$ such that $a_{n} \to x$ in the box topology, proving that the box topology is not metrizable.
+\end{proof}
+
+
+\section{Connectedness}
+
+The \eax{distance from a set} $A$ of a point $x$ is defined as
+\begin{align}
+    d_{A}(x) \defeq \inf \{d(x,a) \mid a \in A\}.
+\end{align}
+Note that $d_{A}(x) = 0$ if and only if $x \in \overline{A}$. Moreover, the map $\varphi : X \to \R$ defined by $\varphi(x) = d_{A}(x)$ is continuous.
+
+\begin{lemma}
+    Let $(X,d)$ be a metric space, and $A,B \subseteq X$ be disjoint closed sets. Then there exists a continuous map $f:X \to [0,1]$ such that $f(a) = 0$ for all $a \in A$ and $f(b) = 1$ for all $b \in B$.
+\end{lemma}
+
+\begin{definition}
+    For a topological space $(X,\tau)$, a \eax{separation} of $X$ is a pair of disjoint non-empty open sets $U,V \in \tau$ such that $X = U \cup V$. If no such separation exists, then $X$ is said to be \eax{connected}.
+\end{definition}
+Note that $X$ is connected if and only if the only non-empty clopen subset of $X$ is $X$ itself. For example, $\Q$ is not connected in $\R$ since $(-\infty, \sqrt{2}) \cap \Q$, $ (\sqrt{2}, \infty) \cap \Q$ is a separation of $\Q$.
+
+\begin{lemma}
+    Suppose $C$ and $D$ form a separation of a topological space $X$. If $Y$ is a connected subspace of $X$, then either $Y \subseteq C$ or $Y \subseteq D$.
+\end{lemma}
+\begin{proof}
+    Suppose not. Then, there exist points $y_{1}, y_{2} \in Y$ such that $y_{1} \in C$ and $y_{2} \in D$. Since $C$ and $D$ are open in $X$, the sets $C \cap Y$ and $D \cap Y$ are open in the subspace topology on $Y$. Moreover, they are disjoint and non-empty, and $Y = (C \cap Y) \cup (D \cap Y)$. Thus, $C \cap Y$ and $D \cap Y$ form a separation of $Y$, contradicting the connectedness of $Y$. Hence, either $Y \subseteq C$ or $Y \subseteq D$.
+\end{proof}
+
+\begin{theorem}
+    Suppose $X_{\alpha}$ are connected subspaces of a topological space $X$ for all $\alpha$ in some index set $\Lambda$. If $\bigcap_{\alpha \in \Lambda} X_{\alpha} \neq \emptyset$, then $\bigcup_{\alpha \in \Lambda} X_{\alpha}$ is connected.
+\end{theorem}
+\begin{proof}
+    Let $x \in \bigcap_{\alpha} X_{\alpha}$. Suppose, for contradicion, that there exists a non-empty set $U \subseteq \bigcup_{\alpha} X_{\alpha}$ that is clopen in the subspace topology. That is, $U \cap X_{\alpha}$ is open and closed in $X_{\alpha}$ for all $\alpha \in \Lambda$. Since $X_{\alpha}$ is connected, we must have either $U \cap X_{\alpha} = \emptyset$ or $U \cap X_{\alpha} = X_{\alpha}$ for all $\alpha \in \Lambda$. But since $x \in \bigcap_{\alpha} X_{\alpha}$, we must have $x \in U$ or $x \notin U$. Thus, either $U = \emptyset$ or $U = \bigcup_{\alpha} X_{\alpha}$, proving that $\bigcup_{\alpha} X_{\alpha}$ is connected.
+\end{proof}
+
+\begin{lemma}
+    Let $f:X \to Y$ be a continuous map. If $X$ is connected, then $f(X)$ is also connected.
+\end{lemma}
+\begin{proof}
+    Suppose not. Then, there exist disjoint non-empty open sets $U,V \subseteq Y$ such that $f(X) = U \cup V$. Since $f$ is continuous, the preimages $f^{-1}(U)$ and $f^{-1}(V)$ are open in $X$. Moreover, they are disjoint and non-empty, and $X = f^{-1}(U) \cup f^{-1}(V)$. Thus, $f^{-1}(U)$ and $f^{-1}(V)$ form a separation of $X$, contradicting the connectedness of $X$. Hence, $f(X)$ is connected.
+\end{proof}
+
+\begin{definition}
+    Two topological spaces $X$ and $Y$ are \eax{homeomorphic} if there exists a bijective continuous map $f:X \to Y$ such that the inverse map $f^{-1} : Y \to X$ is also continuous. Such a map $f$ is called a \eax{homeomorphism}.
+\end{definition}
+
+\textit{January 30th.}
+
+\begin{theorem}
+    If $X_{i}$ are connected topological spaces for all $1 \leq i \leq n$, then the product space $\prod_{i=1}^{n} X_{i}$ is also connected.
+\end{theorem}
+\begin{proof}
+    Note that $X_{1} \times \{b\}$ is connected for $b \in X_{2}$, since it is homeomorphic to $X_{1}$. Now, let $a \in X_{1}$ be arbitrary. Then, the set $\{a\} \times X_{2}$ is connected. Thus, the union $X_{1} \times X_{2}$ is connected, since $(X_{1} \times \{b\}) \cap (\{a\} \times X_{2}) = \{(a,b)\} \neq \emptyset$. Repeating this argument inductively, we have that $\prod_{i=1}^{n} X_{i}$ is connected.
+\end{proof}
+
+\begin{theorem}
+    If $A \subseteq X$ is connected and $A \subseteq B \subseteq \overline{A}$, then $B$ is also connected.
+\end{theorem}
+\begin{proof}
+    Assume that $B$ is disconnected. That is, there exists a clopen set $U$ in $B$ such that $B = U \cup U^{c}$. Without the loss of generality, suppose $\emptyset \neq U \cap A$ is clopen in $A$. Then $U \cap A = A$ or $A \subseteq U$. But then $\overline{A} \subseteq \overline{U} = U$, so $B \subseteq U$, a contradiction. Hence, $B$ is connected.
+\end{proof}
+
+We will now show that $\R^{\N}$ with the product topology is connected, but not with the box topology. With the product topology equipped, let $A_{n} = \{(x_{1},\ldots,x_{n},0,\ldots) \mid x_{i} \in \R\}$. Then $\R^{\N} = \bigcup_{n=1}^{\infty} A_{n}$, and each $A_{n}$ is homeomorphic to $\R^{n}$, which is connected. Moreover, $A_{n} \subseteq A_{n+1}$ for all $n \geq 1$, so by the previous theorem, $\R^{\N}$ with the product topology is connected. For the box topology, let $\R^{\N} = B \cup U$, where $B$ is the set of bounded sequences, and $U$ is the set of unbounded sequences. To show that $B$ is open, let $x = (x_{1}, x_{2}, \ldots) \in B$. Then there exists $K > 0$ such that $\abs{x_{i}} < K$ for all $i \geq 1$. Finally, $x_{i} \in (x_{1}-1, x_{1}+1) \times (x_{2}-1, x_{2}+1) \times \ldots$ is an open neighbourhood of $x$ contained in $B$, proving that $B$ is open. A similar argument shows that $U$ is open. Since both $B$ and $U$ are non-empty, they form a separation of $\R^{\N}$ with the box topology, proving that it is not connected.
+
+\begin{definition}
+    Let $a \neq b \in X$. We say that $\gamma$ is a \eax{path} between $a$ and $b$ if $\gamma : [0,1] \to X$ is continuous, with $\gamma(0) = a$ and $\gamma(1) = b$. If such a path exists, then $a$ and $b$ are said to be path connected. A topological space $X$ is \eax{path connected} if every pair of points in $X$ are path connected.
+\end{definition}
+
+\begin{lemma}
+    Supose there exists a $a_{0} \in X$ such that $a_{0}$ is path connected to every point in $X$. Then, $X$ is path connected.
+\end{lemma}
+\begin{proof}
+    Let $a,b \in X$ be arbitrary. By assumption, there exist paths $\gamma_{1} : [0,1] \to X$ and $\gamma_{2} : [0,1] \to X$ such that $\gamma_{1}(0) = a_{0}$, $\gamma_{1}(1) = a$, $\gamma_{2}(0) = a_{0}$, and $\gamma_{2}(1) = b$. Now, define the map $\gamma : [0,1] \to X$ by
+    \begin{align}
+        \gamma(t) = \begin{cases}
+            \gamma_{1}(2t) & 0 \leq t \leq \frac{1}{2}, \\
+            \gamma_{2}(2t-1) & \frac{1}{2} < t \leq 1.
+        \end{cases}
+    \end{align}
+    Then, $\gamma$ is continuous, and $\gamma(0) = a$, $\gamma(1) = b$. Thus, $a$ and $b$ are path connected. Since $a,b$ were arbitrary, $X$ is path connected.
+\end{proof}
+
+\begin{theorem}
+    If $X$ is path connected, then $X$ is connected.
+\end{theorem}
+\begin{proof}
+    Suppose $X$ is not connected. Then, there exists a separation $U,V$ of $X$ such that $U \cap V = \emptyset$. Let $a \in U$ and $b \in V$. Since $X$ is path connected, there exists a path $\gamma : [0,1] \to X$ such that $\gamma(0) = a$ and $\gamma(1) = b$. Consider the preimages $\gamma^{-1}(U)$ and $\gamma^{-1}(V)$. These sets are open in $[0,1]$, disjoint, non-empty, and their union is $[0,1]$. Thus, they form a separation of $[0,1]$, contradicting the connectedness of $[0,1]$. Hence, $X$ is connected.
+\end{proof}
+
+\noindent \textit{February 3rd.}
+
+Note that in the above proof we implicitly assumed the fact that $[0,1]$ is connected. To show that it is connected, we require the following lemma which is left as an exercise.
+
+\begin{lemma}
+    A topological space $X$ is connected if and only if every continuous map $f:X \to \{\pm1\}$ is constant.
+\end{lemma}
+
+\begin{theorem}
+    The interval $[0,1]$ is connected.
+\end{theorem}
+\begin{proof}
+    Suppose $f:[0,1] \to \{\pm1\}$ is continuous, and not constant. Then there exist $a,b \in [0,1]$ such that $f(a) = 1$ and $f(b) = -1$. Without loss of generality, assume $a < b$. By the intermediate value theorem, there exists some $c \in (a,b)$ such that $f(c) = 0$, contradicting the fact that the codomain of $f$ is $\{\pm1\}$. Thus, every continuous map $f:[0,1] \to \{\pm1\}$ is constant, proving that $[0,1]$ is connected.
+\end{proof}
+
+\begin{proof}[Alternate proof]
+    Suppose $U \subseteq [0,1]$ is non-empty, open, and closed in the subspace topology. Without loss of generality, let $0 \in U$ (otherwise, take $V = U^{c}$). Now define $E = \{x \in [0,1] \mid [0,x] \subseteq U\}$. Since $0 \in U$, we have $0 \in E$, so $E$ is non-empty. There now exists a natural $N \in \N$ such that $[0,\frac{1}{n}] \subseteq U$ for all $n \geq N$, so $\frac{1}{N} \in E$. Thus, $E$ is bounded above by $1$, so let $c = \sup E$. We claim that $c = 1$. Suppose not. Since $U$ is closed in $[0,1]$, we have $c \in U$. Thus, there exists some $\varepsilon > 0$ such that $(c-\varepsilon, c+\varepsilon) \cap [0,1] \subseteq U$. But since $c = \sup E$, there exists some $x \in E$ such that $c - \varepsilon < x \leq c$. Then, $[0,x] \subseteq U$, and $(c-\varepsilon, c+\varepsilon) \cap [0,1] \subseteq U$ implies that $[0, c + \frac{\varepsilon}{2}] \subseteq U$, contradicting the fact that $c$ is an upper bound for $E$. Thus, $c = 1$, so $[0,1] \subseteq U$, proving that $U = [0,1]$. Hence, $[0,1]$ is connected.
+\end{proof}
+
+\begin{example}
+    We can use to show that $GL_{n}(\R)$ is not connected. Note that the map $\det : GL_{n}(\R) \to \R \setminus \{0\}$ is continuous. Since $\R \setminus \{0\}$ is not connected, $GL_{n}(\R)$ is also not connected. Similarly, the hypersphere $S^{n} = \{x \in \R^{n+1} \mid \norm{x} = 1\}$ is connected for all $n \geq 1$, since the map $f : \R^{n+1} \setminus \{0\} \to S^{n}$ defined by $f(x) = \frac{x}{\norm{x}}$ is continuous, and $\R^{n+1} \setminus \{0\}$ is connected for all $n \geq 1$.
+\end{example}
+
+\begin{example}
+    We show that $\R$ and $\R^{2}$ cannot be homeomorphic. Suppose there exists a homeomorphism $f : \R \to \R^{2}$. Let $a \in \R$ be arbitrary, and consider the set $\R^{2} \setminus \{f(a)\}$. Note that this set is connected, since it is homeomorphic to $\R^{2} \setminus \{0\}$, which is connected. However, the set $\R \setminus \{a\}$ is not connected, since it can be separated into $(-\infty,a)$ and $(a,\infty)$. But since $f$ is a homeomorphism, the image of $\R \setminus \{a\}$ under $f$ must also be disconnected, a contradiction. Thus, no such homeomorphism exists, proving that $\R$ and $\R^{2}$ are not homeomorphic.
+\end{example}
+
+\subsection{Components}
+On a topological space $X$, define an equivalence relation $\sim$ on $X$ by $x \sim y$ if and only if there exists a connected subspace of $X$ containing both $x$ and $y$. The equivalence classes under this relation are called the \eax{component}s of $X$.
+
+\begin{theorem}
+    The components of $X$ are connected, disjoint subspaces such that their union is $X$. Any connected subspace of $X$ intersects only one component.
+\end{theorem}
+\begin{proof}
+    Let $C$ be a component of $X$. Let $x_{0} \in C$ be arbitrary. Then, by definition of the equivalence relation, for every $x \in C$, there exists a connected subspace $V_{x}$ of $X$ such that $x_{0}, x \in V_{x}$. Thus, we have
+    \begin{align}
+        C = \bigcup_{x \in C} V_{x},
+    \end{align}
+    and since each $V_{x}$ is connected and they all share the point $x_{0}$, by a previous theorem, $C$ is connected. The components are disjoint simply by the definition of an equivalence relation, and their union is $X$ since every point in $X$ is contained in some component. Finally, suppose $A \subseteq X$ is connected, and intersects two components $C_{1}$ and $C_{2}$. Then, there exist points $a_{1} \in A \cap C_{1}$ and $a_{2} \in A \cap C_{2}$. Since $A$ is connected, there exists a connected subspace of $X$ containing both $a_{1}$ and $a_{2}$. Thus, by definition of the equivalence relation, we must have $C_{1} = C_{2}$, proving that any connected subspace of $X$ intersects only one component.
+\end{proof}
+
+Thus, the components may even be called the connected components of $X$. 
+
+\begin{theorem}
+    Let $U \subseteq \R^{n}$ be an open connected set. Then, $U$ is path connected.
+\end{theorem}
+\begin{proof}
+    Fix some $x_{0} \in U$, and let $A$ be the set of all points in $U$ that are path connected to $x_{0}$. We wish to show that $A = U$. Note that $A$ is non-empty since $x_{0} \in A$. To show that $A$ is open, let $x \in A$ be arbitrary. Since $U$ is open, there exists some $\varepsilon > 0$ such that $B(x,\varepsilon) \subseteq U$. Now, for any $y \in B(x,\varepsilon)$, the line segment from $x$ to $y$ lies entirely within $B(x,\varepsilon)$, so there exists a path from $x$ to $y$. Since there also exists a path from $x_{0}$ to $x$, by concatenating these two paths, we have a path from $x_{0}$ to $y$. Thus, $y \in A$, proving that $B(x,\varepsilon) \subseteq A$. Hence, $A$ is open. To show that $A$ is closed, we look at $U \setminus A$. Let $x \in U \setminus A$ be arbitrary; there is no path from $x_{0}$ to $x$. Since $U$ is open, there exists some $\delta > 0$ such that $B(x,\delta) \subseteq U$. Now, for any $y \in B(x,\delta)$, the line segment from $x$ to $y$ lies entirely within $B(x,\delta)$, so there exists a path from $x$ to $y$. If there existed a path from $x_{0}$ to $y$, then by concatenating this path with the path from $x$ to $y$, we would have a path from $x_{0}$ to $x$, contradicting our assumption. Thus, there is no path from $x_{0}$ to $y$, so $y \in U \setminus A$. Hence, $B(x,\delta) \subseteq U \setminus A$, proving that $U \setminus A$ is open. Since $U$ is connected, and $A$ is non-empty, open, and closed in $U$, we must have $A = U$. Thus, every point in $U$ is path connected to $x_{0}$, so $U$ is path connected.
+\end{proof}
+
+More generally, we have the following result.
+
+\begin{theorem}
+    Let $X$ be a topological space that is connected. If each point $x \in X$ has an open neighbourhood that is path connected, then $X$ is path connected.
+\end{theorem}
+
+From here, we say that $X$ is locally connected at $x_{0}$ if every open neighbourhood of $x_{0}$ contains a connected open neighbourhood of $x_{0}$. If $X$ is locally connected at every point $x \in X$, then $X$ is said to be \eax{locally connected}.
+
+
+\section{Compactness}
+
+Recall that $\{A_{\alpha}\}_{\alpha \in \Lambda}$ is an open \eax{covering} of $X$ if $\bigcup_{\alpha \in \Lambda} A_{\alpha} \supseteq X$. A subcover is a subset of the covering that still covers $X$.
+
+\begin{definition}
+    A topological space $X$ is \eax{compact} if every open covering of $X$ has a finite subcovering.
+\end{definition}
+
+\begin{theorem}
+    Every compact subset of a Hausdorff space is closed.
+\end{theorem}
+\begin{proof}
+    Let $K \subseteq X$ be compact. We wish to show that $K^{c}$ is open. Let $x_{0} \in X \setminus K$. For each $y \in K$, since $X$ is Hausdorff, there exist disjoint open neighbourhoods $U_{y}$ of $x_{0}$ and $V_{y}$ of $y$. Then $\{V_{y}\}_{y \in K}$ is an open covering of $K$, so there exists a finite subcovering $\{V_{y_{i}}\}_{i=1}^{n}$. Now, let $U = \bigcap_{i=1}^{n} U_{y_{i}}$. Then, $U$ is an open neighbourhood of $x_{0}$, and for every $i$, we have $U \cap V_{y_{i}} = \emptyset$. Thus, $U \cap K = \emptyset$, proving that $x_{0} \in K^{c}$ has an open neighbourhood contained in $K^{c}$. Since $x_{0}$ was arbitrary, $K^{c}$ is open, so $K$ is closed.
+\end{proof}
+
+\begin{lemma}
+    Let $F \subseteq K$ where $F$ is closed and $K$ is compact. Then, $F$ is also compact.
+\end{lemma}
+\begin{proof}
+    Let $\{U_{\alpha}\}_{\alpha \in \Lambda}$ be an open covering of $F$. Then, $\{U_{\alpha}\}_{\alpha \in \Lambda} \cup \{K \setminus F\}$ is an open covering of $K$, so there exists a finite subcovering $\{U_{\alpha_{i}}\}_{i=1}^{n} \cup \{K \setminus F\}$. Since $F$ is not covered by $K \setminus F$, we have that $\{U_{\alpha_{i}}\}_{i=1}^{n}$ is a finite subcovering of $F$. Thus, $F$ is compact.
+\end{proof}
+
+\begin{theorem}
+    $[a,b]$ is compact for all $a < b \in \R$.
+\end{theorem}
+\begin{proof}
+    Let $\{U_{\alpha}\}_{\alpha \in \Lambda}$ be an open covering of $[a,b]$. Suppose it is not compact. Choose $a \leq a_{1} < b_{1} \leq b$ such that $I_{1} = [a_{1},b_{1}]$ has no finite subcovering, and $\abs{b_{1}-a_{1}} \leq \frac{1}{2}\abs{b-a}$. Now, choose $a_{1} \leq a_{2} < b_{2} \leq b_{1}$ such that $I_{2} = [a_{2},b_{2}]$ has no finite subcovering, and $\abs{b_{2}-a_{2}} \leq \frac{1}{2}\abs{b_{1}-a_{1}}$. Continuing this process, we have a sequence of nested closed intervals $I_{n} = [a_{n}, b_{n}]$ such that $I_{n}$ has no finite subcovering for all $n \geq 1$, and $\abs{b_{n}-a_{n}} \leq \frac{1}{2^{n-1}}\abs{b-a}$ for all $n \geq 1$. By the nested interval property, there exists some $c \in [a,b]$ such that $\sup a_{k} = c = \inf b_{k}$. Then $c \in U_{\alpha_{0}}$ for some $\alpha_{0} \in \Lambda$, since $\{U_{\alpha}\}_{\alpha \in \Lambda}$ is an open covering of $[a,b]$. Thus, there exists some $\varepsilon > 0$ such that $(c-\varepsilon, c+\varepsilon) \subseteq U_{\alpha_{0}}$. However, there exists some $N \in \N$ such that for all $n \geq N$, we have $\abs{b_{n}-a_{n}} < \varepsilon$, so $I_{N} \subseteq (c-\varepsilon, c+\varepsilon) \subseteq U_{\alpha_{0}}$. This contradicts the fact that $I_{N}$ has no finite subcovering. Hence, $[a,b]$ is compact.
+\end{proof}
+
+\begin{lemma}
+    Let $f:X \to Y$ be a continuous map. If $X$ is compact, then $f(X)$ is also compact.
+\end{lemma}
+\begin{proof}
+    Let $f(K) \subseteq \bigcup_{\alpha \in \Lambda} U_{\alpha}$ be an open covering of $f(K)$. Then, $\{f^{-1}(U_{\alpha})\}_{\alpha \in \Lambda}$ is an open covering of $K$, so there exists a finite subcovering $\{f^{-1}(U_{\alpha_{i}})\}_{i=1}^{n}$. Thus, $\{U_{\alpha_{i}}\}_{i=1}^{n}$ is a finite subcovering of $f(K)$, proving that $f(K)$ is compact.
+\end{proof}
+
+\begin{theorem}
+    Let $f:X \to Y$ be a continuous bijection. If $X$ is compact and $Y$ is Hausdorff, then $f$ is a homeomorphism.
+\end{theorem}
+\begin{proof}
+    We wish to show that the inverse map $f^{-1} : Y \to X$ is continuous. Let $V \subseteq X$ be closed. Then, since $X$ is compact, $V$ is also compact. Thus, by the previous lemma, $f(V)$ is compact. Since $Y$ is Hausdorff, $f(V)$ is closed. Hence, the preimage of every closed set under $f^{-1}$ is closed, proving that $f^{-1}$ is continuous. Thus, $f$ is a homeomorphism.
+\end{proof}
+
+\begin{theorem}
+    If $X$ and $Y$ are compact topological spaces, then the product space $X \times Y$ is also compact.
+\end{theorem}
+\begin{proof}
+    Note that for $x_{0} \in X$, $x_{0} \times Y$ is homeomorphic to $Y$, so it is compact. We need to show that if $N$ is an open set such that $x_{0} \times Y \subset N \subset X \times Y$, then there exists a neighbourhood $W$ of $x_{0}$ in $X$ such that $W \times Y \subseteq N$. Let $X \times Y = \bigcup_{\alpha} A_{\alpha}$ be an open covering of $X \times Y$. By compactness of $x_{0} \times Y$, there exists a finite subcovering $\bigcup_{i \in \Lambda_{x_{0}}} A_{\alpha_{i}}$ where $\Lambda_{x_{0}}$ is a finite index set. Then $x_{0} \times Y \subseteq W_{x_{0}} \times Y \subseteq \bigcup_{i \in \Lambda_{x_{0}}} A_{\alpha_{i}}$, where $W_{x_{0}} = \bigcap_{i \in \Lambda_{x_{0}}} \pi_{X}(A_{\alpha_{i}})$ is an open neighbourhood of $x_{0}$ in $X$. Now, for each $x \in X$, we can repeat this process to obtain an open neighbourhood $W_{x}$ of $x$ in $X$ such that $W_{x} \times Y$ is covered by a finite number of sets from the open covering. Then, $\{W_{x}\}_{x \in X}$ is an open covering of $X$, so by compactness of $X$, there exists a finite subcovering $\{W_{x_{j}}\}_{j=1}^{m}$. Thus, we have $X \times Y = \bigcup_{j=1}^{m} (W_{x_{j}} \times Y)$, and each $W_{x_{j}} \times Y$ is covered by a finite number of sets from the original open covering. Hence, $X \times Y$ has a finite subcovering, proving that it is compact.
+\end{proof}
+
+
+\textit{February 6th.}
+
+\begin{definition}
+    A collection $\cC$ of subsets of a topological space $X$ has the \eax{finite intersection property} if for every finite subcollection $\{C_{i}\}_{i=1}^{n} \subseteq \cC$, we have $\bigcap_{i=1}^{n} C_{i} \neq \emptyset$.
+\end{definition}
+
+\begin{theorem}
+    $X$ is compact if and only if every collection $\cC$ of closed subsets of $X$ with the finite intersection property satisfies $\bigcap_{C \in \cC} C \neq \emptyset$.
+\end{theorem}
+\begin{proof}
+    Suppose $X$ is compact. Let $\cC$ be a collection of closed subsets of $X$ with the finite intersection property but $\bigcap_{C \in \cC} C = \emptyset$. Then, $X = \bigcup_{C \in \cC} C^{c}$, so there exists a finite subcovering $\{C_{i}^{c}\}_{i=1}^{n}$ of $X$. This implies that $\bigcap_{i=1}^{n} C_{i} = \emptyset$, contradicting the finite intersection property. Hence, $\bigcap_{C \in \cC} C \neq \emptyset$. Conversely, assume that every collection $\cC$ of closed subsets of $X$ with the finite intersection property satisfies $\bigcap_{C \in \cC} C \neq \emptyset$, and let $\{U_{\alpha}\}_{\alpha \in \Lambda}$ be an open covering of $X$ with no finite subcovering. Then, $\{U_{\alpha}^{c}\}_{\alpha \in \Lambda}$ is a collection of closed subsets of $X$ with the finite intersection property, since for every finite subcollection $\{U_{\alpha_{i}}^{c}\}_{i=1}^{n}$, we have $\bigcap_{i=1}^{n} U_{\alpha_{i}}^{c} = \left(\bigcup_{i=1}^{n} U_{\alpha_{i}}\right)^{c} \neq \emptyset$ (if we did have $\bigcap_{i=1}^{n} U_{\alpha_{i}}^{c} = \emptyset$, then $\{U_{\alpha_{i}}\}_{i=1}^{n}$ would be a finite subcovering of $X$, contradicting our assumption). Thus, there exists some $x \in X$ such that $x \in \bigcap_{\alpha \in \Lambda} U_{\alpha}^{c}$, contradicting the fact that $\{U_{\alpha}\}_{\alpha \in \Lambda}$ is an open covering of $X$. Hence, every open covering of $X$ has a finite subcovering, proving that $X$ is compact.
+\end{proof}
+
+Recall that for a subset $A$ of a metric space $(X,d)$, the distance of $x \in X$ from $A$ is defined as $d_{A}(x) = \inf \{d(x,a) \mid a \in A\}$. The mapping $x \mapsto d_{A}(x)$ is continuous. We can also define the \eax{diameter} of $A$, when it is bounded, as $\diam(A) = \sup \{d(a,b) \mid a,b \in A\}$.
+
+\begin{lemma}[\eax{Lebesgue's number lemma}]
+    Let $\cA$ be an open convering of a compact metric space $(X,d)$. Then there exists some $\delta > 0$ such that every subset of $X$ with diameter less than $\delta$ is contained in some set $A \in \cA$.
+\end{lemma}
+Such a $\delta$ is called a \eax{Lebesgue number} of the covering $\cA$.
+\begin{proof}
+    Let $X = \bigcup_{i=1}^{k} A_{i}$, with $A_{i} \in \cA$ (assume that $A_{i} \neq X$, since it is trivial otherwise); this is possible since $\cA$ is an open covering and $X$ is compact. Define, for each $x$, $f(x) = \frac{1}{n} \sum_{i=1}^{n} d_{A_{i}^{c}}(x)$. Then, $f$ is continuous, and $f(x) > 0$ for all $x \in X$. Since $f:X \to (0,\infty)$ and $X$ is compact, $f(X)$ must be compact in $(0,\infty)$, so there exists some $\delta > 0$ such that $f(X) \subseteq [\delta, K]$. We claim that this $\delta$ is a Lebesgue number of $\cA$. Let $M$ be a subset of $X$ with $\diam(M) = \delta$. Take any $m \in M$. Then $M \subseteq B(m,\delta)$. Hence, we must show that $B(m,\delta) \subseteq A_{i}$ for some $i$. That is, we wish to show that $d_{A_{i}^{c}}(m) \geq \delta$ for some $i$. Suppose not. Then
+    \begin{align}
+        f(m) = \frac{1}{n} \sum_{i=1}^{n} d_{A_{i}^{c}}(m) < \frac{1}{n} \sum_{i=1}^{n} \delta = \delta,
+    \end{align}
+    which contradicts the fact that $f(X) \subseteq [\delta, K]$. Thus, there exists some $i$ such that $d_{A_{i}^{c}}(m) \geq \delta$, so $B(m,\delta) \subseteq A_{i}$, proving that $\delta$ is a Lebesgue number of $\cA$.
+\end{proof}
+
+\textit{February 10th.}
+
+\begin{theorem}
+    Suppose $X$ is a non-empty and compact Hausdorff space. If $X$ has no isolated points, then $X$ is uncountable.
+\end{theorem}
+\begin{proof}
+    Assume $X$ is as such and countable. Then, we can write $X = \{x_{1},x_{2},\ldots\}$. Note that $X$ cannot be finite. Start with $x_{1}$. Since $X$ has no isolated points, there must exist some $y \neq x_{1}$. Via the Hausdorff property, there exist disjoint open neighbourhoods $U_{1}$ of $x_{1}$ and $V_{1}$ of $y$. Moreover, $x_{i} \notin \bar{U}_{1}$, since if it were so, it would contradict the fact that $U_{1}$ and $V_{1}$ are disjoint. We now claim that there exists an open $U_{2} \subseteq U_{1}$ such that $x_{2} \notin \bar{U}_{2}$. Let $x_{2} \neq y \in U_{1}$. Then, there exist disjoint open neighbourhoods $W_{2}$ of $y$ and $W_{1}$ of $x_{2}$. Now $U_{2} = U_{1} \cap W_{2}$ is open. Moreover, $x_{2} \notin \bar{U}_{2}$, since if it were so, it would contradict the fact that $W_{1}$ and $W_{2}$ are disjoint. We can repeat this process to obtain a sequence of nested open sets $U_{1} \supseteq U_{2} \supseteq \ldots$ such that for each $n \geq 1$, we have $x_{n} \notin \bar{U}_{n}$. Rewriting, we have a sequence of nested closed sets $\bar{U}_{1} \supseteq \bar{U}_{2} \supseteq \ldots$. Also note that any finite intersection of these sets is non-empty, since $\bar{U}_{n} \supseteq \bar{U}_{m}$ for all $n < m$, and the space $X$ is compact. Thus, by the finite intersection property, we have $\bigcap_{n=1}^{\infty} \bar{U}_{n} \neq \emptyset$. Let $x \in \bigcap_{n=1}^{\infty} \bar{U}_{n}$. Then, $x \neq x_{n}$ for all $n$, since if $x = x_{n}$ for some $n$, then $x \in \bar{U}_{n}$, contradicting the fact that $x_{n} \notin \bar{U}_{n}$. This contradicts the fact that $X = \{x_{1}, x_{2}, \ldots\}$, so $X$ must be uncountable.
+\end{proof}
+
+A similar problem is to show that if $X$ is a non-empty compact Hausdorff space, and $\{A_{n}\}$ is a collection of closed sets in $X$ such that $\Int A_{n} = \emptyset$ for all $n$, then $\bigcup_{n=1}^{\infty} A_{n} \neq X$. This can be shown by a similar argument to the above proof, where we construct a sequence of nested open sets $U_{1} \supseteq U_{2} \supseteq \ldots$ such that for each $n \geq 1$, we have $A_{n} \cap \bar{U}_{n} = \emptyset$. We can then use the finite intersection property to obtain some $x \in \bigcap_{n=1}^{\infty} \bar{U}_{n}$, and show that $x$ cannot be contained in any of the sets $A_{n}$, contradicting the fact that $\bigcup_{n=1}^{\infty} A_{n} = X$. This is also known as the \eax{Baire category theorem}.
+
+
+\subsection{Sequential Compactness}
+\begin{definition}
+    A topological space $X$ is \eax{sequentially compact} if every sequence in $X$ has a convergent subsequence.
+\end{definition}
+
+For example, $[a,b] \subseteq \R$ is sequentially compact for all $a < b \in \R$, since every sequence in $[a,b]$ has a subsequence that converges to some point in $[a,b]$ via the Bolzano-Weierstrass theorem. 
+
+\begin{theorem}
+    Let $(X,d)$ be a metric space. Then, $X$ is compact if and only if $X$ is sequentially compact.
+\end{theorem}
+
+\begin{proof}[Proof of ($\Rightarrow$)]
+    Suppose $X$ is compact. Let $\{x_{n}\}$ be a sequence in $X$. We wish to show that $\{x_{n}\}$ has a convergent subsequence. If $\{x_{n}\}$ has only finitely many distinct terms, then there exists some $x \in X$ such that $x_{n} = x$ for infinitely many $n$, so the constant subsequence $x,x,x,\ldots$ converges to $x$. Otherwise, $\{x_{n}\}$ has infinitely many distinct terms; assume that $\{x_{n}\}$ as a set has no limit point, since if it did, we would be done. Thus, $A = \{x_{n}\}_{n \geq 1}$ is closed in $X$. Since $X$ is compact, $A$ is also compact. Thus, there exist open sets $\{U_{x}\}_{x \in A}$ such that $U_{x} \cap A = \{x\}$ for all $x \in A$. Then, $\{U_{x}\}_{x \in A}$ is an open covering of $A$. In particular, $X \subseteq \bigcup_{x \in A} U_{x} \cup (X \setminus A)$, so there exists a finite subcovering $\{U_{x_{i}}\}_{i=1}^{k} \cup (X \setminus A)$. Since $A$ is not covered by $X \setminus A$, we have that $\{U_{x_{i}}\}_{i=1}^{k}$ is a finite subcovering of $A$. But since $A$ is infinite, there exists some $x_{n}$ such that $x_{n} \in U_{x_{i}}$ for some $i$, contradicting the fact that $U_{x_{i}} \cap A = \{x_{i}\}$. Hence, $\{x_{n}\}$ must have a limit point, so there exists a subsequence of $\{x_{n}\}$ that converges to this limit point. Thus, $X$ is sequentially compact. 
+\end{proof}
+
+For the converse, we will show it via a few lemmas.
+
+\begin{lemma}
+    Let $X$ be a sequentially compact topological space. Then Lebegue's number lemma holds for $X$.
+\end{lemma}
+\begin{proof}
+    Let $\cA$ be an open covering of $X$. Suppose there is no Lebesgue number of $\cA$. Then, for every $n \in \N$, there exists some subset $D_{n}$ of $X$ such that $\diam(M_{n}) < \frac{1}{n}$, but $D_{n}$ is not contained in any set in $\cA$. We may assume $D_{n} = B(x_{n},1/2n)$ for some $x_{n} \in X$. Since $X$ is sequentially compact, there exists a subsequence $\{x_{n_{k}}\}$ of $\{x_{n}\}$ that converges to some point $x \in X$. Then, $x \in A$ for some $A \in \cA$, since $\cA$ is an open covering of $X$. Thus, there exists some $\varepsilon > 0$ such that $B(x,\varepsilon) \subseteq A$. However, there exists some $N \in \N$ such that for all $k \geq N$, we have $\frac{1}{2n_{k}} < \varepsilon$, so $D_{n_{k}} = B(x_{n_{k}},1/2n_{k}) \subseteq B(x,\varepsilon) \subseteq A$, contradicting the fact that $D_{n}$ is not contained in any set in $\cA$ for all $n$. Hence, there exists a Lebesgue number of $\cA$.
+\end{proof}
+
+\begin{lemma}
+    Let $(X,d)$ be a sequentially compact metric space. Then, for all $\varepsilon > 0$, the open cover $\{B(x,\varepsilon) \mid x \in X\}$ has a finite subcover.
+\end{lemma}
+\begin{proof}
+    Let $\varepsilon > 0$ be arbitrary. Suppose there is no finite subcover of $\{B(x,\varepsilon) \mid x \in X\}$. Then, for every $n \in \N$, there exists some $x_{n} \in X$ such that $x_{n} \notin \bigcup_{i=1}^{n-1} B(x_{i},\varepsilon)$. Since $X$ is sequentially compact, there exists a subsequence $\{x_{n_{k}}\}$ of $\{x_{n}\}$ that converges to some point $x \in X$. Then, there exists some $N \in \N$ such that for all $k \geq N$, we have $d(x,x_{n_{k}}) < \varepsilon$, so $x_{n_{k}} \in B(x,\varepsilon)$ for all $k \geq N$. However, since $\{x_{n}\}$ is a sequence of distinct points and $x_{n} \notin \bigcup_{i=1}^{n-1} B(x_{i},\varepsilon)$ for all $n$, we have that $x_{n_{k}} \notin \bigcup_{i=1}^{N-1} B(x_{i},\varepsilon)$ for all $k \geq N$, contradicting the fact that $x_{n_{k}} \in B(x,\varepsilon)$ for all $k \geq N$. Hence, there exists a finite subcover of $\{B(x,\varepsilon) \mid x \in X\}$.
+\end{proof}
+
+
+We may prove the converse now.
+\begin{proof}[Proof of ($\Leftarrow$)]
+    Suppose $X$ is sequentially compact. Let $\cA$ be an open covering of $X$. By Lebesgue's number lemma, there exists some $\delta > 0$ such that every subset of $X$ with diameter less than $\delta$ is contained in some set in $\cA$. By the previous lemma, there exists a finite subcover $\{B(x_{i},\delta/2)\}_{i=1}^{n}$ of $\{B(x,\delta/2) \mid x \in X\}$. Since each $B(x_{i},\delta/2)$ is contained in some set in $\cA$, we have that $\cA$ has a finite subcovering. Thus, $X$ is compact.
+\end{proof}
+
+\subsection{Local Compactness and Compactification}
+
+\begin{definition}
+    A space $X$ is called locally compact at $x \in X$, if there exists an open $U$ and compact $K$ such that $x \in U \subseteq K$. The space $X$ is \eax{locally compact} if it is locally compact at every point $x \in X$.
+\end{definition}
+
+Note that if $X$ is compact, then $X$ is locally compact, since we can take $U = K = X$.
+
+\begin{theorem}
+    $X$ is locally compact and Hausdorff if and only if there exists a topological space $Y$ with $X \subseteq Y$ such that $Y \setminus X$ consists of a single point, and $Y$ is compact and Hausdorff.
+\end{theorem}
+\begin{proof}
+    Define $Y = X \cup \{\infty\}$, where $\infty$ is a symbol not in $X$. Let the topology on $Y$ be defined as follows: the open sets of $Y$ are exactly the open sets of $X$, together with the sets of the form $\{\infty\} \cup (X \setminus K)$ where $K$ is a compact subset of $X$. Let the open sets of the $X$ be of `type 1', and the sets of the form $\{\infty\} \cup (X \setminus K)$ be of `type 2'. The reader may verify that this is a valid topology on $Y$. We further claim that $Y$ is compact and Hausdorff. We first show Hausdorff; if $x,y \in X \subseteq Y$, then Hausdorffness of $X$ works. So, let $x \in X$ and $y = \infty$. Since $X$ is locally compact at $x$, there exists an open $U$ and compact $K$ such that $x \in U \subseteq K$. Then, $U$ and $\{\infty\} \cup (X \setminus K)$ are disjoint open neighbourhoods of $x$ and $\infty$, respectively. Thus, $Y$ is Hausdorff.
+
+    Now, we show compactness. Let $Y \subseteq \bigcup_{\alpha \in \Lambda_{1}} A_{\alpha}^{(1)} \cup \bigcup_{\alpha \in \Lambda_{2}} A_{\alpha}^{(2)}$ be an open covering of $Y$, where $A_{\alpha}^{(1)}$ are the type 1 open sets and $A_{\alpha}^{(2)}$ are the type 2 open sets. Since $\infty \in Y$, there exists some $\alpha_{0} \in \Lambda_{2}$ such that $\infty \in A_{\alpha_{0}}^{(2)}$. Then, $A_{\alpha_{0}}^{(2)} = \{\infty\} \cup (X \setminus K)$ for some compact $K$. Thus, $K$ is covered by $\{A_{\alpha}^{(1)}\}_{\alpha \in \Lambda_{1}}$, so there exists a finite subcovering $\{A_{\alpha_{i}}^{(1)}\}_{i=1}^{n}$ of $K$. Now, we have $Y = A_{\alpha_{0}}^{(2)} \cup \bigcup_{i=1}^{n} A_{\alpha_{i}}^{(1)}$, so there exists a finite subcovering of $Y$. Hence, $Y$ is compact.
+\end{proof}
+
+\noindent \textit{February 17th.}
+
+This movtivates the following definition.
+
+\begin{definition}
+    Let $X$ be a topological space, and $Y$ a compact space. $Y$ is termed a \eax{compactification} of $X$ if $X$ is a dense subspace of $Y$.
+\end{definition}
+
+In general, there are many ways to construct compactifications of a given space $X$. The simplest one is the \eax{one-point compactification}, which we observed in the above proof; if $X$ is locally compact and Hausdorff, then we can construct a compactification $Y$ of $X$ by adding a single point $\infty$ to $X$, and defining the topology on $Y$ as exactly the open sets of $X$ together with the sets of the form $\{\infty\} \cup (X \setminus K)$ where $K$ is a compact subset of $X$.
+
+Suppose $f:X_{1} \to X_{2}$ is a continuous map between two locally compact Hausdorff spaces. Let $X_{1}^{+}$ and $X_{2}^{+}$ be the one-point compactifications of $X_{1}$ and $X_{2}$, respectively. Then, we can extend $f$ to a continuous map $f^{+} : X_{1}^{+} \to X_{2}^{+}$ by defining $f^{+}(x) = f(x)$ for all $x \in X_{1}$, and $f^{+}(\infty) = \infty$. The reader may verify that this is a well-defined continuous map. One can also show that $f^{+}$ is continuous if and only if $f^{-1}(K)$ is compact for every compact $K \subseteq X_{2}$. Moreover, if $f$ is a homeomorphism, then so is $f^{+}$.
+
+\section{Countability}
+\textit{March 3rd.}
+
+\begin{definition}
+    $X$ has a \eax{countable basis} at $x \in X$ if there exists a countable collection $\{U_{n}\}_{n \geq 1}$ of open neighbourhoods of $x$ such that for every open neighbourhood $V$ of $x$, there exists some $n$ such that $U_{n} \subseteq V$. If $X$ has a countable basis at every point, then $X$ is said to be \eax{first countable}.
+\end{definition}
+
+For example, any metric space is first countable, since for each $x \in X$, the collection $\{B(x,1/n)\}_{n \geq 1}$ is a countable basis at $x$.
+
+\begin{lemma}
+    If $X$ is first countable and $A \subseteq X$, then for every $x \in \bar{A}$, there exists a sequence $\{x_{n}\}$ in $A$ such that $x_{n} \to x$.
+\end{lemma}
+
+\begin{proof}
+    Let $\{B_{n}\}_{n \geq 1}$ be a countable basis at $x$. Note that $B_{1} \supseteq B_{1} \cap B_{2} \supseteq \cdots \supseteq \{x\}$ is a sequence of nested open neighbourhoods of $x$. Since $x \in \bar{A}$ and $x \in B_{1} \cap \cdots \cap B_{k}$ for all $k \geq 1$, we have that $A \cap (B_{1} \cap \cdots \cap B_{k}) \neq \emptyset$ for all $k$. Thus, we can choose some $x_{n} \in A \cap (B_{1} \cap \cdots \cap B_{n})$ for each $n$. Then, $\{x_{n}\}$ is a sequence in $A$ such that $x_{n} \to x$, since for every open neighbourhood $V$ of $x$, there exists some $N$ such that $B_{1} \cap \cdots \cap B_{N} \subseteq V$, so for all $n \geq N$, we have $x_{n} \in B_{1} \cap \cdots \cap B_{N} \subseteq V$. Hence, the result holds.
+\end{proof}
+
+\begin{definition}
+    $X$ is \eax{second countable} if $X$ has a countable basis, that is, there exists a countable collection $\{U_{n}\}_{n \geq 1}$ of open sets such that for every open set $V$, there exists some $n$ such that $U_{n} \subseteq V$.
+\end{definition}
+
+For example, $\R^{n}$ is second countable; the collection $\{B(q,1/n) \mid q \in \Q^{n}, n \geq 1\}$ is a countable basis of $\R^{n}$. For $\R^{\N}$ with the product topology, the collection $\{\prod_{i=1}^{\infty} U_{i} \mid U_{i} = \R \text{ for all but finitely many } i, U_{i} = B(q_{i},1/n) \text{ for some } q_{i} \in \Q, n \geq 1\}$ is a countable basis of $\R^{\N}$.
+
+\begin{lemma}
+    If $X$ is second countable, then any discrete subspace of $X$ is countable.
+\end{lemma}
+
+\begin{proof}
+    Let $A$ be a discrete subspace of $X$. Then, for each $a \in A$, there exists an open neighbourhood $U_{a}$ of $a$ such that $U_{a} \cap A = \{a\}$. Since $X$ is second countable, there exists a countable basis $\{V_{n}\}_{n \geq 1}$ of $X$. For each $a \in A$, there exists some $n$ such that $V_{n} \subseteq U_{a}$. Thus, we can define a map $\varphi : A \to \N$ by $\varphi(a) = n$ where $n$ is the least natural number such that $V_{n} \subseteq U_{a}$. We claim that $\varphi$ is injective. Let $a,b \in A$ such that $\varphi(a) = \varphi(b) = n$. Then, we have $V_{n} \subseteq U_{a}$ and $V_{n} \subseteq U_{b}$, so $V_{n} \subseteq U_{a} \cap U_{b}$. However, since $U_{a} \cap A = \{a\}$ and $U_{b} \cap A = \{b\}$, we have that $(U_{a} \cap U_{b}) \cap A = (U_{a} \cap A) \cap (U_{b} \cap A) = \{a\} \cap \{b\}$, so if $a \neq b$, then $(U_{a} \cap U_{b}) \cap A = \emptyset$, contradicting the fact that $V_{n} \subseteq U_{a} \cap U_{b}$ and $V_{n} \cap A$ is non-empty (since if it were empty, then there would be no least natural number such that $V_{n} \subseteq U_{a}$). Hence, we must have $a = b$, proving that $\varphi$ is injective. Thus, there exists an injection from the discrete subspace $A$ to $\N$, so $A$ is countable.
+\end{proof}
+
+\begin{lemma}
+    The following hold true.
+    \begin{itemize}
+        \item If $X$ is first countable, then any subspace of $X$ is first countable.
+        \item If $X_{i}$'s are first countable, then so is $\prod_{i=1}^{\infty} X_{i}$ with the product topology.
+        \item The above two statements also hold if we replace `first countable' with `second countable'.
+    \end{itemize}
+\end{lemma}
+
+\begin{proof}
+    The first statement is straightforward and is left to the reader. For the second statement, let $X = \prod_{i=1}^{\infty} X_{i}$ with the product topology, and let $\{B_{ji}\}_{j \geq 1}$ be a countable basis at $x_{i} \in X_{i}$ for each $i$. Look at
+    \begin{align}
+        \cB = \{\prod_{i=1}^{\infty} U_{i} \mid U_{i} = B_{ji} \text{ for some } j \text{ and finitely many } i\text{; } U_{i} = X_{i} \text{ for all other } i\}.
+    \end{align}
+    We claim that $\cB$ is a countable basis at $x = (x_{1}, x_{2}, \ldots)$. Let $U$ be an open neighbourhood of $x$. Then, there exists some basic open set $\prod_{i=1}^{\infty} U_{i}$ such that $x \in \prod_{i=1}^{\infty} U_{i} \subseteq U$, where $U_{i}$ is an open neighbourhood of $x_{i}$ for each $i$. Since $\{B_{ji}\}_{j \geq 1}$ is a countable basis at $x_{i}$, there exists some $j$ such that $B_{ji} \subseteq U_{i}$ for each $i$. Thus, we have $\prod_{i=1}^{\infty} B_{ji} \subseteq \prod_{i=1}^{\infty} U_{i} \subseteq U$, so $\cB$ is a countable basis at $x$. Hence, the product space $\prod_{i=1}^{\infty} X_{i}$ is first countable. A similar argument works for second countability.
+\end{proof}
+
+\begin{theorem}
+    Suppose $X$ has a countable basis. Then, every open cover of $X$ has a countable subcover. Moreover, there exists a countable dense subset of $X$.
+\end{theorem}
+A topological space satisfying the fact that every open cover has a countable subcover is called a \eax{Lindel\"of space}. A topological space with a countable dense subset is called a \eax{separable space}.
+\begin{proof}
+    Let $\{U_{\alpha}\}_{\alpha \in \Lambda}$ be an open cover of $X$, and let $B_{1},B_{2},\ldots$ be a countable basis. Pick some $i_{1}$ such that $B_{i_{1}} \subseteq U_{\alpha_{1}}$ for some $\alpha$ indexed as $\alpha_{1}$. Then rule out all $B_{i} \subseteq U_{\alpha_{i}}$ from the list indexed by $\N$. Continue this process to get $U_{\alpha_{1}},U_{\alpha_{2}},\ldots$. Then $X = \bigcup_{i \in \N} U_{\alpha_{i}}$ since $X = \bigcup B_{i}$. This shows the first statement.
+
+    For the second statement, let $x_{n} \in B_{n}$ for all $n$, and let $D = \{x_{n} \mid n \in \N\}$. Then $D$ is countable; we claim that $D$ is dense. For any $x \in X$, and $U$ an open neighbourhood of $x$, there exists some $B_{i}$ contained in $U$ since $B_{i}$ is a basis. Since $x_{i} \in B_{i}$, $U \cap D \neq \emptyset$ so $x \in \bar{D}$.
+\end{proof}
+
+\begin{lemma}
+    A metric space $(X,d)$ is Linde\"of if and only if it is separale if and only if it is second countable.
+\end{lemma}
+\begin{proof}
+    Let $(X,d)$ be separable. Suppose $D = \{x_{n}\}_{n \geq 1}$ is dense in $X$. Then $\cB = \{B(x_{n},\frac{1}{m}) \mid m,n \geq 1\}$ is a countable basis.
+\end{proof}
+
+\textit{March 5th.}
+
+\begin{example}
+    Let us study the example of the lower limit topology $\R_{l}$ with basis $\{[a,b) \mid a < b \in \R\}$. $\R_{l}$ is first countable, since for each $x \in \R$, the collection $\{[x,x+1/n) \mid n \geq 1\}$ is a countable basis at $x$. We show that is it \textit{not} second countable. Suppose $\{U_{n}\}_{n \geq 1}$ is a countable basis of $\R_{l}$. Then, for each $x \in \R$, there exists some $n$ such that $[x,x+1) \subseteq U_{n}$. Thus, we can define a map $\varphi : \R \to \N$ by $\varphi(x) = n$ where $n$ is the least natural number such that $[x,x+1) \subseteq U_{n}$. This is an injection, since if $\varphi(x) = \varphi(y) = n$, then $[x,x+1) \subseteq U_{n}$ and $[y,y+1) \subseteq U_{n}$, so $U_{n} \cap [\min\{x,y\},\max\{x,y\}+1) \neq \emptyset$, contradicting the fact that $U_{n}$ is open in $\R_{l}$ and $[x,x+1)$ and $[y,y+1)$ are disjoint. Hence, there exists an injection from $\R$ to $\N$, which is a contradiction. Thus, $\R_{l}$ is not second countable. $\R_{l}$ is separable since $\Q$ is dense in $\R_{l}$.
+\end{example}
+
+For Lindel\"of, we discuss how one shows a space $X$ is Lindel\"of. Note that every open covering consisting of basis elements has a countable subcovering. The proof of this mimics the proof of the fact that secound countability implies Lindel\"of. Hence, this statement can be used to show that a space $X$ is Lindel\"of. For $\R_{l}$ specifically, let $\{[a_{\alpha},b_{\alpha})\}_{\alpha \in \Lambda}$ be an open covering of $\R_{l}$, consisting of basis elements. That is, $\R_{l} = \bigcup_{\alpha \in \Lambda} [a_{\alpha},b_{\alpha})$. Now define $\cC = \bigcup_{\alpha \in \Lambda} (a_{\alpha},b_{\alpha})$; we claim that $\R_{l} \setminus \cC$ is countable. Let $x \in \R_{l} \setminus \cC$. Then, $x \in [a_{\alpha},b_{\alpha})$ for some $\alpha$, so $x = a_{\alpha}$, since if $x > a_{\alpha}$, then $x \in (a_{\alpha},b_{\alpha})$, contradicting the fact that $x \notin \cC$. Now for each $\alpha$, pick a rational $q_{x}$ in $(a_{\alpha},b_{\alpha})$; this is possible since $(a_{\alpha},b_{\alpha})$ is non-empty. We claim that the map $x \mapsto q_{x}$ is injective. Let $x,y \in \R_{l} \setminus \cC$ such that $q_{x} = q_{y}$. Then, there exist $\alpha$ and $\beta$ such that $x = a_{\alpha}$ and $y = a_{\beta}$, so $q_{x} = q_{y} \in (a_{\alpha},b_{\alpha}) \cap (a_{\beta},b_{\beta})$, contradicting the fact that $[a_{\alpha},b_{\alpha})$ and $[a_{\beta},b_{\beta})$ are disjoint. Hence, there exists an injection from $\R_{l} \setminus \cC$ to $\Q$, so $\R_{l} \setminus \cC$ is countable. From here, we can find a countable subcovering of $\R_{l} \setminus \cC$ by picking $[a_{\alpha},b_{\alpha})$ for each $x \in \R_{l} \setminus \cC$, and we can find a countable subcovering of $\cC$ since $\cC$ is an open covering of $\R_{l}$ in the usual topology, so there exists a countable subcovering of $\R_{l}$, proving that $\R_{l}$ is Lindel\"of.
+
+\section{Regular and Normal Spaces}
+
+\begin{definition}
+    Suppose $X$ is a topological space where all singletons are closed. $X$ is termed \eax{regular} if every pair $(x,F)$ where $x \in X$ and $F$ is a closed set such that $x \notin F$, has disjoint open neighbourhoods. Note that regular implies Hausdorff. $X$ is termed \eax{normal} if every pair $(F_{1},F_{2})$ where $F_{1}$ and $F_{2}$ are disjoint closed sets, has disjoint open neighbourhoods. Note that normal implies regular.
+\end{definition}
+
+\begin{theorem}
+    Let $X$ be a topological space such that singletons are closed. $X$ is regular if and only if for all $x \in X$ and open neighbourhood $U$ of $x$, there exists an open neighbourhood $V$ of $x$ such that $\bar{V} \subseteq U$. $X$ is normal if and only if for all closed $F$ and open neighbourhood $U$ of $F$, there exists an open neighbourhood $V$ of $F$ such that $\bar{V} \subseteq U$.
+\end{theorem}
+
+
+\begin{proof}
+    Assume that $X$ is regular. Let $x \in X$ and $U$ be an open neighbourhood of $x$. Since $X$ is regular, there exist disjoint open neighbourhoods $V$ of $x$ and $W$ of $X \setminus U$. Then $V \subseteq X \setminus W$, so $\bar{V} \subseteq \overline{X \setminus W} = X \setminus W \subseteq U$. Conversely, assume that for all $x \in X$ and open neighbourhood $U$ of $x$, there exists an open neighbourhood $V$ of $x$ such that $\bar{V} \subseteq U$. Let $x \in X$ and $F$ be a closed set such that $x \notin F$. Then, $X \setminus F$ is an open neighbourhood of $x$, so there exists an open neighbourhood $V$ of $x$ such that $\bar{V} \subseteq X \setminus F$. Then, $V$ and $X \setminus \bar{V}$ are disjoint open neighbourhoods of $x$ and $F$, respectively, proving that $X$ is regular. The statement of normal spaces is left as an exercise.
+\end{proof}
+
+\textit{March 6th.}
+
+\begin{lemma}
+    If $X$ is regular, then so is any subspace. If $X_{\alpha}$'s are regular spaces, then so is $\prod_{\alpha} X_{\alpha}$ with the product topology.
+\end{lemma}
+
+\begin{proof}
+    The first statement mimics the proof of Hausdorffness of subspaces. For the second statement, let $F \subseteq \prod X_{\alpha}$ be a closed set, with $x \in \prod X_{\alpha}$ but $x \notin F$. Since $F$ is closed, we have that $\prod X_{\alpha} \setminus F$ is open, so there exists some basic open set $\prod U_{\alpha}$ such that $x \in \prod U_{\alpha} \subseteq \prod X_{\alpha} \setminus F$, where $U_{\alpha}$ is non-trivial for finitely many $\alpha$. That is, we can rewrite it as $x = (x_{\alpha}) \in \prod_{i=1}^{k} U_{\alpha_{i}} \times \prod_{\alpha \neq \alpha_{i}} X_{\alpha}$. Since $X_{\alpha}$'s are regular, we can find open sets $V_{\alpha_{i}}$ such that $x_{\alpha_{i}} \in V_{\alpha_{i}} \subseteq \bar{V}_{\alpha_{i}} \subseteq U_{\alpha_{i}}$. Then, we have $x \in \prod_{i=1}^{k} V_{\alpha_{i}} \times \prod_{\alpha \neq \alpha_{i}} X_{\alpha} \subseteq \prod_{i=1}^{k} \bar{V}_{\alpha_{i}} \times \prod_{\alpha \neq \alpha_{i}} X_{\alpha} \subseteq \prod \bar{V}_{\alpha_{i}} \times \prod_{\alpha \neq \alpha_{i}} X_{\alpha} \subseteq \prod X_{\alpha} \setminus F$. Hence, $\prod_{\alpha} X_{\alpha}$ is regular.
+\end{proof}
+
+Note that normal implies regular implies Hausdorff. For metric spaces, we have the following result.
+
+\begin{lemma}
+    A metric space is normal.
+\end{lemma}
+\begin{proof}
+    Let $(X,d)$ be a metric space, and $A$ and $B$ be two disjoint closed sets. Define a function $f:X \to [0,1]$ by $f(x) = \frac{d(x,A)}{d(x,A) + d(x,B)}$. Then, $f$ is continuous, and $f(A) = \{0\}$ and $f(B) = \{1\}$. Thus, $f^{-1}([0,1/2))$ and $f^{-1}((1/2,1])$ are disjoint open neighbourhoods of $A$ and $B$, respectively, proving that $X$ is normal.
+\end{proof}
+
+\begin{theorem}
+    A compact Hausdorff space is normal.
+\end{theorem}
+\begin{proof}
+    We first show that a compact Hausdorff space $X$ is regular. Let $x \in X$ and $F$ be a closed set such that $x \notin F$. For each $y \in F$, there exist disjoint open neighbourhoods $U_{y}$ of $y$ and $V_{y}$ of $x$. Then, $\{U_{y}\}_{y \in F}$ is an open covering of $F$, so there exists a finite subcovering $\{U_{y_{i}}\}_{i=1}^{n}$ of $F$. Then, $\bigcup_{i=1}^{n} U_{y_{i}}$ and $\bigcap_{i=1}^{n} V_{y_{i}}$ are disjoint open neighbourhoods of $F$ and $x$, respectively, proving that $X$ is regular. To show that $X$ is normal, let $F_{1}$ and $F_{2}$ be two disjoint closed sets. For each $x \in F_{1}$, there exist disjoint open neighbourhoods $U_{x}$ of $x$ and $V_{x}$ of $F_{2}$. Then, $\{U_{x}\}_{x \in F_{1}}$ is an open covering of $F_{1}$, so there exists a finite subcovering $\{U_{x_{i}}\}_{i=1}^{n}$ of $F_{1}$. Then, $\bigcup_{i=1}^{n} U_{x_{i}}$ and $\bigcap_{i=1}^{n} V_{x_{i}}$ are disjoint open neighbourhoods of $F_{1}$ and $F_{2}$, respectively, proving that $X$ is normal.
+\end{proof}
+
+
+\textit{March 10th.}
+
+\begin{theorem}[\eax{Urysohn's lemma}]
+    Let $X$ be a normal space, and $A$ and $B$ be two disjoint closed sets. Then, there exists a continuous function $f:X \to [0,1]$ such that $f(A) = \{0\}$ and $f(B) = \{1\}$.
+\end{theorem}
+
+\begin{proof}
+    Define $Q = \Q \cap [0,1]$. Enumerate $Q$ as $Q = \{0,1,r_{2},r_{3},\ldots\}$ and define $Q_{n}$ to be the first $n$ many elements of $Q$. Thus, $Q_{1} \subseteq Q_{2} \subseteq \cdots$ and $\bigcup_{n=1}^{\infty} Q_{n} = Q$. Note that $U_{1} = X \setminus B$ is open and $A \subseteq U_{1}$. By normality, there exists an open $U_{0}$ such that $A \subseteq U_{0} \subseteq \bar{U}_{0} \subseteq U_{1}$. Now suppose we have defined $U_{p}$ for all $p \in Q_{n}$ such that $A \subseteq U_{p} \subseteq \bar{U}_{p} \subseteq U_{q}$ for all $p < q$ in $Q_{n}$. Let $r$ be the next element in $Q$ after $Q_{n}$. We claim that there exist $p,q \in Q_{n}$ such that $p < r < q$, with no other element of $Q_{n}$ between $p$ and $q$. If not, then either there is no element of $Q_{n}$ less than $r$, or there is no element of $Q_{n}$ greater than $r$, or there are infinitely many elements of $Q_{n}$ less than $r$, or there are infinitely many elements of $Q_{n}$ greater than $r$. The first two cases cannot happen since $0,1 \in Q_{n}$. The last two cases cannot happen since $Q_{n}$ is finite. Thus, there exist $p,q \in Q_{n}$ such that $p < r < q$, with no other element of $Q_{n}$ between $p$ and $q$. By the definition of the $U_{i}$'s, we get $\bar{U}_{p} \subseteq U_{r} \subseteq \bar{U}_{r} \subseteq U_{q}$. Thus, we can define $U_{r}$ to be an open set such that $\bar{U}_{p} \subseteq U_{r} \subseteq \bar{U}_{r} \subseteq U_{q}$, which is possible by normality. By induction, we can define $U_{p}$ for all $p \in Q$ such that $A \subseteq U_{p} \subseteq \bar{U}_{p} \subseteq U_{q}$ for all $p < q$ in $Q$. Now, we can define a function $f:X \to [0,1]$ by $f(x) = \inf\{p \in Q \mid x \in U_{p}\}$. Note that $f(x)$ is well-defined since $\{p \in Q \mid x \in U_{p}\}$ is bounded below by $0$ (and above by $1$). So $f(X) \subseteq [0,1]$. Since $A \subseteq U_{0}$, $0 \in Q(a)$ for all $a \in A$ giving $f(A) = \{0\}$. Since $B \subseteq X \setminus U_{1}$, $Q(x) = \emptyset$ for all $x \in B$, so $f(B) = \{1\}$. Finally, we show that $f$ is continuous; note two observations. Observation $\alpha$: $x \in \bar{U}_{r} \implies x \in U_{s} \text{ for all } s > r \implies f(x) \leq r$. Observation $\beta$: $x \notin U_{r} \implies x \notin U_{s} \text{ for all } s < r \implies f(x) \geq r$. Now given any $(c,d) \subseteq \R$, we wish to show that $f^{-1}(c,d)$ is open. Let $x_{0} \in f^{-1}(c,d)$. Then there exist $r,s \in \Q$ such that $r < f(x_{0}) < s$ and $r > c$ and $s < d$. By observation $\alpha$, we have $x_{0} \in \bar{U}_{r}$, so there exists an open neighbourhood $V$ of $x_{0}$ such that $V \subseteq U_{r}$. By observation $\beta$, we have $x_{0} \notin U_{s}$, so there exists an open neighbourhood $W$ of $x_{0}$ such that $W \cap U_{s} = \emptyset$. Then, we have $V \cap W \subseteq U_{r} \cap (X \setminus U_{s}) \subseteq f^{-1}(c,d)$, so $f^{-1}(c,d)$ is open. Hence, $f$ is continuous.
+\end{proof}
+
+\begin{theorem}
+    If $X$ is compact and Hausdorff, then it is normal. If $X$ is locally compact and Hausdorff, then it is regular.
+\end{theorem}
+
+\begin{theorem}
+    Every regular second countable space is normal.
+\end{theorem}
+\begin{proof}
+    Suppose $A$ and $B$ are disjoint closed sets of a regular second countable space $X$. Let $\cB = \{B_{n}\}_{n \geq 1}$ be a countable basis of $X$. For each $a \in A$, there exists an open neighbourhood $U_{a}$ of $a$ with $U_{a} \cap B = \emptyset$. By regularity, there exists an open neighbourhood $V_{a}$ of $a$ such that $a \in V_{a} \subseteq \bar{V}_{a} \subseteq U_{a}$. note that there also exists $B_{a} \in \cB$ such that $a \in B_{a} \subseteq V_{a}$. Then, $\{B_{a}\}_{a \in A}$ is an open covering of $A$, so there exists a countable subcovering $\{U_{n}\}_{n \geq 1}$ of $A$. Similarly, we can find $\{V_{n}\}_{n \geq 1}$, a collection of basis elements, that cover $B$. 
+such that $V_{n} \cap A = \emptyset$ for all $n \geq 1$. Now define
+\begin{align}
+    U' = \bigcup_{n=1}^{\infty} (U_{n} \setminus \bigcup_{m=1}^{n} \bar{V}_{m}), \quad V' = \bigcup_{n=1}^{\infty} (V_{n} \setminus \bigcup_{m=1}^{n} \bar{U}_{m}).
+\end{align}
+Then $U'$ and $V'$ are disjoint open sets with $A \subseteq U'$ and $B \subseteq V'$, proving that $X$ is normal.
+\end{proof}
+
+\textit{March 12th.}
+
+\begin{theorem}
+    Every regular second countable space is a metric space.
+\end{theorem}
+\begin{proof}
+    Let $X$ be a regular second countable space, and $\cB = \{B_{n}\}_{n \geq 1}$ be a countable basis of $X$. Define $\cA = \{(n,m) \in \N^{2} \mid \bar{B}_{n} \subseteq B_{m}\}$. Note that $\cA$ cannot be empty; pick $x_{m} \in B_{m}$. By regularity, there exists an open $V$ such that $x_{m} \in V \subseteq \bar{V} \subseteq B_{m}$. Since $\cB$ is a basis, there exists some $n$ such that $x_{m} \in B_{n} \subseteq V$, so $\bar{B}_{n} \subseteq \bar{V} \subseteq B_{m}$, giving $(n,m) \in \cA$. Now, by Urysohn's lemma, there exists a continuous function $g_{n,m} : X \to [0,1]$ such that $g_{n,m}(\bar{B}_{n}) = \{0\}$ and $g_{n,m}(X \setminus B_{m}) = \{1\}$ for each $(n,m) \in \cA$. Hence, we can extract a sequence of functions $\{f_{n}\}_{n \geq 1}$ from the $g$'s such that for all $x$ and open nieghbourhoods $U$ of $x$, there exists some $n$ such that $f_{n}(X \setminus U) = \{0\}$ and $f_{n}(x) > 0$.
+
+    We now define a mapping $F: X \to \R^{\N}$ ($\R^{\N}$ equipped with the product topology) defined as $F(x) = (f_{1}(x),f_{2}(x),\ldots)$. We claim that $F$ is an embedding, that is, $X \cong F(X)$. Note that $F$ is continuous since each $f_{n}$ is continuous. We show that $F$ is injective. Let $x,y \in X$ such that $F(x) = F(y)$. Then, for all $n$, we have $f_{n}(x) = f_{n}(y)$. Given any open neighbourhood $U$ of $x$, there exists some $n$ such that $f_{n}(X \setminus U) = \{0\}$ and $f_{n}(x) > 0$. Since $f_{n}(y) = f_{n}(x) > 0$, we have that $y \notin X \setminus U$, so $y \in U$. Since this holds for all open neighbourhoods of $x$, we have that $y \in \{x\}$, so $x = y$. Thus, $F$ is injective. We now wish to show that if $U$ is open in $X$, then $F(U) \subseteq F(X)$ and $F(U)$ is open in $F(X)$. Suppose $x_{0} \in U$, or $F(x_{0}) \in F(U)$. By the above, there exists a natural $n$ such that $f_{n}(x_{0}) > 0$ and $f_{n}(X \setminus U) = \{0\}$. Set $V = \R \times \cdots \times \R \times (0,\infty) \times R \cdots$. This is open in the product topology of $\R^{\N}$. Clearly, $F(x_{0}) \in V \cap F(X)$. We claim that $V \cap F(X) \subseteq F(U)$. Take $F(x) \in V$. If $x \notin U$, then $f_{n}(x) = 0$, contradicting the fact that $F(x) \in V$. Thus, $x \in U$, so $F(x) \in F(U)$, proving that $V \cap F(X) \subseteq F(U)$. Hence, $F(U)$ is open in $F(X)$, so $F$ is an embedding. Since $F(X)$ is a subspace of $\R^{\N}$, which is a metric space, we have that $F(X)$ is a metric space, so $X$ is a metric space.
+\end{proof}
+
+\textit{March 13th.}
+
+\begin{theorem}[\eax{Tietze extension theorem}]
+    Suppose $X$ is a normal space and $A \subseteq X$ is closed. Given any continuous function $f : A \to [-1,1]$, there exists a continuous function $g: X \to [-1,1]$ such that $g|_{A} = f$. More generally, given any continuous function $f : A \to \R$, there exists a continuous function $g: X \to \R$ such that $g|_{A} = f$.
+\end{theorem}
+
+To show this, we require a small lemma.
+
+\begin{lemma}
+    Let $r > 0$. Suppose $X$ is a normal space and $A \subseteq X$ is closed. Given any continuous function $f : A \to [-r,r]$, there exists a continuous function $g: X \to [-r/3,r/3]$ such that $\abs{g(a)-f(a)} \leq \frac{2}{3}r$ for all $a \in A$.
+\end{lemma}
+
+\begin{proof}
+    Let $I_{1} = [-r,-\frac{1}{3}r]$, $I_{2} = [-\frac{1}{3}r,\frac{1}{3}r]$, and $I_{3} = [\frac{1}{3}r,r]$. Note that since $f$ is continuous, $B = f^{-1}(I_{1})$ and $C = f^{-1}(I_{3})$ are disjoint closed sets in $A$ and in $X$. $X$ is normal so Urysohn's lemma gives a continuous function $g: X \to [-\frac{1}{3}r,\frac{1}{3}r]$ such that $g(B) = \{-\frac{1}{3}r\}$ and $g(C) = \{\frac{1}{3}r\}$. If $a \in B$, then $g(a) = -\frac{1}{3}r$ and $f(a) \leq -\frac{1}{3}r$, so $\abs{g(a)-f(a)} \leq \frac{2}{3}r$. If $a \in C$, then $g(a) = \frac{1}{3}r$ and $f(a) \geq \frac{1}{3}r$, so $\abs{g(a)-f(a)} \leq \frac{2}{3}r$. If $a \in A \setminus (B \cup C)$, then $g(a) \in [-\frac{1}{3}r,\frac{1}{3}r]$ and $f(a) \in [-\frac{1}{3}r,\frac{1}{3}r]$, so $\abs{g(a)-f(a)} \leq \frac{2}{3}r$. Hence, $\abs{g(a)-f(a)} \leq \frac{2}{3}r$ for all $a \in A$.
+\end{proof}
+
+We use this lemma to show the extension theorem.
+
+\begin{proof}[Proof of Tietze extension theorem]
+    Set $r = 1$. The lemma then gives us a function $g_{1} : X \to [-\frac{1}{3},\frac{1}{3}]$ for all $x \in X$ with $\abs{g_{1}(a)-f(a)} \leq \frac{2}{3}$ for all $a \in A$. Now, we can apply the lemma again to get a function $g_{2} : X \to [-\frac{1}{9},\frac{1}{9}]$ such that $\abs{g_{2}(a)-(f(a)-g_{1}(a))} \leq \frac{2}{3} \cdot \frac{2}{3} = \frac{4}{9}$ for all $a \in A$. Continuing this process, we can get a sequence of functions $\{g_{n}\}_{n \geq 1}$ such that $g_{n} : X \to [-\frac{1}{3^{n}},\frac{1}{3^{n}}]$ and $\abs{g_{n}(a) - (f(a) - \sum_{i=1}^{n-1} g_{i}(a))} \leq (\frac{2}{3})^{n}$ for all $a \in A$. We claim that the series $\sum_{n=1}^{\infty} g_{n}(x)$ converges for all $x$, and the limit function $g(x) = \sum_{n=1}^{\infty} g_{n}(x)$ is the desired extension of $f$. Note that since $\abs{g_{n}(x)} \leq \frac{1}{3^{n}}$, the series $\sum_{n=1}^{\infty} g_{n}(x)$ converges by comparison test. We now show that $g$ is continuous. Let $x_{0} \in X$ and $\epsilon > 0$. Pick some $N$ such that $\sum_{n=N+1}^{\infty} \frac{1}{3^{n}} < \epsilon/2$. Since $g_{1},\ldots,g_{N}$ are continuous, there exists an open neighbourhood $U$ of $x_{0}$ such that $\abs{g_{i}(x) - g_{i}(x_{0})} < \epsilon/(2N)$ for all $x \in U$ and $i = 1,\ldots,N$. Then, for all $x \in U$, we have
+    \begin{align}
+        \abs{g(x) - g(x_{0})} &\leq \abs{\sum_{n=1}^{N} g_{n}(x) - \sum_{n=1}^{N} g_{n}(x_{0})} + \abs{\sum_{n=N+1}^{\infty} g_{n}(x)} + \abs{\sum_{n=N+1}^{\infty} g_{n}(x_{0})} \\
+        &< N \cdot \frac{\epsilon}{2N} + \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+    \end{align}
+    Hence, $g$ is continuous mapping into $\R$. Let $\varphi:\R \to [-1,1]$ be the continuous function defined as $y \mapsto \frac{y}{\abs{y}}$ for $\abs{y} > 1$, and $y \mapsto y$ for $\abs{y} \leq 1$. Then define $\tilde{g} = \varphi \circ g :X \to [-1,1]$. $\tilde{g}$ is continuous since it is a composition of continuous functions, and $\tilde{g}|_{A} = \varphi \circ g|_{A} = \varphi \circ f = f$, so $\tilde{g}$ is the desired extension of $f$.
+\end{proof}

@@ -1,0 +1,997 @@
+\chapter{RINGS}
+
+\textit{January 19th.}
+
+Of course, we begin with the definition of a ring.
+
+\begin{definition}
+    A \eax{ring} is a triple $(R, +, \cdot)$ where $R$ is a set, and $+$ and $\cdot$ are binary operations on $R$ such that the following axioms are satisfied:
+    \begin{itemize}
+        \item $(R, +)$ is an abelian group. The identity element of this group is denoted by $0_{R}$, and the (additive) inverse of an element $a \in R$ is denoted by $-a$.
+        \item The property of \eax{associativity} of $\cdot$ holds; i.e., for all $a, b, c \in R$, we have $(a \cdot b) \cdot c = a \cdot (b \cdot c)$.
+        \item The property of \eax{distributivity} of $\cdot$ over $+$ holds; i.e., for all $a, b, c \in R$, we have
+        \begin{align}
+            a \cdot (b + c) &= a \cdot b + a \cdot c, \\
+            (a + b) \cdot c &= a \cdot c + b \cdot c.
+        \end{align}
+    \end{itemize}
+\end{definition}
+
+Rings may be written simply as $R$ instead of the triple. The ring $R$ is termed a \eax{ring with unity} if there exists an element $1_{R} \in R$ such that for all $a \in R$, we have $1_{R} \cdot a = a \cdot 1_{R} = a$. Some examples of rings with unity include $\Z$, $\Q$, $\R$, $\C$, $M_{n}(\R)$ with the usual addition and multiplication. A ring $R$ is said to be a \eax{commutative ring} if for all $a, b \in R$, we have $a \cdot b = b \cdot a$. Examples of commutative rings include $\Z$, $\Q$, $\R$, $\C$, but $M_{n}(\R)$ is not commutative for $n \geq 2$. Lastly, a commutative ring $R$ with unity is termed a \eax{field} if every non-zero element of $R$ has a multiplicative inverse; i.e., for every $a \in R \setminus \{0_{R}\}$, there exists an element $b \in R$ such that $a \cdot b = b \cdot a = 1_{R}$. Examples of fields include $\Q$, $\R$, $\C$, but $\Z$ is not a field.
+
+Example of rings without unity include $2\Z$ with the usual addition and multiplication, and the set of all continuous functions from $\R$ to $\R$ that vanish at $0$, with the usual addition and multiplication of functions. Another class of rings we previously studied was $\Z/n\Z$ for $n \geq 2$, with the usual addition and multiplication modulo $n$. This ring has unity, but is a field if and only if $n$ is prime.
+
+\begin{definition}
+    Let $R$ be a ring with unity. An element $a \in R$ is called a \eax{unit} if there exists an element $b \in R$ such that $a \cdot b = b \cdot a = 1_{R}$.
+\end{definition}
+
+For example, in the ring $\Z/n\Z$, an element $\bar{a}$ is a unit if and only if $\gcd(a, n) = 1$. The set of all units in a ring $R$ with unity is denoted by $R^{\times}$. It can be easily verified that $(R^{\times}, \cdot)$ is an abelian group.
+
+\section{Properties and Maps}
+Some basic properties may be inferred.
+
+\begin{proposition}
+    Let $R$ be a ring with unity. Then,
+    \begin{itemize}
+    \item $1_{R}$ is the unique multiplicative identity in $R$.
+    \item $1_{R} \cdot 0_{R} = 0_{R}$. In general, $a \cdot 0_{R} = 0_{R}$ for all $a \in R$.
+    \item $-1_{R} \cdot a = -a$ for all $a \in R$.
+\end{itemize}
+\begin{proof}
+    \begin{itemize}
+        \item This is left as an exercise to the reader.
+        \item $1_{R} \cdot 0_{R} = 1_{R}$ is trivial since $1_{R}$ is the multiplicative identity. For the general case, let $a \in R$. Then,
+        \begin{align}
+            a \cdot 0_{R} = a \cdot (0_{R} + 0_{R}) = a \cdot 0_{R} + a \cdot 0_{R} \implies a \cdot 0_{R} = 0_{R}
+        \end{align}
+        by the addition of $-(a \cdot 0_{R})$ on both sides.
+        \item Let $a \in R$. Then,
+        \begin{align}
+            (-1_{R} \cdot a) + a = (-1_{R} + 1_{R}) \cdot a = 0_{R} \implies -1_{R} \cdot a = -a.
+        \end{align}
+    \end{itemize}
+\end{proof}
+\end{proposition}
+
+The subscript $R$ in $0_{R}$ and $1_{R}$ may be dropped when the context is clear. We move on to some special maps.
+
+\begin{definition}
+    A \eax{ring homomorphism} is a map $\varphi : (R, +, \cdot) \to (S, \oplus, \odot)$ between two rings such that for all $a, b \in R$, we have
+    \begin{align}
+        \varphi(a + b) = \varphi(a) \oplus \varphi(b), \quad \varphi(a \cdot b) = \varphi(a) \odot \varphi(b).
+    \end{align}
+\end{definition}
+Most of the time, we shall drop $\oplus$ and $\odot$ when the context is clear. Some examples of ring homomorphisms include the map $\varphi : \Z \to \Z/n\Z$ defined by $\varphi(a) = \bar{a}$ for all $a \in \Z$, and the inclusion map from $\Z$ to $\Q$. Non-examples include $n \mapsto -n$ from $\Z$ to $\Z$, and the determinant map from $M_{n}(\R)$ to $\R$.
+
+Let $(\Z \times \Z, +, \cdot)$ be the ring where addition and multiplication are defined component-wise. Then the map $Z \to \Z \times \Z$ defined by $a \mapsto (a, 0)$ is a ring homomorphism since it preserves both addition and multiplication. However, the unity of $\Z$ is mapped to $(1, 0)$, which is not the unity of $\Z \times \Z$. Thus, ring homomorphisms need not map unity to unity.
+
+\begin{definition}
+    Let $R$ be a ring with $S \subseteq R$ a subset. Then, $S$ is called a \eax{subring} of $R$ if $(S, +, \cdot)$ is itself a ring with the operations inherited from $R$.
+\end{definition}
+Again, even if $R$ has unity, a subring $S$ need not have the same unity as $R$ or even a unity at all.
+\\ \\
+\textit{January 23rd.}
+
+\begin{definition}
+    A ring homomorphism $\varphi: R \to S$ is termed a \eax{ring monomorphism} if it is injective, a \eax{ring epimorphism} if it is surjective, and a \eax{ring isomorphism} if it is bijective. If there exists a ring isomorphism from $R$ to $S$, then $R$ and $S$ are said to be \eax{isomorphic}, denoted by $R \cong S$.
+\end{definition}
+
+Note that if $\varphi: R \to S$ is bijective, then its inverse $\varphi^{-1} : S \to R$ is a ring homomorphism. We look at some examples of rings and mappings.
+
+\begin{example}
+    Let $X$ be any set and let $R \defeq \{f:X \to \R\}$ be the set of all functions from $X$ to $\R$. Then, $(R, +, \cdot)$ is a ring where addition and multiplication are defined pointwise; i.e., for all $f, g \in R$ and $x \in X$, $(f + g)(x) \defeq f(x) + g(x)$ and $(f \cdot g)(x) \defeq f(x) \cdot g(x)$. The additive identity is the zero function $0:X \to \R$ defined by $0(x) = 0$ for all $x \in X$, and the multiplicative identity is the constant function $1:X \to \R$ defined by $1(x) = 1$ for all $x \in X$. It is easy to verify that all ring axioms are satisfied. Moreover, this ring is commutative and has unity. Note that $\R$ can be replaced by any ring $S$ to form the ring of functions from $X$ to $S$. In such a case, $R$ is a (commutative) ring with unity if and only if $S$ is a (commutative) ring with unity.
+
+    In the special case that $X = \{1,2,\ldots,n\}$ for some $n \in \N$, the ring $R$ is isomorphic to the ring $(\R^{n},+,\cdot)$ where addition and multiplication are defined component-wise. The isomorphism $\varphi : R \to \R^{n}$ is given by $\varphi(f) = (f(1), f(2), \ldots, f(n))$ for all $f \in R$.
+\end{example}
+
+\begin{example}
+    Continuing from the previous example, let $X = [a,b]$. Note that the $R$ in this case is the set of all functions from the interval $[a,b]$ to $\R$, which is not a very manageable set. Thus, we may consider the subset $C([a,b], \R) \subseteq R$ consisting of all continuous functions from $[a,b]$ to $\R$. It is easy to verify that $C([a,b], \R)$ is a subring of $R$. Similarly, one defined $C^{n}([a,b], \R)$ to be the set of all $n$-times continuously differentiable functions from $[a,b]$ to $\R$, and $C^{\infty}([a,b], \R)$ to be the set of all infinitely differentiable functions from $[a,b]$ to $\R$. Both of these are subrings of $R$ as well.
+\end{example}
+
+\begin{example}
+    The set $\Z[i] \defeq \{a + bi : a, b \in \Z\}$ is a subring of the field $\C$. It is easy to verify that $\Z[i]$ is a ring with unity, but it is not a field since, for example, the element $1 + i$ does not have a multiplicative inverse in $\Z[i]$. Note that there is a natural bijection $\varphi : \Z[i] \to \Z^{2}$ defined by $\varphi(a + bi) = (a, b)$ for all $a + bi \in \Z[i]$, where $\Z^{2}$ has component-wise addition and multiplication. However, this map is not a ring isomorphism since it does not preserve multiplication; for example, $\varphi(i \cdot i) = \varphi(-1) = (-1, 0)$, but $\varphi(i) \cdot \varphi(i) = (0, 1) \cdot (0, 1) = (0, 1)$.
+\end{example}
+
+\subsection{Polynomials}
+
+Let $R$ be a ring. The polynomial ring in the variable $x$ with coefficients from $R$ is defined as follows:
+\begin{definition}
+    The \eax{polynomial ring} $R[x]$ is defined as
+    \begin{align}
+        R[x] \defeq \{f:\N_{0} \to R \mid f(n) = 0 \text{ for all but finitely many } n \in \N_{0}\}.
+    \end{align}
+    The elements of $R[x]$ are called \eax{polynomials} in the variable $x$ with coefficients from $R$. For $f, g \in R[x]$ and $n \in \N_{0}$, addition is defined as
+    \begin{align}
+        (f + g)(n) \defeq f(n) + g(n) \quad \text{ for all } n \in \N_{0},
+    \end{align}
+    and multiplication is defined as
+    \begin{align}
+        (f \cdot g)(n) \defeq \sum_{k=0}^{n} f(k) \cdot g(n-k) \quad \text{ for all } n \in \N_{0}.
+    \end{align}
+\end{definition}
+
+Alternatively, a polynomial $f \in R[x]$ may be expressed in the form
+\begin{align}
+    f(x) = a_{0} + a_{1}x + a_{2}x^{2} + \cdots + a_{n}x^{n},
+\end{align}
+where $a_{i} = f(i)$ for all $0 \leq i \leq n$ and $f(k) = 0$ for all $k > n$. For $0 \neq f \in R[x]$ as above with $a_{n} \neq 0_{R}$, the integer $n$ is called the \eax{degree} of $f$, denoted by $\deg(f)$. The degree of the zero polynomial is usually left undefined, or changed upon convention. Also note that $f \cdot g \in R[x]$ since $f \cdot g(k) = 0_{R}$ for all $k > \deg(f) + \deg(g)$.
+
+\begin{proposition}
+    For a ring $R$, the polynomial ring $R[x]$ is, indeed, a ring with unity under the operations defined above. If $R$ is commutative, then so is $R[x]$. The map $\iota : R \to R[x]$ defined by $\iota(a) = f_{a}$ where $f_{a}(0) = a$ and $f_{a}(n) = 0_{R}$ for all $n \geq 1$ is a ring monomorphism.
+\end{proposition}
+
+\begin{proof}
+    That $(R[x],+)$ forms an abelian group is clear. The associativity of multiplication is verified as follows: let $f, g, h \in R[x]$ and $n \in \N_{0}$. Then,
+    \begin{align}
+        ((f \cdot g) \cdot h)(n) &=  \sum_{k=0}^{n} (f \cdot g)(k) \cdot h(n-k) = \sum_{k=0}^{n} \left( \sum_{j=0}^{k} f(j) \cdot g(k-j) \right) \cdot h(n-k) \notag \\ &= \sum_{j=0}^{n} f(j) \cdot \left( \sum_{k=j}^{n} g(k-j) \cdot h(n-k) \right) = \sum_{j=0}^{n} f(j) \cdot (g \cdot h)(n-j) = (f \cdot (g \cdot h))(n).
+    \end{align}
+    The distributive properties follow similarly. The unity in $R[x]$ is the polynomial $1_{R[x]}$ defined by $1_{R[x]}(0) = 1_{R}$ and $1_{R[x]}(n) = 0_{R}$ for all $n \geq 1$. Finally, it is easy to verify that $\iota$ is a ring homomorphism, and it is injective since $\iota(a) = \iota(b)$ implies that $a = b$.
+\end{proof}
+
+With $R[x]$ established as a ring, we may consider a higher level of abstraction, by considering polynomials over this polynomial ring itself; that is, $(R[x])[y]$. Elements of this ring look like
+\begin{align}
+    f(x,y) = a_{00} + a_{10}x + a_{01}y + a_{20}x^{2} + a_{11}xy + a_{02}y^{2} + \cdots + a_{mn}x^{m}y^{n},
+\end{align}
+where $a_{ij} \in R$ for all $i, j \geq 0$ and $a_{ij} = 0_{R}$ for all but finitely many pairs $(i,j)$. We have already shown that $R[x]$ is a ring, so it follows that $(R[x])[y]$ is also a ring. This ring is usually denoted by $R[x,y]$. For $f \in R[x,y]$ as above with $a_{mn} \neq 0_{R}$, the degree of $f$ is defined as $\deg(f) = m + n$. Similarly, one may define $R[x_{1}, x_{2}, \ldots, x_{n}]$ for any $n \in \N$. For a countable number of indeterminates, one may define $R[x_{1}, x_{2}, x_{3}, \ldots]$ as the union $\bigcup_{n=1}^{\infty} R[x_{1}, x_{2}, \ldots, x_{n}]$.
+
+\begin{example}
+    Let $e \in \R$ be the Euler's number (or any transcendental number). Then $\Z[e] \subseteq \C$ is the smallest subring of $\C$ containing both $\Z$ and $e$. Here, $\Z[e]$ consists of all polynomials in $e$ with integer coefficients; i.e., all elements of the form $a_{0} + a_{1}e + a_{2}e^{2} + \cdots + a_{n}e^{n}$ where $n \geq 0$ and $a_{i} \in \Z$. Since $e$ is transcendental, there are no non-trivial polynomial relations among the powers of $e$ with integer coefficients. Thus, the map $\varphi : \Z[x] \to \Z[e]$ defined by $\varphi(f) = f(e)$ for all $f \in \Z[x]$ is a ring isomorphism.
+\end{example}
+
+\section{Ideals}
+
+\begin{definition}
+    Let $R$ be a commutative ring with unity. A subset $I \subseteq R$ is called an \eax{ideal} of $R$ if the following conditions hold:
+    \begin{itemize}
+        \item for all $a, b \in I$, we have $a + b \in I$,
+        \item for all $a \in I$ and $r \in R$, we have $r \cdot a \in I$.
+    \end{itemize}
+\end{definition}
+
+Note that the first condition implies that $(I, +)$ is a subgroup of $(R, +)$. Some examples of ideals include the set $\{0_{R}\}$, the ring $R$ itself, and the set $n\Z = \{nk : k \in \Z\}$ for any $n \in \Z_{\geq 0}$ as an ideal of the ring $\Z$. A non-example is $\Z$ in $\R$; it is a subring, but not an ideal since, for example, $1 \in \Z$ but $\pi \cdot 1 = \pi \notin \Z$. Note that if $1_{R} \in I$, then $I = R$.
+
+\begin{example}
+    Let us look at ideals of $\R$. Trivially, $\{0\}$ and $\R$ are ideals of $\R$. We claim that these are the only ideals of $\R$. To see this, let $I$ be any ideal of $\R$ such that $I \neq \{0\}$. Then, there exists some $a \in I$ such that $a \neq 0$. Since $\R$ is a field, $a$ has a multiplicative inverse $a^{-1} \in \R$. Thus, $1 = a^{-1} \cdot a \in I$, which implies that $I = \R$. In fact, this argument shows that in any field, the only ideals are the zero ideal and the field itself.
+\end{example}
+
+\begin{example}
+    We examine ideals of $\Z$. From group theory, we know that every subgroup of $(\Z, +)$ is of the form $n\Z$ for some $n \in \Z_{\geq 0}$, so $n\Z$ are the only candidates for ideals of $\Z$. In fact, each $n\Z$ is an ideal of $\Z$ since for all $a, b \in n\Z$, we have $a + b \in n\Z$, and for all $a \in n\Z$ and $r \in \Z$, we have $r \cdot a \in n\Z$. Thus, the ideals of $\Z$ are precisely the sets $n\Z$ for $n \in \Z_{\geq 0}$, and $\Z$.
+\end{example}
+
+\begin{proposition}
+    Let $f:R \to S$ be a ring homomorphism between two commutative rings with unity. Then, the \eax{kernel} of $f$, defined as
+    \begin{align}
+        \ker f \defeq \{a \in R \mid f(a) = 0_{S}\},
+    \end{align}
+    is an ideal of $R$. Moreover, $f$ is a ring monomorphism if and only if $\ker f = \{0_{R}\}$.
+\end{proposition}
+\begin{proof}
+    Let $a, b \in \ker f$ and $r \in R$. Then,
+    \begin{align}
+        f(a + b) = f(a) + f(b) = 0_{S} + 0_{S} = 0_{S},
+    \end{align}
+    so $a + b \in \ker f$. Also,
+    \begin{align}
+        f(r \cdot a) = f(r) \cdot f(a) = f(r) \cdot 0_{S} = 0_{S},
+    \end{align}
+    so $r \cdot a \in \ker f$. Thus, $\ker f$ is an ideal of $R$.
+
+    Now, suppose that $f$ is a ring monomorphism. Let $a \in \ker f$. Then, $f(a) = 0_{S} = f(0_{R})$. Since $f$ is injective, we have $a = 0_{R}$, so $\ker f = \{0_{R}\}$. Conversely, suppose that $\ker f = \{0_{R}\}$. Let $a, b \in R$ such that $f(a) = f(b)$. Then,
+    \begin{align}
+        f(a - b) = f(a) - f(b) = 0_{S},
+    \end{align}
+    so $a - b \in \ker f$. Thus, $a - b = 0_{R}$, which implies that $a = b$. Therefore, $f$ is injective.
+\end{proof}
+
+\noindent \textit{January 24th.}
+
+Let $R$ be a ring with unity and $R_{i}$ be a colelction of subrings of $R$ containing the nuity. Then $\bigcap_{i} R_{i}$ is also a subring of $R$ containing the unity. If $I_{j}$ is a collection of ideals of $R$, then $\bigcap_{j} I_{j}$ is also an ideal of $R$. Thus, given any subset $S \subseteq R$, we may define the ideal generated.
+
+\begin{definition}
+    Let $R$ be a commutative ring with unity and $I \subseteq R$ be an ideal. Let $S \subseteq I$ be a set. We say $S$ is a \eax{generating set} of $I$ if $I$ is the smallest ideal containing $S$.
+\end{definition}
+
+\begin{proposition}
+    Let $R$ be a commutative ring with unity and $S \subseteq R$ be any subset. Then, the ideal generated by $S$, denoted by $(S)$, is given by
+    \begin{align}
+        (S) = \left\{ \sum_{i=1}^{n} r_{i} s_{i} : n \geq 0, r_{i} \in R, s_{i} \in S \text{ for all } 1 \leq i \leq n \right\}.
+    \end{align}
+\end{proposition}
+
+\begin{proof}
+    Let $S \subseteq I$, a subset of an ideal. We claim that $(S) \subseteq I$. Let $\alpha \in I$. THen, $\alpha = r_{1}x_{1} + \cdots + r_{n}x_{n}$ for some $n \geq 0$, $r_{i} \in R$ and $x_{i} \in S$ for all $1 \leq i \leq n$. Since $I$ is an ideal, we have $r_{i}x_{i} \in I$ for all $1 \leq i \leq n$, and thus $\alpha \in I$. Therefore, $(S) \subseteq I$.
+\end{proof}
+
+With this, we introduce the notation that if $\{x_{1},\ldots,x_{n}\} \subseteq R$, then $I = (x_{1},\ldots,x_{n}) = Rx_{1} + \cdots + Rx_{n}$ is the ideal generated by $x_{1},\ldots,x_{n}$. Let us look at some exmaples.
+
+\begin{example}
+    In the ring $\Z$, $(2,3) = \Z$ since $1 = 3 - 1 \cdot 2 \in (2,3)$. More generally, for any $a, b \in \Z$, we have $(a,b) = \Z$ if and only if $\gcd(a,b) = 1$. Moreover, in $\Z$, every ideal can be generated by a single element; i.e., every ideal is of the form $(n)$ for some $n \in \Z_{\geq 0}$.
+\end{example}
+
+\begin{example}
+    In $\Z[x]$, the ideal $(2, x)$ consists of all polynomials with integer coefficients where the constant term is even. That is, $(2,x) = 2\Z[x] + x\Z[x]$. 
+\end{example}
+
+Also note that a union of ideals need not be an ideal. For example, in $\Z$, the sets $2\Z$ and $3\Z$ are ideals, but their union $2\Z \cup 3\Z$ is not an ideal. This, however, calls for a more general construction.
+
+\begin{definition}
+    Let $R$ be a commutative ring with unity. If $I_{1}, I_{2}$ are two ideals, we then define their sum as $I_{1} + I_{2} = (I_{1} \cup I_{2})$.
+\end{definition}
+It is easy to verify that $I_{1} + I_{2} = \{a + b \mid a \in I_{1}, b \in I_{2}\}$. This definition may be extended to a finite number of ideals in the obvious way.
+
+\section{Other Rings}
+
+\begin{definition}
+    Let $G$ be a group and $k$ be a field. We define $R[G]$ to be the set of all functions $f:G \to k$ such that $f(x) = 0$ for all but finitely many $x \in G$. Addition is defined pointwise as
+    \begin{align}
+        (f + g)(x) = f(x) + g(x) \quad \text{ for all } x \in G,
+    \end{align}
+    and multiplication is defined as
+    \begin{align}
+        (f \cdot g)(x) = \sum_{y z = x} f(y) g(z) = \sum_{y \in G} f(xy^{-1}) g(y) \quad \text{ for all } x \in G.
+    \end{align}
+    The ring $R[G]$ is called the \eax{group ring} of $G$ over $k$.
+\end{definition}
+
+If $G$ is a finite group with $G = \{e,x_{2},\ldots,x_{n}\}$ then $R[G] = \{a_{1}e + a_{2}x_{2} + \cdots + a_{n}x_{n} \mid a_{i} \in \C\}$. Verify that $R[G]$ is a ring with unity under the operations defined above. This ring, however, may not be commutative.
+
+\begin{definition}
+    Let $R$ be a ring and $x \in R$. $x$ is termed \eax{nilpotent} if there exists some $n \in \N$ such that $x^{n} = 0$. If $R$ is commutative, $x \in R$ is called a \eax{zero divisor} if there exists some $y \in R \setminus \{0\}$ such that $x \cdot y = 0$.
+\end{definition}
+
+Note that nilpotents are zero divisors in a commutative ring, but the converse need not be true. For example, in the ring $\Z/6\Z$, the element $\bar{2}$ is a zero divisor since $\bar{2} \cdot \bar{3} = \bar{0}$, but it is not nilpotent since $\bar{2}^{n} \neq \bar{0}$ for all $n \geq 1$.
+
+\begin{definition}
+    A commutative ring with unity $R$ is called a \eax{reduced ring} if it has no non-zero nilpotent elements. It is called an \eax{integral domain} if it has no non-zero zero divisors.
+\end{definition}
+
+\begin{proposition}
+    Let $R$ be an integral domain. Then, if $x,y \in R$ are such that $x \cdot y = 0$, then either $x = 0$ or $y = 0$.
+\end{proposition}
+\begin{proof}
+    If $x \neq 0$, then since $R$ is an integral domain, $x$ is not a zero divisor. Thus, $y$ must be $0$. Similarly, if $y \neq 0$, then $x$ must be $0$.
+\end{proof}
+
+\begin{proposition}
+    Every integral domain is a reduced ring.
+\end{proposition}
+\begin{proof}
+    Let $R$ be an integral domain and let $x \in R$ be nilpotent. Then, there exists some $n \in \N$ such that $x^{n} = 0$. If $x \neq 0$, then since $R$ is an integral domain, $x$ is not a zero divisor. However, this contradicts the fact that $x^{n} = 0$. Thus, we must have $x = 0$, so $R$ has no non-zero nilpotent elements.
+\end{proof}
+
+\noindent \textit{January 29th.}
+
+In an integral domain $R$, if $ab = ac$ for some $a, b, c \in R$, then either $a = 0$ or $b = c$. Let us look at some examples of integral domains.
+
+\begin{example}
+    The ring $\Z$ is an integral domain since it has no non-zero zero divisors. Similarly, the rings $\Q$, $\R$, and $\C$ are integral domains as well. More generally, any field is an integral domain. Moreover, $\Z/n\Z$ is an integral domain if and only if $n$ is prime.
+\end{example}
+
+\begin{example}
+    Note that $R$ is an integral domain if and only if $R[x]$ is an integral domain. 
+\end{example}
+
+Another small result is as follows: if $R$ is an integral domain and $R'$ is a subring of $R$ containing the unity, then $R'$ is also an integral domain. Some non-examples of integral domains include $\Z^{2}$, $C[0,1]$, $C^{\infty}[0,1]$, etc.
+
+
+
+\section{Quotient Rings and Isomorphism Theorems}
+
+From here on, we shall assume that all rings are commutative with unity unless otherwise stated.
+
+\begin{definition}
+    Let $R$ be a ring and $I$ be an ideal of $R$. The \eax{quotient ring} $R/I$ is defined as the set of all cosets of $I$ in $R$; i.e.,
+    \begin{align}
+        R/I \defeq \{a + I : a \in R\}.
+    \end{align}
+    Addition and multiplication in $R/I$ are defined as follows: for all $a, b \in R$,
+    \begin{align}
+        (a + I) + (b + I) &\defeq (a + b) + I, \\
+        (a + I) \cdot (b + I) &\defeq (a \cdot b) + I.
+    \end{align}
+\end{definition}
+
+Of course, we must verify that these operations are well-defined. Note that $I$ is a normal subgroup of $(R, +)$ since $R$ is abelian under addition, so $R/I$ is an abelian group under addition. We verify that multiplication is well-defined as follows: let $a, a', b, b' \in R$ such that $a + I = a' + I$ and $b + I = b' + I$. Then, there exist $i_{1}, i_{2} \in I$ such that $a' = a + i_{1}$ and $b' = b + i_{2}$. Thus,
+\begin{align}
+    (a' \cdot b') + I &= ((a + i_{1}) \cdot (b + i_{2})) + I = (a \cdot b + a \cdot i_{2} + i_{1} \cdot b + i_{1} \cdot i_{2}) + I \notag \\
+    &= (a \cdot b) + I,
+\end{align}
+since $a \cdot i_{2}, i_{1} \cdot b, i_{1} \cdot i_{2} \in I$. Therefore, multiplication is well-defined. Moreover, it is easy to verify that $R/I$ is a ring with unity under these operations, where the additive identity is $0 + I$ and the multiplicative identity is $1 + I$. One also has the \eax{quotient map} naturally defined as
+\begin{align}
+    q:R \to R/I, \quad q(a) = a + I \quad \text{ for all } a \in R.
+\end{align}
+It is easy to verify that $q$ is a ring epimorphism with kernel $I$. The most common example of a quotient ring is $\Z/n\Z$, which is isomorphic to the quotient ring $\Z/(n\Z)$.
+
+\begin{example}
+    In the ring $\Q[x]$, let $I = (x^{2}-2) = (x^{2}-2)\Q$. Then, the quotient $\Q[x]/(x^{2}-2)$ is indeed a quotient ring. It is also a field, and may be written as $\Q[\sqrt{2}]$. However, the quotient ring $\R[x]/(x^{2}-2)$ is not an integral domain since $(x- \sqrt{2} + I)(x + \sqrt{2} + I) = x^{2} - 2 + I = I$.
+\end{example}
+
+We are now fit to show the isomorphism theorems for rings.
+
+\begin{theorem}[The \eax{first isomorphism theorem} for rings]
+    Let $\varphi : R \to S$ be a ring homomorphism. Let $I = \ker \varphi$. Then there exists a unique ring monomorphism $\overline{\varphi} : R/I \to S$ such that $\varphi = \overline{\varphi} \circ q$, where $q : R \to R/I$ is the quotient map. Moreover, if $\varphi$ is surjective, then $\overline{\varphi}$ is a ring isomorphism.
+\end{theorem}
+\begin{proof}
+    Define the map $\overline{\varphi} : R/I \to S$ as follows: for all $a + I \in R/I$, let
+    \begin{align}
+        \overline{\varphi}(a + I) = \varphi(a).
+    \end{align}
+    We must verify that this map is well-defined. Let $a, b \in R$ such that $a + I = b + I$. Then, there exists some $i \in I$ such that $b = a + i$. Thus,
+    \begin{align}
+        \varphi(b) = \varphi(a + i) = \varphi(a) + \varphi(i) = \varphi(a) + 0_{S} = \varphi(a),
+    \end{align}
+    so $\overline{\varphi}$ is well-defined. It is easy to verify that $\overline{\varphi}$ is a ring homomorphism. Also, for all $a \in R$,
+    \begin{align}
+        (\overline{\varphi} \circ q)(a) = \overline{\varphi}(a + I) = \varphi(a),
+    \end{align}
+    so $\varphi = \overline{\varphi} \circ q$.
+
+    Now, suppose that $\overline{\varphi}(a + I) = 0_{S}$ for some $a + I \in R/I$. Then, $\varphi(a) = 0_{S}$, so $a \in I$. Thus, $a + I = I$, which is the additive identity in $R/I$. Therefore, $\overline{\varphi}$ is injective.
+
+    Finally, if $\varphi$ is surjective, then for any $s \in S$, there exists some $a \in R$ such that $\varphi(a) = s$. Thus,
+    \begin{align}
+        \overline{\varphi}(a + I) = \varphi(a) = s,
+    \end{align}
+    so $\overline{\varphi}$ is surjective as well. Therefore, $\overline{\varphi}$ is a ring isomorphism.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be a ring and $I$ be an ideal of $R$. Then there is a bijection between the set of all ideals of $R$ containing $I$ and the set of all ideals of the quotient ring $R/I$.
+\end{proposition}
+\begin{proof}
+    We make use of the quotient map $q:R \to R/I$. Let $J$ be an ideal of $R$ such that $I \subseteq J$. The bijection is given by sending $J$ to $J/I \defeq q(J) = \{a + I : a \in J\}$, and sending $K$, an ideal of $R/I$, to $q^{-1}(K) = \{a \in R : q(a) \in K\}$. We first show that $q(J) = J/I$ is indeed an ideal of $R/I$, for $J$ an ideal of $R$ containing $I$. Let $x+I \in J/I$ and $r + I \in R/I$. Then, $(r+I)(x+I) = (r \cdot x) + I$. Since $x \in J$ and $J$ is an ideal of $R$, we have $r \cdot x \in J$, so $(r + I)(x + I) \in J/I$. Also note that for all $x + I, y + I \in J/I$, we have $(x + I) + (y + I) = (x + y) + I \in J/I$ since $x, y \in J$ and $J$ is an ideal of $R$. Thus, $J/I$ is an ideal of $R/I$.
+
+    On the other hand, we show that $q^{-1}(K)$ is an ideal of $R$ for $K$ an ideal of $R/I$. Let $x,y \in q^{-1}(K)$. Then, $q(x), q(y) \in K$, so $q(x+y) = q(x) + q(y) \in K$ since $K$ is an ideal of $R/I$. Thus, $x + y \in q^{-1}(K)$. Also, for any $r \in R$ and $x \in q^{-1}(K)$, we have $q(r), q(x) \in R/I$ and $q(x) \in K$, so $q(r \cdot x) = q(r) \cdot q(x) \in K$ since $K$ is an ideal of $R/I$. Thus, $r \cdot x \in q^{-1}(K)$. Therefore, $q^{-1}(K)$ is an ideal of $R$. Also, if $x \in I$, then $q(x) = x + I = I$, which is the additive identity in $R/I$ and thus belongs to every ideal of $R/I$. Therefore, $I \subseteq q^{-1}(K)$.
+
+    To show that the maps are inverses of each other is left as an exercise.
+\end{proof}
+
+\begin{theorem}[The \eax{second isomorphism theorem} for rings]
+    Let $R$ be a ring, and let $S \subseteq R$ be a subring containing the unity. Let $I$ be an ideal of $R$. Then, $S + I = \{s + i : s \in S, i \in I\}$ is a subring of $R$ containing the unity, $S \cap I$ is an ideal of $S$, and there is a ring isomorphism
+    \begin{align}
+        (S + I)/I \cong S/(S \cap I).
+    \end{align}
+\end{theorem}
+\begin{proof}
+    Let $\alpha,\beta \in S+I$. Then $\alpha = s+x$ and $\beta = s'+y$ for some $s,s' \in S$ and $x,y \in I$. Thus, $\alpha + \beta = (s + s') + (x + y) \in S + I$ since $S$ is a subring and $I$ is an ideal. Also, $\alpha \cdot \beta = (s + x)(s' + y) = ss' + sy + xs' + xy \in S + I$ since $ss' \in S$, $sy, xs', xy \in I$. Therefore, $S + I$ is a subring of $R$ containing the unity.
+
+    Note that the inclusion map $i:S \to R$ is a ring homomorphism. Thus, by the proposition above, $S \cap I = i^{-1}(I)$ is an ideal of $S$. Also, $I \subseteq S+I$ is an ideal of $S+I$. Now let $\varphi : S \to (S+I)/I$ be the map $\varphi = q \circ i$, where $q : S + I \to (S + I)/I$ is the quotient map. It is easy to verify that $\varphi$ is a ring homomorphism with kernel
+    \begin{align}
+        \ker \varphi = \{a \in S \mid q \circ i(a) = I\} = \{a \in S \mid a + I = I\} = S \cap I.
+    \end{align}
+    Moreover, $\varphi$ is surjective since for any $s + i + I \in (S + I)/I$ where $s \in S$ and $i \in I$, we have $\varphi(s) = s + I = s + i + I$. Thus, by the first isomorphism theorem, we have the desired isomorphism.
+\end{proof}
+
+\textit{January 30th.}
+
+\begin{theorem}[The \eax{third isomorphism theorem} for rings]
+    Let $R$ be a ring, and let $J \subseteq I$ be two ideals of $R$. Then, $I/J = \{a + J : a \in I\}$ is an ideal of the quotient ring $R/J$, and there is a ring isomorphism
+    \begin{align}
+        (R/J)/(I/J) \cong R/I.
+    \end{align}
+\end{theorem}
+\begin{proof}
+    Let $q_{R} : R \to R/J$ be the quotient map, and $q_{R/J} : R/J \to (R/J)/(I/J)$ be the quotient map. Thus, the composition $\varphi = q_{R/J} \circ q_{R} : R \to (R/J)/(I/J)$ is a surjective ring homomorphism. The kernel of $\varphi$ is given by
+    \begin{align}
+        \ker \varphi = \{x \in R \mid \varphi(x) = J + I/J\} = \{x \in R \mid q_{R}(x) \in I/J\} = \{x \in R \mid x + J \in I/J\} = I.
+    \end{align}
+    Thus, by the first isomorphism theorem, we have the desired isomorphism.
+\end{proof}
+
+We look at some applications of the isomorphism theorems.
+
+\begin{example}
+    Let $I = (5) \subseteq \Z[x]$. We claim that $\Z[x]/5\Z[x] \cong (\Z/5\Z)[x]$. To see this, we make use of the first isomorphism theorem. Let $\varphi : \Z[x] \to (\Z/5\Z)[x]$ be the map defined by
+    \begin{align}
+        \varphi\left( a_{0} + a_{1}x + a_{2}x^{2} + \cdots + a_{n}x^{n} \right) = \bar{a}_{0} + \bar{a}_{1}x + \bar{a}_{2}x^{2} + \cdots + \bar{a}_{n}x^{n},
+    \end{align}
+    where $\bar{a}_{i}$ is the image of $a_{i}$ in $\Z/5\Z$ for all $0 \leq i \leq n$. It is easy to verify that $\varphi$ is a surjective ring homomorphism with kernel $5\Z[x]$. Thus, by the first isomorphism theorem, we have the desired isomorphism.
+\end{example}
+
+\begin{example}
+    Let $(x) \subseteq \Z[x]$. We claim that $\Z[x]/(x) \cong \Z$. To see this, we make use of the second isomorphism theorem. Let $S = \Z \subseteq \Z[x]$. Then, $S + (x) = \Z[x]$ since for any $f(x) \in \Z[x]$, we have $f(x) = f(0) + (f(x) - f(0)) \in S + (x)$. Also, $S \cap (x) = \{0\}$ since the only constant polynomial in $(x)$ is the zero polynomial. Thus, by the second isomorphism theorem, we have
+    \begin{align}
+        \Z[x]/(x) \cong S/(S \cap (x)) = S/\{0\} \cong \Z.
+    \end{align}
+\end{example}
+
+\begin{example}
+    Again, let $I = (x^{2}-4,2) \subseteq \Z[x]$. We claim the isomorphism
+    \begin{align}
+        \Z[x]/(x^{2}-4,2) \cong \Z/2\Z[x]/(x^{2}).
+    \end{align}
+    To see this, we make use of the third isomorphism theorem. Let $J = (2) \subseteq I$. Then, by the third isomorphism theorem, we have
+    \begin{align}
+        \Z[x]/I \cong (\Z[x]/J)/(I/J) \cong (\Z/2\Z)[x]/(x^{2}-4 + J) = (\Z/2\Z)[x]/(x^{2}),
+    \end{align}
+    since $x^{2}-4 + J = x^{2} + J$ in $(\Z/2\Z)[x]$.
+\end{example}
+
+
+\section{Prime and Maximal Ideals}
+
+\begin{definition}
+    Let $R$ be a ring. An ideal $P \subseteq R$ is called a \eax{prime ideal} if $P \neq R$ and for all $a, b \in R$ such that $a \cdot b \in P$, we have either $a \in P$ or $b \in P$.
+\end{definition}
+
+Of course, the most common example of a prime ideal is $(0_{R})$ in an integral domain $R$. Another example is $(p) = p\Z$ in $\Z$ for any prime $p$. Note that if $R$ is a field, then the only prime ideal of $R$ is $(0_{R})$.
+
+\begin{theorem}
+    Let $I$ be an ideal of a ring $R$. Then, $I$ is a prime ideal if and only if the quotient ring $R/I$ is an integral domain.
+\end{theorem}
+\begin{proof}
+    Suppose that $R/I$ is an integral domain. Let $a, b \in R$ such that $a \cdot b \in I$. Then,
+    \begin{align}
+        (a + I)(b + I) = (a \cdot b) + I = I,
+    \end{align}
+    which is the zero element in $R/I$. Since $R/I$ is an integral domain, either $a + I = I$ or $b + I = I$, which implies that either $a \in I$ or $b \in I$. Thus, $I$ is a prime ideal. If we now suppose that $I$ is a prime ideal, let $a + I, b + I \in R/I$ such that $(a+I)(b+I) = (a \cdot b) + I = I$. This implies that $a \cdot b \in I$, so either $a \in I$ or $b \in I$. Thus, either $a + I = I$ or $b + I = I$, so $R/I$ is an integral domain.
+\end{proof}
+
+One can also show that there is the natural bijection between ideals of $R/I$ and ideals of $R$ containing $I$ restricts to a bijection between prime ideals of $R/I$ and prime ideals of $R$ containing $I$.
+
+\begin{example}
+    We can use this theorem to show $(x^{2}+1)$ is a prime ideal of $\Z[x]$. Indeed, look at the ring homomorphism $\varphi : \Z[x] \to \Z[i]$ defined by $\varphi(f) = f(i)$ for all $f \in \Z[x]$. For the kernel, let $f \in \ker \varphi$. By the division algorithm, there exist unique $q, r \in \Z[x]$ such that
+    \begin{align}
+        f(x) = (x^{2}+1)q(x) + r(x),
+    \end{align}
+    where either $r(x) = 0$ or $\deg r < 2$. Plugging in $x = i$ gives $f(i) = 0 = r(i)$. The only way an at most linear polynomial $r(x)$ can be 0 at $x = i$ is if $r$ is the zero polynomial. Hence, $\ker \varphi = (x^{2}+1)$. Since $\Z[i]$ is an integral domain, by the first isomorphism theorem, we have
+    \begin{align}
+        \Z[x]/(x^{2}+1) \cong \Z[i]
+    \end{align}
+    showing that $(x^{2}+1)$ is a prime ideal of $\Z[x]$.
+\end{example}
+
+Another notion is the maximal ideal.
+
+\begin{definition}
+    Let $R$ be a ring. An ideal $M \subseteq R$ is called a \eax{maximal ideal} if $M \neq R$ and there are no ideals $I$ of $R$ such that $M \subsetneq I \subsetneq R$.
+\end{definition}
+
+That is, if $J$ is an ideal such that $M \subseteq J$, then either $J = M$ or $J = R$. For example, in $\Z$, the ideals $(p) = p\Z$ for prime $p$ are maximal ideals. Note that if $R$ is a field, then the only maximal ideal of $R$ is $(0_{R})$. In fact, it may be shown that $R$ is a field if and only if $(0)$ and $R$ are the only ideals.\\
+
+\textit{February 2nd.}
+\begin{theorem}
+    Let $I$ be an ideal of a ring $R$. Then, $I$ is a maximal ideal if and only if the quotient ring $R/I$ is a field.
+\end{theorem}
+\begin{proof}
+    We work with a set of equivalences. $I \subseteq R$ is a maximal ideal \(\iff\) $\{J \mid I \subseteq J \subseteq R\} = \{I, R\}$ \(\iff\) $\{K \mid K \text{ is an ideal of } R/I\} = \{I/I, R/I\}$ \(\iff\) $R/I$ is a field.
+\end{proof}
+
+A neat corollary of this theorem is that every maximal ideal is a prime ideal. Indeed, if $M$ is a maximal ideal of $R$, then $R/M$ is a field, and thus an integral domain. Therefore, by the previous theorem, $M$ is a prime ideal. Another theorem guarantees the existence of maximal ideals.
+
+\begin{theorem}
+    Every non-zero ring has at least a maximal ideal.
+\end{theorem}
+This theorem, though true in many common cases, requires Zorn's lemma for a general proof.
+\begin{proof}
+    Let $(\Omega, \subseteq)$ be the set of all proper ideals of a ring $R$, ordered by inclusion. Note that $R \supsetneq (0) \in \Omega$, so $\Omega \neq \emptyset$. Zorn's lemma states that if every chain in $\Omega$ has an upper bound in $\Omega$, then $\Omega$ has a maximal element. Let $\cC$ be a chain in $\Omega$. We claim that $I_{\cC} = \bigcup_{I \in \cC} I$ is an upper bound of $\cC$ in $\Omega$. Certainly, for any $I \in \cC$, we have $I \subseteq J$. Also, we must verify that $I_{\cC}$ is a proper ideal of $R$.
+
+    Let $x,y \in I_{\cC}$, and $r \in R$. Then there exist two ideals $I,J \in \cC$ such that $x \in I$ and $y \in J$. Since $\cC$ is a chain, without loss of generality, suppose that $I \subseteq J$. Thus, $x,y \in J$, so $x + y \in R$ and $r \cdot x \in R$ since $J$ is an ideal of $R$. Therefore, $I_{\cC}$ is an ideal of $R$. Also, if $I_{\cC} = R$, then $1_{R} \in I_{\cC}$, so there exists some ideal $I \in \cC$ such that $1_{R} \in I$. This implies that $I = R$, which contradicts the fact that $I$ is a proper ideal. Thus, $I_{\cC}$ is a proper ideal of $R$, so $I_{\cC} \in \Omega$. Therefore, by Zorn's lemma, $\Omega$ has a maximal element, which is a maximal ideal of $R$.
+\end{proof}
+
+\begin{example}
+    In $\C[x]$, the ideal $(x)$ is maximal since $\C[x]/(x) \cong \C$, which is a field. However, $(x^{2})$ is not maximal since $(x^{2}) \subsetneq (x)$. Another reasoning is that $\C[x]/(x^{2})$ is not a field since $(x + (x^{2})) \cdot (x + (x^{2})) = x^{2} + (x^{2}) = 0 + (x^{2})$; it is not an integral domain either, so $(x^{2})$ is not even prime. In fact, the maximal ideals of $\C[x]$ are precisely of the form $(x - a)$ for some $a \in \C$.
+\end{example}
+
+\subsection{Jacobson Radical and Nilradical}
+\textit{February 5th.}
+
+
+\begin{definition}
+    The \eax{Jacobson radical} of a non-zero ring $R$ is defined as
+    \begin{align}
+        \Jac(R) = \bigcap_{\substack{\mf{m} \subseteq R \\ \mf{m} \text{ is a maximal ideal}}} \mf{m}.
+    \end{align}
+    It is the interseciton of ideals, so it is also an ideal. The \eax{nilradical} of $R$ is defined as
+    \begin{align}
+        \nil(R) = \{x \in R \mid x^{n} = 0 \text{ for some } n \in \N\}.
+    \end{align}
+\end{definition}
+
+
+The following are some properties of the Jacobson radical and nilradical.
+\begin{proposition}
+    Let $R$ be a ring. Then,
+    \begin{enumerate}
+        \item $\nil(R)$ is an ideal of $R$.
+        \item $\nil(R) \subseteq \Jac(R)$.
+        \item $x \in \Jac(R)$ if and only if $1+ax$ is a unit for all $a \in R$.
+        \item $\nil(R) = \bigcap_{\substack{P \subseteq R \\ P \text{ is a prime ideal}}} P$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \begin{enumerate}
+        \item Let $x,y \in \nil(R)$ and $r \in R$. Then, there exist $m,n \in \N$ such that $x^{m} = 0$ and $y^{n} = 0$. Thus, $(x + y)^{m+n} = 0$ by the binomial theorem, so $x + y \in \nil(R)$. Also, $(r \cdot x)^{m} = r^{m} \cdot x^{m} = 0$, so $r \cdot x \in \nil(R)$. Therefore, $\nil(R)$ is an ideal of $R$.
+        \item Let $x \in \nil(R)$. Then, there exists some $n \in \N$ such that $x^{n} = 0$. Thus $x^{n}$ belongs to every ideal of $R$, so in particular, $x^{n} \in P$ for every prime ideal and $x^{n} \in \mf{m}$ for every maximal ideal. However, $x^{n} \in P$ implies that $x \in P$ since $P$ is prime, and $x^{n} \in \mf{m}$ implies that $x \in \mf{m}$ since $\mf{m}$ is prime as well. Therefore, $x$ belongs to every prime ideal and every maximal ideal, so $x \in \Jac(R)$. Hence, $\nil(R) \subseteq \Jac(R)$.
+        \item For the forward implication, let $x \in \Jac(R)$ and $a \in R$. Note that $ax$ cannot be a unit since it is contained in the (maximal) ideals $\mf{m}$. Suppose $1+ax$ is \textit{not} a unit. Then $I = (1+ax)$ is a proper ideal of $R$. If $q : R \to R/I$ is the quotient map, and $\bar{\mf{m}}$ is a maximal ideal of $R/I$, then we claim that $\mf{m} = q^{-1}(\bar{\mf{m}})$ is a maximal ideal of $R$ containing $I$. Certainly, $\mf{m}$ is an ideal of $R$ containing $I$ by the proposition above. Also, if there exists some ideal $J$ of $R$ such that $\mf{m} \subsetneq J \subsetneq R$, then $I \subseteq J \subsetneq R$, so $q(J)$ is an ideal of $R/I$ such that $\bar{\mf{m}} \subsetneq q(J) \subsetneq R/I$, contradicting the maximality of $\bar{\mf{m}}$. Thus, $\mf{m}$ is a maximal ideal of $R$. However, since $x \in \Jac(R)$, we have $x \in \mf{m}$, so $ax \in I \subseteq \mf{m}$. This implies that $1 = (1 + ax) - ax \in \mf{m}$, a contradiction. Therefore, $1 + ax$ is a unit for all $a \in R$.
+        
+        For the converse, suppose $1+ax$ is a unit for all $a \in R$. Let $\mf{m}$ be any maximal ideal of $R$. If $x \notin \mf{m}$, then the ideal $(\mf{m}, x)$ properly contains $\mf{m}$, so $(\mf{m}, x) = R$. Thus, there exist $m \in \mf{m}$ and $r \in R$ such that $1 = m + r \cdot x$. This implies that $1 - r \cdot x = m \in \mf{m}$, contradicting the fact that $1 - r \cdot x$ is a unit. Therefore, $x \in \mf{m}$. Since $\mf{m}$ was an arbitrary maximal ideal, we have $x \in \Jac(R)$.
+
+        \item It is clear that $\nil(R) \subseteq \bigcap_{P \text{ prime}} P$ since maximal ideals are prime ideals. For the converse inclusion, let $x \in \bigcap_{P \text{ prime}} P$. We claim that $x$ is nilpotent. Suppose not. Then, the set $S = \{x^{n} : n \in \N\}$ does not contain $0$. Define the set $\Omega = \{I \subseteq R \mid I \text{ is an ideal and } I \cap S = \emptyset\}$. Inclusion $\subseteq$ is a partial order on $\Omega$. Let $\cC$ be a chain in $\Omega$ and let $I = \bigcup_{J \in \cC} J$. We claim that $I$ is an upper bound of $\cC$ in $\Omega$. It is an ideal since if $z,y \in I$, then $z \in J_{1}$ and $y \in J_{2}$ with $J_{1} \subseteq J_{2}$. Thus, $z,y \in J_{1} \cup J_{2}$, so $z + y \in J_{1} \cup J_{2} \subseteq I$. Also, for any $r \in R$ and $z \in I$, we have $z \in J$ for some $J \in \cC$, so $r \cdot z \in J \subseteq I$. Therefore, $I$ is an ideal. Moreover, if $J \cap S = \emptyset$ for all $J \in \cC$ tells us $I \cap S = \emptyset$. Hence, $I$ is a valid upper bound, and Zorn's lemma guarantess the existence of a maximal $P$ in $\Omega$. We further claim that $P$ is a prime ideal of $R$. Indeed, $P \subsetneq R$ since $P \cap S = \emptyset$. Let $uv \in P$ for some $u,v \in R$. If both $u,v \notin P$, then the ideals $(P,u)$ and $(P,v)$ properly contain $P$; that is, $au + y = x^{n}$ and $bv + z = x^{m}$ for some $a,b \in R$, $y,z \in P$, and $n,m \in \N$. Thus, $(au+y)(bv+z) = x^{n+m} \in S$, but $(au+y)(bv+z) = abuv + az + by + yz \in P$ since $uv \in P$ and $y,z \in P$. This contradicts the fact that $P \cap S = \emptyset$. Therefore, either $u \in P$ or $v \in P$, so $P$ is a prime ideal. However, by construction, $x$ is in every prime ideal of $R$, so $x \in P$, contradicting the fact that $P \cap S = \emptyset$. Hence, $x$ is nilpotent, so $x \in \nil(R)$.
+    \end{enumerate}
+\end{proof}
+
+\noindent \textit{February 6th.}
+
+Let us look at some examples.
+
+\begin{example}
+    In $\Z$, $\nil(\Z) = \{0\}$ since the only nilpotent element is $0$. Also, $\Jac(\Z) = \{0\}$ since the intersection of all maximal ideals $(p)$ for prime $p$ is $\{0\}$. In the ring $\Z/6\Z$, the nilradical is $\{0\}$ even though it is not an integral domain. The Jacobson radical is $\{0\}$ as well since the maximal ideals are $(2)$ and $(3)$, whose intersection is $\{0\}$.
+\end{example}
+
+\begin{example}
+    For a non-trivial example, let us look at the ring $R = \Z/4\Z$. The nilradical of $R$ is $\{0, 2\}$ since $2^{2} = 0$ in $R$. The Jacobson radical of $R$ is also $\{0, 2\}$ since the only maximal ideal of $R$ is $(2)$. If we take $R = \Q[x,y]/(x^{2},y)$, then $\nil(R) = (x)$ since $x$ is nilpotent. The Jacobson radical of $R$ is also $(x)$.
+\end{example}
+
+
+\begin{example}
+    For an example where the Jacobson radical is strictly larger than the nilradical, consider the power series ring $R = \Q[[x]]$. If $f \in \Q[[x]]$, then $f$ is a unit if and only if the constant term of $f$ is non-zero; if $f = a_{0}(1-g)$ where $a_{0} \in \Q$ and $g \in (x)$, then $f^{-1} = a_{0}^{-1}(1-g)^{-1}$, where $(1-g)^{-1}$ is given by the geometric series expansion $(1-g)^{-1} = 1 + g + g^{2} + \cdots$. Thus, $\Jac(R) = (x)$ since $1 + ax$ is a unit for all $a \in R$. However, $\nil(R) = \{0\}$ since there are no non-zero nilpotent elements in $R$.
+\end{example}
+
+
+\section{Product of Rings}
+
+Let $R_{1},R_{2},\ldots,R_{n}$ be rings. We can define the \eax{product ring} $R_{1} \times R_{2} \times \cdots \times R_{n}$ as the set of all $n$-tuples $(r_{1}, r_{2}, \ldots, r_{n})$ where $r_{i} \in R_{i}$ for all $1 \leq i \leq n$, with addition and multiplication defined componentwise. It is easy to verify that $R_{1} \times R_{2} \times \cdots \times R_{n}$ is also a ring, and the unity is given by $(1_{R_{1}}, 1_{R_{2}}, \ldots, 1_{R_{n}})$. The \eax{projection map} $p_{i} : R_{1} \times R_{2} \times \cdots \times R_{n} \to R_{i}$ is defined by $p_{i}(r_{1}, r_{2}, \ldots, r_{n}) = r_{i}$ for all $1 \leq i \leq n$. It is, again, easy to verify that $p_{i}$ is a surjective ring homomorphism with kernel $R_{1} \times \cdots \times R_{i-1} \times \{0_{R_{i}}\} \times R_{i+1} \times \cdots \times R_{n}$. Conversely, the \eax{inclusion map} $e_{i} : R_{i} \to R_{1} \times R_{2} \times \cdots \times R_{n}$ is defined by $e_{i}(r) = (0_{R_{1}}, \ldots, 0_{R_{i-1}}, r, 0_{R_{i+1}}, \ldots, 0_{R_{n}})$ for all $r \in R_{i}$. It is easy to verify that $e_{i}$ is an injective ring homomorphism with image $\{0_{R_{1}}\} \times \cdots \times \{0_{R_{i-1}}\} \times R_{i} \times \{0_{R_{i+1}}\} \times \cdots \times \{0_{R_{n}}\}$.
+
+Regarding ideals, we have the following proposition.
+
+\begin{proposition}
+    Let $R_{1}, R_{2}, \ldots, R_{n}$ be rings. Then, every ideal of the product ring $R_{1} \times R_{2} \times \cdots \times R_{n}$ is of the form $I_{1} \times I_{2} \times \cdots \times I_{n}$ where $I_{i}$ is an ideal of $R_{i}$ for all $1 \leq i \leq n$.
+\end{proposition}
+\begin{proof}
+    Let $I$ be an ideal of $R_{1} \times R_{2} \times \cdots \times R_{n}$. For each $1 \leq i \leq n$, let $I_{i} = p_{i}(I)$. We claim that each $I_{i}$ is an ideal of $R_{i}$ and $I = I_{1} \times I_{2} \times \cdots \times I_{n}$. Let $x_{i},y_{i} \in I_{i}$ and $r_{i} \in R_{i}$. Then, there exist $x = (x_{1}, \ldots, x_{n}), y = (y_{1}, \ldots, y_{n}) \in I$ such that $p_{i}(x) = x_{i}$ and $p_{i}(y) = y_{i}$. Thus, $x + y \in I$ since $I$ is an ideal of the product ring, so $x_{i} + y_{i} = p_{i}(x+y) \in I_{i}$. Also, $r_{i} \cdot x_{i} = p_{i}(e_{i}(r_{i}) \cdot x) \in I_{i}$ since $e_{i}(r_{i}) \cdot x \in I$. Therefore, $I_{i}$ is an ideal of $R_{i}$.
+
+    Let use first show that $I \supseteq I_{1} \times I_{2} \times \cdots \times I_{n}$. Let $(a_{1}, a_{2}, \ldots, a_{n}) \in I_{1} \times I_{2} \times \cdots \times I_{n}$. Let $x^{(i)} \in I$ such that $p_{i}(x^{(i)}) = a_{i}$ for all $1 \leq i \leq n$. Then $e_{i}(1_{R_{i}}) \cdot x^{(i)} \in I$ since $I$ is an ideal of the product ring, and so $\sum_{i=1}^{n} e_{i}(1_{R_{i}}) \cdot x^{(i)} \in I$ as well. However, $\sum_{i=1}^{n} e_{i}(1_{R_{i}}) \cdot x^{(i)} = (a_{1}, a_{2}, \ldots, a_{n})$, so $(a_{1}, a_{2}, \ldots, a_{n}) \in I$. Therefore, $I \supseteq I_{1} \times I_{2} \times \cdots \times I_{n}$. For the converse inclusion $I \subseteq I_{1} \times I_{2} \times \cdots \times I_{n}$, let $(a_{1},a_{2}, \ldots, a_{n}) \in I$. Then, $a_{i} = p_{i}(a_{1}, a_{2}, \ldots, a_{n}) \in I_{i}$ for all $1 \leq i \leq n$. Thus, $(a_{1}, a_{2}, \ldots, a_{n}) \in I_{1} \times I_{2} \times \cdots \times I_{n}$. Therefore, $I = I_{1} \times I_{2} \times \cdots \times I_{n}$.
+\end{proof}
+
+We now wish to study the prime ideals of the product ring. 
+
+\begin{proposition}
+    Let $R_{1}, R_{2}, \ldots, R_{n}$ be rings. Then $I \subseteq R_{1} \times R_{2} \times \cdots \times R_{n}$ is a prime ideal if and only if $p_{i}(I) = R_{i}$ for all $1 \leq i \leq n$ except for one index $1 \leq k \leq n$ such that $p_{k}(I)$ is a prime ideal of $R_{k}$.
+\end{proposition}
+
+\begin{proof}
+    For the forward direction, let $I = I_{1} \times \cdots I_{n}$ (by the previous proposition), where $I_{i} = p_{i}(I)$ is an ideal of $R_{i}$. Note that $I$ is prime if and only if $(R_{1} \times \cdots \times R_{n})/I \cong R_{1}/I_{1} \times \cdots R_{n}/I_{n}$ is an integral domain. This implies that $R_{i}/I_{i}$ is an integral domain for one index $1 \leq k \leq n$ and $R_{i}/I_{i} \cong \{0\}$ for all $i \neq k$. It it were otherwise, we could find two indices $i \neq j$ such that $R_{i}/I_{i}$ and $R_{j}/I_{j}$ are both non-trivial, and $e_{i}(1_{R_{i}}) + I$ and $e_{j}(1_{R_{j}}) + I$ are two non-zero elements in $R_{1}/I_{1} \times \cdots R_{n}/I_{n}$ whose product is zero, contradicting the fact that $R_{1}/I_{1} \times \cdots R_{n}/I_{n}$ is an integral domain. Thus, $p_{i}(I) = I_{i} = R_{i}$ for all $i \neq k$, and $p_{k}(I) = I_{k}$ is a prime ideal of $R_{k}$.
+
+    Conversely, suppose that $p_{i}(I) = R_{i}$ for all $1 \leq i \leq n$ except for one index $1 \leq k \leq n$ such that $p_{k}(I)$ is a prime ideal of $R_{k}$. Then, $(R_{1} \times \cdots \times R_{n})/I \cong R_{1}/R_{1} \times \cdots R_{k}/p_{k}(I) \times \cdots R_{n}/R_{n} \cong R_{k}/p_{k}(I)$ is an integral domain since $p_{k}(I)$ is a prime ideal of $R_{k}$. Thus, $I$ is a prime ideal of the product ring.
+\end{proof}
+
+\subsection{Idempotents}
+
+\begin{definition}
+    Let $R$ be a ring. An element $x \in R$ is called an \eax{idempotent} if $x^{2} = x$.
+\end{definition}
+
+\begin{example}
+    Trivially, every ring has two idempotents, namely $0_{R}$ and $1_{R}$. If $R_{1}$ and $R_{2}$ are rings, then $(1,1),(0,0),(1,0),(0,1)$ are idempotents of the product ring $R_{1} \times R_{2}$.
+\end{example}
+
+\begin{proposition}
+    Let $R$ be a ring and $e \in R$ be an idempotent. Then $1-e$ is also an idempotent, and $R \cong eR \times (1-e)R$.
+\end{proposition}
+
+\begin{proof}
+    Note that $(1-e)e = e-e^{2} = 0$, and $(1-e)^{2} = (1-e)(1-e) = 1-e$. To show the isomorphism, let $\varphi : R \to eR \times (1-e)R$ be defined by $\varphi(r) = (er, (1-e)r)$ for all $r \in R$. It is easy to verify that $\varphi$ is a ring homomorphism. If we define $\psi : eR \times (1-e)R \to R$ by $\psi(x,y) = x + y$ for all $x \in eR$ and $y \in (1-e)R$, then $\psi$ is also a ring homomorphism. Moreover, $\psi \circ \varphi(r) = \psi(er, (1-e)r) = er + (1-e)r = r$ for all $r \in R$, and $\varphi \circ \psi(x,y) = \varphi(x+y) = (e(x+y), (1-e)(x+y)) = (x,y)$ for all $x \in eR$ and $y \in (1-e)R$. Thus, $\varphi$ is an isomorphism, so $R \cong eR \times (1-e)R$.
+\end{proof}
+
+\noindent \textit{February 9th.}
+
+An interesting consequence is the chinese remainder theorem, which is abstracted from the original number-theoretic version. For the below theorem, we define the product of two ideals $I$ and $J$ of a ring $R$ as
+\begin{align}
+    IJ = \{a_{1}b_{1} + \cdots + a_{n}b_{n} \mid a_{i} \in I, b_{i} \in J, n \in \N\}.
+\end{align}
+One may verify that $IJ$ is an ideal of $R$. Moreover, $IJ \subseteq I \cap J$ since $a_{i}b_{i} \in I$ and $a_{i}b_{i} \in J$ for all $1 \leq i \leq n$. However, it is not necessarily the case that $IJ = I \cap J$. For example, if $R = \Z$ and $I = (2)$ and $J = (4)$, then $IJ = (8)$ but $I \cap J = (4)$. 
+
+\begin{theorem}[The \eax{chinese remainder theorem}]
+    Let $R$ be a ring, and $I_{1}, I_{2}, \ldots, I_{k}$ be ideals of $R$ which are pairwise co-maximal; that is, for all $1 \leq i \neq j \leq k$, we have $I_{i} + I_{j} = R$. Then $I_{1} \cap I_{2} \cap \cdots \cap I_{k} = I_{1} I_{2} \cdots I_{k}$. Moreover, the natural homomorphism $\varphi : R \to R/I_{1} \times R/I_{2} \times \cdots \times R/I_{k}$ defined by $\varphi(r) = (r + I_{1}, r + I_{2}, \ldots, r + I_{k})$ is surjective with kernel $I_{1} I_{2} \cdots I_{k}$, so
+    \begin{align}
+        R/(I_{1} I_{2} \cdots I_{k}) \cong R/I_{1} \times R/I_{2} \times \cdots \times R/I_{k}.
+    \end{align}
+\end{theorem}
+
+We first determine how this abstract version of the chinese remainder theorem implies the original number-theoretic version. Let $n_{1}, n_{2}, \ldots, n_{k}$ be pairwise coprime positive integers, and let $m = n_{1} n_{2} \cdots n_{k}$. Then, the ideals $(n_{1}), (n_{2}), \ldots, (n_{k})$ of $\Z$ are pairwise co-maximal since $(n_{i}) + (n_{j}) = (1)$ for all $1 \leq i \neq j \leq k$. Thus, by the chinese remainder theorem, we have
+\begin{align}
+    \Z \to \Z/n_{1}\Z \times \Z/n_{2}\Z \times \cdots \times \Z/n_{k}\Z, \quad x \mapsto (x + n_{1}\Z, x + n_{2}\Z, \ldots, x + n_{k}\Z)
+\end{align}
+is surjective with kernel $(m)$. That is, given any $(a_{1} + n_{1}\Z, a_{2} + n_{2}\Z, \ldots, a_{k} + n_{k}\Z) \in \Z/n_{1}\Z \times \Z/n_{2}\Z \times \cdots \times \Z/n_{k}\Z$, there exists some integer $x$ such that $x \equiv a_{i} \pmod{n_{i}}$ for all $1 \leq i \leq k$, and any two such integers are congruent modulo $m$. Moreover, we have the isomorphism
+\begin{align}
+    \Z/m\Z \cong \Z/n_{1}\Z \times \Z/n_{2}\Z \times \cdots \times \Z/n_{k}\Z.
+\end{align}
+
+\begin{proof}
+    We first show for $k = 2$. Let $I_{1}$ and $I_{2}$ be two ideals of $R$ such that $I_{1} + I_{2} = R$. Then, there exist $a \in I_{1}$ and $b \in I_{2}$ such that $a + b = 1$. We already know that $I_{1} I_{2} \subseteq I_{1} \cap I_{2}$, so we only need to show the converse inclusion. Let $x \in I_{1} \cap I_{2}$. Then, $x = x(a + b) = xa + xb \in I_{1} I_{2}$ since $xa \in I_{1} I_{2}$ and $xb \in I_{1} I_{2}$. Therefore, $I_{1} \cap I_{2} = I_{1} I_{2}$. We now wish to show the natural map $R \to R/I_{1} \times R/I_{2}$ defined by $r \mapsto (r + I_{1}, r + I_{2})$ is surjective with kernel $I_{1} I_{2}$. It is easy to verify that the map is a ring homomorphism. For surjectivity, since any element of $R/I_{1} \times R/I_{2}$ is of the form $(r_{1} + I_{1}, r_{2} + I_{2})$ for some $r_{1}, r_{2} \in R$, we only show that $(1+I_{1}, 0 + I_{2})$ and $(0 + I_{1}, 1 + I_{2})$ are in the image of the map. Since $a \in I_{1}$, we have $a + I_{1} = 0 + I_{1}$, so $\varphi(b) = (b + I_{1}, b + I_{2}) = (1 + I_{1}, 0 + I_{2})$. Similarly, since $b \in I_{2}$, we have $b + I_{2} = 0 + I_{2}$, so $\varphi(a) = (a + I_{1}, a + I_{2}) = (0 + I_{1}, 1 + I_{2})$. Therefore, the map is surjective. For the kernel, if $r \in R$ is such that $\varphi(r) = (r + I_{1}, r + I_{2}) = (0 + I_{1}, 0 + I_{2})$, then $r \in I_{1} \cap I_{2} = I_{1}I_{2}$. Conversely, if $r \in I_{1}I_{2}$, then $r \in I_{1} \cap I_{2}$, so $\varphi(r) = (0 + I_{1}, 0 + I_{2})$. Thus, the kernel of the map is $I_{1}I_{2}$. For arbitrary $k$, we claim that $I_{1}$ and $I_{2}\cdots I_{k}$ are co-maximal ideals. Since $I_{1}$ and $I_{j}$ are co-maximal for all $2 \leq j \leq k$, there exist $x_{j} \in I_{1}$ and $y_{j} \in I_{j}$ such that $x_{j} + y_{j} = 1$ for all $2 \leq j \leq k$. Then 
+    \begin{align}
+        (x_{2}+y_{2})(x_{3}+y_{3}) \cdots (x_{k}+y_{k}) = 1 \implies \alpha + y_{2}y_{3} \cdots y_{k} = 1
+    \end{align}
+    where $\alpha \in I_{1}$ since $x_{j} \in I_{1}$ for all $2 \leq j \leq k$, and $y_{2} \cdots y_{k} \in I_{2} \cdots I_{k}$. Thus, $I_{1}$ and $I_{2} \cdots I_{k}$ are co-maximal. Now induction can be applied on $k$ to show $I_{1} \cap I_{2} \cap \cdots \cap I_{k} = I_{1} \cap I_{2} \cdots I_{k} = I_{1} I_{2} \cdots I_{k}$. To show surjectivity of the natural map $R \to R/I_{1} \times R/I_{2} \times \cdots \times R/I_{k}$, we show $e_{j} \defeq (0 + I_{1}, \ldots, 0 + I_{j-1}, 1 + I_{j}, 0 + I_{j+1}, \ldots, 0 + I_{k})$ is in the image of the map for all $1 \leq j \leq k$. Since $I_{j}$ and $I_{1} \cdots I_{j-1} I_{j+1} \cdots I_{k}$ are co-maximal, there exist $x \in I_{j}$ and $y \in I_{1} \cdots I_{j-1} I_{j+1} \cdots I_{k}$ such that $x + y = 1$. Then $\varphi(y) = (y + I_{1}, y + I_{2}, \ldots, y + I_{k}) = e_{j}$ since $y \in I_{i}$ for all $i \neq j$ and $y + I_{j} = 1 + I_{j}$. Therefore, the natural map is surjective with kernel $I_{1}I_{2} \cdots I_{k}$, so we have the desired isomorphism $R/(I_{1} I_{2} \cdots I_{k}) \cong R/I_{1} \times R/I_{2} \times \cdots \times R/I_{k}$.
+\end{proof}
+
+\section{Generalizing Properties of Integers}
+\textit{February 12th.}
+
+The ring of integers has several properties, which we axiomatize as properties for more general rings.
+
+\begin{definition}
+    Let $R$ be an integral domain. Let $N: R \setminus \{0\} \to \Z_{\geq 0}$ be a function such that for all $a,b \in R \setminus \{0\}$, there exists $q,r \in R$ such that $a = bq + r$ and either $r = 0$ or $N(r) < N(b)$. Then, we say that $R$ is a \eax{euclidean domain} with respect to the euclidean function $N$.
+\end{definition}
+
+Of course, the ring of integers $\Z$ is a euclidean domain with respect to the euclidean function $N:\Z\setminus\{0\} \to \Z_{\geq 0}$ defined by $N(n) = |n|$ for all $n \in \Z \setminus \{0\}$. We know this to satisfy the condition that given any $a,b \in \Z \setminus \{0\}$, there exist $q,r \in \Z$ such that $a = bq + r$ and $0 \leq r < \abs{b}$. If $k$ denotes a field, then $k[x]$ is a euclidean domain with respect to the euclidean function $N : k[x] \setminus \{0\} \to \Z_{\geq 0}$ defined by $N(f) = \deg(f)$ for all $f \in k[x] \setminus \{0\}$. We know this to satisfy the condition that given any $f,g \in k[x] \setminus \{0\}$, there exist $q,r \in k[x]$ such that $f = gq + r$ and either $r = 0$ or $\deg(r) < \deg(g)$.
+
+\begin{example}
+    A \eax{valuation map} on a field $k$ is a surjective map $v : k \to \Z \cup \{\infty\}$ such that $v(0) = \infty$, $v(ab) = v(a) + v(b)$ and $v(a+b) \geq \min\{v(a), v(b)\}$ for all $a,b \in k$. If $v$ is a valuation map on $k$, then $R_{v} = \{x \in k : v(x) \geq 0\}$ is a valid ring with respect to the usual addition and multiplication on $k$ termed the \eax{valuation ring}. Moreover, $R_{v}$ is a euclidean domain with respect to the euclidean function $N : R_{v} \setminus \{0\} \to \Z_{\geq 0}$ defined by $N(x) = v(x)$ for all $x \in R_{v} \setminus \{0\}$. To show that $N$ satisfies the condition in the definition of euclidean domain, let $a,b \in R_{v} \setminus \{0\}$. If $v(a) < v(b)$, then we can take $q = 0$ and $r = a$. If $v(a) \geq v(b)$, then we can take $q = a/b$ so that $v(a/b) = v(a) - v(b) \geq 0$, so $q \in R_{v}$, and $r = a - bq = 0$. Therefore, $R_{v}$ is a euclidean domain with respect to the euclidean function $N$.
+\end{example}
+
+
+\begin{definition}
+    Let $R$ be an integral domain. We say that $R$ is a \eax{principal ideal domain} if every ideal of $R$ is principal; that is, for every ideal $I$ of $R$, there exists some $a \in R$ such that $I = (a)$.
+\end{definition}
+
+In other words, every ideal of $R$ is generated by a single element. The ring of integers $\Z$ is a principal ideal domain since every ideal of $\Z$ is of the form $(n)$ for some $n \in \Z$. More trivially, $\Q$ and $\R$ are principal ideal domains since the only ideals of $\Q$ and $\R$ are the zero ideal and the whole ring. Generally, we can show the following proposition.
+
+\begin{proposition}
+    Let $R$ be a euclidean domain. Then $R$ is a principal ideal domain.
+\end{proposition}
+\begin{proof}
+    Let $N:R\setminus\{0\} \to \Z_{\geq 0}$ be a euclidean function on $R$. Let $I$ be an ideal of $R$. If $I = \{0\}$, then $I = (0)$ is principal. Else, let $x \in I$ be such that $N(x) = \min\{N(y) : y \in I \setminus \{0\}\}$. We claim that $I = (x)$. It is clear that $(x) \subseteq I$ since $x \in I$ and $I$ is an ideal. For the converse inclusion, let $y \in I\setminus\{0\}$. Then, there exist $q,r \in R$ such that $y = xq + r$ and either $r = 0$ or $N(r) < N(x)$. If $r = 0$, then $y = xq \in (x)$. If $r \neq 0$, then $r = y - xq \in I$, contradicting the choice of $x$ since $N(r) < N(x)$. Therefore, we must have $r = 0$, so $y \in (x)$. Thus, $I = (x)$ is principal.
+\end{proof}
+
+\begin{definition}
+    Let $R$ be a ring. A non-zero element $x \in R$ is called a \eax{prime element} if the ideal $(x)$ generated by $x$ is a non-zero prime ideal of $R$. A non-zero element $x \in R$ is called an \eax{irreducible element} if $x$ is not a unit and whenever $x = ab$ for some $a,b \in R$, then either $a$ or $b$ is a unit.
+\end{definition}
+
+That is, if $x \mid ab$, then $x \mid a$ or $x \mid b$ for all $a,b \in R$ (note that $x \mid a$ means there exists $c \in R$ such that $a = cx$) for a prime $x$. For example, in $\Z$, the prime elements and irreducible elements are exactly the prime numbers and their negatives. In $k[x]$ where $k$ is a field, the prime elements and irreducible elements are exactly the irreducible polynomials.
+
+\begin{proposition}
+    Let $R$ be an integral domain. Then every prime element of $R$ is irreducible. 
+\end{proposition}
+
+\begin{proof}
+    Let $x = ab$ for $a,b \in R$. Then $x \mid ab$, so $x \mid a$ or $x \mid b$ since $x$ is prime. If $x \mid a$, then there exists some $c \in R$ such that $a = cx$. Thus, $x = ab = cxb$, so $(1 - cb)x = 0$. Since $R$ is an integral domain and $x \neq 0$, we must have $cb = 1$, so $b$ is a unit. If $x \mid b$, then there exists some $d \in R$ such that $b = dx$. Thus, $x = ab = adx$, so $(1 - ad)x = 0$. Since $R$ is an integral domain and $x \neq 0$, we must have $ad = 1$, so $a$ is a unit. Therefore, either $a$ or $b$ is a unit, so $x$ is irreducible.
+\end{proof}
+
+Note that in a field, there are no prime elements. In a valuation ring, $x$ is a prime element if and only if $v(x) = 1$. 
+
+\begin{proposition}
+    Let $R$ be a principal ideal domain. Then every irreducible element of $R$ is prime.
+\end{proposition}
+\begin{proof}
+    Consider $I = (x)$. Let $\mf{m}$ be a maximal ideal of $R$ containing $I$. Since $R$ is a principal ideal domain, $\mf{m} = (a)$ for some $a \in R$. Since $I \subseteq \mf{m}$, we have $x \in (a)$, so there exists some $b \in R$ such that $x = ab$. Since $x$ is irreducible, either $a$ or $b$ is a unit. If $a$ is a unit, then $\mf{m} = (a) = R$, contradicting the fact that $\mf{m}$ is a maximal ideal. Thus, $b$ is a unit and $a = b^{-1}x$. Thus $\mf{m} = (a) = (b^{-1}x) \subseteq (x) = I$. Since $\mf{m}$ is a maximal ideal containing $I$, we must have $\mf{m} = I$. Therefore, $I$ is a prime ideal, so $x$ is a prime element.
+\end{proof}
+
+\begin{corollary}
+    In a principal ideal domain, every non-zero prime ideal is a maximal ideal.
+\end{corollary}
+
+\begin{definition}
+    Let $R$ be a ring, and $a,b \in R$. We say that $d \in R$ is a \eax{greatest common divisor} of $a$ and $b$, and we write $d = \gcd(a,b)$, if $d \mid a$ and $d \mid b$, and if there exists some $d' \in R$ such that $d' \mid a$ and $d' \mid b$, then $d' \mid d$.
+\end{definition}
+
+Note that the gcd here may not be unique. For example, in $\Z$, the gcd of $6$ and $-9$ is $3$ and $-3$.
+
+\begin{proposition}
+    Let $R$ be a ring, and $a,b \in R$ such that $(a,b)$ is a principal ideal. Then the $\gcd$ of $a$ and $b$ exists, and if $(d) = (a,b)$, then $d$ is a $\gcd$ of $a$ and $b$. Moreover, $d = ax+by$ for some $x,y \in R$.
+\end{proposition}
+
+\begin{proof}
+    If $(a,b) = (d)$, then $d \mid a$ and $d \mid b$. If $d' \in R$ is such that $d' \mid a$ and $d' \mid b$, then $(a,b) \subseteq (d')$, so $(d) \subseteq (d')$, so $d' \mid d$. Thus, $d$ is a $\gcd$ of $a$ and $b$. Since $(d) = (a,b)$, there exist $x,y \in R$ such that $d = ax + by$.
+\end{proof}
+
+Of course, the notion of $\gcd$ exists for $\Z$. As another example, look at this ring $\Q[x,y]$. By inspection, $1$ is a $\gcd$ of $x$ and $y$, since $1 \mid x$ and $1 \mid y$, and if $d' \in \Q[x,y]$ is such that $d' \mid x$ and $d' \mid y$, then $d' \in \Q$, so $d' \mid 1$. In fact, any $a \in \Q^{\times}$ is a $\gcd$ of $x$ and $y$.
+\\
+
+\textit{February 13th.}
+
+\begin{example}
+    Consider the rings $\Z[i]$ and $\Z[\sqrt{-3}]$. The ring $\Z[i]$ is a euclidean domain with respect to the euclidean function $N : \Z[i] \setminus \{0\} \to \Z_{\geq 0}$ defined by $N(a+bi) = a^{2} + b^{2}$ for all $a+bi \in \Z[i] \setminus \{0\}$.
+    Indeed, given any $\alpha = a+ib, \beta = c+id \in \Z[i]$, for $a,b,c,d \in \Z$, we wish to find $\gamma,r \in \Z[i]$ such that $\alpha = \beta \gamma + r$ and either $r = 0$ or $N(r) < N(\beta)$. Consider
+    \begin{align}
+        \frac{\alpha}{\beta} = \frac{(a+ib)(c-id)}{(c+id)(c-id)} = u+iv
+    \end{align}
+    where $u,v \in \Q$. So there exist $p,q \in \Z$ such that $\abs{p-u} \leq 1/2$ and $\abs{q-v} \leq 1/2$. Thus,
+    \begin{align}
+        \alpha = \beta(u+iv) = \beta(p+iq) + \beta((u-p)+i(v-q)) = \beta(p+iq) + r
+    \end{align}
+    where $N(r) = N(\beta)N((u-p)+i(v-q)) \leq N(\beta) \frac{1}{2} < N(\beta)$. Thus, $\gamma = p+iq$ and $r = \beta((u-p)+i(v-q))$ satisfy the required condition. Therefore, $\Z[i]$ is a euclidean domain, so $\Z[i]$ is a principal ideal domain. Thus, $\Z[i]$ is a principal ideal domain, so every irreducible element of $\Z[i]$ is prime. In particular, $1+i$ is an irreducible element of $\Z[i]$, so $1+i$ is prime.
+    
+    On the other hand, the ring $\Z[\sqrt{-3}]$ is not a principal ideal domain; consider $I = (2,1+\sqrt{-3})$. We show that $I \cap \Z = (2)$. Since $2 \in I$, we have $(2) \subseteq I \cap \Z$. For the converse inclusion, let $x \in I \cap \Z$. Then, there exist $r,s \in \Z[\sqrt{-3}]$ such that $x = r(1+\sqrt{-3}) + s2$. Since $x$ is also an integer, we can write $x = \alpha(1+\sqrt{-3}) + 2 \beta$ where $\alpha \in \Z[-\sqrt{3}]$ and $\beta \in \Z$. But this means that $\alpha(1+\sqrt{-3})$ must be an integer, so taking norms gives $(x-2\beta)^{2} = \alpha\bar{\alpha}4$, so $4 \mid (x-2\beta)^{2}$, so $2 \mid x-2\beta$, so $2 \mid x$. Thus, $x \in (2)$, so $I \cap \Z = (2)$. Hence, $I \subsetneq \Z[\sqrt{-3}]$. If $I$ were principal, then $I = (a+b\sqrt{-3})$ for some $a,b \in \Z$. If $b = 0$, then $I = (a)$ implies $I = 2\Z[\sqrt{-3}]$ which makes the contradiction $1+\sqrt{-3} \notin 2\Z[\sqrt{-3}]$; $b$ has to be non-zero. We must have, as $2 \in I$, $2 = (a+b\sqrt{-3})(c+d\sqrt{-3})$ for some $c,d \in \Z$. Taking norms gives $4 = (a^{2}+3b^{2})(c^{2}+3d^{2})$. Since $b \neq 0$, $b = \pm 1$ and $a = \pm 1$ must be the only possibilities. This again must mean that $c^{2}+3d^{2} = 1$ which implies $c = \pm 1$ and $d = 0$. But this gives $2 = \pm(1 \pm \sqrt{-3})$, which is nonsense. Hence $I$ cannot be principal.
+\end{example}
+
+A more general result states that if $D \equiv 1 \pmod{4}$ and $D$ is square-free, then $\Z[\sqrt{D}]$ cannot be a principal ideal domain.
+
+
+\begin{proposition}
+    Let $R$ be a ring such that $R[x]$ is a principal ideal domain. Then $R$ is a field.
+\end{proposition}
+\begin{proof}
+    Since $R \subseteq R[x]$ is a subring, $R$ is an integral domain. Let $\varphi:R[x] \to R$ be the evaluation homomorphism defined by $\varphi(f) = f(0)$ for all $f \in R[x]$. This map is surjective. Moreover, $\ker \varphi = (x) \subseteq R[x]$. So $R[x]/(x) \cong R$, implying that $R[x]/(x)$ is an integral domain and $(x)$ is a prime ideal. We had shown that any non-zero prime ideal in a principal ideal domain is maximal, so $(x)$ is maximal. Thus, $R[x]/(x) \cong R$ is a field, so $R$ is a field.
+\end{proof}
+\begin{definition}
+    For a ring $R$, the map $N:R \to \Z_{\geq 0}$ is called a \eax{Dedekind-Hasse} norm if $N(0) = 0$, and for all $a,b \in R \setminus \{0\}$, either $b \mid a$ or there exists $0 \neq r \in (a,b)$ such that $N(r) < N(b)$.
+\end{definition}
+
+\begin{proposition}
+    If $R$ is an integral domain that admits a Dedekind-Hasse norm, then $R$ is a principal ideal domain. The converse also holds.
+\end{proposition}
+
+\begin{proof}
+    Let $I \subseteq R$ be an ideal. Let $x \in I\setminus\{0\}$ be such that $N(x)$ is the least among $\{N(y) \mid y \in I, y \neq 0\}$. $(x) \subseteq I$ is clear. Let $y \in I\setminus\{0\}$. So either $x \mid y$ or there exists $0 \neq r \in (x,y)$ such that $N(r) < N(x)$. This, however, is a contradiction to the choice of $x$. Hence $x \mid y$ and $y \in (x)$. Thus, $I = (x)$ is principal. 
+\end{proof}
+
+
+\begin{example}
+    The ring $\Z[(1+\sqrt{-19})/2]$ is a principal ideal domain but not a euclidean domain. Note that $N:\Z[\omega=(1+\sqrt{-19})/2]\setminus\{0\} \to \Z_{\geq 0}$ defined by $a+b\omega \mapsto a^{2}+ab+5b^{2}$ is a Dedekind-Hasse norm.
+\end{example}
+
+\begin{proposition}
+    Let $R$ be a euclidean domain but not a field. Then it contains a `\eax{universal side divisor}'; that is, there exists a non-zero non-unit $u \in R$ such that for all non-zero $x \in R$, there exists $q \in R$ satisfying that $r=x-qu$ is either $0$ or a unit 
+\end{proposition}
+
+\begin{proof}
+    Let $u \in \R\setminus\{0\}$ be such that $N(u)$ is least among all non-zero non-unit elements of $R$. We claim that $u$ satisfies this property. Let $x \in R\setminus\{0\}$. Then there exist $q,r \in R$ such that $x = qu+r$ satisfying either $r = 0$ or $N(r) < N(u)$. Since $u$ is a non-unit, $N(u) > 0$, so $N(r) < N(u)$ implies that $r$ is a unit. Thus, $r = x-qu$ is either $0$ or a unit, so the claim holds.
+\end{proof}
+
+One may check that $\Z[(1+\sqrt{-19})/2]$ has no universal side division, and $\pm 1$ are the only units in the ring.
+
+\begin{definition}
+    Let $R$ be an integral domain. We say that $R$ is a \eax{unique factorization domain} if for all non-zero non-unit $x \in R$, $x$ can be written as $x = p_{1} \cdots p_{n}$ for some $n \geq 1$ and $p_{i}$ irreducibles, and if $x = p_{1} \cdots p_{n} = q_{1} \cdots q_{m}$ for some $m \geq 1$ and irreducibles $q_{j}$, then $n = m$ and, after reordering, $p_{i} = u_{i} q_{i}$ for some unit $u_{i}$ for all $1 \leq i \leq n$.
+\end{definition}
+
+For example, both $\Z$ and $k[x]$ where $k$ is a field are UFDs. As a small definition, $x,y \in R$ are termed \eax{associates} if $x = uy$ for some unit $u \in R$. Again, in $\Z$, $-n$ and $n$ are associates, and in $\Q[x]$, $f$ and $cf$ for some $c \in \Q^{\times}$ are associates. Lastly, in $\Z[i]$, $n,-n, ni, -ni$ are all associates for any $n \in \Z$. Thus the above definition is saying that the factorization of $x$ into irreducibles is unique up to reordering and up to associates. For non-examples, $\Z[\sqrt{5}]$ is an integral domain but not a unique factorization domain since $-4 = -2 \cdot 2 = (1+\sqrt{5})(1-\sqrt{5})$ are two distinct factorizations of $-4$ into irreducibles, and the irreducibles $2, 1+\sqrt{5}, 1-\sqrt{5}$ are not associates of each other.\\ 
+
+\textit{February 16th.}
+
+\begin{example}
+    As a more concrete example of a non-UFD, consider the quotient ring $\bar{R} = \Q[x,y,z,w]/(xy-zw)$. Suppose $\bar{x} = \bar{f} \bar{g}$ for some $\bar{f}, \bar{g} \in \bar{R}$. Then $x - fg \in (xy-zw)$ unless $x - fg = 0$. Since $xy-zw$ is irreducible in $\Q[x,y,z,w]$, we must have $x \mid f$ or $x \mid g$. If $x \mid f$, then $\bar{f}$ is a unit in $\bar{R}$, so $\bar{x}$ is irreducible. Similarly, if $x \mid g$, then $\bar{g}$ is a unit in $\bar{R}$, so $\bar{x}$ is irreducible. Thus, $\bar{x}$ is irreducible. By symmetry, $\bar{y}, \bar{z}, \bar{w}$ are also irreducible. However, we have the two distinct factorizations $\bar{x}\bar{y} = \bar{z}\bar{w}$ into irreducibles, and the irreducibles $\bar{x}, \bar{y}, \bar{z}, \bar{w}$ are not associates of each other since they are all of degree one. Therefore, $\bar{R}$ is not a unique factorization domain.
+\end{example}
+
+\begin{theorem}
+    Let $R$ be a principal ideal domain. Then $R$ is a unique factorization domain.
+\end{theorem}
+\begin{proof}
+    Let $x \in R$ be a non-zero non-unit. We show that $x$ can be written as a product of irreducibles. Let $\mf{m}$ be a maximal ideal of $R$ containing $(x)$. Since $R$ is a principal ideal domain, $\mf{m} = (p_{1})$ for some $p_{1} \in R$. Thus, $p_{1}$ is a prime element, so $p_{1}$ is irreducible. If $x = p_{1} x_{1}$ for some $x_{1} \in R$, then we can repeat the process for $x_{1}$. If $x_{1}$ is a unit, then we are done. Else, we can repeat the process for $x_{1}$ to get a prime element $p_{2}$ such that $x_{1} = p_{2} x_{2}$ for some $x_{2} \in R$. We can keep repeating this process; we claim that it must terminate after finitely many steps. If not, then we have an infinite sequence of ideals $(x) \subsetneq (x_{1}) \subsetneq (x_{2}) \subsetneq \cdots$. Let $I = \bigcup_{n \geq 0} (x_{n})$. Then $I$ is an ideal of $R$. Since $R$ is a principal ideal domain, $I = (y)$ for some $y \in R$. Thus, $y \in I$ implies that $y \in (x_{r})$ for some $r \geq 0$, so $y = ux_{r}$ for some $u \in R$. Also, $x_{r} = p_{r+1}x_{r+1}$ for some $p_{r+1} \in R$ and $x_{r+1} \in R$, so $y = u p_{r+1} x_{r+1}$. Also, since $x_{r+1} = vy$ for some $v \in R$, we have $y = u p_{r+1} vy$, so $(1 - up_{r+1}v)y = 0$. Since $R$ is an integral domain and $y \neq 0$, we must have $up_{r+1}v = 1$, so $p_{r+1}$ is a unit, contradicting the fact that $p_{r+1}$ is a prime element. Therefore, the process must terminate after finitely many steps, so $x$ can be written as a product of irreducibles (note that the last terminating unit may be absorbed into the previous prime element to make it irreducible).
+
+    To show uniquness upto reordering, and associates, let $x = p_{1} \cdots p_{n} = q_{1} \cdots q_{m}$ for some $m \geq 1$ and irreducibles $q_{j}$. Since $p_{1}$ is irreducible and $R$ is a principal ideal domain, $p_{1}$ is prime, so $p_{1} \mid q_{1} \cdots q_{m}$ implies that $p_{1} \mid q_{i_{1}}$ for some $1 \leq i_{1} \leq m$. Since $q_{i_{1}}$ is irreducible, $p_{1}$ and $q_{i_{1}}$ are associates, so $p_{1} = u_{1} q_{i_{1}}$ for some unit $u_{1}$. We can reorder the $q_{j}$'s so that $i_{1} = 1$, giving us $p_{1} = u_{1} q_{1}$. Cancellation gives us $p_{2} \cdots p_{n} = u_{1} q_{2} \cdots q_{m}$; we can repeat the same process to get $p_{2} = u_{2} q_{2}$ for some unit $u_{2}$, and so on. After repeating this process, we get $p_{i} = u_{i} q_{i}$ for some unit $u_{i}$ for all $1 \leq i \leq n$. By symmetry argument, we also get $q_{j} = v_{j} p_{j}$ for some unit $v_{j}$ for all $1 \leq j \leq m$. Thus, $n = m$ and $p_{i} = u_{i} q_{i}$ for some unit $u_{i}$ for all $1 \leq i \leq n$, so the factorization of $x$ into irreducibles is unique up to reordering and up to associates.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be a unique factorization domain. Then an element is irreducible if and only if it is prime.
+\end{proposition}
+\begin{proof}
+    We already know that every prime element is irreducible in any integral domain. For the converse, let $x$ be an irreducible element of $R$. Let $x \mid ab$ for some $a,b \in R$. There then exists some $y \in R$ such that $ab = xy$. Let $a = p_{1}\cdots p_{n}$ and $b = q_{1} \cdots q_{m}$, and $y = r_{1} \cdots r_{k}$ be the factorizations of $a,b,y$ into irreducibles. Then $p_{1} \cdots p_{n} q_{1} \cdots q_{m} = r_{1} \cdots r_{k} x$. Since $x$ is irreducible, $x$ must be an associate of some $p_{i}$ or some $q_{j}$, so $x \mid a$ or $x \mid b$. Thus, $x$ is prime.
+\end{proof}
+
+\begin{theorem}
+    Let $R$ be a principal ideal domain. Then $R$ has a Dedekind-Hasse norm.
+\end{theorem}
+
+\begin{proof}
+    Let $x \in R\setminus\{0\}$. Define $N : R\setminus\{0\} \to \Z_{\geq 0}$ as follows: if $x$ is a unit, $N(x) = 1$. Otherwise, write $x = p_{1} \cdots p_{n}$ for some $n \geq 1$ and irreducibles $p_{i}$, and define $N(x) = 2^{n}$. Verify that $N$ is a Dedekind-Hasse norm. 
+\end{proof}
+
+
+\textit{February 19th.}
+
+\begin{proposition}
+    Let $R$ be a unique factorization domain. If $a,b \in R$ are non-zero, then $\gcd(a,b)$ exists. If $a$ or $b$ is a unit, then $\gcd(a,b)$ is a unit. Moreover, if $a$ and $b$ are non-units, then there exist irreducibles $p_{1},\ldots,p_{r}$ such that $a = p_{1}^{e_{1}} \cdots p_{r}^{e_{r}}$ and $b = p_{1}^{f_{1}} \cdots p_{r}^{f_{r}}$ for some $e_{i},f_{i} \geq 0$ for all $1 \leq i \leq r$, and $\gcd(a,b) = p_{1}^{\min\{e_{1},f_{1}\}} \cdots p_{r}^{\min\{e_{r},f_{r}\}}$.
+\end{proposition}
+\begin{proof}
+    If $a$ or $b$ is a unit, then $\gcd(a,b)$ is a unit since any unit divides any element. So we may assume that $a$ and $b$ are non-units. Since $R$ is a unique factorization domain, there exist irreducibles $p_{1},\ldots,p_{r}$ such that $a = p_{1}^{e_{1}} \cdots p_{r}^{e_{r}}$ and $b = p_{1}^{f_{1}} \cdots p_{r}^{f_{r}}$ for some $e_{i},f_{i} \geq 0$ for all $1 \leq i \leq r$. Let $d = p_{1}^{\min\{e_{1},f_{1}\}} \cdots p_{r}^{\min\{e_{r},f_{r}\}}$. Then $d \mid a$ and $d \mid b$. If $d' \in R$ is such that $d' \mid a$ and $d' \mid b$, then there exist some irreducibles $q_{1},\ldots,q_{s}$ such that $d' = q_{1}^{g_{1}} \cdots q_{s}^{g_{s}}$ for some $g_{i} \geq 0$ for all $1 \leq i \leq s$. Since $d' \mid a$, we have that each irreducible factor of $d'$ must be an associate of some irreducible factor of $a$, so after reordering, we can write $d' = p_{1}^{g'_{1}} \cdots p_{r}^{g'_{r}}$ where each $g'_{i} \geq 0$. Since $d' \mid b$, we have that each irreducible factor of $d'$ must be an associate of some irreducible factor of $b$, so after reordering, we can write $d' = p_{1}^{g''_{1}} \cdots p_{r}^{g''_{r}}$ where each $g''_{i} \geq 0$. Thus, after reordering, we can write $d' = p_{1}^{g'''_{1}} \cdots p_{r}^{g'''_{r}}$ where $g'''_{i} = \min\{g'_{i},g''_{i}\} \leq \min\{e_{i},f_{i}\}$ for all $1 \leq i \leq r$. Thus, $d' \mid d$. Therefore, $d$ is a $\gcd$ of $a$ and $b$.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be an integral domain. Then $R$ is a unique factorization domain if and only if every irreducible element of $R$ is prime and any increasing chain of principal ideals in $R$ stabilizes.
+\end{proposition}
+
+\begin{proof}
+    For the foward implication, if have already shown that every irreducible element of $R$ is prime. Let $(x_{1}) \subsetneq (x_{2}) \subsetneq (x_{3}) \subsetneq \cdots$ be a strictly increasing chain of principal ideals in $R$. If $x_{1}$ is a unit, then $(x_{1}) = R$, contradicting the fact that $(x_{1}) \subsetneq (x_{2})$. If $x_{1} = 0$, then $x_{2} \neq 0$ so we may assume that $x_{1}$ is a non-zero non-unit. Since $R$ is a unique factorization domain, we can uniquely factor $x_{1}$ as $x_{1} = p_{1} \cdots p_{n}$ for some $n \geq 1$ and irreducibles $p_{i}$. Since $x_{1} \in (x_{2})$, $x_{1} = x_{2}y$ for some $y \in R$. Also $(x_{1}) \subsetneq (x_{2})$ implies that $y$ is not a unit. Let $x_{2} = q_{1} \cdots q_{m}$ and $y = r_{1} \cdots r_{k}$ be the factorizations of $x_{2}$ and $y$ into irreducibles. Then by the uniquness of factorization, $n = m+k$ and since $y$ is not a unit, $k \geq 1$, so $m < n$. Thus, $x_{2}$ has strictly less irreducible factors than $x_{1}$. We can repeat the same process for $x_{2}$ to get that $x_{3}$ has strictly less irreducible factors than $x_{2}$, and so on. Since the number of irreducible factors is a non-negative integer, this process must terminate after finitely many steps giving a $x_{n}$ that is a unit, contradicting the fact that $(x_{n}) \subsetneq (x_{n+1})$. Therefore, any increasing chain of principal ideals in $R$ stabilizes.
+
+    For the converse implication, let $x \in R$ be a non-zero non-unit. The result is trivial if $x$ is irreducible, so we may assume that $x$ is not an irreducible. We claim that there exists an irreducible $p_{1} \in R$ such that $x = p_{1}y$ for some $y \in R$. Since $x$ is not irreducible, there exist $x_{1},y_{1} \in R$ such that $x = x_{1}y_{1}$ and neither $x_{1}$ nor $y_{1}$ is a unit. If $x_{1}$ is irreducible, then we can take $p_{1} = x_{1}$ and $y = y_{1}$. Else, we can repeat the same process for $x_{1}$ to get $x = x_{2}y_{2}y_{1}$ for some non-units $x_{2},y_{2} \in R$. We can keep repeating this process; we claim that it must terminate after finitely many steps. If not, then we have an infinite sequence of ideals $(x) \subsetneq (x_{1}) \subsetneq (x_{2}) \subsetneq \cdots$. This contradicts the fact that any increasing chain of principal ideals in $R$ stabilizes. Therefore, the process must terminate after finitely many steps, so there exists an irreducible $p_{1} \in R$ such that $x = p_{1}y$ for some $y \in R$. If $y$ is a unit, then we are done. Else, we can repeat the same process for $y$ to get $x = p_{1}p_{2}y_{2}$ for some irreducible $p_{2}$ and some $y_{2} \in R$. We can keep repeating this process; we claim that it must terminate after finitely many steps. If not, then we have an infinite sequence of ideals $(x) \subsetneq (p_{1}) \subsetneq (p_{1}p_{2}) \subsetneq \cdots$. This contradicts the fact that any increasing chain of principal ideals in $R$ stabilizes. Therefore, the process must terminate after finitely many steps, so $x$ can be written as a product of irreducibles. The uniquenss follows from the same proof as that of the theorem that a principal ideal domain is a unique factorization domain.
+\end{proof}
+
+\section{Localization}
+\textit{March 2nd.}
+
+Localization of rings is a process that allows us to `invert' a subset of elements in a ring. We will see that the localization of $\Z$ leads to $\Q$.
+
+\begin{definition}
+    Let $R$ be an integral domain. Then $K \defeq \{(a,b) \equiv \frac{a}{b} \mid a,b \in R, \; b \neq 0\} = R \times (R\setminus\{0\}) /\sim$ where $(a,b) \sim (c,d)$ if and only if $ad = bc$ is a field, called the \eax{field of fractions} of $R$; the operations in this field are defined as follows: $\frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd}$ and $\frac{a}{b} \cdot \frac{c}{d} = \frac{ac}{bd}$.
+\end{definition}
+We may denote the field of fractions of $R$ by $QF(R)$ or $\mathrm{frac}(R)$. Note that the field of fractions of $\Z$ is $\Q$; the definition is simply abstracted from the construction of $\Q$ from $\Z$. Note that we have a natural embedding $R \hookrightarrow K$ given by $a \mapsto \frac{a}{1}$ for all $a \in R$. We will identify $R$ with its image in $K$ under this embedding, so we will view $R$ as a subring of $K$. If $R$ itself is a field, then $R$ is its own field of fractions. We wish to generalize this idea; that is, we want to `invert' only a particular subset of elements in $R$ instead of all non-zero elements. 
+
+\begin{definition}
+    Let $R$ be a ring. A subset $S \subseteq R$ is called a \eax{multiplicative subset} if $1 \in S$ and if $s,t \in S$, then $st \in S$.
+\end{definition}
+
+For example, if $R$ is a ring then any subring $S$ works as a multiplicative subset. If $R = \Z$, we can take $S = \N$. We can also take $S$ to be $R^{\times}$, the group of units. If $R$ is an integral domain and $S = R\setminus\{0\}$, then $S$ is a multiplicative subset. For any $R$, we can also take $S = I \setminus \{0\} \cup \{1\}$ for any ideal $I$ of $R$. In particular, we are interested in this example: if $R$ is a ring and $P$ is a prime ideal of $R$, then $S = R\setminus P$ is a multiplicative subset. To show this, let $x,y \in R\setminus P$. If $xy \in P$, then since $P$ is prime, either $x \in P$ or $y \in P$, contradicting the choice of $x,y$. Thus, $xy \in R\setminus P$. Moreover, $P$ is a proper ideal, so $1 \in R\setminus P$. Thus, $R\setminus P$ is a multiplicative subset. Similarly, $S = R\setminus \bigcup_{i=1}^{n} P_{i}$ is a multiplicative subset for any prime ideals $P_{1},\ldots,P_{n}$ of $R$.
+
+\begin{definition}
+    Let $R$ be a ring and $S \subseteq R$ be a multiplicative subset. Then on $S \times R$, we define an (equivalence) relation $\sim$ by $(s_{1},r_{1}) \sim (s_{2},r_{2})$ if and only if there exists some $t \in S$ such that $t(s_{1}r_{2} - s_{2}r_{1}) = 0$. We can verify that $\sim$ is an equivalence relation. Let $S^{-1}R = S \times R/\sim$. We define $\oplus$ and $\odot$ on $S^{-1}R$ as follows: $\frac{r_{1}}{s_{1}} \oplus \frac{r_{2}}{s_{2}} = \frac{s_{2}r_{1} + s_{1}r_{2}}{s_{1}s_{2}}$ and $\frac{r_{1}}{s_{1}} \odot \frac{r_{2}}{s_{2}} = \frac{r_{1}r_{2}}{s_{1}s_{2}}$. These operations are well-defined, and $S^{-1}R$ is a ring with respect to these operations, called the \eax{localization} of $R$ at $S$. Finally, we have a natural homomorphism $\varphi:R \to S^{-1}R$ defined by $\varphi(r) = \frac{r}{1}$ for all $r \in R$. 
+\end{definition}
+
+\noindent \textit{March 5th.}
+
+We will simply use $+$ and $\cdot$ for $\oplus$ and $\odot$ respectively. We verify some of the claims made in this definition.
+
+\begin{proof}
+    That $\sim$ is reflexive and symmetric is clear. To show that $\sim$ is transitive, let $(s_{1},r_{1}) \sim (s_{2},r_{2})$ and $(s_{2},r_{2}) \sim (s_{3},r_{3})$. Then there exist some $t,t' \in S$ such that $t(s_{1}r_{2} - s_{2}r_{1}) = 0$ and $t'(s_{2}r_{3} - s_{3}r_{2}) = 0$. Then, multiplying the first equation by $s_{3}t'$ and the second equation by $s_{1}t$, we get $ts_{3}t'(s_{1}r_{2} - s_{2}r_{1}) = 0$ and $s_{1}tt'(s_{2}r_{3} - s_{3}r_{2}) = 0$. Adding these two equations gives us $ts_{3}t'(s_{1}r_{2} - s_{2}r_{1}) + s_{1}tt'(s_{2}r_{3} - s_{3}r_{2}) = 0$, so $tt'(s_{1}s_{3}r_{2} - s_{1}s_{2}r_{3} + s_{1}s_{2}r_{3} - s_{1}s_{3}r_{2}) = 0$, so $tt'(s_{1}s_{3}r_{2} - s_{1}s_{3}r_{2}) = 0$, so $tt' \cdot 0 = 0$. Thus, $(s_{1},r_{1}) \sim (s_{3},r_{3})$, so $\sim$ is transitive. $\sim$ is an equivalence relation.
+
+    To show that $\odot$ is well-defined, let $\frac{r_{1}}{s_{1}} = \frac{r'_{1}}{s'_{1}}$ and $\frac{r_{2}}{s_{2}} = \frac{r'_{2}}{s'_{2}}$. Then there exist some $u,v \in S$ such that $u(s_{1}'r_{1} - s_{1}r_{1}') = 0$ and $v(s_{2}'r_{2} - s_{2}r_{2}') = 0$. Then $uv(s_{1}'s_{2}'r_{1}r_{2} - s_{1}s_{2}r_{1}r_{2}') = uv(s_{1}'r_{1} \cdot s_{2}'r_{2} - s_{1}r_{1}' \cdot s_{2}r_{2}') = uv(s_{1}'r_{1} \cdot s_{2}'r_{2} - s_{1}'r_{1} \cdot s_{2}r_{2}' + s_{1}'r_{1} \cdot s_{2}r_{2}' - s_{1}r_{1}' \cdot s_{2}r_{2}') = uv(s_{1}'r_{1} \cdot (s'_{2}r'_{2} - s'_{2}r'_{2}) + (s'_{1}r'_{1} - s'_{1}r'_{1}) \cdot s'_{2}r'_{2}) = uv(0 + 0) = 0$. Thus, $\frac{r_1 r_2}{s_1 s_2} = \frac{r'_1 r'_2}{s'_1 s'_2}$, so $\odot$ is well-defined. Similarly, we can show that $\oplus$ is well-defined.
+
+    Showing that $(S^{-1}R, \oplus)$ is an abelian group is straightforward, with the identity element being $\frac{0}{1}$ and the inverse of $\frac{r}{s}$ being $\frac{-r}{s}$. The distributivity of $\odot$ over $\oplus$, and its associativity and commutativity, are also straightforward to verify, with $\frac{1}{1}$ being the multiplicative identity. Thus, $S^{-1}R$ is a ring with respect to these operations. Finally, $\varphi$ may be verified to be a homomorphism by checking that $\varphi(r_{1} + r_{2}) = \varphi(r_{1}) \oplus \varphi(r_{2})$ and $\varphi(r_{1}r_{2}) = \varphi(r_{1}) \odot \varphi(r_{2})$ for all $r_{1},r_{2} \in R$.
+\end{proof}
+
+\begin{example}
+    The most common example, of course, is to take $\R = \Z$ and $S = \Z \setminus \{0\}$. Then $S^{-1}R$ is the field of fractions of $\Z$, which is $\Q$. More generally, if $R$ is an integral domain and $S = R\setminus\{0\}$, then $S^{-1}R$ is the field of fractions of $R$. In such a case, the natural homomorphism $\varphi:R \to S^{-1}R$ is injective, so we can identify $R$ with its image in $S^{-1}R$, and view $R$ as a subring of $S^{-1}R$. Thus, we can view the field of fractions of an integral domain as an extension of the integral domain.
+\end{example}
+
+\begin{proposition}
+    Let $\varphi : R \to S^{-1}R$ be the natural homomorphism. Then $\ker \varphi = \{r \in R \mid sr = 0 \text{ for some } s \in S\}$. In particular, if $S$ consists only of non-zero divisors, then $\varphi$ is injective.
+\end{proposition}
+
+\begin{proof}
+    The second statement follows from the first statement since $\ker \varphi = \{0\}$ if $S$ consists only of non-zero divisors. To show the first statement, let $r \in R$. If $r \in \ker \varphi$, then $\varphi(r) = \frac{r}{1} = 0$ in $S^{-1}R$, so there exists some $s \in S$ such that $s(r\cdot 1 - 0\cdot 1) = sr = 0$. Conversely, if $sr = 0$ for some $s \in S$, then $\varphi(r) = \frac{r}{1} = \frac{0}{s} = 0$ in $S^{-1}R$, so $r \in \ker \varphi$. Thus, $\ker \varphi = \{r \in R \mid sr = 0 \text{ for some } s \in S\}$.
+\end{proof}
+
+From here, we verify that $S^{-1}R$ indeed gives the field of fractions for an integral domain $R$ by verifying that it is a field; indeed; let $\frac{r}{s} \in S^{-1}R$ such that $\frac{r}{s} \neq \frac{0}{1}$; this occurs iff $t(r-0) \neq 0$ for all $t \in S$ which occurs iff $r \neq 0$, since $R$ is an integral domain. This means that $r \in S$ so $\frac{s}{r} \in S^{-1}R$ showing that $\frac{r}{s}$ has a multiplicative inverse.
+
+An important example of a multiplicative subset of a ring $R$ is to choose $S = \{1,x,x^{2},x^{3},\ldots\}$ for some $x \in R$. In such a case, we denote $S^{-1}R = R[\frac{1}{x}]$. In particular, if we choose $R = \Z$ and $S = \{1,2,4,8,\ldots\}$, then we get $S^{-1}R = \Z[\frac{1}{2}]$. If $R$ is an integral domain, we can write $R[\frac{1}{x}]$ as $\{\frac{a}{x^{k}} \mid a \in R, \; k \geq 0\}$. Some choices of $S$ can lead to rather ugly constructions; suppose $0 \in S$ for the ring $R$. Then $\frac{r_{1}}{s_{1}}, \frac{r_{2}}{s_{2}} \in S^{-1}R$ are always equal; $0 \cdot (s_{1}r_{2}-s_{2}r_{1}) = 0$ since $0 \in S$, making the construction a trivial ring.
+
+\begin{proposition}
+    Let $R$ be a ring, $S$ a multiplicative subset, and $\varphi :R \to S^{-1}R$ be the localization homomorphism. Then for $s \in S$, $\varphi(s)$ is a unit in $S^{-1}R$.
+\end{proposition}
+
+\begin{proof}
+    $s$ is mapped to $\frac{s}{1}$. Since $s \in S$, $\frac{1}{s} \in S^{-1}R$, which is the multiplicative inverse of $\frac{s}{1}$; $\varphi(s)$ is a unit.
+\end{proof}
+
+Let $R$ be an integral domain, and let $S_{x} = \{1,x,x^{2},\ldots\}$ and $S_{y} = \{1,y,y^{2},\ldots\}$ for some $x,y \in R$. Also let $S_{xy} = \{1,xy,x^{2}y^{2},\ldots\}$. Then, we have $S_{x}^{-1}R \subseteq S_{xy}^{-1}R$.
+\\ \\
+\noindent \textit{March 6th.}
+
+Recall that we define the quotient map as follows: given any ring homomorphism $\varphi : R \to A$ such that $I \subseteq \ker \varphi$ for $I$ an ideal of $R$, then there exists a unique map $\bar{\varphi}:R/I \to A$ such that $\bar{\varphi} \circ q = \varphi$, via $\bar{\varphi}(r + I) = \varphi(r)$. One can also define the quotient ring as follows.
+
+\begin{definition}
+    A quotient of a ring $R$ by an ideal $I$ is a ring homomorphism $q : R \to B$ such that for any ring homomorphism $\varphi : R \to A$ with $I \subseteq \ker \varphi$, there exists a unique ring homomorphism $\bar{\varphi} : B \to A$ satisfying $\bar{\varphi} \circ q = \varphi$.
+\end{definition}
+
+\begin{theorem}[The \eax{universal property of localization}]
+    Let $R$ be a ring and $S$ a multiplicative subset. Also let $f : R \to A$ be a ring homomorphism such that $f(s)$ is a unit in $A$ for all $s \in S$. Then there exists a unique homomorphism $\bar{f} : S^{-1}R \to A$ such that $\bar{f} \circ \varphi = f$, where $\varphi : R \to S^{-1}R$ is the localization map.
+\end{theorem}
+
+\begin{proof}
+    We define $\bar{f} : S^{-1}R \to A$ as $\bar{f} ( \frac{r}{s}) = f(s)^{-1} f(r)$. This $\bar{f}$ is well-defined; to show this let $\frac{r}{s} = \frac{r'}{s'}$. That is, there exists $u \in S$ such that $u(s'r - sr') = 0$. Thus,
+    \begin{align}
+        f(u) (f(s')f(r) - f(s)f(r')) = 0 \implies f(s') f(r) = f(s) f(r') \implies \bar{f}(\frac{r}{s}) = \bar{f}(\frac{r'}{s'})
+    \end{align}
+    since $u,s,s' \in S$ are all mapped to units in $A$. To show $\bar{f}$ is a ring homomorphism, we first have
+    \begin{align}
+        \bar{f}(\frac{r_{1}}{s_{1}} + \frac{r_{2}}{s_{2}}) = \bar{f}(s_{1}s_{2})^{-1} f(s_{2}r_{1} + s_{1}r_{2}) = f(s_{1})^{-1} f(r_{1}) + f(s_{2})^{-1} f(r_{2}) = \bar{f}(\frac{r_{1}}{s_{1}}) + \bar{f}(\frac{r_{2}}{s_{2}}).
+    \end{align}
+    Similarly, one can show multiplication. For uniqueness, let $g : S^{-1}R \to A$ be a ring homomorphism such that $g \circ \varphi = f$. Then $g(\frac{r}{s}) = g(\frac{r}{1}) g(\frac{1}{s}) = g \circ \varphi(r) (g \circ \varphi(s))^{-1} = f(r) f(s)^{-1} = \bar{f}(\frac{r}{s})$ showing $g = \bar{f}$.
+\end{proof}
+
+We look at some applications of localization.
+
+\begin{proposition}
+    Let $R$ be an integral domain and $K$ be a field. Moreover, let $i:R \to K$ be an injective ring homomorphism. Then $i$ extends to an injective ring homomorphism $\tilde{\iota} : \mathrm{frac}(R) \to K$. In other words, if $R \subseteq K$, then $\mathrm{frac}(R) \subseteq K$.
+\end{proposition}
+Here, recall that $\mathrm{frac}(R)$ is the field of fractions of an integral domain $R$; its the localization of $R$ with $R \setminus \{0\}$ chosen as the multiplicative subset.
+\begin{proof}
+    Note that $i(s)$ is a unit in $K$ for all $s \neq 0$. By the universal property, there exists a unique ring homomorphism $\tilde{\iota} : \mathrm{frac}(R) \to K$ such that $\tilde{\iota} \circ \varphi = i$, with $\varphi$ being the localization map. Thus, $\tilde{\iota} (\frac{r}{1}) = i(r)$ for all $r \in R$. Moreover, $\tilde{\iota} : \mathrm{frac}(R) \to K$ is also injective; we have
+    \begin{align}
+        \tilde{\iota}(\frac{r}{s}) = 0 \implies \tilde{\iota}(\frac{r}{1}) = i(r) = 0 \implies r = 0 \implies \frac{r}{s} = \frac{0}{1}
+    \end{align}
+    since $i$ is injective.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be a ring and $a \in R$. Then,
+    \begin{align}
+        R[X] / (aX-1) \cong R[\frac{1}{a}]
+    \end{align}
+    via the map $r \mapsto \frac{r}{1}$ for all $r \in R$ and $X \mapsto \frac{1}{a}$.
+\end{proposition}
+
+\begin{proof}
+    Define the map $\alpha: R[X] \to S^{-1}R = R[\frac{1}{a}]$ via $f(X) \mapsto f(\frac{1}{a})$. Let $I = (aX - 1)$. Note that $\alpha (aX - 1) = \frac{a}{1} \cdot \frac{1}{a} - \frac{1}{1} = 0$, so $(aX - 1) \subseteq \ker \alpha$. Thus, we have a ring homomorphism $\bar{\alpha}: R[X]/I \to S^{-1}R$ such that $\bar{\alpha} \circ q = \alpha$, $q$ being the quotient map; $\bar{\alpha} (f(X) + I) = f(\frac{1}{a})$. We now give a map in the other direction; let $f : R \to R[X]/I$ be the map defined by $f(r) = r + I$. Note that $S = \{1,a,a^{2},\ldots\}$; each $a^{n}$ is mapped to the unit $a^{n} + I$ with inverse $X^{n} + I$. Thus, by the universal property of localization, there exists a unique ring homomorphism $\bar{f} : S^{-1} R \to R[X]/(aX - 1)$ such that $\bar{f} \circ \varphi = f$. We show that $\bar{\alpha}$ and $\bar{f}$ are inverses of each other. To this end, see that
+    \begin{align}
+        \bar{f} \circ \bar{\alpha} (g(X) + I) = \bar{f} \circ \alpha (g(X)) = \bar{f} \circ g(\frac{1}{a}) = (b_{n}+I) \bar{f}(\frac{1}{a^{n}}) + (b_{n-1}+I) \bar{f}(\frac{1}{a^{n-1}}) + \cdots (b_{0}+I)
+    \end{align}
+    which is $(b_{n}+I)(X^{n}+I) + \cdots + (b_{1}+I)(X+I) + b_{0}+I = (b_{n}X^{n} + b_{n-1}X^{n-1} + \cdots + b_{0}) + I = g(X) + I$. Similarly, one can show that the $\bar{\alpha} \circ \bar{f}$.
+\end{proof}
+
+\subsection{Local Ring}
+
+\begin{definition}
+    A ring is called a \eax{local ring} if it has a unique maximal ideal.
+\end{definition}
+
+Of course, a trivial example is fields; the unique maximal ideal is $\{0\}$. In the ring of power series $k[[X]]$, $(X)$ is the unique maximal ideal making $k[[X]]$ a local ring for a field $k$. $\Z/p^{r}\Z$ is a local ring with $p\Z/p^{r}\Z$ the unique maximal ideal.
+
+For a more particular example, let $R \subseteq \C(X)$ be the subring of the field of complex rational functions defined as follows: $R = \{f(X)/g(X) \mid f(X),g(X) \in \C[X] \text{ and } g(0) \neq 0 \}$. One can verify that this is a ring; it is the ring of rational functions from $\C$ to $\C$ which is defined at $0$. Since such a function is continuous in its domain, it is locally define at $0$. In fact, $R$ is a local ring with the maximal ideal consisting of those rational functions $h$ such that $h(0) = 0$.
+\\
+
+\textit{March 12th.}
+
+\begin{proposition}
+    Let $R$ be a ring and $P$ be a prime ideal of $R$. Set $S = R \setminus P$. Then $S^{-1}R$ is a local ring with unique maximal ideal $PS^{-1}R = \{\frac{r}{s} \mid r \in P,\; s \in R \setminus P\}$.
+\end{proposition}
+\begin{proof}
+    Note that it is enough to show that $PS^{-1}R$ is an ideal and $\alpha \in S^{-1}R \setminus PS^{-1}R$ is a unit. To show that $PS^{-1}R$ is an ideal, let $\frac{r_{1}}{s_{1}},\frac{r_{2}}{s_{2}} \in PS^{-1}R$, so that $r_{1},r_{2} \in P$ and $s_{1},s_{2} \in R \setminus P$. Then $s_{2}r_{1}+s_{1}r_{2} \in P$ since $P$ is and ideal, and $s_{1}s_{2} \in R \setminus P$. Thus, $\frac{s_{2}r_{1}+s_{1}r_{2}}{s_{1}s_{2}} \in PS^{-1}R$. Also if $\frac{R}{s} \in S^{-1}R$, then $\frac{rr_{1}}{ss_{1}} \in PS^{-1}R$. Hence $PS^{-1}R$ is an ideal of $S^{-1}R$. Now let $\alpha = \frac{r}{s} \in S^{-1}R \setminus PS^{-1}R$. Since $\alpha \notin PS^{-1}R$, $r \notin P$. This means that $r \in R \setminus P = S$, so $\frac{s}{r} \in S^{-1}R$ is the multiplicative inverse of $\alpha$. Thus, $S^{-1}R$ is a local ring with unique maximal ideal $PS^{-1}R$.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be a ring $\mf{m}$ be a maximal ideal of $R$. Then the following are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+        \item $R$ is a local ring.
+        \item The set of non-units of $R$ form the ideal $\mf{m}$.
+        \item $1+x$ is a unit for all $x \in \mf{m}$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    $(i) \implies (ii)$: Let $J$ be the set of non-units of $R$. Note that $\mf{m} \subseteq J$ since $\mf{m}$ is a proper ideal. Let $x \in J$. Since $x$ is not a unit, there exists a maximal ideal $\mf{m}'$ containing $x$. Since $R$ is a local ring, $\mf{m}' = \mf{m}$, so $x \in \mf{m}$. Thus, $J \subseteq \mf{m}$, so $J = \mf{m}$.
+    
+    $(ii) \implies (iii)$: If $x \in \mf{m}$ and $1+x$ is not a unit, then $1+x \in \mf{m}$. But then $1 = (1+x) - x \in \mf{m}$, contradicting the fact that $\mf{m}$ is a proper ideal. Thus, $1+x$ is a unit for all $x \in \mf{m}$.
+
+    $(iii) \implies (i)$: Let $x \in \mf{m}$. Then $ax \in \mf{m}$ for all $a \in R$, and thus $1 + ax$ is a unit in $R$ for all $a \in R$. Hence, $x \in \Jac(R)$. Finally, we have $\mf{m} \subseteq \Jac(R)$ and so, $\mf{m} = \Jac(R)$ since $\Jac(R) \subseteq \mf{m}$ for any maximal ideal $\mf{m}$. Thus, $R$ is a local ring.
+\end{proof}
+
+We look at some examples of using these propositions to construct local rings.
+
+\begin{example}
+    Let $R = \Z$ and $P = (3)$. Then $S = \Z \setminus (3) = \{1,2,4,5,7,8,\ldots\}$ and $S^{-1}R$ is the ring $\Z_{(3)} = \{\frac{a}{b} \mid a,b \in \Z, \; 3 \nmid b\}$, which is a local ring with unique maximal ideal $\{\frac{a}{b} \mid a,b \in \Z, \; 3 \nmid b, \; 3 | a\}$.
+\end{example}
+
+\section{Polynomials and Gauss Lemma}
+\textit{March 13th.}
+
+Gauss lemma can refer to several results; the one Gauss originally proved is the following: let $f(X) \in \Z[X]$ be a polynomial such that $p \nmid f(X)$ for all primes $p$. If $f(X) = g(X) h(X)$ in $\Q[X]$ then there exists a factorization $f(X) = G(X) H(X)$ in $\Z[X]$ such that $\deg(g) = \deg(G)$ and $\deg(h) = \deg(H)$. We will see this result as a corollary of several sequence of results, which are also called Gauss lemma.
+
+\begin{definition}
+    Let $R$ be a ring which admits a $\gcd$ function (for example, a UDF). For $f(X) \in R[X]$, we define the \eax{content} of $f(X)$ as $c(f) = \gcd(a_{0},a_{1},\ldots,a_{n})$ where $f(X) = a_{n}X^{n} + \cdots + a_{1}X + a_{0}$. Note that $c = c(f)$ holds if and only if $uc = c(f)$ for all units $u \in R$. A polynomial $f(X)$ is called \eax{primitive} if $c(f) = 1$.
+\end{definition}
+
+As an example, $2X-1$ is a primitive polynomial in $\Z[X]$ since $c(2X-1) = 1$. On the other hand, $2X+2$ is not a primitive polynomial in $\Z[X]$ since $c(2X+2) = 2$. Note that if $f(X) \in R[X]$ is a non-zero polynomial, then $f(X) = c(f) f_{0}(X)$ for some primitive polynomial $f_{0}(X)$; indeed, we can take $f_{0}(X) = \frac{1}{c(f)} f(X)$.
+
+The first version of Gauss lemma is the following.
+\begin{lemma}[Gauss lemma, version 1]
+    Let $R$ be a UFD and $f(x),g(x) \in R[X]$. Then $c(fg) = c(f) c(g)$.
+\end{lemma}
+\begin{lemma}[Gauss lemma, version 2]
+    Let $R$ be a UFD and $K = \mathrm{frac}(R)$ be its field of fractions. Let $f(X) \in R[X] \subseteq K[X]$. If $f(X) = g(X) h(X)$ for some $g(X),h(X) \in K[X]$, then $f(X)$ can be factored as $f(X) = G(X) H(X)$ for some $G(X),H(X) \in R[X]$ such that $\deg(G) = \deg(g)$ and $\deg(H) = \deg(h)$.
+\end{lemma}
+
+One can easily see that the statement at the beginning of this section is a corollary of the second version of Gauss lemma. The following version of Gauss lemma, a corollary of the second version, is the most widely used version of Gauss lemma.
+
+\begin{corollary}[Gauss lemma, version 3]
+    Let $R$ be a UFD and $K = \mathrm{frac}(R)$ be its field of fractions. A primitive polynomial $f(X) \in R[X]$ is irreducible in $R[X]$ if and only if it is irreducible in $K[X]$.
+\end{corollary}
+
+We first begin with the proof of this corollary.
+\begin{proof}[Proof of Gauss lemma, version 3 from version 2]
+    For the forward implication, let $f(X) \in R[X]$ be a primitive polynomial which is irreducible in $R[X]$, and suppose $f(X) = g(X) h(X)$ for some $g(X),h(X) \in K[X]$. By version 2 of Gauss lemma, there exist some $G(X),H(X) \in R[X]$ such that $f(X) = G(X) H(X)$ and $\deg(G) = \deg(g) \geq 1$ and $\deg(H) = \deg(h) \geq 1$. Hence, $G$ and $H$ are non-units in $R[X]$, contradicting the irreducibility of $f(X)$ in $R[X]$. For the converse implication, assume $f(X)$ is irreducible in $K[X]$, and suppose $f(X) = G(X) H(X)$ for some $G(X),H(X) \in R[X]$. Since $f(X)$ is irreducible in $K[X]$, either $G(X)$ or $H(X)$ is a constant polynomial; let's say $G(X)$ is a constant polynomial. Then $f(X) = cH(X)$ for some $c \in R$. Since $f(X)$ is primitive, we must have $c \mid c(f) = 1$, so $c$ is a unit in $R$. Thus, $f(X)$ is irreducible in $R[X]$.
+\end{proof}
+
+We now prove the second verion.
+\begin{proof}[Proof of Gauss lemma, version 2 from version 1]
+    Let $f(X) \in R[X]$ be a polynomial such that $f(X) = g(X) h(X)$ with $g(X), h(X) \in K[X]$. Note that since each coefficient of $g(X)$ and $h(X)$ is a fraction, we can find some $\beta$ (possibly, the product of all denominators of coefficients of $g(X)$) and $\alpha$ (similarly pick $\alpha$) such that $G_{1}(X) = \beta g(X)$ and $H_{1}(X) = \alpha h(X)$ are in $R[X]$. Then $\alpha \beta f(X) = G_{1}(X) H_{1}(X)$, so $c(\alpha \beta f(X)) = \alpha \beta c(f) = c(G_{1}) c(H_{1})$. So $f(X) = c(f) F(X)$ where $F(X) \in R[X]$. Similarly, $G_{1}(X) = c(G_{1}) G(X)$ and $H_{1}(X) = c(H_{1}) H(X)$ for some $G,H \in R[X]$. Thus, $c(f) F(X) = c(G_{1}) c(H_{1}) G(X) H(X)$, so $F(X) = u G(X) H(X)$ where $u \in R$ is a unit. Hence, $u c(f) G(X), H(X) \in R[X]$ and $f(X) = c(F) F(X)$, with $\deg (u c (f) G(X)) = \deg (G(X)) = \deg(g(X))$ and $\deg(H(X)) = \deg(h(X))$.
+\end{proof}
+
+Finally, we prove the first version of Gauss lemma.
+\begin{proof}[Proof of Gauss lemma, version 1]
+    Let $f(X), g(X) \in R[X]$, and $h(X) = f(X) g(X)$. Let $f(X) = c(f) F(X)$, $g(X) = c(g) G(X)$, $h(X) = c(h) H(X)$ where $F(X),G(X),H(X) \in R[X]$.
+    Then $c(h) H(X) = c(f) c(g) F(X) G(X)$, so Note that $c(f) c(g)$ divides all coefficients of $h(X)$, so $c(f) c(g) \mid c(h)$. Let $c(f) c(g) = p_{1} \cdots p_{n}$ where $p_{i}$'s are irreducible in $R$ and $c(h) = p_{1} \cdots p_{n} q_{1} \cdots q_{m}$ where $q_{j}$'s are irreducible in $R$, and $m,n \geq 0$. If $m \neq 0$, then $q_{1}$ exists and $q_{1} \mid c(h)$, so that $p_{1} \cdots p_{n} q_{1} \mid c(h) H(X) = c(f) c(g) F(X) G(X)$. Thus $q_{1} \mid F(X) G(X)$ since $c(f) c(g) = p_{1} \cdots p_{n}$. Let $i_{0}$ be the smallest index $i$ such that $q_{1} \nmid b_{i_{0}}$ and let $j_{0}$ be the smallest index $j$ such that $q_{1} \nmid c_{j_{0}}$. Now look at the coefficient $a$ of $X^{i_{0}+j_{0}}$ in $F(X)G(X)$. Then $q_{1} \mid a$. But $a = b_{i_{0}}c_{j_{0}} + b_{i_{0}-1} c_{j_{0}+1} + \cdots + b_{0} c_{j_{0}+i_{0}} + b_{i_{0}+1}c_{j_{0}-1} + \cdots b_{i_{0}+j_{0}} c_{0} = b_{i_{0}} c_{j_{0}} + \text{(terms divisible by $q_{1}$)}$. Since $q_{1} \nmid b_{i_{0}}$ and $q_{1} \nmid c_{j_{0}}$, $q_{1} \nmid b_{i_{0}} c_{j_{0}}$, so $q_{1} \nmid a$, a contradiction since $q_{1}$ is a prime. Thus, $m = 0$, so $c(h) = c(f) c(g)$.
+\end{proof}
+
+\begin{example}
+    Let $f(X,Y) \in \C[X,Y]$ be $f(X,Y) = 2X^{3}Y + 3X^{2} + 7XY + 4$. Then $f(X,Y)$ is also in $\C(X)[Y]$, where $\C(X)$ is the formal power series field in $X$ over $\C$. Note that $f(X,Y) = (2X^3+7X) Y + (3X^2 + 4)$ is irreducible in $\C(X)[Y]$ since it is linear in $Y$. One can verify that $\gcd(2X^{3}+7X, 3X^{2}+4) = 1$ so $f(X,Y)$ is primitive in $\C[X][Y]$. By Gauss lemma, $f(X,Y)$ is irreducible in $\C[X][Y] = \C[X,Y]$.
+\end{example}
+
+\begin{theorem}
+    Let $R$ be a UFD. Then $R[X]$ is also a UFD.
+\end{theorem}
+\begin{proof}
+    Let $f(X) \in R[X]$, and write $f(X) = c(f) F(X)$ for some primitive $F(X) \in R[X]$ and $c(f) \in R$. Since $R$ is a UFD, we have $c(f) = p_{1} \cdots p_{r}$ for some irreducibles $p_{i} \in R$. Let $K = \mathrm{frac}(R)$. Then $F(X) \in K[X]$. But $K[X]$ is a euclidean domain, and hence a UFD; hence, $F(X) = g_{1}(X) \cdots g_{n}(X)$ where $g_{i}(X) \in K[X]$ are irreducible polynomials. By the second version of Gauss lemma, $F(X) = G_{1}(X) \cdots G_{n}(X)$ where $G_{i}(X) \in R[X]$, and $G_{i} = \alpha_{i} g_{i}$ for some $\alpha_{i} \in K^{\times}$. Also, $1 = c(F) = c(G_{1}) \cdots c(G_{n})$ implies $G_{i}$'s are primitive polynomials and, so, irreducile polynomials in $K[X]$. Therefore, $G_{i}(X)$ are irreducible in $R[X]$ by version 3 of Gauss lemma. So $f(X) = p_{1} \cdots p_{r} G_{1}(X) \cdots G_{n}(X)$. Suppose $f(X) = q_{!} \cdots q_{t}$ for $q_{i}$ irreduciles in $R[X]$. Note that $c(f) = c(q_{1}) \cdots c(q_{t})$ by the first version of Gauss lemma. Let $q_{i}(X) = c(q_{i}) Q_{i}(X)$ where $Q_{i}(X) \in R[x]$ are primitive. Since $q_{1}(X)$ is irreducible, either $c(q_{i})$ or $Q_{i}(X)$ is a unit, that is, $q_{i}(X)$ is primitive or $q_{i}(X)$ is a constant polynomial. After reordering, we may assume $q_{1},\ldots,q_{s}$ are constant polynomials and $q_{s+1}(X),\ldots,q_{t}(X)$ are non-constant primitive polynomials. So $c(f) = c(q_{1}) \cdots c(q_{r}) = q_{1} \cdots q_{s}$ and $q_{i}$ are irreducible constants in $R[X]$ and hence irreducible in $R$. Since $R$ is a UFD, $r = s$ and $p_{i}$'s are associate to $q_{i}$'s after reordering. Thus, $f(X) = c(f) F(X) = q_{s+1}(X) \cdots q_{t}(X) (q_{1} \cdots q_{s})$ so $F(X) = q_{s+1}(X) \cdots q_{t}(X) = G_{1}(X) \cdots G_{n}(X)$ in $R[X] \subseteq K[X]$. Since $K[X]$ is a UFD, after reordering, $n = t-s$ and $G_{i}(X) = u_{i} q_{s+i}(X)$ for some units $u_{i} \in K^{\times}$. Of course, these may not be units in $R$; let $u_{i} = \frac{a_{i}}{b_{i}}$ for some $a_{i},b_{i} \in R$ with $b_{i} \neq 0$. Then $b_{i}G_{i}(X) = a_{i}q_{s+i}(X)$ which implies $c(B_{i} G_{i}(X)) = c(a_{i} q_{s+i}(X))$ showing $a_{i}$ and $b_{i}$ are associates, or that $\frac{a_{i}}{b_{i}}$ is a unit in $R$.
+\end{proof}

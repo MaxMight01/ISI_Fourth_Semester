@@ -1,0 +1,528 @@
+\chapter{METRIC AND TOPOLOGICAL SPACES}
+
+\section{Metric Spaces and Examples}
+
+\textit{January 6th.}
+
+A \eax{metric space} is a pair $(X,d)$ where $X$ is a set and $d:X \times X \to \R_{\geq 0}$ is a function, called a \eax{metric} on $X$, satisfying the following properties for all $x,y,z \in X$:
+\begin{enumerate}[label=(\roman*)]
+    \item $d(x,y) = 0$ if and only if $x = y$ (\eax{positive definiteness}).
+    \item $d(x,y) = d(y,x)$ (\eax{symmetry}).
+    \item $d(x,z) \leq d(x,y) + d(y,z)$ (\eax{triangle inequality}).
+\end{enumerate}
+
+Let us look at some examples of metric spaces.
+
+\begin{example}
+    Any set $X$ can be made into a metric space by defining the \eax{discrete metric} $d$ as follows:
+    \begin{align}
+        d(x,y) = \begin{cases}
+            0 & \text{if } x = y, \\
+            1 & \text{if } x \neq y.
+        \end{cases}
+    \end{align}
+    It is easy to verify that $d$ satisfies all the properties of a metric.
+\end{example}
+
+\begin{example}
+    Recall that a normed space $(V, \norm{\cdot})$ was a vector space $V$ equipped with a \eax{norm} $\norm{\cdot}: V \to \R_{\geq 0}$ satisfying the following properties for all $u,v \in V$ and $\alpha \in \F$:
+    \begin{enumerate}[label=(\roman*)]
+        \item $\norm{v} = 0$ if and only if $v = 0$ (positive definiteness).
+        \item $\norm{\alpha v} = |\alpha| \norm{v}$ (\eax{absolute homogeneity}).
+        \item $\norm{u + v} \leq \norm{u} + \norm{v}$ (triangle inequality).
+    \end{enumerate}
+    Given a normed space $(V, \norm{\cdot})$, we can define a metric $d$ on $V$ as follows:
+    \begin{align}
+        d(u,v) = \norm{u - v} \quad \forall u,v \in V.
+    \end{align}
+    Yet again, it is straightforward to verify that $d$ satisfies all the properties of a metric. Given a vector space $V$, we can have multiple norms on it, and hence multiple metrics. For example, consider the vector space $\R^n$. We have the following norms on $\R^n$:
+    \begin{itemize}
+        \item The \eax{$\ell^{1}$ norm}: $\norm{x}_1 = \sum_{i=1}^{n} |x_i|$,
+        \item the \eax{Euclidean norm}: $\norm{x}_2 = \left( \sum_{i=1}^{n} |x_i|^2 \right)^{1/2}$,
+        \item the \eax{supremum norm}: $\norm{x}_{\infty} = \max_{1 \leq i \leq n} |x_i|$,
+    \end{itemize}
+    for all $x = (x_1, x_2, \ldots, x_n) \in \R^n$. Each of these norms induces a different metric on $\R^n$.
+\end{example}
+
+The notion of open and closed balls is also abstracted to metric spaces as follows.
+
+\begin{definition}
+    Let $(X,d)$ be a metric space. The \eax{open ball} of radius $r > 0$ centered at a point $x \in X$ is the set
+    \begin{align}
+        B(x,r) = \{ y \in X \mid d(x,y) < r \},
+    \end{align}
+    and the \eax{closed ball} of radius $r > 0$ centered at $x$ is the set
+    \begin{align}
+        B[x,r] = \{ y \in X \mid d(x,y) \leq r \}.
+    \end{align}
+\end{definition}
+
+Note that in the discrete metric space, $B(x,1) = \{x\} = B(x,\frac{1}{2})$, and $B(x,2) = X = B(y,2)$ for any $x,y \in X$. Thus, $B(x,r) = B(y,\rho)$ does not imply that $x = y$ or $r = \rho$ in general.
+
+\begin{example}
+    Let $p$ be a prime, say $p=3$. Define a function $\abs{\cdot}_{3}:\Z \to \R_{\geq 0}$ as follows: for any non-zero integer $m$, write $m = 3^{k} m'$ where $m'$ is not divisible by $3$, and set $\abs{m}_{3} = 3^{-k}$. Also, set $\abs{0}_{3} = 0$. This function $\abs{\cdot}_{3}$ is called the $3$-adic absolute value on $\Z$. In general, for any prime $p$, the \eax{$p$-adic absolute value} is defined similarly.
+
+    This $3$-adic absolute value induces a norm $d_{3}$ on $\Q$ as follows:
+    \begin{align}
+        \abs{q}_{3} = \begin{cases}
+            0 & \text{if } q = 0, \\
+            \abs{m}_{3} / \abs{n}_{3} & \text{if } q = m/n \text{ in lowest terms}.
+        \end{cases}
+    \end{align}
+    This induces a metric on $\Q$ defined by $d_{3}(x,y) = \abs{x - y}_{3}$ for all $x,y \in \Q$. This metric space $(\Q, d_{3})$ is called the $3$-adic metric space, and in general $(\Q, d_{p})$ is called the \eax{$p$-adic metric space}. The completion of $(\Q, d_{p})$ gives us the \eax{field of $p$-adic numbers}, denoted by $\Q_{p}$. This metric space has some interesting properties; for instance, the triangle inequality is strengthened to the \eax{ultrametric inequality}:
+    \begin{align}
+        d_{p}(x,z) \leq \max \{ d_{p}(x,y), d_{p}(y,z) \} \quad \forall x,y,z \in \Q.
+    \end{align}
+\end{example}
+
+
+\begin{lemma}[\eax{Hausdorff property}]
+    Let $(X,d)$ be a metric space. For any distinct $x,y \in X$, there exists $r > 0$ such that $B(x,r) \cap B(y,r) = \emptyset$.
+\end{lemma}
+\begin{proof}
+    Verify that choosing any $r \leq \frac{1}{2}d(x,y)$ works.
+\end{proof}
+
+Let $(X,d)$ be a metric space. Then a subset $A \subseteq X$ can also be made into a metric space by restricting the metric $d$ to $A \times A$. In the metric space $(A,d|_{A \times A})$, the open balls are given by $B_{A}(x,r) = B_{X}(x,r) \cap A$ for all $x \in A$ and $r > 0$, where $B_{X}(x,r)$ is the open ball in $(X,d)$.
+
+Again, as before, the notion of open sets is abstracted to metric spaces as follows.
+
+\begin{definition}
+    Let $(X,d)$ be a metric space. A subset $U \subseteq X$ is said to be an \eax{open set} if for every $x \in U$, there exists $r > 0$ such that $B(x,r) \subseteq U$. 
+\end{definition}
+
+As a small lemma, one can show that every open ball in a metric space is an open set. As an exercise, show that the complement of the closed ball $B[x,r]^{c} = \{y \mid d(x,y) > r\}$ is also an open set.
+
+\begin{proposition}
+    Let $(X,d)$ be a metric space. Let $\tau = \{ U \subseteq X \mid U \text{ is open} \}$, that is, the collection of all open sets in $X$. Then the following hold true.
+    \begin{enumerate}[label=(\roman*)]
+        \item $\emptyset, X \in \tau$.
+        \item For $\{U_{\alpha}\}_{\alpha \in \Lambda} \subseteq \tau$, we have $\bigcup_{\alpha \in \Lambda} U_{\alpha} \in \tau$. That is, an arbitrary union of open sets is open.
+        \item For $U_1, U_2, \ldots, U_n \in \tau$, we have $\bigcap_{i=1}^{n} U_i \in \tau$. That is, a finite intersection of open sets is open.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    The proof of the first property is trivial. For the second property, let $x \in \bigcup_{\alpha \in \Lambda} U_{\alpha}$. Then there exists some $\alpha_0 \in \Lambda$ such that $x \in U_{\alpha_0}$. Since $U_{\alpha_0}$ is open, there exists $r > 0$ such that $B(x,r) \subseteq U_{\alpha_0} \subseteq \bigcup_{\alpha \in \Lambda} U_{\alpha}$. Thus, $\bigcup_{\alpha \in \Lambda} U_{\alpha}$ is open.
+
+    For the third property, let $x \in \bigcap_{i=1}^{n} U_i$. Then $x \in U_i$ for all $1 \leq i \leq n$. Since each $U_i$ is open, there exists $r_i > 0$ such that $B(x,r_i) \subseteq U_i$ for all $1 \leq i \leq n$. Let $r = \min\{r_1, r_2, \ldots, r_n\}$. Then we have
+    \begin{align}
+        B(x,r) \subseteq B(x,r_i) \subseteq U_i \quad \forall 1 \leq i \leq n,
+    \end{align}
+    which implies that $B(x,r) \subseteq \bigcap_{i=1}^{n} U_i$. Thus, $\bigcap_{i=1}^{n} U_i$ is open.
+\end{proof}
+
+
+\section{Topological Spaces and Examples}
+
+A \eax{topological space} is a pair $(X, \tau)$ where $X$ is a set and $\tau$ is a collection of subsets of $X$ satisfying the following properties:
+\begin{enumerate}[label=(\roman*)]
+    \item $\emptyset, X \in \tau$.
+    \item For $\{U_{\alpha}\}_{\alpha \in \Lambda} \subseteq \tau$, we have $\bigcup_{\alpha \in \Lambda} U_{\alpha} \in \tau$. That is, an arbitrary union of sets in $\tau$ is in $\tau$.
+    \item For $U_1, U_2, \ldots, U_n \in \tau$, we have $\bigcap_{i=1}^{n} U_i \in \tau$. That is, a finite intersection of sets in $\tau$ is in $\tau$.
+\end{enumerate}
+
+These are the exact same properties that the collection of open sets in a metric space satisfy. Hence, every metric space $(X,d)$ gives rise to a topological space $(X, \tau_{d})$ where $\tau_{d}$ is the collection of all open sets in $(X,d)$. Such a topology $\tau_{d}$ is called the topology induced by the metric $d$.
+
+As a smaller example, let $X = \{0,1,2,3,4\}$ and consider the collection $\tau = \{\emptyset, X, \{0\}, \{0,1\}, \{2,4\}\}$. Then the pair $(X, \tau)$ is \textit{not} a topological space since $\{0,1\} \cup \{2,4\} = \{0,1,2,4\} \notin \tau$. However, the pair $(X, \tau')$ where $\tau' = \{\emptyset, X, \{0\}, \{0,1\}, \{2,4\}, \{0,1,2,4\}\}$ is a topological space.
+
+\subsubsection{Description of open sets in $\R$}
+
+\begin{theorem}
+    A non-empty open set in $\R$ is a countable union of pairwise disjoint open intervals.
+\end{theorem}
+\begin{proof}
+    Let $U \subseteq \R$ be a non-empty open set. For each $x \in U$, define
+    \begin{align}
+        I_{x} = \bigcup \{ (a,b) \mid x \in (a,b) \subseteq U \}.
+    \end{align}
+    Note that $x \in I_{x} \subseteq U$. Let $a_{x} = \inf I_{x}$ and $b_{x} = \sup I_{x}$. We claim that $I_{x} = (a_{x}, b_{x})$. For $a_{x} < z < b_{x}$, there exists $a,b \in I_{x}$ such that $a_{x} < a < z < b < b_{x}$. Since $z \in (a,b) \subseteq I_{x}$, we have $z \in I_{x}$. Thus, $(a_{x}, b_{x}) \subseteq I_{x}$. The other inclusion is trivial. Hence, $I_{x} = (a_{x}, b_{x})$ is an open interval.
+
+    We now claim that if $x \neq y$, then either $I_{x} = I_{y}$ or $I_{x} \cap I_{y} = \emptyset$. Suppose that $I_{x} \cap I_{y} \neq \emptyset$. Then $I_{x} \cup I_{y}$ is an interval containing both $x$ and $y$ and contained in $U$. By the definition of $I_{x}$ and $I_{y}$, we have $I_{x} \cup I_{y} \subseteq I_{x}$ and $I_{x} \cup I_{y} \subseteq I_{y}$. Thus, $I_{x} = I_{y}$.
+
+    Finally, let $U = \bigcup_{x \in U} I_{x}$. By the above claim, the collection $\{I_{x} \mid x \in U\}$ consists of pairwise disjoint open intervals. Since each $I_{x}$ contains a rational number (by the density of $\Q$ in $\R$), for each $I_{x}$, we can choose a distinct rational number $q_{x} \in I_{x}$. This gives $I_{x} = I_{q_{x}}$. Thus, we have
+    \begin{align}
+        U = \bigcup_{x \in U} I_{x} = \bigcup_{q \in \Q \cap U} I_{q},
+    \end{align}
+    which is a countable union of pairwise disjoint open intervals.
+\end{proof}
+
+\begin{definition}
+    Let $(X,d_{1})$ and $(X,d_{2})$ be two metric spaces on the same set $X$. The metrics $d_{1}$ and $d_{2}$ are said to be \eax{equivalent metrics}, $d_{1} \sim d_{2}$, if open sets in $(X,d_{1})$ are exactly the open sets in $(X,d_{2})$.
+\end{definition}
+
+
+\textit{January 8th.}
+
+\begin{definition}
+    Let $A \subseteq X$ be a subset of a metric space $(X,d)$. The \eax{interior} of $A$, denoted by $\Int(A)$, is defined as
+    \begin{align}
+        \Int (A) \defeq \{ x \in A \mid \exists r > 0 \text{ such that } B(x,r) \subseteq A \}.
+    \end{align}
+\end{definition}
+
+For a general topological space, the interior of a set $A$ is defined as the largest open set contained in $A$. For another definition, we have
+\begin{align}
+    \Int(A) \defeq \{x \in A \mid \exists U \in \tau \text{ such that } x \in U \subseteq A \}.
+\end{align}
+
+\begin{lemma}
+    The above definitions of the interior of a set in a topological space are equivalent.
+\end{lemma}
+\begin{proof}
+    Suppose we affirm the second definition. Let $x \in \Int (A)$. Then there exists an open set $U_{x} \in \tau$ such that $x \in U_{x} \subseteq A$. Thus, $\bigcup_{x \in \Int (A)} U_{x} \subseteq A$ is contained in $A$ and is open. Moreover, if $z \in \Int (A) \setminus \bigcup_{x \in \Int (A)} U_{x}$, then there exists an open set $V \in \tau$ such that $z \in V \subseteq A$. But then $z \in U_{z} \subseteq \bigcup_{x \in \Int (A)} U_{x}$, a contradiction. Thus, $\Int (A) = \bigcup_{x \in \Int (A)} U_{x}$ is the largest open set contained in $A$. If $V$ is any open set contained in $A$, then for any $y \in V$, there exists an open set $V_{y} \in \tau$ such that $y \in V_{y} \subseteq A$. Thus, $y \in \Int (A)$, which implies that $V \subseteq \Int (A)$. Hence, the first definition holds.
+\end{proof}
+
+As an example, with the standard topology on $\R$, we have $\Int([0,1]) = (0,1)$, $\Int((0,1) \cup \{2\}) = (0,1)$, and $\Int(\Q) = \emptyset$. Note that the interior of an open set is the set itself; $\Int(U) = U$ for any open set $U$.
+
+In the spirit of an induced metric, the subspace topology is defined as follows.
+\begin{definition}
+    Let $(X, \tau)$ be a topological space and let $Y \subseteq X$. The \eax{subspace topology} on $Y$ is defined as
+    \begin{align}
+        \tau_{Y} = \{ U \cap Y \mid U \in \tau \}.
+    \end{align}
+\end{definition}
+
+One can verify that $\tau_{Y}$ is a topology on $Y$. Let us look at some examples of topological spaces.
+
+\begin{example}
+    The \eax{discrete topology} on a set $X$ is the topology $\tau = \cP(X)$, the power set of $X$. Every subset of $X$ is open in this topology. In contrast, the \eax{indiscrete topology} (trivial topology) on $X$ is the topology $\tau = \{\emptyset, X\}$. Only the empty set and the whole set are open in this topology.
+\end{example}
+
+\begin{example}
+    Let $X$ be any set. The \eax{cofinite topology} on $X$ is defined as
+    \begin{align}
+        \tau = \{ U \subseteq X \mid U = \emptyset \text{ or } U^{c} \text{ is finite} \}.
+    \end{align}
+    One can verify that $\tau$ is a topology on $X$; both $\emptyset$ and $X$ are in $\tau$. For an arbitrary union of sets in $\tau$, if any one of them is $X$, then the union is $X$. Otherwise, the complement of the union is the intersection of finite sets, which is finite. For a finite intersection of sets in $\tau$, the complement of the intersection is the finite union of finite sets, which is finite. Thus, $\tau$ is a topology on $X$.
+\end{example}
+
+\begin{example}
+    Let $X$ be any set. The \eax{cocountable topology} on $X$ is defined as
+    \begin{align}
+        \tau = \{ U \subseteq X \mid U = \emptyset \text{ or } U^{c} \text{ is countable} \}.
+    \end{align}
+    One can verify that $\tau$ is a topology on $X$; both $\emptyset$ and $X$ are in $\tau$. For an arbitrary union of sets in $\tau$, if any one of them is $X$, then the union is $X$. Otherwise, the complement of the union is the intersection of countable sets, which is countable. For a finite intersection of sets in $\tau$, the complement of the intersection is the finite union of countable sets, which is countable. Thus, $\tau$ is a topology on $X$.
+\end{example}
+
+
+\subsection{Basis}
+
+\begin{definition}
+    Let $(X,\tau)$ be a topological space. A collection $\cB \subseteq \tau$ is said to be a \eax{basis} for $\tau$ if
+    \begin{enumerate}[label=(\roman*)]
+        \item For every $x \in X$, there exists $B \in \cB$ such that $x \in B$.
+        \item For any $B_1, B_2 \in \cB$ and any $x \in B_1 \cap B_2$, there exists $B_3 \in \cB$ such that $x \in B_3 \subseteq B_1 \cap B_2$.
+    \end{enumerate}
+\end{definition}
+
+For any set $X$, if we have a collection $\cB$ of subsets of $X$ satisfying the above two properties, then the collection
+\begin{align}
+    \tau = \{U \subseteq X \mid \forall x \in U, \exists B \in \cB \text{ such that } x \in B \subseteq U \}
+\end{align}
+is a topology on $X$, and $\cB$ is a basis for this topology.
+\\ \\
+\textit{January 9th.}
+
+For example, choosing $\cB = \cP(X)$ gives us the discrete topology on $X$, and choosing $\cB = \{X\}$ gives us the indiscrete topology on $X$.
+
+\begin{lemma}
+    Let $(X,\tau)$ be a topological space and let $\cB$ be a basis for $\tau$. Then $\tau$ is the collection of all possible unions of elements in $\cB$.
+\end{lemma}
+\begin{proof}
+    Note that every union of elements in $\cB$ is in $\tau$ by the definition of a topology; we need to show the other inclusion, that is, every set in $\tau$ can be expressed as a union of elements in $\cB$. Let $U \in \tau$. For each $x \in U$, by the definition of a basis, there exists $B_{x} \in \cB$ such that $x \in B_{x} \subseteq U$. Thus, we have
+    \begin{align}
+        U = \bigcup_{x \in U} B_{x},
+    \end{align}
+    which is a union of elements in $\cB$.
+\end{proof}
+
+\begin{definition}
+    Let $(X,\tau_{1})$ and $(X,\tau_{2})$ be two topological spaces on the same set $X$. We say $\tau_{1} \supseteq \tau_{2}$, or that $\tau_{1}$ is (strictly) \eax{finer} than $\tau_{2}$, if every open set in $\tau_{2}$ is also an open set in $\tau_{1}$. Conversely, we say $\tau_{2}$ is (strictly) \eax{coarser} than $\tau_{1}$ if every open set in $\tau_{1}$ is also an open set in $\tau_{2}$, that is, $\tau_{2} \subseteq \tau_{1}$.
+\end{definition}
+
+\begin{lemma}
+    Let $\cB$ and $\cB'$ be bases for topologies $\tau$ and $\tau'$ on the same set $X$. Then the following are equivalent:
+    \begin{enumerate}[label=$\mathrm{(\roman*)}$]
+        \item $\tau' \supseteq \tau$.
+        \item For all $x \in X$ and all $B \in \cB$ such that $x \in B$, there exists $B' \in \cB'$ such that $x \in B' \subseteq B$.
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    For the reverse implication, let $U \in \tau$. Then $U$ can be written as $U = \bigcup_{\alpha \in \Lambda} B_{\alpha}$ where $B_{\alpha} \in \cB$ for all $\alpha \in \Lambda$. For each $\alpha \in \Lambda$ and each $x \in B_{\alpha}$, by the second property, there exists $B'_{x} \in \cB'$ such that $x \in B'_{x} \subseteq B_{\alpha}$. Thus, we have
+    \begin{align}
+        U = \bigcup_{\alpha \in \Lambda} B_{\alpha} = \bigcup_{\alpha \in \Lambda} \bigcup_{x \in B_{\alpha}} B'_{x},
+    \end{align}
+    which is a union of elements in $\cB'$. Thus, $U \in \tau'$, and hence $\tau' \supseteq \tau$. For the forward implication, let $B \in \cB$ and $x \in B$. Since $B \in \tau \subseteq \tau'$, there exists $B' \in \cB'$ such that $x \in B' \subseteq B$.
+\end{proof}
+
+Let us look at some topologies generated by bases.
+
+\begin{example}
+    Let $X = \R$ and $\cB = \{[a,b) \mid a < b, \, a,b \in \R\}$. We claim that $\cB$ is a basis for a topology on $\R$. Clearly, for every $x \in \R$, there exists $[x,x+1) \in \cB$ such that $x \in [x,x+1)$. Now, let $B_1 = [a_1,b_1), B_2 = [a_2,b_2) \in \cB$ and let $x \in B_1 \cap B_2$. Then we have three cases:
+    \begin{itemize}
+        \item If $a_1 \leq a_2 \leq x \leq b_1 \leq b_2$, then choose $B_3 = [a_2, b_1)$.
+        \item If $a_2 \leq a_1 \leq x \leq b_2 \leq b_1$, then choose $B_3 = [a_1, b_2)$.
+        \item If $a_1 \leq x \leq b_2 \leq b_1$ (the case $a_2 \leq x \leq b_1 \leq b_2$ is similar), then choose $B_3 = [x, b_2)$.
+    \end{itemize}
+    In all cases, we have $x \in B_3 \subseteq B_1 \cap B_2$. Thus, $\cB$ is a basis for a topology on $\R$, called the \eax{lower limit topology} denoted by $\R_{l}$. Similarly, the collection $\cB' = \{(a,b] \mid a < b, \, a,b \in \R\}$ is a basis for a topology on $\R$, called the \eax{upper limit topology} denoted by $\R_{u}$.
+\end{example}
+
+\begin{example}
+    Ket $K = \{ 1/n \mid n \in \N \}$. Consider the collection
+    \begin{align}
+        \cB = \{ (a,b), (a,b) \setminus K \mid a < b, \, a,b \in \R \}.
+    \end{align}
+    Verify that $\cB$ is a basis for a topology on $\R$, called the \eax{K-topology} on $\R$, denoted by $\R_{K}$.
+\end{example}
+
+\begin{lemma}
+    The standard topology on $\R$ is strictly finer than $\R_{l}$, and also strictly finer than $\R_{K}$. However, $\R_{l}$ and $\R_{K}$ are not comparable.
+\end{lemma}
+\begin{proof}
+    For $\R_{l}$: Let $x \in \R$ and let $B = (a,b) \in \cB$ such that $x \in B$. Then choose $B' = [x, b) \in \cB$ such that $x \in B' \subseteq B$. Thus, by the previous lemma, the standard topology on $\R$ is finer than $\R_{l}$. To see that the inclusion is strict, note that $[a,b)$ is open in $\R_{l}$ but not in the standard topology on $\R$.
+
+    For $\R_{K}$: Note that inclusion is trivial since every basis element of $\R_{K}$ is also a basis element of the standard topology on $\R$. To see that the inclusion is strict, note that $(-1,1) \setminus K$ is open in $\R_{K}$ but not in the standard topology on $\R$.
+
+    For non-comparability of $\R_{l}$ and $\R_{K}$: Note that $[5,6)$ is open in $\R_{l}$ but not in $\R_{K}$ since it cannot be expressed as a union of basis elements of $\R_{K}$. Also, note that $(-1,1) \setminus K$ is open in $\R_{K}$ but not in $\R_{l}$ since it cannot be expressed as a union of basis elements of $\R_{l}$.
+\end{proof}
+
+
+\section{Closed Sets}
+
+\begin{definition}
+    Let $(X,\tau)$ be a topological space. A subset $A \subseteq X$ is said to be a \eax{closed set} if its complement $A^{c} = X \setminus A$ is an open set.
+\end{definition}
+
+Using De Morgan's laws, one can easily verify the following properties of closed sets in a topological space.
+\begin{proposition}
+    Let $(X,\tau)$ be a topological space. Then the following hold true.
+    \begin{enumerate}[label=(\roman*)]
+        \item $\emptyset$ and $X$ are closed sets.
+        \item For any collection $\{A_{\alpha}\}_{\alpha \in \Lambda}$ of closed sets, we have $\bigcap_{\alpha \in \Lambda} A_{\alpha}$ is a closed set. That is, an arbitrary intersection of closed sets is closed.
+        \item For closed sets $A_1, A_2, \ldots, A_n$, we have $\bigcup_{i=1}^{n} A_i$ is a closed set. That is, a finite union of closed sets is closed.
+    \end{enumerate}
+\end{proposition}
+
+\begin{lemma}
+    Any finite set of a metric space $(X,d)$ is closed.
+\end{lemma}
+\begin{proof}
+    Note that it is enough to show that a singleton set $\{x\}$ is closed for any $x \in X$. Let $y \in \{x\}^{c}$. Then $y \neq x$, and by the Hausdorff property, there exists $r > 0$ such that $B(x,r) \cap B(y,r) = \emptyset$. Thus, $B(y,r) \subseteq \{x\}^{c}$, which implies that $\{x\}^{c}$ is open. Hence, $\{x\}$ is closed.
+\end{proof}
+
+Similar to the open sets, we can define closed sets in a subspace as follows.
+
+\begin{theorem}
+    Let $(X,\tau)$ be a topological space and let $Y \subseteq X$ be a subspace with the subspace topology $\tau_{Y}$. Then a set $C \subseteq Y$ is closed in $(Y, \tau_{Y})$ if and only if there exists a closed set $D$ in $(X,\tau)$ such that $C = D \cap Y$.
+\end{theorem}
+\begin{proof}
+    Let $C$ be closed in $(Y, \tau_{Y})$. Then $C^{c} = Y \setminus C$ is open in $(Y, \tau_{Y})$. Thus, there exists an open set $U \in \tau$ such that $C^{c} = U \cap Y$. Let $D = U^{c}$, which is closed in $(X,\tau)$. Then we have
+    \begin{align}
+        C = Y \setminus C^{c} = Y \setminus (U \cap Y) = Y \cap U^{c} = Y \cap D.
+    \end{align}
+    Conversely, let $D$ be closed in $(X,\tau)$ and let $C = D \cap Y$. Then $D^{c}$ is open in $(X,\tau)$. Thus, we have
+    \begin{align}
+        C^{c} = Y \setminus C = Y \setminus (D \cap Y) = Y \cap D^{c},
+    \end{align}
+    which is open in $(Y, \tau_{Y})$. Hence, $C$ is closed in $(Y, \tau_{Y})$.
+\end{proof}
+
+Analogous to the interior of a set, we have the notion of the closure of a set.
+
+\begin{definition}
+    Let $(X,\tau)$ be a topological space and let $A \subseteq X$. The \eax{closure} of $A$, denoted by $\overline{A}$, is defined as the smallest closed set containing $A$. That is,
+    \begin{align}
+        \overline{A} \defeq \bigcap \{ C \subseteq X \mid C \text{ is closed and } A \subseteq C \}.
+    \end{align}
+\end{definition}
+
+
+\begin{theorem}
+    The closure of a set $A$ in a topological space $(X,\tau)$ is equivalent to saying
+    \begin{align}
+        \overline{A} = \{x \in X \mid \forall U \in \tau \text{ with } x \in U, \, U \cap A \neq \emptyset \}.
+    \end{align}
+\end{theorem}
+
+\begin{proof}
+    Let $x \in \overline{A}$ with $x \in U \in \tau$. Suppose for the sake of contradiction that $U \cap A = \emptyset$. Then we have $A \subseteq U^{c}$, where $U^{c}$ is closed. This must then imply that $\overline{A} \subseteq U^{c}$, which is a contradiction since $x \in U$. Thus, we have $U \cap A \neq \emptyset$.
+
+    For the converse inclusion, let $x \notin \overline{A}$. Then there exists a closed set $C$ such that $A \subseteq C$ but $x \notin C$. Thus, $x \in C^{c}$, where $C^{c}$ is open. Since $A \subseteq C$, we have $C^{c} \cap A = \emptyset$. Hence, there exists an open set $C^{c}$ containing $x$ such that $C^{c} \cap A = \emptyset$.
+\end{proof}
+
+Instead of using ``$\forall U \in \tau$'' in the above theorem, one can equivalently use ``$\forall B \in \cB$'' where $\cB$ is a basis for the topology $\tau$.
+\\ \\
+\textit{January 12th.}
+
+\begin{lemma}
+    $A$ is closed if and only if $A = \overline{A}$. Moreover, $A \subseteq B$ implies $\overline{A} \subseteq \overline{B}$.
+\end{lemma}
+\begin{proof}
+    The first assertion is left as an exercise. For the second assertion, let $x \in \overline{A}$. Then for every open set $U$ containing $x$, we have $U \cap A \neq \emptyset$. Since $A \subseteq B$, we have $U \cap B \neq \emptyset$. Thus, $x \in \overline{B}$.
+\end{proof}
+
+\begin{theorem}
+    Let $Y \subseteq X$ be a subspace of a topological space $(X, \tau)$. For any $A \subseteq Y$, we have
+    \begin{align}
+        \overline{A}^{Y} = \overline{A} \cap Y,
+    \end{align}
+    where $\overline{A}^{Y}$ is the closure of $A$ in the subspace $(Y, \tau_{Y})$ and $\overline{A}$ is the closure of $A$ in $(X, \tau)$.
+\end{theorem}
+\begin{proof}
+    We have
+    \begin{align}
+        \overline{A}^{Y} = \{ y \in Y \mid y \in U \cap Y, \, U \in \tau, \, U \cap Y \cap A \neq \emptyset \} \subseteq \overline{A} \cap Y.
+    \end{align}
+    Now let $y_{0} \in \overline{A} \cap Y$. Then for every $U \in \tau$ such that $y_{0} \in U$, we have $U \cap A \neq \emptyset$. Thus, taking intersection over all closed sets containing $A$ in $(X, \tau)$ and then intersecting with $Y$, we have
+    \begin{align}
+        \bigcap_{\substack{C \subseteq X \\ C \text{ closed} \\ A \subseteq C}} (C \cap Y) = \overline{A} \cap Y.
+    \end{align}
+    Thus, $y_{0} \in \overline{A}^{Y}$. Hence, we have $\overline{A}^{Y} = \overline{A} \cap Y$.
+\end{proof}
+
+\section{Convergence and Hausdorff Spaces}
+\begin{definition}
+    Let $(X,\tau)$ be a topological space and let $A \subseteq X$. A point $x \in X$ is said to be a \eax{limit point} of $A$ if for every open set $U \in \tau$ containing $x$, we have $(U \setminus \{x\}) \cap A \neq \emptyset$.
+\end{definition}
+
+Let us denote the set of all limit points of $A$ by $A'$. Then $A' \subseteq \overline{A}$ since for every open set $U$ containing a limit point $x$, we have $U \cap A \neq \emptyset$. Note that nothing can be said about the relation between $A$ and $A'$.
+
+For example, if $A = \{1/n \mid n \in \N\} \subseteq \R$ with the standard topology, then $A' = \{0\}$ and $\overline{A} = A \cup \{0\}$. If $A = (0,1) \cup \{2\}$, then $A' = [0,1]$ and $\overline{A} = [0,1] \cup \{2\}$. If $A = \Q \subseteq \R$ with the standard topology, then $A' = \R$ and $\overline{A} = \R$. There is a nice characterization of the closure of a set using limit points.
+
+\begin{theorem}
+    Let $(X,\tau)$ be a topological space and let $A \subseteq X$. Then
+    \begin{align}
+        \overline{A} = A \cup A'.
+    \end{align}
+\end{theorem}
+
+\begin{proof}
+    One direction is easy since we have already seen that $A, A' \subseteq \overline{A}$. For the other direction, let $x \in \overline{A}$. If $x \in A$, then we are done. So suppose that $x \notin A$. Then for every open set $U$ containing $x$, we have $U \cap A \neq \emptyset$. Since $x \notin A$, we have $(U \setminus \{x\}) \cap A \neq \emptyset$. Thus, $x$ is a limit point of $A$, and hence $x \in A'$. Therefore, we have $\overline{A} \subseteq A \cup A'$, and hence the result follows.
+\end{proof}
+
+\begin{corollary}
+    A set $A$ is closed if and only if $A' \subseteq A$.
+\end{corollary}
+
+We are now ready to define convergence in a (metric) topological space.
+
+\begin{definition}
+    Let $(X,d)$ be a metric space. A sequence $(x_{n})_{n \geq 1} \subseteq X$ is said to \eax{converge} to a point $x \in X$ if for every $\varepsilon > 0$, there exists a natural $N(\varepsilon) \equiv N \in \N$ such that
+    \begin{align}
+        d(x_{n}, x) < \varepsilon \quad \forall n \geq N.
+    \end{align}
+    Equivalently, the sequence $(d(x_{n},x))_{n \geq 1} \subseteq \R$ converges to $0$ in the usual sense.
+\end{definition}
+
+In the topological sense, we say $(x_{n})_{n \geq 1}$ converges to $x$ if for every open set $U$ containing $x$, there exists a natural $N(U) \equiv N \in \N$ such that
+\begin{align}
+        x_{n} \in U \quad \forall n \geq N.
+\end{align}
+
+Note that the limit of a sequence in a metric space is unique. However, in a general topological space, the limit of a sequence need not be unique. For example, consider the set $X$ with the indiscrete topology. Then every sequence in $X$ converges to every point in $X$.
+
+\begin{theorem}
+    Let $(X,d)$ be a metric space and let $(x_{n})_{n \geq 1} \subseteq X$ be a sequence converging to both $x$ and $y$ in $X$. Then $x = y$.
+\end{theorem}
+\begin{proof}
+    For every $\varepsilon > 0$, there exists $N_{1} \in \N$ such that
+    \begin{align}
+        d(x_{n}, x) < \varepsilon/2 \quad \forall n \geq N_{1}.
+    \end{align}
+    Similarly, there exists $N_{2} \in \N$ such that
+    \begin{align}
+        d(x_{n}, y) < \varepsilon/2 \quad \forall n \geq N_{2}.
+    \end{align}
+    Let $N = \max\{N_{1}, N_{2}\}$. Then for all $n \geq N$, we have
+    \begin{align}
+        d(x,y) \leq d(x,x_{n}) + d(x_{n},y) < \varepsilon/2 + \varepsilon/2 = \varepsilon.
+    \end{align}
+    Since $\varepsilon > 0$ is arbitrary, we have $d(x,y) = 0$, which implies that $x = y$.
+\end{proof}
+
+The concept of Hausdorff property can be generalized to topological spaces as follows: for every $x,y \in X$ with $x \neq y$, there exist open sets $U,V \in \tau$ such that $x \in U$, $y \in V$, and $U \cap V = \emptyset$.
+
+\begin{theorem}
+    Let $(X,\tau)$ be a Hausdorff topological space and let $(x_{n})_{n \geq 1} \subseteq X$ be a sequence converging to both $x$ and $y$ in $X$. Then $x = y$.
+\end{theorem}
+\begin{proof}
+    The proof is similar to that in the metric space case. For $x \neq y$, there exist open sets $U,V \in \tau$ such that $x \in U$, $y \in V$, and $U \cap V = \emptyset$. Since $(x_{n})_{n \geq 1}$ converges to $x$, there exists $N_{1} \in \N$ such that
+    \begin{align}
+        x_{n} \in U \quad \forall n \geq N_{1}.
+    \end{align}
+    Similarly, since $(x_{n})_{n \geq 1}$ converges to $y$, there exists $N_{2} \in \N$ such that
+    \begin{align}
+        x_{n} \in V \quad \forall n \geq N_{2}.
+    \end{align}
+    Let $N = \max\{N_{1}, N_{2}\}$. Then for all $n \geq N$, we have $x_{n} \in U$ and $x_{n} \in V$, which implies that $x_{n} \in U \cap V$. This is a contradiction since $U \cap V = \emptyset$. Hence, we must have $x = y$.
+\end{proof}
+
+\noindent \textit{January 13th.}
+
+\begin{lemma}
+    Let $(X,\tau)$ be a Hausdorff topological space. Then every finite subset of $X$ is closed.
+\end{lemma}
+\begin{proof}
+    It is enough to show that a singleton set $\{x\}$ is closed for any $x \in X$. Let $y \in \{x\}^{c}$. Then $y \neq x$, and by the Hausdorff property, there exist open sets $U,V \in \tau$ such that $x \in U$, $y \in V$, and $U \cap V = \emptyset$. Thus, $V \subseteq \{x\}^{c}$, which implies that $\{x\}^{c}$ is open. Hence, $\{x\}$ is closed.
+\end{proof}
+
+We ask this: is it true that if every finite subset of a topological space $(X,\tau)$ is closed, then $(X,\tau)$ is Hausdorff? The answer is no, since a counterexample is provided by the cofinite topology on an infinite set $X$. In this topology, every finite subset is closed, but the space is not Hausdorff.
+
+\begin{definition}
+    We say that a topological space $(X,\tau)$ is \eax{T1} if finite subsets of $X$ are closed.
+\end{definition}
+
+\begin{theorem}
+    Suppose $(X,\tau)$ is a T1 topological space. Let $A \subseteq X$. Then $x \in A'$ if and only if for every open set $U \in \tau$ containing $x$, we have $U \cap A$ is an infinite set.
+\end{theorem}
+\begin{proof}
+    The reverse implication is obvious by the very definition of $A'$. For the forward implication, let $x \in A'$ and let $U \in \tau$ be any open set containing $x$. Suppose for the sake of contradiction that $U \cap A$ is a finite set. Since $(X,\tau)$ is T1, finite subsets of $X$ are closed. Thus, $(U \cap A)^{c}$ is open. Moreover, we have
+    \begin{align}
+        x \in U \cap (U \cap A)^{c}, \quad (U \cap (U \cap A)^{c}) \cap A = \emptyset,
+    \end{align}
+    which is a contradiction since $x \in A'$. Hence, $U \cap A$ is an infinite set.
+\end{proof}
+
+Let us look at some examples of Hausdorff spaces.
+
+\begin{example}
+    If $X$ is Hausdorff, then the subspace $Y \subseteq X$ with the subspace topology is also Hausdorff. This is because for any $y_1, y_2 \in Y$ with $y_1 \neq y_2$, there exist open sets $U,V \in \tau$ such that $y_1 \in U$, $y_2 \in V$, and $U \cap V = \emptyset$. Thus, $y_1 \in U \cap Y$, $y_2 \in V \cap Y$, and $(U \cap Y) \cap (V \cap Y) = \emptyset$.
+\end{example}
+
+\begin{example}
+    For a space $(X,\tau)$, and a subset $A \subseteq X$, the \eax{boundary} of $A$ is defined as $\Bd(A) = \overline{A} \cap \overline{X\setminus A}$. Then $\Bd(A)$ and $\Int(A)$ are disoint; indeed, let $x \in \Bd(A) \cap \Int(A)$. Then there exists an open set $U \in \tau$ such that $x \in U \subseteq A$. Since $x \in \Bd(A)$, we have $x \in \overline{X \setminus A}$. Thus, for every open set $V \in \tau$ containing $x$, we have $V \cap (X \setminus A) \neq \emptyset$. In particular, taking $V = U$, we have $U \cap (X \setminus A) \neq \emptyset$, which is a contradiction since $U \subseteq A$. Hence, we must have $\Bd(A) \cap \Int(A) = \emptyset$.
+
+    Moreover, we have $\overline{A} = \Int(A) \cup \Bd(A)$. The reverse inclusion is trivial since $\Bd(A) \subseteq \overline{A}$ and $\Int(A) \subseteq A \subseteq \overline{A}$. For the forward inclusion, let $x \in \overline{A}$. If $x \in \Bd(A)$, then we are done. So suppose that $x \notin \Bd(A)$. Then $x \notin \overline{X \setminus A}$, which implies that there exists an open set $U \in \tau$ such that $x \in U$ and $U \cap (X \setminus A) = \emptyset$. Thus, we have $U \subseteq A$, which implies that $x \in \Int(A)$. Therefore, we have $\overline{A} = \Int(A) \cup \Bd(A)$.
+
+    Finally, if $\Bd(A) = \emptyset$, then $A$ is both open and closed. Indeed, since $\overline{A} = \Int(A) \cup \Bd(A)$, we have $\overline{A} = \Int(A)$. Thus, $A$ is closed. Also, since $\Bd(A) = \emptyset$, we have $\overline{X \setminus A} = \Int(X \setminus A)$. Thus, $X \setminus A$ is closed, which implies that $A$ is open.
+\end{example}
+
+\section{Product Spaces}
+
+For two metric spaces $(X,d_{X})$ and $(Y,d_{Y})$, we can define a metric on the product set $X \times Y$ as follows:
+\begin{align}
+    d((x_{1},y_{1}),(x_{2},y_{2})) = \max\{d_{X}(x_{1},x_{2}), d_{Y}(y_{1},y_{2}).\}
+\end{align}
+A basis of $X \times Y$ with the product metric is given by
+\begin{align}
+    \cB = \{ B_{X}(x,r) \times B_{Y}(y,r) \mid x \in X, y \in Y, r > 0 \}.
+\end{align}
+
+In particular, if $(X, \tau_{X})$ and $(Y, \tau_{Y})$ are two topological spaces, then we can define a topology on $X \times Y$, called the \eax{product topology}, by taking the basis
+\begin{align}
+    \cB = \{ U \times V \mid U \in \tau_{X}, V \in \tau_{Y} \}.
+\end{align}
+Then, the topology $\tau_{X \times Y}$ generated by the basis $\cB$ is called the product topology on $X \times Y$. Verify that $\tau_{X \times Y}$ is indeed a topology on $X \times Y$. Note that if $\tau_{X \times Y}$ was taken to be $\{U \times V \mid U \in \tau_{X}, V \in \tau_{Y}\}$, then it would not be a topology since it is not closed under arbitrary unions. Also worth noting is that if $X$ and $Y$ are both Hausdorff, then so is $X \times Y$ with the product topology.
+
+\begin{example}
+    $X$ is Hausdorff if and only if the diagonal set $\Delta = \{(x,x) \mid x \in X\} \subseteq X \times X$ is closed in $X \times X$ with the product topology; suppose $X$ is Hausdorff. Let $(x,y) \in (X \times X) \setminus \Delta$. Then $x \neq y$, and by the Hausdorff property, there exist open sets $U,V \in \tau$ such that $x \in U$, $y \in V$, and $U \cap V = \emptyset$. Thus, we have
+    \begin{align}
+        (U \times V) \cap \Delta = \emptyset, \quad (x,y) \in U \times V \subseteq (X \times X) \setminus \Delta,
+    \end{align}
+    which implies that $(X \times X) \setminus \Delta$ is open. Hence, $\Delta$ is closed. Conversely, suppose $\Delta$ is closed. Let $x,y \in X$ with $x \neq y$. Then $(x,y) \in (X \times X) \setminus \Delta$, which is open. Thus, there exists a basis element $U \times V$ such that
+    \begin{align}
+        (x,y) \in U \times V \subseteq (X \times X) \setminus \Delta.
+    \end{align}
+    This implies that $x \in U$, $y \in V$, and $U \cap V = \emptyset$. Hence, $X$ is Hausdorff.
+\end{example}
