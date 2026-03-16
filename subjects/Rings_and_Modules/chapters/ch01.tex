@@ -995,3 +995,36 @@ Finally, we prove the first version of Gauss lemma.
 \begin{proof}
     Let $f(X) \in R[X]$, and write $f(X) = c(f) F(X)$ for some primitive $F(X) \in R[X]$ and $c(f) \in R$. Since $R$ is a UFD, we have $c(f) = p_{1} \cdots p_{r}$ for some irreducibles $p_{i} \in R$. Let $K = \mathrm{frac}(R)$. Then $F(X) \in K[X]$. But $K[X]$ is a euclidean domain, and hence a UFD; hence, $F(X) = g_{1}(X) \cdots g_{n}(X)$ where $g_{i}(X) \in K[X]$ are irreducible polynomials. By the second version of Gauss lemma, $F(X) = G_{1}(X) \cdots G_{n}(X)$ where $G_{i}(X) \in R[X]$, and $G_{i} = \alpha_{i} g_{i}$ for some $\alpha_{i} \in K^{\times}$. Also, $1 = c(F) = c(G_{1}) \cdots c(G_{n})$ implies $G_{i}$'s are primitive polynomials and, so, irreducile polynomials in $K[X]$. Therefore, $G_{i}(X)$ are irreducible in $R[X]$ by version 3 of Gauss lemma. So $f(X) = p_{1} \cdots p_{r} G_{1}(X) \cdots G_{n}(X)$. Suppose $f(X) = q_{!} \cdots q_{t}$ for $q_{i}$ irreduciles in $R[X]$. Note that $c(f) = c(q_{1}) \cdots c(q_{t})$ by the first version of Gauss lemma. Let $q_{i}(X) = c(q_{i}) Q_{i}(X)$ where $Q_{i}(X) \in R[x]$ are primitive. Since $q_{1}(X)$ is irreducible, either $c(q_{i})$ or $Q_{i}(X)$ is a unit, that is, $q_{i}(X)$ is primitive or $q_{i}(X)$ is a constant polynomial. After reordering, we may assume $q_{1},\ldots,q_{s}$ are constant polynomials and $q_{s+1}(X),\ldots,q_{t}(X)$ are non-constant primitive polynomials. So $c(f) = c(q_{1}) \cdots c(q_{r}) = q_{1} \cdots q_{s}$ and $q_{i}$ are irreducible constants in $R[X]$ and hence irreducible in $R$. Since $R$ is a UFD, $r = s$ and $p_{i}$'s are associate to $q_{i}$'s after reordering. Thus, $f(X) = c(f) F(X) = q_{s+1}(X) \cdots q_{t}(X) (q_{1} \cdots q_{s})$ so $F(X) = q_{s+1}(X) \cdots q_{t}(X) = G_{1}(X) \cdots G_{n}(X)$ in $R[X] \subseteq K[X]$. Since $K[X]$ is a UFD, after reordering, $n = t-s$ and $G_{i}(X) = u_{i} q_{s+i}(X)$ for some units $u_{i} \in K^{\times}$. Of course, these may not be units in $R$; let $u_{i} = \frac{a_{i}}{b_{i}}$ for some $a_{i},b_{i} \in R$ with $b_{i} \neq 0$. Then $b_{i}G_{i}(X) = a_{i}q_{s+i}(X)$ which implies $c(B_{i} G_{i}(X)) = c(a_{i} q_{s+i}(X))$ showing $a_{i}$ and $b_{i}$ are associates, or that $\frac{a_{i}}{b_{i}}$ is a unit in $R$.
 \end{proof}
+
+\subsubsection{Eisenstein's Criterion}
+
+
+\textit{March 16th.}
+
+\begin{theorem}
+    Let $f(X) \in \Z[X]$ be a monic polynomial and $p$ be a prime such that $p \mid a_{i}$ for all $i < n$ and $p^{2} \nmid a_{0}$. Then $f(X)$ is irreducible in $\Z[X]$ (and hence in $\Q[X]$).
+\end{theorem}
+\begin{proof}
+    Suppose $f(X) = g(X) h(X)$ for some $g(X),h(X) \in \Z[X]$. We may assume $g(X)$ and $h(X)$ are monic. Let $g(X) = X^{m} + b_{m-1} X^{m-1} + \cdots + b_{0}$ and $h(X) = X^{l} + c_{l-1} X^{l-1} + \cdots + c_{0}$. Let $i_{0}$ be the least index $i$ such that $p \nmid b_{i_{0}}$, and $j_{0}$ be the least index $j$ such that $p \nmid c_{j_{0}}$. Now consider $a_{i_{0}+j_{0}}$, the coefficient of $X^{i_{0}+j_{0}}$ in $f(X) = g(X)h(X)$. If $i_{0} < m$ or $j_{0} < l$, then $p \mid a_{i_{0}+j_{0}}$. We have $a_{i_{0}+j_{0}} = b_{i_{0}} c_{j_{0}} + \text{(terms divisible by $p$)}$, so $p \mid b_{i_{0}} c_{j_{0}}$. But then $p$ must divide either $b_{i_{0}}$ or $c_{j_{0}}$, contradicting the definition of $i_{0}$ and $j_{0}$. Thus, $i_{0} = m$ and $j_{0} = l$, so $p \mid b_{i}$ for all $i < m$ and $p \mid c_{j}$ for all $j < l$. Hence, $p^{2} \mid a_{0} = b_{0} c_{0}$, contradicting the assumption. Thus, $f(X)$ is irreducible in $\Z[X]$.
+\end{proof}
+
+
+\section{Noetherian Rings}
+
+\begin{proposition}
+    Let $R$ be a ring. The following are equivalent.
+    \begin{enumerate}
+        \item Every ideal of $R$ is finitely generated.
+        \item Every increasing sequence of ideals stabilizes.
+        \item Let $\Omega$ be any non-empty collection of ideals of $R$. Then $\Omega$ has a maximal element under inclusion.
+    \end{enumerate}
+\end{proposition}
+Any ring satisfying any (all) of the three conclusions is termed a \eax{noetherian ring}. Examples include any principal ideal domain, and fields. If $R_{1},\ldots,R_{n}$ are noetherian, then so is their product. If $R$ is noetherian and $I$ is an ideal of $R$, then $R/I$ is also noetherian. For a noetherian ring $R$ and $S$ a multiplicative subset, $S^{-1}R$ is also noetherian. The Hilbert basis theorem states that if $R$ is noetherian, then so is $R[X]$.
+
+\begin{proof}
+    1.~implies 2.: Let $I_{0} \subseteq I_{1} \subseteq I_{2} \subseteq \cdots$ be an increasing sequence of ideals of $R$. Let $I = \bigcup_{n=0}^{\infty} I_{n}$, which is an ideal of $R$. Since $I$ is finitely generated, we have $I = (x_{1},\ldots,x_{n})$ for some $n$ with $x_{i} \in I$. Since $x_{i} \in I$, there exists $N_{i}$ such that $x_{i} \in I_{N_{i}}$. Let $N = \max\{N_{1},\ldots,N_{n}\}$. Then $x_{1},\ldots,x_{n} \in I_{N}$, so $I = (x_{1},\ldots,x_{n}) \subseteq I_{N}$. Since $I_{N} \subseteq I$, we have $I = I_{N}$. Hence, the sequence stabilizes at $I_{N}$.
+
+    2.~implies 3.: Let $I_{0} \in \Omega$. If $I_{0}$ is not maximal, there exists $I_{1}$ such that $I_{0} \subsetneq I_{1}$ and $I_{1} \in \Omega$. If $I_{1}$ is not maximal, there exists $I_{2}$ such that $I_{1} \subsetneq I_{2}$ and $I_{2} \in \Omega$. Continuing in this way, we get a strictly increasing sequence $I_{0} \subsetneq I_{1} \subsetneq I_{2} \subsetneq \cdots$ of ideals in $\Omega$, contradicting the assumption. Hence, there exists a maximal element in $\Omega$.
+
+    3.~implies 1.: Let $I \subseteq R$ be an ideal. Let $x_{1} \in I$. If $I = (x_{1})$, then $I$ is finitely generated. Otherwise, there exists $x_{2} \in I \setminus (x_{1})$. If $I = (x_{1},x_{2})$, then $I$ is finitely generated. Otherwise, there exists $x_{3} \in I \setminus (x_{1},x_{2})$. Continuing in this way, we get a sequence of ideals $(x_{1}) \subsetneq (x_{1},x_{2}) \subsetneq (x_{1},x_{2},x_{3}) \subsetneq \cdots$. If this process never terminates, then $\Omega = \{I_{1},I_{2},\ldots\}$ has no maximal element, contradicting the assumption. Hence, there exists $n$ such that $I = (x_{1},\ldots,x_{n})$, so $I$ is finitely generated.
+\end{proof}
