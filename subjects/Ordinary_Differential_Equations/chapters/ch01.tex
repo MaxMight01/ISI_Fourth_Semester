@@ -923,5 +923,27 @@ Linearization, however, doesn't always capture the local behaviour around a fixe
 \end{definition}
 
 \begin{theorem}[\eax{Hartman-Grobman theorem}]
-    Suppose $\dot{X} = f(X)$ and $f \in c^{1}$. Say $p \in \R^{2}$ is a hyperbolic center point and let $\dot{Z} = AZ$ be the linear approximation of $\dot{X} = f(X)$ at $p$. Then, there exists an open neighborhood $U$ of $p$ such that the flow of $\dot{X} = f(X)$ restricted to $U$ is topologically conjugate to the flow of $\dot{Z} = AZ$ restricted to some open neighborhood of the origin, with $p$ mapped to the origin.
+    Suppose $\dot{X} = f(X)$ and $f \in C^{1}$. Say $p \in \R^{2}$ is a hyperbolic center point and let $\dot{Z} = AZ$ be the linear approximation of $\dot{X} = f(X)$ at $p$. Then, there exists an open neighborhood $U$ of $p$ such that the flow of $\dot{X} = f(X)$ restricted to $U$ is topologically conjugate to the flow of $\dot{Z} = AZ$ restricted to some open neighborhood of the origin, with $p$ mapped to the origin.
 \end{theorem}
+
+\textit{March 16th.}
+
+\begin{theorem}[The \eax{box flow theorem}]
+    Let $\dot{X} = f(X)$, where $f \in C^{1}$. Say $p \in \R^{2}$ is such that $f(p) \neq 0$. Then, there exists an open neighborhood $U$ of $p$ such that the flow of $\dot{X} = f(X)$ restricted to $U$ is topologically conjugate to the flow of $\dot{Z} = AZ$ where $A = \begin{pmatrix}
+        0 & 1 \\
+        0 & 0
+    \end{pmatrix}$, with $p$ mapped to the origin.
+\end{theorem}
+
+\begin{theorem}[The \eax{stable manifold theorem}]
+    Suppose $\dot{X} = f(X)$ and $f \in C^{1}$. Say $p \in \R^{2}$ is a saddle point. Then there are 2 invariant curves (manifolds) through $p$ such that the flow of $\dot{X} = f(X)$ restricted to an open neighborhood of $p$ is topologically conjugate to the flow of $\dot{Z} = AZ$ where $A = \begin{pmatrix}
+        1 & 0 \\
+        0 & -1
+    \end{pmatrix}$, with $p$ mapped to the origin.
+\end{theorem}
+
+\subsection{Conservative Systems}
+
+\begin{definition}
+    A system $\dot{X} = f(X)$ is \eax{conservative} if there exists a $C^{1}$-function $E:\R^{2} \to \R$ such that along any solution $X(t)$ of $\dot{X} = f(X)$, we have $E$ is constant but $E \not\equiv \text{constant}$.
+\end{definition}
