@@ -947,3 +947,22 @@ Linearization, however, doesn't always capture the local behaviour around a fixe
 \begin{definition}
     A system $\dot{X} = f(X)$ is \eax{conservative} if there exists a $C^{1}$-function $E:\R^{2} \to \R$ such that along any solution $X(t)$ of $\dot{X} = f(X)$, we have $E$ is constant but $E \not\equiv \text{constant}$.
 \end{definition}
+
+\textit{March 18th.}
+
+A point $x^{\ast}$ is termed \eax{asymptotically stable} if there exists $\delta > 0$ such that $X(t,p) \to x^{\ast}$ for all $p \in B(x^{\ast},\delta)$.
+
+\begin{lemma}
+    A conservative system cannot have an asymptotically stable point.
+\end{lemma}
+\begin{proof}
+    Suppose we have a conservative system $\dot{X} = f(X)$ with $x^{\ast}$ an asymptotically stable point. Let $E:\R^{2} \to \R$ be a $C^{1}$-function such that along any solution $X(t)$ of $\dot{X} = f(X)$, we have $E$ is constant but $E \not\equiv \text{constant}$. For any $p \in B(x^{\ast},\delta)$, we have $X(t,p) \to x^{\ast}$. So $E(X(t,p)) = E(x^{\ast})$ for all $t$. Hence, $E(p) = E(x^{\ast})$ for all $p \in B(x^{\ast},\delta)$, which contradicts the fact that $E \not\equiv \text{constant}$.
+\end{proof}
+
+So far, we have been discussing local behaviour of solutions around hyperbolic fixed points and regular points. We ask this non-local question: can a system have a closed orbit? That is, can a solution $X(t)$ of $\dot{X} = f(X)$ satisfy $X(t+T) = X(t)$ for some $T > 0$? We can rule out the existence of closed orbits in some cases. For instance, consider gradient systems; $\dot{X} = - \nabla V(X)$, where $V$ is a $C^{1}$-function. Such a system cannot have a closed orbit.
+
+\begin{proof}
+    Suppose $\dot{X} = - \nabla V(X)$ has a closed orbit $X(t)$ with period $T > 0$. Denote the trajectory $t \mapsto V(X(t))$ by $\varphi$. Then, $0 = \varphi(T) - \varphi(0) = \int_{0}^{T} \varphi'(t) \, dt = \int_{0}^{T} -\norm{\dot{X}(t)}^{2} \, dt < 0$. This is a contradiction, and hence $\dot{X} = - \nabla V(X)$ cannot have a closed orbit.
+\end{proof}
+
+Another way of ruling out the existence of closed orbits is to analyze energy-like functions along solutions. If we can show that there is an energy function $F$ which descreases across solutions, then a similar proof as above can be used to show that there are no closed orbits. We may also rule out orbits via \eax{Dulac's condition}. Suppose $U \subseteq \R^{2}$ is an open, connected, and simply connected set, and $\dot{X} = f(X)$ is a system with $f$ a $C^{1}$-function. If $\nabla \cdot f$ is always non-negative (or always non-positive) on $U$, and $\nabla \cdot f$ is not identically zero, then $\dot{X} = f(X)$ cannot have a closed orbit contained in $U$. The proof of this utilises the divergence theorem, via $\int_{\Omega} \nabla \cdot f \, dA = \int_{\partial \Omega} f \cdot n \, ds$ for any closed curve $\partial \Omega$ contained in $U$. In this setting, we can also find a $C^{1}$-function $g:U \to \R$ such that $\nabla \cdot (g f)$ is always non-negative (or always non-positive) on $U$, and $\nabla \cdot (g f)$ is not identically zero, then $\dot{X} = f(X)$ cannot have a closed orbit contained in $U$.
