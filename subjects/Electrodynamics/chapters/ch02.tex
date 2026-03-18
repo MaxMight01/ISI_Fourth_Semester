@@ -40,7 +40,7 @@ Since this must hold for any arbitrary volume $\curs{v}$, and using the fact tha
 \end{align}
 This is the \eax{continuity equation} for electric charge. It is a statement of the conservation of electric charge, and it tells us that the rate of change of charge density in a given volume is equal to the negative of the divergence of the current density. In other words, if there is a net outflow of current from a given volume, then the charge density in that volume must decrease, and vice versa. The continuity equation is a fundamental equation in electrodynamics, and it is satisfied by all physical processes involving electric charge and current.
 
-\section{Biot-Savart Law}
+\section{Analogous Ideas}
 
 We wish to translate some of the laws regarding electrostatics to the case of electrodynamics, or magnetostatics. Note that just as electrostatics arises from the study of stationary charges, magnetostatics arises from the study of steady currents, since this implies $\frac{\partial{\rho}}{\partial{t}} = 0$ and $\nabla \cdot \bv{J} = 0$. We will now derive the analogue of Coulomb's law for magnetostatics, which is known as the \eax{Biot-Savart law}. It states this:
 \begin{align}
@@ -69,4 +69,19 @@ where we have used the fact that $\nabla \times \left( \frac{\hat{\bcurs{r}}}{\c
 \begin{align}
     \oint \bv{B} \cdot \di{\bv{l}} = \int_{S} (\nabla \times \bv{B}) \cdot \di{\bv{a}} = \mu_{0} \int_{S} \bv{J} \cdot \di{\bv{a}} = \mu_{0} I_{\text{enc}},
 \end{align}
-where $I_{\text{enc}}$ is the current enclosed by the loop $\partial S$. This is the integral form of Ampère's law, and it is often more useful for calculating magnetic fields in situations with high symmetry. 
+where $I_{\text{enc}}$ is the current enclosed by the loop $\partial S$. This is the integral form of Ampère's law, and it is often more useful for calculating magnetic fields in situations with high symmetry.
+\\ \\
+\noindent \textit{March 18th.}
+
+We had already derived the current due to a long straight wire, which is given by $B = \frac{\mu_{0} I}{2 \pi s}$. The problem becomes almost trivial using Ampère's law. We can choose an Amperian loop to be a circle of radius $s$ centered on the wire. The magnetic field is tangent to the loop at every point, and its magnitude is constant along the loop. Thus, we have
+\begin{align}
+\oint \bv{B} \cdot \di{\bv{l}} = B \oint \di{l} = B (2 \pi s) = \mu_{0} I \implies B = \frac{\mu_{0} I}{2 \pi s}.
+\end{align}
+Now consider a \eax{solenoid}, which is a long cylindrical coil of wire with $n$ turns per unit length, carrying a current $I$. With a little bit of thought, we can see that the magnetic field inside the solenoid is uniform and parallel to the axis of the solenoid. We can choose an Amperian loop to be a rectangle that extends inside and outside the solenoid, with one side parallel to the axis of the solenoid and the other side perpendicular to it. The magnetic field outside the solenoid is negligible, so the contribution to the line integral from the outside part of the loop is zero. The contribution from the inside part of the loop is $B \cdot l$, where $l$ is the length of the side of the loop that is parallel to the axis of the solenoid. The current enclosed by the loop is $I_{\text{enc}} = n I l$, since there are $n$ turns per unit length and each turn carries a current $I$. Hence, we have
+\begin{align}
+B \cdot l = \mu_{0} n I l \implies B = \mu_{0} n I.
+\end{align}
+
+\subsection{Potential}
+
+We have already seen that $\nabla \cdot \bv{E} = \frac{\rho}{\epsilon_{0}}$ and $\nabla \times \bv{E} = 0$ in electrostatics, and $\nabla \cdot \bv{B} = 0$ and $\nabla \times \bv{B} = \mu_{0} \bv{J}$ in magnetostatics. We can now ask if there are potentials associated with the electric and magnetic fields. In electrostatics, since $\nabla \times \bv{E} = 0$, we can write $\bv{E} = -\nabla V$, where $V$ is the electric potential. In magnetostatics, since $\nabla \cdot \bv{B} = 0$, we can write $\bv{B} = \nabla \times \bv{A}$, where $\bv{A}$ is the \eax{magnetic vector potential}. Note that just like $V$ was arbitrary up to an additive constant, $\bv{A}$ is also arbitrary up to the gradient of a scalar function, since $\nabla \times (\bv{A} + \nabla \lambda) = \nabla \times \bv{A}$. 
