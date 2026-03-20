@@ -744,3 +744,28 @@ We use this lemma to show the extension theorem.
     \end{align}
     Hence, $g$ is continuous mapping into $\R$. Let $\varphi:\R \to [-1,1]$ be the continuous function defined as $y \mapsto \frac{y}{\abs{y}}$ for $\abs{y} > 1$, and $y \mapsto y$ for $\abs{y} \leq 1$. Then define $\tilde{g} = \varphi \circ g :X \to [-1,1]$. $\tilde{g}$ is continuous since it is a composition of continuous functions, and $\tilde{g}|_{A} = \varphi \circ g|_{A} = \varphi \circ f = f$, so $\tilde{g}$ is the desired extension of $f$.
 \end{proof}
+
+\textit{March 20th.}
+
+\begin{definition}
+    Suppose we have a mapping $\varphi : X \to \R$. The \eax{support} of $\varphi$ is defined as $\supp(\varphi) = \overline{\{x \in X \mid \varphi(x) \neq 0\}}$.
+\end{definition}
+
+\begin{definition}
+    Let $\{U_{i}\}_{i=1}^{n}$ be a finite open cover of $X$. We call $\{\varphi_{i}\}_{i=1}^{n}$ a \eax{partition of unity} dominated by $\{U_{i}\}_{i=1}^{n}$ if $\varphi_{i} : X \to [0,1]$ is continuous for all $i$, $\supp(\varphi_{i}) \subseteq U_{i}$ for all $i$, and $\sum_{i=1}^{n} \varphi_{i}(x) = 1$ for all $x \in X$.
+\end{definition}
+
+\begin{lemma}
+    Let $X$ be a normal space, and $\{U_{i}\}_{i=1}^{n}$ be a finite open cover of $X$. Then there exists a finite open cover $\{V_{i}\}_{i=1}^{n}$ of $X$ such that $\bar{V}_{i} \subseteq U_{i}$ for all $i$.
+\end{lemma}
+
+\begin{proof}
+    Let $F_{1} = X \setminus (U_{2} \cup \cdots \cup U_{n}) \subseteq U_{1}$, so that $F_{1}$ is a closed set. By normality, there exists an open $V_{1}$ such that $F_{1} \subseteq V_{1} \subseteq \bar{V}_{1} \subseteq U_{1}$. Note that $V_{1},U_{2},\ldots,U_{n}$ cover $X$. Let $F_{2} = X \setminus (V_{1} \cup U_{3} \cup \cdots \cup U_{n}) \subseteq U_{2}$, so that $F_{2}$ is a closed set. By normality, there exists an open $V_{2}$ such that $F_{2} \subseteq V_{2} \subseteq \bar{V}_{2} \subseteq U_{2}$. Note that $V_{1},V_{2},U_{3},\ldots,U_{n}$ cover $X$. Continuing this process, we can find a finite open cover $\{V_{i}\}_{i=1}^{n}$ of $X$ such that $\bar{V}_{i} \subseteq U_{i}$ for all $i$.
+\end{proof}
+
+\begin{theorem}
+    If $X$ is normal, then every finite open cover of $X$ admits a partition of unity dominated by it.
+\end{theorem}
+\begin{proof}
+    By the previous lemma, we can find a finite open cover $\{V_{i}\}_{i=1}^{n}$ of $X$ such that $\bar{V}_{i} \subseteq U_{i}$ for all $i$. By Urysohn's lemma, there exists a continuous function $g_{i} : X \to [0,1]$ such that $g_{i}(\bar{V}_{i}) = \{1\}$ and $g_{i}(X \setminus U_{i}) = \{0\}$ for each $i$. Then, we can define $\varphi_{i} : X \to [0,1]$ by $\varphi_{i}(x) = \frac{g_{i}(x)}{\sum_{j=1}^{n} g_{j}(x)}$. Note that $\varphi_{i}$ is continuous since it is a quotient of continuous functions. If $x \in X \setminus U_{i}$, then $g_{i}(x) = 0$, so $\varphi_{i}(x) = 0$, giving $\supp(\varphi_{i}) \subseteq U_{i}$. Finally, we have $\sum_{i=1}^{n} \varphi_{i}(x) = 1$ for all $x$, so $\{\varphi_{i}\}_{i=1}^{n}$ is a partition of unity dominated by $\{U_{i}\}_{i=1}^{n}$.
+\end{proof}
