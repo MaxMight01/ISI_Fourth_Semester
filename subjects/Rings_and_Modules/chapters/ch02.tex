@@ -1,0 +1,46 @@
+\chapter{MODULES}
+
+\section{Abstracting Vector Spaces}
+
+Just as in the way that vector spaces are defined over fields, we can analogously define modules over rings. The theory of modules extends beyond commutative rings with unity to non-commutative rings as well, but we will restrict ourselves to the commutative case.
+
+\begin{definition}
+    Let $R$ be a ring. An $R$-\eax{module} $(M,+,\cdot,R)$ where $+ : M \times M \to M$ is a binary operation and $\cdot : R \times M \to M$ is a function satisfying the following axioms.
+    \begin{itemize}
+        \item $(M,+)$ is an abelian group.
+        \item $r \cdot (m_{1} + m_{2}) = r \cdot m_{1} + r \cdot m_{2}$ for all $r \in R$ and $m_{1},m_{2} \in M$.
+        \item $(r_{1} + r_{2}) \cdot m = r_{1} \cdot m + r_{2} \cdot m$ for all $r_{1},r_{2} \in R$ and $m \in M$.
+        \item $1 \cdot m = m$ for all $m \in M$.
+        \item $(r_{1}r_{2}) \cdot m = r_{1} \cdot (r_{2} \cdot m)$ for all $r_{1},r_{2} \in R$ and $m \in M$.
+    \end{itemize}
+\end{definition}
+
+Note that if $R$ is a field, then an $R$-module is precisely a vector space over $R$.
+
+\begin{example}
+    As a non-trivial example of a module, let $R = \Z$. Then a $\Z$-module is precisely an abelian group, since the axioms of a $\Z$-module reduce to the axioms of an abelian group; one can show this. Conversely, any abelian group can be regarded as a $\Z$-module by defining $n \cdot m = m + m + \cdots + m$ ($n$ times) for $n > 0$, $0 \cdot m = 0$ for all $m \in M$, and $(-n) \cdot m = -(n \cdot m)$ for $n > 0$. More trivially, if $R$ is a ring, then $R$ itself is an $R$-module by the natural mappings. If $I$ is an ideal of $R$, then $I$ is an $R$-module by the natural mappings.
+\end{example}
+
+\begin{example}
+    Suppose $\varphi:R \to R'$ is a homomorphism of rings. Then $R'$ is an $R$-module by defining $r \cdot r' = \varphi(r)r'$ for all $r \in R$ and $r' \in R'$. In particular, if $\varphi$ is an inclusion map, then $R'$ is an $R$-module by the natural mappings. More particularly, $S^{-1}R$ is an $R$-module for any multiplicatively closed subset $S$ of $R$ by the natural mappings.
+\end{example}
+
+Some trivial consequences of the axioms of a module can be inferred easily. For instance, $0 \cdot m = 0$ for all $m \in M$ since $0 \cdot m = (0 + 0) \cdot m = 0 \cdot m + 0 \cdot m$ implies $0 \cdot m = 0$. Similarly, $r \cdot 0 = 0$ for all $r \in R$. Also, $(-1) \cdot m = -m$ for all $m \in M$ since $0 = 0 \cdot m = (1 + (-1)) \cdot m = 1 \cdot m + (-1) \cdot m = m + (-1) \cdot m$ implies $(-1) \cdot m = -m$. More generally, $(-r) \cdot m = -(r \cdot m)$ for all $r \in R$ and $m \in M$.
+
+\begin{definition}
+    Let $M$ be an $R$-module. A non-empty subset $N \subseteq M$ is called an $R$-\eax{submodule} of $M$ if for all $x,y \in N$ and $r \in R$, $rx + y \in N$. That is, $(N, +|_{N \times N}, \cdot|_{R \times N}, R)$ is an $R$-module.
+\end{definition}
+
+From the above, any ideal $I$ of $R$ is a submodule of the $R$-module $R$. 
+
+\subsection{Quotient Modules}
+
+\begin{proposition}
+    Let $R$ be a ring and $M$ be an $R$-module. Also let $N$ be a submodule of $M$. Then $M/N$ has a natural structure of an $R$-module defined by $R \times M/N \to M/N$ given by $(r,m+N) \mapsto r \cdot (m+N) \defeq rm+N$ for all $r \in R$ and $m \in M$.
+\end{proposition}
+
+This is called the \eax{quotient module} of $M$ by $N$.
+
+\begin{proof}
+    First, we verify that the above definition is well-defined. Let $m + N = m' + N$ for some $m,m' \in M$. Then $m - m' \in N$, so $r(m - m') \in N$ since $N$ is a submodule of $M$. Hence, $rm + N = rm' + N$, so the above definition is well-defined. It is left as an exercise to verify that the above definition indeed gives $M/N$ the structure of an $R$-module, by checking the axioms of an $R$-module.
+\end{proof}
