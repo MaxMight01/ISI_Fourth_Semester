@@ -966,3 +966,20 @@ So far, we have been discussing local behaviour of solutions around hyperbolic f
 \end{proof}
 
 Another way of ruling out the existence of closed orbits is to analyze energy-like functions along solutions. If we can show that there is an energy function $F$ which descreases across solutions, then a similar proof as above can be used to show that there are no closed orbits. We may also rule out orbits via \eax{Dulac's condition}. Suppose $U \subseteq \R^{2}$ is an open, connected, and simply connected set, and $\dot{X} = f(X)$ is a system with $f$ a $C^{1}$-function. If $\nabla \cdot f$ is always non-negative (or always non-positive) on $U$, and $\nabla \cdot f$ is not identically zero, then $\dot{X} = f(X)$ cannot have a closed orbit contained in $U$. The proof of this utilises the divergence theorem, via $\int_{\Omega} \nabla \cdot f \, dA = \int_{\partial \Omega} f \cdot n \, ds$ for any closed curve $\partial \Omega$ contained in $U$. In this setting, we can also find a $C^{1}$-function $g:U \to \R$ such that $\nabla \cdot (g f)$ is always non-negative (or always non-positive) on $U$, and $\nabla \cdot (g f)$ is not identically zero, then $\dot{X} = f(X)$ cannot have a closed orbit contained in $U$.
+\\ \\
+\textit{March 23rd.}
+
+There is also \eax{Lyapunov's stability condition}. Let $\dot{X} = f(X)$ be a system with $f$ a $C^{1}$-function, and let $x^{\ast} \in \R^{2}$ be a fixed point. A \eax{Lyapunov function} $V: \R^{2} \to \R^{2}$ is a $C^{1}$-function satisfying the following conditions:
+\begin{itemize}
+    \item $V \geq 0$, and $V(x) = 0 \iff x = x^{\ast}$;
+    \item $V$ decreases along solutions; that is, for any solution $X(t)$ of $\dot{X} = f(X)$, we have $V(X(t))$ is non-increasing in $t$.
+\end{itemize}
+\begin{theorem}
+    If $V$ is a Lyapunov function for $\dot{X} = f(X)$ at $x^{\ast}$, then $x^{\ast}$ is globally asymptotically stable. That is, $\lim_{t \to \infty} X(t,p) = x^{\ast}$ for all $p \in \R^{2}$.
+\end{theorem}
+
+The above were all ways to rule out the existence of closed orbits. We now look at a way to guarantee the existence of closed orbits. One way is the theorem below.
+
+\begin{theorem}[\eax{Poincar\'e-Bendixson theorem}]
+    Let $\dot{X} = f(X)$ be a system with $f$ a $C^{1}$-function. Suppose $\cR \subseteq \R^{2}$ is a compact set such that $f$ has no fixed points in $\cR$ and there exists a solution which is `confined' in $\cR$; that is, there exists a solution $X(t,p)$ such that $X(t,p) \in \cR$ for all $t \geq 0$ and $p \in \cR$. Then, either $X(t,p)$ is a closed orbit, or spirals to a closed orbit $e$.
+\end{theorem}
