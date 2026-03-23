@@ -84,4 +84,39 @@ B \cdot l = \mu_{0} n I l \implies B = \mu_{0} n I.
 
 \subsection{Potential}
 
-We have already seen that $\nabla \cdot \bv{E} = \frac{\rho}{\epsilon_{0}}$ and $\nabla \times \bv{E} = 0$ in electrostatics, and $\nabla \cdot \bv{B} = 0$ and $\nabla \times \bv{B} = \mu_{0} \bv{J}$ in magnetostatics. We can now ask if there are potentials associated with the electric and magnetic fields. In electrostatics, since $\nabla \times \bv{E} = 0$, we can write $\bv{E} = -\nabla V$, where $V$ is the electric potential. In magnetostatics, since $\nabla \cdot \bv{B} = 0$, we can write $\bv{B} = \nabla \times \bv{A}$, where $\bv{A}$ is the \eax{magnetic vector potential}. Note that just like $V$ was arbitrary up to an additive constant, $\bv{A}$ is also arbitrary up to the gradient of a scalar function, since $\nabla \times (\bv{A} + \nabla \lambda) = \nabla \times \bv{A}$. 
+We have already seen that $\nabla \cdot \bv{E} = \frac{\rho}{\epsilon_{0}}$ and $\nabla \times \bv{E} = 0$ in electrostatics, and $\nabla \cdot \bv{B} = 0$ and $\nabla \times \bv{B} = \mu_{0} \bv{J}$ in magnetostatics. We can now ask if there are potentials associated with the electric and magnetic fields. In electrostatics, since $\nabla \times \bv{E} = 0$, we can write $\bv{E} = -\nabla V$, where $V$ is the electric potential. In magnetostatics, since $\nabla \cdot \bv{B} = 0$, we can write $\bv{B} = \nabla \times \bv{A}$, where $\bv{A}$ is the \eax{magnetic vector potential}. Note that just like $V$ was arbitrary up to an additive constant, $\bv{A}$ is also arbitrary up to the gradient of a scalar function, since $\nabla \times (\bv{A} + \nabla \lambda) = \nabla \times \bv{A}$.
+\\ \\
+\textit{March 23rd.}
+
+We can exploit the freedom in the definition of $\bv{A}$ to choose a particular `gauge'. One common choice is to impose the condition $\nabla \cdot \bv{A} = 0$. To do so, suppose we have a $\bv{A}_{0}$ which is not divergence free. We can write $\bv{A}_{0} = \bv{A} + \nabla \lambda$, where $\nabla \cdot \bv{A} = 0$. Hence, we have $\nabla \cdot \bv{A}_{0} = \nabla \cdot (\bv{A} + \nabla \lambda) = \nabla^{2} \lambda$. Thus, we can solve the Poisson equation $\nabla^{2} \lambda = \nabla \cdot \bv{A}_{0}$ to find $\lambda$, and hence find a divergence-free vector potential $\bv{A}$. Thus, we have
+\begin{align}
+    \lambda = \frac{1}{4 \pi} \int \frac{\nabla \cdot \bv{A}_{0}(\bv{r}')}{\curs{r}} \, \di{V}'.
+\end{align}
+If $\nabla \cdot \bv{A}_{0}$ does not go to zero at infinity, we have to find other means of solving the equation. Taking the curl of both sides of $\bv{B} = \nabla \times \bv{A}$, we get $\nabla \times \bv{B} = \nabla \times (\nabla \times \bv{A})$. Using the vector identity $\nabla \times (\nabla \times \bv{A}) = \nabla (\nabla \cdot \bv{A}) - \nabla^{2} \bv{A}$, and using the gauge condition $\nabla \cdot \bv{A} = 0$, we get $\nabla \times \bv{B} = -\nabla^{2} \bv{A}$. Using Ampère's law, we have $\mu_{0} \bv{J} = -\nabla^{2} \bv{A}$, which is a Poisson equation for each component of $\bv{A}$. Thus, this gives
+\begin{align}
+    \bv{A} = \frac{\mu_{0}}{4 \pi} \int \frac{\bv{J}(\bv{r}')}{\curs{r}} \, \di{V}'.
+\end{align}
+For line currents and surface currents, we can write $\bv{A}$ as
+\begin{align}
+    \bv{A} = \frac{\mu_{0}}{4 \pi} \int \frac{\bv{I} \, \di{\bv{l}'}}{\curs{r}} \quad \text{and} \quad \bv{A} = \frac{\mu_{0}}{4 \pi} \int \frac{\bv{K}(\bv{r}')}{\curs{r}} \, \di{a}',
+\end{align}
+respectively. 
+
+\subsubsection{Magnetostatic Boundary Conditions}
+
+Recall that $\bv{E}$ was discontinuous at surface charges. Analogously, $\bv{B}$ is discontinuous at surface currents. Using the fact that $\nabla \cdot \bv{B} = 0$ and $\oint \bv{B} \cdot \di{\bv{a}} = 0$, we have $\oint \bv{B} \cdot \di{\bv{l}} = \mu_{0} I_{\text{enc}}$, where $I_{\text{enc}}$ is the current enclosed by the loop. So, $B^{\parallel}_{\text{above}} - B^{\parallel}_{\text{below}} = \mu_{0} K$, where $K$ is the surface current density. Combining gives
+\begin{align}
+    \bv{B}_{\text{above}} - \bv{B}_{\text{below}} = \mu_{0} \bv{K} \times \hat{\bv{n}},
+\end{align}
+where $\hat{\bv{n}}$ is the unit normal vector pointing from the below region to the above region. And just like before, $\bv{A}_{\text{above}} - \bv{A}_{\text{below}} = 0$ since $\nabla \cdot \bv{A} = 0$ and $\oint \bv{A} \cdot \di{\bv{l}} = 0$. We can also attempt a multipole expansion of the vector potential $\bv{A}$, just like we did for the scalar potential $V$. We have
+\begin{align}
+    \frac{1}{\curs{r}} = \frac{1}{\sqrt{r^{2}+r'^{2}+2rr'\cos \theta}} = \frac{1}{r} \sum_{n = 0}^{\infty} \left( \frac{r'}{r} \right)^{n} P_{n}(\cos \theta),
+\end{align}
+so
+\begin{align}
+    \bv{A} = \frac{\mu_{0} I}{4 \pi} \oint \frac{\di{\bv{l}'}}{\curs{r}} = \frac{\mu_{0} I}{4 \pi r} \sum_{n = 0}^{\infty} \frac{1}{r^{n}} \oint r'^{n} P_{n}(\cos \theta) \, \di{\bv{l}'}.
+\end{align}
+The vector potential of an infinite solenoid carryinng current $I$ and with $n$ turns per unit length, with radius $R$, is given by
+\begin{align}
+    \bv{A} = \frac{\mu_{0}}{4 \pi} \int \frac{\bv{J}(\bv{r}')}{\curs{r}} \, \di{V}'.
+\end{align}
