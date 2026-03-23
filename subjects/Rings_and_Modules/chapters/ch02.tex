@@ -31,9 +31,7 @@ Some trivial consequences of the axioms of a module can be inferred easily. For 
     Let $M$ be an $R$-module. A non-empty subset $N \subseteq M$ is called an $R$-\eax{submodule} of $M$ if for all $x,y \in N$ and $r \in R$, $rx + y \in N$. That is, $(N, +|_{N \times N}, \cdot|_{R \times N}, R)$ is an $R$-module.
 \end{definition}
 
-From the above, any ideal $I$ of $R$ is a submodule of the $R$-module $R$. 
-
-\subsection{Quotient Modules}
+From the above, any ideal $I$ of $R$ is a submodule of the $R$-module $R$.
 
 \begin{proposition}
     Let $R$ be a ring and $M$ be an $R$-module. Also let $N$ be a submodule of $M$. Then $M/N$ has a natural structure of an $R$-module defined by $R \times M/N \to M/N$ given by $(r,m+N) \mapsto r \cdot (m+N) \defeq rm+N$ for all $r \in R$ and $m \in M$.
@@ -44,3 +42,49 @@ This is called the \eax{quotient module} of $M$ by $N$.
 \begin{proof}
     First, we verify that the above definition is well-defined. Let $m + N = m' + N$ for some $m,m' \in M$. Then $m - m' \in N$, so $r(m - m') \in N$ since $N$ is a submodule of $M$. Hence, $rm + N = rm' + N$, so the above definition is well-defined. It is left as an exercise to verify that the above definition indeed gives $M/N$ the structure of an $R$-module, by checking the axioms of an $R$-module.
 \end{proof}
+
+\subsection{Linear Maps, and Isomorphisms}
+
+\begin{definition}
+    Let $M,N$ be $R$-modules. A map $\varphi:M \to N$ is called $R$-\eax{linear}, or $R$-\eax{module homomorphism}, if $\varphi(x+y) = \varphi(x) + \varphi(y)$ for all $x,y \in M$ and $\varphi(rx) = r\varphi(x)$ for all $r \in R$ and $x \in M$.
+\end{definition}
+
+Equivalently, $\varphi$ is $R$-linear if and only if $\varphi(rx+y) = r\varphi(x) + \varphi(y)$ for all $r \in R$ and $x,y \in M$.
+
+\begin{example}
+    If $N \subseteq M$ is an $R$-submodule, then the inclusion map $i:N \to M$ is $R$-linear, and injective. Also, the quotient map $q:M \to M/N$ given by $m \mapsto m + N$ is $R$-linear, and surjective. 
+\end{example}
+
+An $R$-\eax{module isomorphism} is simply a bijective $R$-linear map. If there exists an $R$-module isomorphism between $M$ and $N$, then we say that $M$ and $N$ are isomorphic as $R$-modules.
+
+\begin{proposition}
+    Let $\varphi : M \to N$ be an $R$-linear map. Then $\ker \varphi = \{m \in M \mid \varphi(m) = 0\}$ is a submodule of $M$, and $\Img \varphi = \{\varphi(m) \mid m \in M\}$ is a submodule of $N$. M
+\end{proposition}
+\begin{proof}
+    Let $x,y \in \ker \varphi$ and $r \in R$. Then $\varphi(rx+y) = r\varphi(x) + \varphi(y) = 0$, so $rx+y \in \ker \varphi$. Hence, $\ker \varphi$ is a submodule of $M$. Let $x,y \in \Img \varphi$ and $r \in R$. Then there exist $m_{1},m_{2} \in M$ such that $\varphi(m_{1}) = x$ and $\varphi(m_{2}) = y$. Then $\varphi(rm_{1}+m_{2}) = r\varphi(m_{1}) + \varphi(m_{2}) = rx + y$, so $rx+y \in \Img \varphi$. Hence, $\Img \varphi$ is a submodule of $N$.
+\end{proof}
+
+\begin{theorem}[The first isomorphism theorem for modules]
+    Let $\varphi : M \to N$ be an $R$-linear map. Let $K = \ker \varphi$ and $K' \subseteq K$ be an $R$-submodule. Then $\varphi$ induces an $R$-linear map $\overline{\varphi} : M/K' \to N$ such that $\overline{\varphi}(m+K') = \varphi(m)$ for all $m \in M$. Moreover, $\overline{\varphi} \circ q = \varphi$, where $q : M \to M/K'$ is the quotient map. In particular, if $K' = K$, then $\overline{\varphi} : M/K \to N$ is an injective $R$-linear map, and if $\varphi$ is surjective, then $\overline{\varphi} : M/K \to N$ is an $R$-module isomorphism.
+\end{theorem}
+
+\begin{proof}
+    The map $\overline{\varphi}$ is well-defined since if $m + K' = m' + K'$ for some $m,m' \in M$, then $m - m' \in K' \subseteq K$, so $\varphi(m) = \varphi(m')$. Let $m+K',n+K' \in M/K'$ and $r \in R$. Then $\overline{\varphi}((m+K')+(n+K')) = \overline{\varphi}((m+n)+K') = \varphi(m+n) = \varphi(m) + \varphi(n) = \overline{\varphi}(m+K') + \overline{\varphi}(n+K')$ and $\overline{\varphi}(r(m+K')) = \overline{\varphi}(rm+K') = \varphi(rm) = r\varphi(m) = r\overline{\varphi}(m+K')$, so $\overline{\varphi}$ is $R$-linear. Also, for $m \in M$, $\overline{\varphi}(q(m)) = \overline{\varphi}(m+K') = \varphi(m)$, so $\overline{\varphi} \circ q = \varphi$. If $K' = K$, then $\ker \overline{\varphi} = \{m + K \mid m \in M, \varphi(m) = 0\} = \{m+K \mid \varphi(m) = 0\} = \{0+K\}$, so $\overline{\varphi}$ is injective. If $\varphi$ is surjective, then $\overline{\varphi} \circ q = \varphi$ is surjective, so $\overline{\varphi}$ is surjective. Hence, $\overline{\varphi}$ is an $R$-module isomorphism.
+\end{proof}
+
+\begin{theorem}[The second isomorphism theorem for modules]
+    Let $M$ be an $R$-module, and let $N_{1},N_{2}$ be $R$-submodules of $M$. Then $N_{1} + N_{2} = \{n_{1} + n_{2} \mid n_{1} \in N_{1}, n_{2} \in N_{2}\}$ is an $R$-submodule of $M$, and $N_{1} \cap N_{2}$ is an $R$-submodule of $M$. Moreover,
+    \begin{align}
+        (N_{1}+N_{2})/N_{2} \cong N_{1}/(N_{1} \cap N_{2})
+    \end{align}
+\end{theorem}
+
+\begin{proof}
+    Let $n_{1},n_{1}' \in N_{1}$ and $n_{2},n_{2}' \in N_{2}$, and let $r \in R$. Then $(n_{1}+n_{2}) + (n_{1}'+n_{2}') = (n_{1}+n_{1}') + (n_{2}+n_{2}') \in N_{1} + N_{2}$ and $r(n_{1}+n_{2}) = rn_{1} + rn_{2} \in N_{1} + N_{2}$, so $N_{1} + N_{2}$ is an $R$-submodule of $M$. Let $x,y \in N_{1} \cap N_{2}$ and $r \in R$. Then $x+y \in N_{1}$ and $x+y \in N_{2}$, so $x+y \in N_{1} \cap N_{2}$. Also, $rx \in N_{1}$ and $rx \in N_{2}$, so $rx \in N_{1} \cap N_{2}$. Hence, $N_{1} \cap N_{2}$ is an $R$-submodule of $M$. Define $\varphi : N_{1} \to (N_{1}+N_{2})/N_{2}$ by $\varphi(n) = n + N_{2}$ for all $n \in N_{1}$. Then $\varphi$ is well-defined since if $n,n' \in N_{1}$ and $\varphi(n) = \varphi(n')$, then $n - n' \in N_{2}$, so $n - n' \in N_{1} \cap N_{2}$. Also, for all $n,n' \in N$ and $r \in R$, $\varphi(n+n') = (n+n') + N_{2} = (n+N_{2}) + (n'+N_{2}) = \varphi(n) + \varphi(n')$ and $\varphi(rn) = rn + N_{2} = r(n+N_{2}) = r\varphi(n)$, so $\varphi$ is an $R$-linear map. Moreover, $\ker \varphi = N_{1} \cap N_{2}$ since if $n \in N_{1} \cap N_{2}$, then $\varphi(n) = n + N_{2} = N_{2}$, so $n \in \ker \varphi$, and if $n \in \ker \varphi$, then $\varphi(n) = n + N_{2} = N_{2}$, so $n \in N_{2}$, and since $n \in N_{1}$, $n \in N_{1} \cap N_{2}$. Hence, $\ker \varphi = N_{1} \cap N_{2}$. Also, $\Img \varphi = \{n + N_{2} \mid n \in N_{1}\} = (N_{1}+N_{2})/N_{2}$ since if $n \in N_{1}$, then $\varphi(n) = n + N_{2} \in (N_{1}+N_{2})/N_{2}$, and if $n + N_{2} \in (N_{1}+N_{2})/N_{2}$, then there exist $n_{1} \in N_{1}$ and $n_{2} \in N_{2}$ such that $n + N_{2} = (n_{1}+n_{2}) + N_{2} = n_{1} + N_{2}$, so $n_{1} \in N_{1}$ and $\varphi(n_{1}) = n_{1} + N_{2} = n + N_{2}$, so $n + N_{2} \in \Img \varphi$. Hence, $\Img \varphi = (N_{1}+N_{2})/N_{2}$. By the first isomorphism theorem for modules, $N_{1}/(N_{1} \cap N_{2}) \cong (N_{1}+N_{2})/N_{2}$.
+\end{proof}
+
+
+\begin{theorem}[The third isomorphism theorem for modules]
+    Let $M$ be an $R$-module, and let $K \subseteq N \subseteq M$ be $R$-submodules. Then $N/K$ is an $R$-submodule of $M/K$, and $(M/K)/(N/K) \cong M/N$.    
+\end{theorem}
+The proof is left as an exercise, by defining $\varphi : M/K \to M/N$ by $\varphi(m+K) = m + N$ for all $m \in M$.
