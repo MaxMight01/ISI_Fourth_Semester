@@ -120,3 +120,36 @@ The vector potential of an infinite solenoid carryinng current $I$ and with $n$ 
 \begin{align}
     \bv{A} = \frac{\mu_{0}}{4 \pi} \int \frac{\bv{J}(\bv{r}')}{\curs{r}} \, \di{V}'.
 \end{align}
+
+\section{The Electromotive Force}
+\textit{March 25th.}
+
+Plainly stated, \eax{Ohm's law} states that the current density $\bv{J}$ is proportional to the force per unit charge $\bv{f}$, with the constant of proportionality being the \eax{conductivity} $\sigma$ of the material. Hence, we have
+\begin{align}
+    \bv{J} \propto \bv{f} \implies \bv{J} = \sigma \bv{f}.
+\end{align}
+In the presence of an electric field $\bv{E}$ and a magnetic field $\bv{B}$, the force per unit charge is given by $\bv{f} = \bv{E} + \bv{v} \times \bv{B}$. In practice, however, the magnetic force is negligible compared to the electric force, since the velocity of the charges is typically very small. Hence, we can write Ohm's law as
+\begin{align}
+    \bv{J} = \sigma \bv{E}.
+\end{align}
+This is not the form we are familiar with; to that end, let us take the divergence of both sides. For materials with constant conductivity, we have $\nabla \cdot \bv{J} = \sigma \nabla \cdot \bv{E}$. Using Gauss's law, we have $\nabla \cdot \bv{E} = \frac{\rho}{\epsilon_{0}}$, so $\nabla \cdot \bv{J} = \frac{\sigma}{\epsilon_{0}} \rho$. Therefore, for study currents, $\nabla \cdot \bv{J} = 0$, so $\rho = 0$. That is, there is no net charge density within the volume of the conductor and all charge must reside on the surface.
+
+In a typical circuit, a battery maintains an \eax{electromotive force} (emf), which is the work done by the battery per unit charge to move the charges through the circuit. The force per unit charge in this case is $\bv{f} = \bv{f}_{s} + \bv{E}$, where $\bv{f}_{s}$ is the force per unit charge due to the battery. The net effect is summarized by following quantity,
+\begin{align}
+    \cE = \oint \bv{f} \cdot \di{\bv{l}} = \oint \bv{f}_{s} \cdot \di{\bv{l}} + \oint \bv{E} \cdot \di{\bv{l}} = \oint \bv{f}_{s} \cdot \di{\bv{l}},
+\end{align}
+where we have used the fact that $\oint \bv{E} \cdot \di{\bv{l}} = 0$ for electrostatic fields. The quantity $\cE$ is the emf of the circuit. For an ideal source, $\bv{f} = 0$ or $\bv{f}_{s} = -\bv{E}$. Recall that $V = -\int \bv{E} \cdot \di{\bv{l}}$, so $\cE = V$. Thus, it is valid to intepret $\cE$ as the potential difference across the battery too.
+
+Now suppose we have a rectangular loop of wire of height $h$ being pulled out of a uniform and perpendicular magnetic field $\bv{B}$ with a velocity $\bv{v}$. Note that $\bv{f}_{\text{pull}}$, the force due to the pulling, contributes nothing to the emf, since $\oint \bv{f}_{\text{pull}} \cdot \di{\bv{l}} = 0$. The only contribution to the emf is from the magnetic force, which is given by $\oint \bv{f}_{\text{mag}} \cdot \di{\bv{l}} = \oint (\bv{v} \times \bv{B}) \cdot \di{\bv{l}} = vBh$. Hence, we have $\cE = vBh$. This is known as the \eax{motional emf}, and it is a consequence of the fact that the magnetic force on the charges in the wire does work as the wire moves through the magnetic field. An alternative way of computing the motional emf is to note that the \eax{magnetic flux} through the loop is given by $\Phi = \int \bv{B} \cdot \di{\bv{a}} = Bhx$, where $x$ is the length of the loop that is still within the magnetic field. Hence, we have $\cE = -\frac{\di{\Phi}}{\di{t}} = vBh$, which is consistent with our previous calculation. Note that this result of
+\begin{align}
+    \cE = -\frac{\di{\Phi}}{\di{t}}
+\end{align}
+generalizes to loops of arbitrary shapes, non-constant magnetic fields, and non-uniform velocities. There is some ambiguity in the fact that in $\int \bv{B} \cdot \di{\bv{a}}$, which direction do we choose for the area element $\di{\bv{a}}$? The standard choice is to use the right-hand rule: if the current in the loop is flowing in a counterclockwise direction, then the area element points upwards; if the current is flowing in a clockwise direction, then the area element points downwards. The equation $\cE = -\frac{\di{\Phi}}{\di{t}}$ is known as \eax{Faraday's law of induction}, and it tells us that a changing magnetic flux through a loop induces an emf in the loop. Note that
+\begin{align}
+    \cE = \oint \bv{E} \cdot \di{\bv{l}} = -\frac{\di{\Phi}}{\di{t}} = -\int \frac{\partial{\bv{B}}}{\partial{t}} \cdot \di{\bv{a}},
+\end{align}
+so $\oint \bv{E} \cdot \di{\bv{l}} = -\int \frac{\partial{\bv{B}}}{\partial{t}} \cdot \di{\bv{a}}$. Using Stokes' theorem, we have $\int (\nabla \times \bv{E}) \cdot \di{\bv{a}} = -\int \frac{\partial{\bv{B}}}{\partial{t}} \cdot \di{\bv{a}}$, so
+\begin{align}
+    \nabla \times \bv{E} = -\frac{\partial{\bv{B}}}{\partial{t}}.
+\end{align}
+This is the differential form of Faraday's law.
