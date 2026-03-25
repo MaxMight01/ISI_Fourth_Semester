@@ -983,3 +983,47 @@ The above were all ways to rule out the existence of closed orbits. We now look 
 \begin{theorem}[\eax{Poincar\'e-Bendixson theorem}]
     Let $\dot{X} = f(X)$ be a system with $f$ a $C^{1}$-function. Suppose $\cR \subseteq \R^{2}$ is a compact set such that $f$ has no fixed points in $\cR$ and there exists a solution which is `confined' in $\cR$; that is, there exists a solution $X(t,p)$ such that $X(t,p) \in \cR$ for all $t \geq 0$ and $p \in \cR$. Then, either $X(t,p)$ is a closed orbit, or spirals to a closed orbit $e$.
 \end{theorem}
+
+\section{Qualitative Properties}
+\textit{March 25th.}
+
+We first discuss qualitative properties of second order homogeneous linear ODEs. We aim that, without explicitly solving the ODE, we can make some qualitative conclusions about $y$. Consider the ODE $y'' + P(t) y' + Q(t) y = 0$. Recall that if $P$ and $Q$ are continuous, then the solution space is 2-dimensional. For any $c \in \R$, if $y(c) = a$ and $y'(c) = b$, then there exists a unique solution $y$ of the ODE satisfying this. Also, $W(y_{1},y_{2}) = y_{1} y_{2}' - y_{1}' y_{2} \neq 0$ for all $t$ if $y_{1}$ and $y_{2}$ are linearly independent solutions. As a concrete example, look at the ODE $y'' + y = 0$. We know that $\spanof \{\sin x, \cos x\}$ is the solution space, but let us assume that we don't know this, and try to conclude some properties of the solutions.
+
+Let $s(x)$ be the solution such that $s(0) = 0$ and $s'(0) = 1$, and let $c(x)$ be the solution such that $c(0) = 1$ and $c'(0) = 0$. Since $s(0) = 0$ and $s'(0) = 1$, $s > 0$ on a small enough interval $(0,\delta_{0})$. Since $s'' = -s$, $s$ is concave down on $(0,\delta_{0})$. Let $V = \inf\{x > 0 \mid s(x) = 0\}$. Note that $V > 0$ since $s > 0$ on $(0,\delta_{0})$. If $V < \infty$, then Rolle's theorem says that there exists $x_{0} \in (0,V)$ such that $s'(x_{0}) = 0$. If $V = \infty$, then $s > 0$ on $(0,\infty)$. So, $s'(x) - s'(\delta_{0}) = \int_{\delta_{0}}^{x} s''(t) \, dt = -\int_{\delta_{0}}^{x} s(t) \, dt$. If there exists $x$ with $s'(x) < 0$, then $s' = 0$ at some point by the intermediate value theorem. If not, then $s' > 0$ on $(0,\infty)$, and $s'(x) \leq s'(\delta_{0}) - s(\delta_{0})(x-\delta_{0})$ for all $x > \delta_{0}$. Hence, $s'(x) < 0$ for sufficiently large $x$, which is a contradiction. Thus, there exists $x_{0} \in (0,V)$ such that $s'(x_{0}) = 0$. Now let $p = \inf \{x > 0 \mid s'(x) = 0\}$. Again, $p > 0$. We claim that $s$ is symmetric about $p$. Let $f(x) = s(p+x)$ and $g(x) = s(p-x)$. Note that $f$ and $g$ also satisfy $y'' +y = 0$ and $f(0)=g(0)=s(p)$ and $f'(0) = g'(0) = 0$. Hence, $f = g$, and $s$ is symmetric about $p$.
+
+Also, $s' = c$ and $c' = -s$; this is easy to see since $s'(0) = 1 = c(0)$ and $s''(0) = -s(0) = 0 = c'(0)$. Hence, $s' = c$ and $c' = -s$. Also note that $s^{2} + c^{2} = 1$ since $2ss' + 2cc' = 2sc - 2cs = 0$ and $s(0)^{2} + c(0)^{2} = 1$. Using this, $W(s,c) = s c' - s' c = -1 \neq 0$ so $s$ and $c$ are linearly independent. Hence, $\spanof \{s,c\}$ is the solution space. 
+
+\begin{theorem}
+    \begin{enumerate}[label=\arabic*.]
+        \item Let $y$ be any non-trivial solution of $y''+P(x)y'+Q(x)y = 0$. Then the zeroes of $y$ form a discrete set; that is, there are no accumulation points of zeroes of $y$.
+        \item Let $y_{1}$ and $y_{2}$ be any two linearly independent solutions of $y''+P(x)y'+Q(x)y = 0$. Then, the zeroes of $y_{1}$ and $y_{2}$ interlace; that is, if $x_{1} < x_{2}$ are two consecutive zeroes of $y_{1}$, then there exists a zero of $y_{2}$ in the interval $(x_{1},x_{2})$, and vice versa.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \begin{enumerate}[label=\arabic*.]
+        \item Suppose the zero set of $y$ has an accumulation point $x_{0}$. Then, there exists a sequence $(x_{n})$ of zeroes of $y$ such that $x_{n}$'s are distinct and $x_{n} \to x_{0}$. This implies that $y(x_{0}) = 0$. By Rolle's theorem, there exists $\alpha_{n} \in (x_{n},x_{n+1})$ such that $y'(\alpha_{n}) = 0$. Since $\alpha_{n} \to x_{0}$, we have $y'(x_{0}) = 0$. Hence, $y(x_{0}) = y'(x_{0}) = 0$, which implies that $y \equiv 0$, a contradiction.
+        \item $y_{1}$ and $y_{2}$ are linearly independent, so $W(y_{1},y_{2}) \neq 0$. Let us assume $z_{1} < z_{2}$ are two adjacent zeroes of $y_{1}$. Then,
+        \begin{align}
+            0 < W(y_{1},y_{2})(z_{1}) = -y_{2}(z_{1}) y_{1}'(z_{1}).
+        \end{align}
+        Since $y_{1}(z_{1}) = 0 = y_{1}(z_{2})$ and $y$ doesn't vanish in $(z_{1},z_{2})$, then $y_{1}'(z_{1})$ and $y_{1}'(z_{2})$ have opposite signs. Since $W$ doesn't change sign, $y_{2}(z_{1})$ and $y_{2}(z_{2})$ have the same sign. Hence, there exists a zero of $y_{2}$ in the interval $(z_{1},z_{2})$. The converse is similar.
+    \end{enumerate}
+\end{proof}
+
+The \eax{normal form} of a second order homogeneous linear ODE is $z'' + q(x)z = 0$. We claim that we can find a function $v \neq 0$ such that $z(x) \defeq v(x)y(x)$ satisfies $z'' + q(x) z = 0$ for some function $q$. We have
+\begin{align}
+    z'' = v'' y + 2v' y' + v y'' = v'' y + 2v' y' - v P y' - v Q y.
+\end{align}
+Hence, if $2v' - vP = 0$, then $z'' + q z = 0$ where $q = \frac{v''}{v} - Q$. Solving $2v' - vP = 0$ gives us $v(x) = e^{\int_{x_{0}}^{x} P(t)/2 \, dt}$ for some $x_{0}$. Note that $v$ is non-zero since the exponential function is non-zero. Hence, we can find a function $v \neq 0$ such that $z(x) \defeq v(x)y(x)$ satisfies $z'' + q(x) z = 0$ for some function $q$. Note that $v$ is never zero, so $y$ and $z$ have the same zeroes. Hence, the qualitative properties of $y$ can be deduced from those of $z$. 
+
+\begin{theorem}
+    If $q < 0$, then any non-trivial solution of $z'' + q(x) z = 0$ has at most one zero.
+\end{theorem}
+\begin{proof}
+    Suppose $x_{0} \in \R$ is such that $y(x_{0}) = 0$ for a non-trivial solution $y$. Without the loss of generality, assume that $y'(x_{0}) > 0$. We claim that $y > 0$ on $(x_{0},\infty)$. If not, then there exists $x_{1} > x_{0}$ such that $y(x_{1}) = 0$ and $y > 0$ on $(x_{0},x_{1})$. The sign of $y''$ is the same as the sign of $-q y$, which is positive on $(x_{0},x_{1})$. Hence, $y' \geq y'(x_{0})$ on $(x_{0},x_{1})$. This contradicts the fact that $y(x_{1}) = 0$ and $y > 0$ on $(x_{0},x_{1})$. Hence, $y > 0$ on $(x_{0},\infty)$. A similar argument shows that $y < 0$ on $(-\infty,x_{0})$. Hence, $y$ has at most one zero.
+\end{proof}
+
+\begin{theorem}
+    Suppose $q > 0$ and also assume that $\int_{x_{0}}^{\infty} q(x) \, dx = \infty$ for some $x_{0} \in \R$. Then, any non-trivial solution of $z'' + q(x) z = 0$ has infinitely many zeroes.
+\end{theorem}
