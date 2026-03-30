@@ -1027,3 +1027,51 @@ Hence, if $2v' - vP = 0$, then $z'' + q z = 0$ where $q = \frac{v''}{v} - Q$. So
 \begin{theorem}
     Suppose $q > 0$ and also assume that $\int_{x_{0}}^{\infty} q(x) \, dx = \infty$ for some $x_{0} \in \R$. Then, any non-trivial solution of $z'' + q(x) z = 0$ has infinitely many zeroes.
 \end{theorem}
+
+
+\textit{March 30th.}
+
+\begin{example}
+    Suppose $y'' + \frac{k}{x^{2}} y = 0$ for some $k \in \R$. We shall show that fo $k < \frac{1}{4}$, any non-trivial solution has finitely many zeroes, and for $k > \frac{1}{4}$, any non-trivial solution has infinitely many zeroes in $(0,\infty)$. We can rewrite the system as $x^{2} y'' + ky = 0$. If we set $y = x^{m}$, then we get $m(m-1) + k = 0$, so $m = \frac{1 \pm \sqrt{1-4k}}{2}$. If $k < \frac{1}{4}$, then $m$'s are real and distinct, so $\spanof \{x^{m_{1}}, x^{m_{2}}\}$ is the solution space. Hence, any non-trivial solution has at most one zero in $(0,\infty)$. If $k > \frac{1}{4}$, then $m$'s are complex conjugates, so $\spanof \{x^{\alpha} \cos (\beta \log x), x^{\alpha} \sin (\beta \log x)\}$ is the solution space for some $\alpha,\beta \in \R$ with $\beta > 0$. Hence, any non-trivial solution has infinitely many zeroes in $(0,\infty)$. Note that $q(x)$ in this case does not integrate to infinity, so the previous theorem is only sufficient but not necessary for the existence of infinitely many zeroes.
+\end{example}
+
+\begin{proof}[Proof of previous theorem]
+    Let us assume that there are only finitely many zeroes. In this case, there exists $x_{0} > 0$ such that $y$ does not have any zeroes in $[x_{0},\infty)$. Without the loss of generality, assume that $y > 0$ on $[x_{0},\infty)$. Then, $y''$ has the same sign as $-q y$, which is negative on $[x_{0},\infty)$, or $y'$ decreases continuously on $(x_{0},\infty)$. We claim that if there exists $x_{1} \in (x_{0},\infty)$ such that $y'(x_{1}) < 0$, then $y$ has a zero in $(x_{0},\infty)$. Integrating $y'$ from $x_{1}$ to $x$ gives
+    \begin{align}
+        y(x) = y(x_{1}) + \int_{x_{1}}^{x} y'(s) \, ds \leq y(x_{1}) + y'(x_{1})(x-x_{1})
+    \end{align}
+    which is negative for sufficiently large $x$, showing that $y = 0$ somehwere in $(x_{0},\infty)$. Hence, to prove the theorem, we need to show the existence of such a point $x_{1}$. To this end, consider $v = -\frac{y'}{y}$. Then
+    \begin{align}
+        v' = -\frac{yy''-y'^{2}}{y^{2}} = -\frac{y''}{y} + \frac{y'^{2}}{y^{2}} = q + v^{2} \implies v(x)-v(x_{0}) = \int_{x_{0}}^{x} q + \int_{x_{0}}^{x} v^{2}.
+    \end{align}
+    Note that $v(x) \to \infty$ as $x \to \infty$, so there must exist $x_{1}$ such that $v(x_{1}) > 0$, or equivalently, $y'(x_{1}) < 0$. This completes the proof.
+\end{proof}
+
+\begin{theorem}
+    Suppose $y'' + qy = 0$ and $z'' + rz = 0$ with $q > r > 0$ Then between any two zeroes of $z$, there is at least one zero of $y$.
+\end{theorem}
+
+\begin{proof}
+    Let $x_{1}$ and $x_{2}$ be zeroes of $z$ and assume that $z$ does not vanish in $(x_{1},x_{2})$. Without the loss of generality, assume that $z > 0$ in $I \defeq (x_{1},x_{2})$. Now suppose $y > 0$ on $I$. Then $w(x) = W(y,z)(x) = yz' - y'z$ gives $w' = yz(q-r) > 0$ on $I$. But $w(x_{1}) = y(x_{1})z'(x_{1}) > 0$ and $w(x_{2}) = y(x_{2})z'(x_{2}) < 0$, which is a contradiction. Hence, $y$ has a zero in $(x_{1},x_{2})$.
+\end{proof}
+
+\begin{example}
+    Let us look at \eax{Bessel's equation} $x^{2}y'' + xy' + (x^{2}-p^{2})y = 0$. We show that
+    \begin{enumerate}
+        \item $y$ has infinitely many zeroes in $(0,\infty)$ for any $p$.
+        \item $p = \frac{1}{2}$ implies that the zeroes are $\pi$-apart.
+        \item $0 < p < \frac{1}{2}$ implies that every interval of length $\pi$ has at least one zero.
+        \item $p > \frac{1}{2}$ implies that every interval of length $\pi$ has at most one zero.
+    \end{enumerate}
+    We make the substitution $z = \sqrt{x} y$ gives us the normal form
+    \begin{align}
+        z'' + \left( 1 + \frac{1-4p^{2}}{4x^{2}} \right) z = 0.
+    \end{align}
+\end{example}
+
+\section{Power Series Solutions}
+For this section, we will assume that there are solutions of the equation which have a power series representation and then we will solve for the coefficients of the power series. Recall that for all $p \in \R$, a \eax{power series} centred at $p$ looks like $\sum_{n=0}^{\infty} a_{n} (x-p)^{n}$ for some sequence $(a_{n})$ of real numbers. The \eax{radius of convergence} $R \in [0,\infty]$ of the power series is defined as the supremum of $r > 0$ such that $\sum_{n=0}^{\infty} a_{n} (x-p)^{n}$ converges absolutely for all $x \in (p-r,p+r)$, and converges uniformly. One can show that
+\begin{align}
+    R = \frac{1}{\limsup_{n \to \infty} \abs{a_{n}}^{1/n}}.
+\end{align}
+Recall that the uniform limit of a sequence of differentiable functions is not necessarily differentiable, but if the sequence of derivatives also converges uniformly, then the limit is differentiable and the derivative of the limit is the limit of the derivatives. Hence, if $\sum_{n=0}^{\infty} a_{n} (x-p)^{n}$ has radius of convergence $R > 0$, then $\sum_{n=0}^{\infty} a_{n} (x-p)^{n}$ is differentiable on $(p-R,p+R)$ and its derivative is $\sum_{n=1}^{\infty} n a_{n} (x-p)^{n-1}$, which also has radius of convergence $R$. 
