@@ -153,3 +153,57 @@ so $\oint \bv{E} \cdot \di{\bv{l}} = -\int \frac{\partial{\bv{B}}}{\partial{t}} 
     \nabla \times \bv{E} = -\frac{\partial{\bv{B}}}{\partial{t}}.
 \end{align}
 This is the differential form of Faraday's law.
+
+\subsection{Induction}
+
+\noindent \textit{March 30th.}
+
+Faraday's law may be used in many different ways. For example, suppose a uniform magnetic field $\bv{B}$ is passing perpendicularly. If the magnetic field is changing with time, then there will be an electric field induced. For an amperian loop that is a circle of radius $s$, we have
+\begin{align}
+    E \cdot 2 \pi s = - \frac{\di{\Phi}}{\di{t}} = -\pi s^{2} \frac{\di{B}}{\di{t}} \implies E = -\frac{s}{2} \frac{\di{B}}{\di{t}} \implies \bv{E} = -\frac{s}{2} \frac{\di{B}}{\di{t}} \hat{\bvs{\phi}},
+\end{align}
+
+Suppose we have a freely, and horizontally, suspended circular disc of inner radius $a$ and outer radius $b$, with a linear charge $\lambda$ per unit length glued to the outer circumference. Suppose also that a uniform magnetic field $\bv{B}_{0}$ passes through the middle perpendicularly upwards. We now switch off $B_{0}$ instantaneously. What happens? Switching off $B_{0}$ induces an electric field $\bv{E}$ along the $\hat{\bvs{\phi}}$ direction. But there is also the line charge $\lambda$ along the rim; a current is induced which moves the charges and the disc starts to rotate. We have
+\begin{align}
+    \cE = \oint \bv{E} \cdot \di{\bv{l}} = -\frac{\di{B}}{\di{t}} \pi a^{2}.
+\end{align}
+The torque is given by $\bv{N} = \bv{r} \times \bv{F}$, or $\di{\bv{N}} = \bv{r} \times \di{\bv{F}}$. Using $\di{F} = E \lambda \, \di{l}$, we have $\di{N} = E \lambda \, \di{l} \, b$. Integrating gives us
+\begin{align}
+    N = -\lambda b \pi a^{2} \frac{\di{B}}{\di{t}}.
+\end{align}
+The angular momentum is, thus,
+\begin{align}
+    N = \frac{\di{L}}{\di{t}} = - \pi a^{2} \lambda b \frac{\di{B}}{\di{t}} \implies L = -\pi a^{2} \lambda b \int_{B_{0}}^{0} \di{B} = \pi a^{2} \lambda b B_{0}.
+\end{align}
+
+Now suppose we have two loops of wire, where one carries a current $I_{1}$. The magnetic field produced is
+\begin{align}
+    \bv{B}_{1} = \frac{\mu_{0}I_{1}}{4 \pi} \oint \frac{\di{\bv{l}_{1}} \times \hat{\bcurs{r}}}{\curs{r}^{2}}.
+\end{align}
+The important thing to note is the fact that $\abs{\bv{B}_{1}} \propto I_{1}$. The magnetic flux through the second loop is given by $\Phi_{21} = \int \bv{B}_{1} \cdot \di{\bv{a}_{2}}$, so $\Phi_{21} \propto I_{1}$. This gives us $\Phi_{21} = M_{21} I_{1}$, where $M_{21}$ is the \eax{mutual inductance} between the two loops. Using the fact that $\bv{B}_{1} = \nabla \times \bv{A}_{1}$, we have $\Phi_{21} = \int (\nabla \times \bv{A}_{1}) \cdot \di{\bv{a}_{2}}$. Using Stokes' theorem, we have $\Phi_{21} = \oint \bv{A}_{1} \cdot \di{\bv{l}_{2}}$. Substituting the expression for $\bv{A}_{1}$ gives us
+\begin{align}
+    \Phi_{21} = \frac{\mu_{0} I_{1}}{4 \pi} \oint \oint \frac{\di{\bv{l}_{1}} \cdot (\di{\bv{l}_{2}} \times \hat{\bcurs{r}})}{\curs{r}^{2}} \implies M_{21} = \frac{\mu_{0}}{4 \pi} \oint \oint \frac{\di{\bv{l}_{1}} \cdot (\di{\bv{l}_{2}})}{\curs{r}}.
+\end{align}
+We observe that $M_{21}$ depends only on the geometry of the two loops, and not on the current $I_{1}$. By symmetry, we also conclude $M_{21} = M_{12} = M$.
+
+Now suppose we have two concentric solenoids, with the inner solenoid having $n_{1}$ turns per unit length and radius $a$ and carrying a current $I$, and the outer solenoid having $n_{2}$ turns per unit length and radius $b$. Also, the inner solenoid is shorter than the outer one. We are to find the flux and the mutual inductance. Note that $B$ for the short solenoid is messy, but $B$ for the long solenoid is simple. We can exploit the symmetry of $M_{21} = M_{12}$ and change the problme; suppose the long solenoid was carrying current $I$, and the short solenoid was not carrying any current. The magneti field produced by the long solenoid is given by $\bv{B} = \mu_{0} n_{2} I \hat{\bv{z}}$. The flux through the short solenoid is given by $\Phi = \int \bv{B} \cdot \di{\bv{a}} = \pi a^{2} \mu_{0} n_{2} I$. Hence, we have $M = \frac{\Phi}{I} = \pi a^{2} \mu_{0} n_{2}$.
+
+Suppose we have a single loop of wire with a current $I$. If we allow $I$ to vary with time, then the flux canges which induces an emf in the loop that opposes back the change in flux. This is known as \eax{self-induction}. In such a case, we have $\Phi = LI$, where $L$ is the \eax{self-inductance} of the loop. The back emf is given by $\cE = -\frac{\di{\Phi}}{\di{t}} = -L \frac{\di{I}}{\di{t}}$.
+
+Finally, now suppose we have a circuit with a battery of emf $\cE_{0}$ and an \eax{inductor} (a device that resists changes in current) with self-inductance $L$, and a \eax{resistor} (a device that resists the flow of current) with \eax{resistance} $R$ (recall that the standard form of Ohm's law is $V = IR$, where $V$ is the potential difference across the resistor, $I$ is the current through the resistor, and $R$ is the resistance of the resistor). We are to find the current $I$ as a function of time. Adding up the emfs gives us
+\begin{align}
+    \cE_{0} - L \frac{\di{I}}{\di{t}} - IR = 0 \implies L \frac{\di{I}}{\di{t}} + IR = \cE_{0}.
+\end{align}
+This is a first-order linear ordinary differential equation, and can be easily solved using integrating factors. We have
+\begin{align}
+    I = \frac{\cE_{0}}{R} + ke^{-\frac{R}{L}t}
+\end{align}
+where $k$ is a constant that can be determined by the initial condition. If we assume that the current is zero at time $t = 0$, then we have $k = -\frac{\cE_{0}}{R}$. Hence, we have
+\begin{align}
+    I = \frac{\cE_{0}}{R} \left( 1 - e^{-\frac{R}{L}t} \right).
+\end{align}
+Here, $\tau = L/R$ is known as the \eax{time constant} of the circuit, and it characterizes how quickly the current reaches its steady-state value of $\cE_{0}/R$. For $t \gg \tau$, we have $I \approx \cE_{0}/R$, which is the steady-state current. We can think of $L$ as playing the role of `mass'. What if we also add a capacitor (a device that stores electric charge) with \eax{capacitance} $C$ (recall that the standard form of the relationship between charge and voltage for a capacitor is $Q = CV$, where $Q$ is the charge stored in the capacitor, $C$ is the capacitance of the capacitor, and $V$ is the potential difference across the capacitor)? The equation becomes
+\begin{align}
+    \cE_{0} = L \frac{\di{I}}{\di{t}} + IR + \frac{q}{C} = L \frac{\di{}^{2}q}{\di{t}^{2}} + R \frac{\di{q}}{\di{t}} + \frac{q}{C}.
+\end{align}
+Compare this with $m \frac{\di{}^{2}x}{\di{t}^{2}} + b \frac{\di{x}}{\di{t}} + kx = F_{0}$, which is the equation of motion for a damped harmonic oscillator with mass $m$, damping coefficient $b$, spring constant $k$, and external force $F_{0}$. We see that the charge $q$ on the capacitor behaves like the position $x$ of a damped harmonic oscillator, with the inductance $L$ playing the role of mass, the resistance $R$ playing the role of damping, and the inverse of capacitance $1/C$ playing the role of spring constant. 
