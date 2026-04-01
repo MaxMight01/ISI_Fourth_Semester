@@ -206,4 +206,61 @@ Here, $\tau = L/R$ is known as the \eax{time constant} of the circuit, and it ch
 \begin{align}
     \cE_{0} = L \frac{\di{I}}{\di{t}} + IR + \frac{q}{C} = L \frac{\di{}^{2}q}{\di{t}^{2}} + R \frac{\di{q}}{\di{t}} + \frac{q}{C}.
 \end{align}
-Compare this with $m \frac{\di{}^{2}x}{\di{t}^{2}} + b \frac{\di{x}}{\di{t}} + kx = F_{0}$, which is the equation of motion for a damped harmonic oscillator with mass $m$, damping coefficient $b$, spring constant $k$, and external force $F_{0}$. We see that the charge $q$ on the capacitor behaves like the position $x$ of a damped harmonic oscillator, with the inductance $L$ playing the role of mass, the resistance $R$ playing the role of damping, and the inverse of capacitance $1/C$ playing the role of spring constant. 
+Compare this with $m \frac{\di{}^{2}x}{\di{t}^{2}} + b \frac{\di{x}}{\di{t}} + kx = F_{0}$, which is the equation of motion for a damped harmonic oscillator with mass $m$, damping coefficient $b$, spring constant $k$, and external force $F_{0}$. We see that the charge $q$ on the capacitor behaves like the position $x$ of a damped harmonic oscillator, with the inductance $L$ playing the role of mass, the resistance $R$ playing the role of damping, and the inverse of capacitance $1/C$ playing the role of spring constant.
+
+\subsubsection{Energy in Magnetic Fields}
+\textit{April 1st.}
+
+The simple idea is that building up a current takes work against the back emf $\cE = -L \frac{\di{I}}{\di{t}}$. The power is given by $P = -\cE I = L I \frac{\di{I}}{\di{t}}$. Integrating gives us the energy stored in the magnetic field of the inductor, which is given by
+\begin{align}
+    W = \frac{1}{2} LI^{2}.
+\end{align}
+The corresponding electrostatic equation was $W = \frac{1}{2} CV^{2}$. Note that $L$ depends only on the geometry. The magnetic flux in this case is
+\begin{align}
+    \Phi = \int_{S} \bv{B} \cdot \di{\bv{a}} = \int_{S} (\nabla \times \bv{A}) \cdot \di{\bv{a}} = \oint_{P} \bv{A} \cdot \di{\bv{l}} = LI,
+\end{align}
+so we can rewrite the work as
+\begin{align}
+    W = \frac{1}{2} \oint I\bv{A} \cdot \di{\bv{l}} = \frac{1}{2} \oint \bv{A} \cdot \bv{I} \, \di{l}.
+\end{align}
+This can be generalized to a volume current distribution as
+\begin{align}
+    W = \frac{1}{2} \int \bv{A} \cdot \bv{J} \, \di{V}.
+\end{align}
+Now, $\bv{J}$ can be replaced by $\frac{1}{\mu_{0}} \nabla \times \bv{B}$ using Ampère's law, so
+\begin{align}
+    W = \frac{1}{2 \mu_{0}} \int \bv{A} \cdot (\nabla \times \bv{B}) \, \di{V} &= \frac{1}{2 \mu_{0}} \int_{V} \bv{B} \cdot (\nabla \times \bv{A}) \, \di{V'} - \frac{1}{2 \mu_{0}} \int_{V} \nabla \cdot (\bv{A} \times \bv{B}) \, \di{V'} \notag \\ &= \frac{1}{2 \mu_{0}} \int_{V} B^{2} \, \di{V'} - \frac{1}{2 \mu_{0}} \oint_{S} (\bv{A} \times \bv{B}) \cdot \di{\bv{a}}.
+\end{align}
+THe second of these terms is the boundary term and is hence zero. Thus, we have
+\begin{align}
+    W = \frac{1}{2 \mu_{0}} \int_{V} B^{2} \, \di{V'}.
+\end{align}
+The corresponding electrostatic equation was $W = \frac{\epsilon_{0}}{2} \int_{V} E^{2} \, \di{V'}$. 
+
+\section{The Laws of Electromagnetics}
+Along with the Lorentz force law $\bv{f} = \bv{E} + \bv{v} \times \bv{B}$, we have the following four equations that govern all of electromagnetics:
+\begin{align}
+\nabla \cdot \bv{E} &= \frac{\rho}{\epsilon_{0}} \quad \text{(Gauss's law)}, \notag \\
+\nabla \cdot \bv{B} &= 0 \quad \text{(no magnetic monopoles)}, \notag \\
+\nabla \times \bv{E} &= -\frac{\partial{\bv{B}}}{\partial{t}} \quad \text{(Faraday's law)}, \notag \\
+\nabla \times \bv{B} &= \mu_{0} \bv{J} \quad \text{(Ampère's law)}. \notag
+\end{align}
+Out of all of these equations, however, one has a fundamental issue. Ampère's law, in its original form, was $\nabla \times \bv{B} = \mu_{0} \bv{J}$. This is fine for steady currents, but it fails for time-varying currents. To notice this inconsistency, we can take the divergence of both sides. We have
+\begin{align}
+\nabla \cdot (\nabla \times \bv{B}) = \nabla \cdot (\mu_{0} \bv{J}) \implies 0 = \mu_{0} \nabla \cdot \bv{J}.
+\end{align}
+The last equation implies $\nabla \cdot \bv{J} = 0$, which holds only in the case of steady currents. Thus, this law must be modified to resolve this inconsistency. To do so, consider a circuit consisting of a battery of emf $\cE$ and a capacitor with capacitance $C$. The integral form of Ampère's law states that $\oint \bv{B} \cdot \di{\bv{l}} = \mu_{0} I_{\text{enc}}$, where $I_{\text{enc}}$ is the current enclosed by the loop. If we take the loop around the wire, then $I_{\text{enc}} = I$, where $I$ is the current through the wire. If we take the loop around the capacitor, then $I_{\text{enc}} = 0$, since there is no current through the capacitor. This clearly cannot be the case.
+
+The continuity equation states that $\frac{\partial \rho}{\partial t} + \nabla \cdot \bv{J} = 0$. Using this, we have
+\begin{align}
+    \nabla \cdot (\nabla \times \bv{B}) = \mu_{0} \nabla \cdot \bv{J} = -\mu_{0} \frac{\partial \rho}{\partial t} = -\mu_{0} \epsilon_{0} \frac{\partial}{\partial t} (\nabla \cdot \bv{E}) = -\mu_{0} \epsilon_{0} \nabla \cdot \left( \frac{\partial{\bv{E}}}{\partial{t}} \right).
+\end{align}
+Hence, Faraday added a term $\mu_{0} \epsilon_{0} \frac{\partial{\bv{E}}}{\partial{t}}$ to the right-hand side of Ampère's law, so that the modified Ampère's law is given by
+\begin{align}
+    \nabla \times \bv{B} = \mu_{0} \bv{J} + \mu_{0} \epsilon_{0} \frac{\partial{\bv{E}}}{\partial{t}}.
+\end{align}
+This, along with the other three equations, are known as \eax{Maxwell's equations}, and they govern all of electromagnetics. From this modified equation, we also infer that changing electric fields can also produce magnetic fields, just as changing magnetic fields can produce electric fields. Coming back to the capacitor example, we see that
+\begin{align}
+    \oint \bv{B} \cdot \di{\bv{l}} = \mu_{0} \epsilon_{0} \int \frac{\partial \bv{E}}{\partial t} \cdot \di{\bv{a}} = \mu_{0} \epsilon_{0} \frac{I}{\epsilon_{0}A} \cdot A = \mu_{0} I,
+\end{align}
+where we used the fact that $\frac{\partial E}{\partial t} = \frac{I}{\epsilon_{0}A}$, since $I = \frac{\di{Q}}{\di{t}}$ and $Q = \epsilon_{0} EA$. Thus, the modified Ampère's law resolves the inconsistency in the original Ampère's law.
