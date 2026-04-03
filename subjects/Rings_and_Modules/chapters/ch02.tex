@@ -277,9 +277,72 @@ We show the second statement.
 \end{example}
 
 \begin{definition}
-    An $R$-module $M$ is called \eax{torsion free} if $T(M) = 0$.
+    An $R$-module $M$ is called \eax{torsion free} if $T(M) = 0$. $M$ is called a \eax{torsion module} if $T(M) = M$.
 \end{definition}
 
 \begin{proposition}
-    Suppose $R$ is an integral domain, and $M$ an $R$-module. Then $M/T(M)$ is torsion free.
+    Suppose $R$ is an integral domain, and $M$ an $R$-module. Then $M/T(M)$ is torsion free. 
 \end{proposition}
+
+
+\textit{April 3rd.}
+
+\begin{proof}
+    Let $m + T(M) \in M/T(M)$ be such that $r(m + T(M)) = T(M)$ for some $r \in R \setminus \{0\}$. Then $rm \in T(M)$, so there exists $r' \in R \setminus \{0\}$ such that $r'(rm) = (rr')m = 0$, so $m \in T(M)$, so $m + T(M) = T(M)$. Hence, $M/T(M)$ is torsion free.
+\end{proof}
+
+\begin{proposition}
+    Let $R$ be integral domain, and $M$ be a torsion $R$-module. Then $\rank M = 0$.
+\end{proposition}
+
+\begin{proof}
+    Let $S = R \setminus \{0\}$. Then $S^{-1}M = 0$ since for all $\frac{m}{s} \in S^{-1}M$, we have $rm = 0$ for some $r \in R \setminus \{0\}$, so $\frac{m}{s} = \frac{rm}{rs} = 0$. Hence, $\rank M = \dim_{S^{-1}R}(S^{-1}M) = 0$.
+\end{proof}
+
+\begin{proposition}
+    $\rank(M\oplus N) = \rank M + \rank N$ for all $R$-modules $M$ and $N$.
+\end{proposition}
+The proof is left as a straightforward exercise.
+
+\begin{theorem}[The \eax{structure theorem for finitely generated modules over a PID}]
+    Let $R$ be a principal ideal domain, and $M$ be a finitely generated $R$-module. Then
+    \begin{align}
+        M \cong R^{k} \oplus R/(a_{1}) \oplus R/(a_{2}) \oplus \cdots \oplus R/(a_{n})
+    \end{align}
+    for some $k,n \geq 0$ and $a_{1},\ldots,a_{n} \in R$ such that $a_{1} \mid a_{2} \mid \cdots \mid a_{n}$. Note that $k = 0$ if and only if $M$ is a torsion module, and $n = 0$ if and only if $M$ is torsion free. Moreover, the above decomposition is unique up to isomorphism.
+\end{theorem}
+
+Interesting corollaries can be drawn.
+
+\begin{corollary}
+    Let $R$ be a principal ideal domain, and $M$ be a finitely generated torsion free $R$-module. Then $M$ is a free $R$-module.
+\end{corollary}
+
+\begin{theorem}[The \eax{structure theorem for finitely generated abelian groups}]
+    Let $G$ be a finitely generated abelian group. Then
+    \begin{align}
+        G \cong \Z^{k} \oplus \Z/n_{1}\Z \oplus \Z/n_{2}\Z \oplus \cdots \oplus \Z/n_{m}\Z
+    \end{align}
+    for some $k,m \geq 0$ and $n_{1},\ldots,n_{m} \in \N$ such that $n_{1} \mid n_{2} \mid \cdots \mid n_{m}$.
+\end{theorem}
+\begin{proof}
+    This is a direct consequence of the previous theorem, since a finitely generated abelian group is just a finitely generated $\Z$-module, and $\Z$ is a principal ideal domain.
+\end{proof}
+
+\begin{example}
+    Let $R = \Z$ and $M = \Q$. This is not finitely generated as a $\Z$-module. Note that $\rank \Q = 1$ since $S^{-1}\Q = \Q$ as a $\Q$-vector space, so $\dim_{\Q}(S^{-1}\Q) = 1$. However, $\Q$ is not singly generated; let $\frac{p}{q},\frac{r}{s} \in \Q$. Then $rq\frac{p}{q} -ps\frac{r}{s} = 0$, so any set of length $2$ is linearly dependent.
+\end{example}
+
+\begin{proposition}
+    Let $R$ be a principal ideal domain, and $F$ be a free module of rank $n$. Also let $N$ be a submodule of $F$. Then $N$ is also free and of rank $m \leq n$. Moreover, there is a basis $\{x_{1},x_{2},\ldots,x_{n}\}$ of $F$ and elements $a_{1},a_{2},\ldots,a_{m} \in R$ such that $\{a_{1}x_{1},a_{2}x_{2},\ldots,a_{m}x_{m}\}$ is a basis of $N$ and $a_{1} \mid a_{2} \mid \cdots \mid a_{m}$.
+\end{proposition}
+
+\begin{proof}
+    This is trivial if $N = 0$, so assume $N \neq 0$. Let $\Sigma = \{\varphi(N) \mid \varphi : F \to R \text{ is an } R\text{-linear map}\}$. Then $\Sigma$ is a non-empty collection of $R$-ideals, so $\Sigma$ has a maximal element, say $I_{1} = (a_{1}) = R$, with $a_{1} \neq 0$. Also, $(a_{1}) = \nu(N)$ for some $R$-linear $\nu : F \to R$. There exists $x \in N$ such that $a_{1} = \nu(x)$. We claim that $a_{1} \mid \varphi(x)$ for all $R$-linear maps $\varphi : F \to R$. If not, then let $d = \gcd (a_{1},\varphi(x))$ so that $d = r_{1}a_{1} + r_{2}\varphi(x)$ for some $r_{1},r_{2} \in R$. Consider $(r_{1}\nu + r_{2}\varphi) : F \to R$. Then $(r_{1}\nu + r_{2}\varphi)(x) = r_{1}a_{1} + r_{2}\varphi(x) = d$, which implies $(r_{1}\nu+r_{2}\varphi)(N) \supseteq (d) \supsetneq (a_{1})$, contradicting the maximality of $(a_{1})$.
+    
+    In particular, $a_{1} \mid \pi_{i} \circ \psi(x)$, where $\psi : F \to R^{n}$ is an isomorphism and $\pi_{i} : R^{n} \to R$ is the projection map defined by $\pi_{i}(r_{1},\ldots,r_{n}) = r_{i}$ for all $r_{1},\ldots,r_{n} \in R$. Let $\psi(x) = (b_{1},\ldots,b_{n})$. Then $a_{1} \mid b_{i}$ for all $1 \leq i \leq n$, so there exists $x_{1} \in F$ such that $\psi(x_{1}) = (\frac{b_{1}}{a_{1}}, \ldots, \frac{b_{n}}{a_{1}}) \in R^{n}$, and $a_{1}x_{1} = x$ (possible since $\psi(a_{1}x_{1}) = (b_{1},\ldots,b_{n})$). We now claim that $F = Rx_{1} \oplus \ker \nu$ and $N = Ra_{1}x_{1} \oplus (N \cap \ker \nu)$. To this end, let $y \in F$. Then $y = \nu(y)x_{1} + (y - \nu(y)x_{1})$, where $\nu(y)x_{1} \in Rx_{1}$ and $y - \nu(y)x_{1} \in \ker \nu$ (since $\nu(a_{1}x_{1}) = \nu(x)$, $\nu(x_{1}) = 1$). Now let $y \in Rx_{1} \cap \ker \nu$. Then $y = rx_{1}$ for some $r \in R$, and $0 = \nu(y) = r\nu(x_{1}) = r$, so $y = 0$. Hence, $F = Rx_{1} \oplus \ker \nu$. A similar argument shows that $N = Ra_{1}x_{1} \oplus (N \cap \ker \nu)$. Thus, $\rank N = \rank(Ra_{1}x_{1}) + \rank(N \cap \ker \nu)$ and $\rank F = \rank (Rx_{1}) + \rank(\ker \nu)$. Note that $\ker \nu \cap N$ is an $R$-submodule of $F$ and of rank strictly less than $\rank N$. Hence, by induction on the rank of $N$, $\ker \nu \cap N$ is free and of rank $\rank(N) - 1 = m-1$. But $N = Ra_{1}x_{1} \oplus (N \cap \ker \nu) \cong R^{m}$. Therefore, $N$ is free and of rank $m$.
+
+    Now induct on the rank of $F$; $\ker \nu$ is an $R$-submodule of $F$ and of rank $n-1$. Also, it is free by what we just proved. Hence, $\ker \nu \cong R^{n-1}$. $N \cap \ker \nu \subseteq N$ is an $R$-submodule of $N$, so by the induction hypothesis, there exists a basis $\{x_{2},\ldots,x_{n}\}$ of $\ker \nu$ and elements $a_{2},\ldots,a_{m} \in R$ such that $a{2} \mid \cdots \mid a_{m}$ and $\{a_{2}x_{2},\ldots,a_{m}x_{m}\}$ is a basis of $N \cap \ker \nu$. By the claim above, $\{x_{1},\ldots,x_{n}\}$ is a basis of $F$ and $\{a_{1}x_{1},a_{2}x_{2},\ldots,a_{m}x_{m}\}$ is a basis of $N$. We now wish to show that $a_{1} \mid a_{2}$.
+
+    With $\Sigma$ defined as beofre, and $(a_{1}) = \nu(N)$, we have $(a_{2}) = \nu_{2}(N \cap \ker \nu)$ for some $R$-linear $\nu_{2} : \ker \nu \to R$ and $\mu : Rx_{1} \oplus \ker \nu \to R$. For $r \in R$ and $\alpha \in \ker \nu$, we have $\mu(rx_{1}+\alpha) = r\nu(x_{1}) + \nu_{2}(\alpha)$. Hence, $\mu$ is $R$-linear and $\mu(x) = \mu(a_{1}x_{1}) = a_{1} \in \mu(N)$ so that $(a_{1}) = \mu(N)$. But $\mu(N) \supseteq \mu(\ker \nu \cap N) = \nu_{2}(\ker \nu \cap N) = (a_{2})$, so $a_{1} \mid a_{2}$.
+\end{proof}
