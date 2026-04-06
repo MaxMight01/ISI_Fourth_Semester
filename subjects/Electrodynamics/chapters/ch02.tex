@@ -264,3 +264,64 @@ This, along with the other three equations, are known as \eax{Maxwell's equation
     \oint \bv{B} \cdot \di{\bv{l}} = \mu_{0} \epsilon_{0} \int \frac{\partial \bv{E}}{\partial t} \cdot \di{\bv{a}} = \mu_{0} \epsilon_{0} \frac{I}{\epsilon_{0}A} \cdot A = \mu_{0} I,
 \end{align}
 where we used the fact that $\frac{\partial E}{\partial t} = \frac{I}{\epsilon_{0}A}$, since $I = \frac{\di{Q}}{\di{t}}$ and $Q = \epsilon_{0} EA$. Thus, the modified Ampère's law resolves the inconsistency in the original Ampère's law.
+\\ \\
+\textit{April 6th.}
+
+Now suppose we have a region of space with no charges and no currents. Then, Maxwell's equations reduce to
+\begin{align}
+\nabla \cdot \bv{E} = 0, \quad \nabla \cdot \bv{B} = 0, \quad \nabla \times \bv{E} = -\frac{\partial{\bv{B}}}{\partial{t}}, \quad \nabla \times \bv{B} = \mu_{0} \epsilon_{0} \frac{\partial{\bv{E}}}{\partial{t}}.
+\end{align}
+
+\subsection{Poynting's Theorem}
+The equations of work done,
+\begin{align}
+    W = \frac{\epsilon_{0}}{2} \int_{V} E^{2} \, \di{V'} \quad \text{and} \quad W = \frac{1}{2 \mu_{0}} \int_{V} B^{2} \, \di{V'},
+\end{align}
+suggest that the energy density of the electromagnetic field is given by
+\begin{align}
+    u = \frac{\epsilon_{0}}{2} E^{2} + \frac{1}{2 \mu_{0}} B^{2}.
+\end{align}
+Now suppose we have a charge and current configuration generating fields $\bv{E}(\bv{r},t)$ and $\bv{B}(\bv{r},t)$. The work done by the electromagnetic force is
+\begin{align}
+    \di{W} = \bv{F} \cdot \di{\bv{l}} = q(\bv{E} + \bv{v} \times \bv{B}) \cdot \bv{v} \, \di{t}.
+\end{align}
+Using $q = \rho \, \di{V}'$ and $\bv{J} = \rho \bv{v}$, we have
+\begin{align}
+    \frac{\di{\tilde{W}}}{\di{t}} = \int \rho (\bv{J} \cdot \bv{E}) \, \di{V}'
+\end{align}
+where $\di{\tilde{W}}/\di{t}$ represents the work done per unit time across a given volume $V$. We can replace $\bv{J}$ from Maxwell's equations as
+\begin{align}
+    \bv{E} \cdot \bv{J} = \bv{E} \cdot \left( \frac{1}{\mu_{0}} (\nabla \times \bv{B}) - \epsilon_{0} \frac{\partial \bv{E}}{\partial t} \right).
+\end{align}
+Using the vector identity $\nabla \cdot (\bv{E} \times \bv{B}) = \bv{B} \cdot (\nabla \times \bv{E}) - \bv{E} \cdot (\nabla \times \bv{B})$, we have
+\begin{align}
+    \bv{E} \cdot \bv{J} = \frac{1}{\mu_{0}} \bv{B} \cdot (\nabla \times \bv{E}) - \frac{1}{\mu_{0}} \nabla \cdot (\bv{E} \times \bv{B}) - \epsilon_{0} \bv{E} \cdot \frac{\partial \bv{E}}{\partial t}.
+\end{align}
+We can now replace $\nabla \times \bv{E}$ from Maxwell's equations as
+\begin{align}
+    \bv{E} \cdot \bv{J} &= -\frac{1}{\mu_{0}} \bv{B} \cdot \frac{\partial \bv{B}}{\partial t} - \epsilon_{0} \bv{E} \cdot \frac{\partial \bv{E}}{\partial t} - \frac{1}{\mu_{0}} \nabla \cdot (\bv{E} \times \bv{B}) \notag \\
+    &= -\frac{\partial}{\partial t} \left( \frac{1}{2} \left( \epsilon_{0} E^{2} + \frac{1}{\mu_{0}} B^{2} \right) \right) - \frac{1}{\mu_{0}} \nabla \cdot (\bv{E} \times \bv{B}).
+\end{align}
+Therefore,
+\begin{align}
+    \frac{\di{\tilde{W}}}{\di{t}} = -\int_{V} \frac{\partial u}{\partial t} \, \di{V}' - \int_{V} \nabla \cdot \bv{S} \, \di{V}',
+\end{align}
+where $u = \frac{\epsilon_{0}}{2} E^{2} + \frac{1}{2 \mu_{0}} B^{2}$ is defined as the \eax{energy density} of the electromagnetic field, and $\bv{S} = \frac{1}{\mu_{0}} \bv{E} \times \bv{B}$ is defined as the \eax{Poynting vector}. Note that the Poynting vector $\bv{S}$ is orthogonal to both $\bv{E}$ and $\bv{B}$. Therefore, using $W$ instead of $\tilde{W}$ to represent the total work done, we have
+\begin{align}
+    \frac{\di{W}}{\di{t}} = -\frac{\di{U}}{\di{t}} - \oint_{S} \bv{S} \cdot \di{\bv{a}},
+\end{align}
+where $U$ is the total energy stored in the electromagnetic field, and $S$ is the surface bounding the volume $V$. This is known as \eax{Poynting's theorem}. Thus, the work done on charges by the electromagnetic field within a certain volume equates to a decrease in the energy stored in the electromagnetic field within that volume, plus a net outward flow of energy across the boundary of that volume. The Poynting vector $\bv{S}$ represents the energy flux density of the electromagnetic field, and its direction indicates the direction of energy flow.
+
+Note that work done on the charges will also increase their mechanical energy. If we employ $U_{em}$ instead of $U$ to explicitly represent the energy stored in the electromagnetic field, and $u_{em}$ instead of $u$ to explicitly represent the energy density of the electromagnetic field, and finally $u_{mech}$ to represent the mechanical energy density of the charges, then we can rewrite Poynting's theorem as
+\begin{align}
+    \frac{\di{}}{\di{t}} \int u_{mech} \, \di{V}' = -\int \frac{\partial u_{em}}{\partial t} \, \di{V}' - \oint_{S} \bv{S} \cdot \di{\bv{a}} \implies \frac{\di{}}{\di{t}} \int (u_{mech} + u_{em}) \, \di{V}' = -\oint_{S} \bv{S} \cdot \di{\bv{a}}.
+\end{align}
+If we now use $u_{total} = u_{mech} + u_{em}$ to represent the total energy density, then we have
+\begin{align}
+    \frac{\di{}}{\di{t}} \int u_{total} \, \di{V}' = -\oint_{S} \bv{S} \cdot \di{\bv{a}} = -\int_{V} \nabla \cdot \bv{S} \, \di{V}' \implies \frac{\partial u_{total}}{\partial t} + \nabla \cdot \bv{S} = 0
+\end{align}
+which is the differential form of Poynting's theorem. This equation, along with
+\begin{align}
+    \frac{\partial \rho}{\partial t} + \nabla \cdot \bv{J} = 0
+\end{align}
+which is the continuity equation, are the two conservation laws of electromagnetics. The first one states that the total energy (mechanical plus electromagnetic) is conserved, while the second one states that electric charge is conserved.
