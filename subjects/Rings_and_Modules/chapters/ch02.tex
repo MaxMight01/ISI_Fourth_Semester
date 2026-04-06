@@ -346,3 +346,40 @@ Interesting corollaries can be drawn.
 
     With $\Sigma$ defined as beofre, and $(a_{1}) = \nu(N)$, we have $(a_{2}) = \nu_{2}(N \cap \ker \nu)$ for some $R$-linear $\nu_{2} : \ker \nu \to R$ and $\mu : Rx_{1} \oplus \ker \nu \to R$. For $r \in R$ and $\alpha \in \ker \nu$, we have $\mu(rx_{1}+\alpha) = r\nu(x_{1}) + \nu_{2}(\alpha)$. Hence, $\mu$ is $R$-linear and $\mu(x) = \mu(a_{1}x_{1}) = a_{1} \in \mu(N)$ so that $(a_{1}) = \mu(N)$. But $\mu(N) \supseteq \mu(\ker \nu \cap N) = \nu_{2}(\ker \nu \cap N) = (a_{2})$, so $a_{1} \mid a_{2}$.
 \end{proof}
+
+\noindent \textit{April 6th.}
+
+We are now equipped to prove the structure theorem for finitely generated modules over a PID, using the previous proposition.
+
+\begin{proof}[Proof of the structure theorem for finitely generated modules over a PID]
+    Let $\{m_{1},\ldots,m_{n}\}$ be a generating set of $M$ as an $R$-module. Then $\varphi:F=R^{n} \to M$ defined by $\varphi(r_{1},\ldots,r_{n}) = r_{1}m_{1} + \cdots + r_{n}m_{n}$ for all $r_{1},\ldots,r_{n} \in R$ is a surjective $R$-linear map. By the previous proposition, $N = \ker(\varphi) \subseteq F$ is a free $R$-submodule of $F$ and of rank $m \leq n$. Moreover, there is a basis $\{x_{1},\ldots,x_{n}\}$ of $F$ and elements $a_{1},\ldots,a_{m} \in R$ such that $\{a_{1}x_{1},\ldots,a_{m}x_{m}\}$ is a basis of $N$ and $a_{1} \mid a_{2} \mid \cdots \mid a_{m}$. By the first isomorphism theorem, $M \cong F/N$. Note that we can write $F = Rx_{1} \oplus Rx_{2} \oplus \cdots \oplus Rx_{n}$ and $N = Ra_{1}x_{1} \oplus Ra_{2}x_{2} \oplus \cdots \oplus Ra_{m}x_{m}$, so
+    \begin{align}
+        M \cong F/N = (Rx_{1} \oplus \cdots \oplus Rx_{n})/(Ra_{1}x_{1} \oplus \cdots \oplus Ra_{m}x_{m}) \cong R/(a_{1}) \oplus R/(a_{2}) \oplus \cdots \oplus R/(a_{m}) \oplus R^{n-m}.
+    \end{align}
+    Hence, $M$ is isomorphic to a direct sum of a free module and a torsion module. The rank of $M$ is simply
+    \begin{align}
+        \rank M = \dim_{S^{-1}R}(S^{-1}M) = \dim_{S^{-1}R}(S^{-1}(R^{n-m})) = n-m.
+    \end{align}
+    where $\dim_{S^{-1}R}(S^{-1}((R/(a_{1})) \oplus \cdots \oplus R/(a_{m}))) = 0$ since $R/(a_{i})$ is a torsion module for all $1 \leq i \leq m$. Hence, $k = n - m$.
+\end{proof}
+
+There also exists an alternative version of the structure theorem for finitely generated modules over a PID.
+
+\begin{theorem}[The alternative structure theorem]
+    Let $R$ be a PID, and $M$ be a finitely generated $R$-module. Then
+    \begin{align}
+        M \cong R^{k} &\oplus R/(p_{1}^{r_{11}}) \oplus R/(p_{1}^{r_{12}}) \oplus \cdots \oplus R/(p_{1}^{r_{1n_{1}}}) \notag \\
+        &\oplus R/(p_{2}^{r_{21}}) \oplus R/(p_{2}^{r_{22}}) \oplus \cdots \oplus R/(p_{2}^{r_{2n_{2}}}) \notag \\
+        &\oplus \cdots \notag \\
+        &\oplus R/(p_{l}^{r_{l1}}) \oplus R/(p_{l}^{r_{l2}}) \oplus \cdots \oplus R/(p_{l}^{r_{ln_{l}}})
+    \end{align}
+    where $r_{ij} \geq r_{ij-1}$ for all $1 \leq i \leq l$ and $2 \leq j \leq n_{i}$, where $p_{1},\ldots,p_{l}$ are prime elements of $R$.
+\end{theorem}
+
+\begin{proof}
+    Write $M \cong R^{k} \oplus R/(a_{1}) \oplus \cdots \oplus R/(a_{n})$ as in the previous structure theorem. Since $R$ is a PID, and $a_{1} \mid a_{2} \mid \cdots \mid a_{n}$, we can write $a_{i} = p_{1}^{r_{i1}}p_{2}^{r_{i2}} \cdots p_{l}^{r_{il}}$ for some prime elements $p_{1},\ldots,p_{l}$ of $R$ and some non-negative integers $r_{ij}$ such that $r_{ij} \geq r_{i,j-1}$ for all $1 \leq i \leq l$ and $2 \leq j \leq n_{i}$. Then, by the chinese remainder theorem, we have
+    \begin{align}
+        R/(a_{i}) = R/(p_{1}^{r_{i1}}p_{2}^{r_{i2}} \cdots p_{l}^{r_{il}}) \cong R/(p_{1}^{r_{i1}}) \oplus R/(p_{2}^{r_{i2}}) \oplus \cdots \oplus R/(p_{l}^{r_{il}}).
+    \end{align}
+    The result follows by applying this decomposition to each $R/(a_{i})$.
+\end{proof}
