@@ -1093,6 +1093,14 @@ The question now is when one can expect $y'' + P(x) y' + Q(x) y = 0$ to have an 
     We say that $x_{0} \in \R$ is an \eax{ordinary point} of $y'' + P(x) y' + Q(x) y = 0$ if $P$ and $Q$ are analytic in a neighbourhood of $x_{0}$. If $x_{0}$ is not an ordinary point, then we say that $x_{0}$ is a \eax{singular point}. Moreover, a singular point $x_{0}$ is a \eax{regular singular point} if $(x-x_{0})P$ and $(x-x_{0})^{2} Q$ are analytic in a neighbourhood of $x_{0}$, and an \eax{irregular singular point} otherwise.
 \end{definition}
 
+Consider the ODE $y'' + \frac{p}{x} y' + \frac{q}{x^{2}} y = 0$ for some $p,q \in \R$. Note that $0$ is a regular singular point. Let us substitute $x = e^{z}$. Then $Y(z) = y(x(z))$, and $\frac{dY}{dz} = \dot{Y}$ and $\frac{dy}{dx} = y'$. By the chain rule, $\dot{Y} = y' \cdot \frac{dx}{dz} = y' e^{z}$, so $y' = \dot{Y} e^{-z}$. Also, $\ddot{Y} = \frac{d}{dz} (y' e^{z}) = y'' e^{2z} + y' e^{z}$, so $y'' = \ddot{Y} e^{-2z} - y' e^{-z}$. Substituting these into the ODE gives us $\ddot{Y} + (p-1) \dot{Y} + q Y = 0$. This is an ODE with constant coefficients, so we can solve it explicitly. Hence, we can find a solution to the original ODE. As a variation, we also wish to find solutions of
+\begin{align}
+    y'' + \frac{p(x)}{x} y' + \frac{q(x)}{x^{2}} y = 0
+\end{align}
+where $p$ and $q$ are analytic around and at $0$. A guess is to look for a solution of the form $y = x^{m} \sum_{n \geq 0} a_{n} x^{n}$ or $y = x^{m} \ln x \sum_{n \geq 0} a_{n} x^{n}$ for some $m \in \R$ and some sequence $(a_{n})$. Substituting these into the ODE gives us a way to solve for $m$ and $a_{n}$'s. This is known as the \eax{Frobenius method}.
+
+\textit{April 6th.}
+
 \begin{theorem}
     Suppose $x_{0}$ is an ordinary point of $y'' + P(x) y' + Q(x) y = 0$, where $P$ and $Q$ have a power series representation in $I = (x_{0}-\varepsilon,x_{0}+\varepsilon)$ for some $\varepsilon > 0$. Then, given $a_{0},a_{1} \in \R$, there exists a unique analytic solution $y$ of $y'' + P(x) y' + Q(x) y = 0$ such that $y(x_{0}) = a_{0}$ and $y'(x_{0}) = a_{1}$.
 \end{theorem}
@@ -1106,11 +1114,21 @@ The question now is when one can expect $y'' + P(x) y' + Q(x) y = 0$ to have an 
     \begin{align}
         (n+2)(n+1) a_{n+2} + \sum_{k+l=n} (k+1) a_{k+1} p_{l} + \sum_{r+s=n} a_{r} q_{s} = 0.
     \end{align}
-    For $n = 0$, $2a_{2} + a_{1} p_{0} + a_{0} q_{0} = 0$, so $a_{2}$ is determined by $a_{0}$ and $a_{1}$. For $n \geq 1$, $a_{n+2}$ is determined by $a_{0},\ldots,a_{n+1}$. 
+    For $n = 0$, $2a_{2} + a_{1} p_{0} + a_{0} q_{0} = 0$, so $a_{2}$ is determined by $a_{0}$ and $a_{1}$. For $n \geq 1$, $a_{n+2}$ is determined by $a_{0},\ldots,a_{n+1}$, recursively. We now wish to show that $\sum a_{n} x^{n}$ coverges on $(-R,R)$. Take $0 < r < R$. Then $\sum \abs{p_{n} r^{n}}$ and $\sum \abs{q_{n} r^{n}}$ both converge. Hence, there exists $M > 0$ such that $\abs{p_{n}} r^{n} \leq M$ and $\abs{q_{n}} r^{n} \leq M$ for all $n$. Using the above recurrence relation, we have
+    \begin{align}
+        (n+2)(n+1)\abs{a_{n+2}} &\leq \sum_{k=0}^{n} \left( (k+1) \cdot \frac{M}{r^{n-k}} \abs{a_{k+1}} + \frac{M}{r^{n-k}} \abs{a_{k}} \right) \notag \\ &\leq \frac{M}{r^{n}} \sum_{k=0}^{n} \left( (k+1) \abs{a_{k+1}} + \abs{a_{k}} \right)r^{k} + M \abs{a_{n+1}} r.
+    \end{align}
+    Note that it is easier to analyze if the above inequality is an equality. Hence, we shall instead consider $b_{n}$'s (which we will define, and will be closely related to the $a_{n}$'s), but satisfy some equality like the one above. Let $b_{0} = \abs{a_{0}}$, $b_{1} = \abs{a_{1}}$, $b_{n}$'s by the recurrence relation for $n \geq 2$. Then
+    \begin{align}
+        (n+2)(n+1) b_{n+2} = \frac{M}{r^{n}} \sum_{k=0}^{n} \left( (k+1) b_{k+1} + b_{k} \right) r^{k} + M b_{n+1} r.
+    \end{align}
+    A bit of algebraic manipulation gives the following relation between $b_{n+2}$ and $b_{n+1}$:
+    \begin{align}
+        (n+2)(n+1) b_{n+2} \cdot r = b_{n+1} \left( n(n+1) + Mr(n+1) + Mr^{2} \right)
+    \end{align}
+    Therefore,
+    \begin{align}
+        \limsup_{n \to \infty} \frac{b_{n+2}}{b_{n+1}}r = \limsup_{n \to \infty} \frac{n(n+1) + Mr(n+1) + Mr^{2}}{(n+2)(n+1)} = 1,
+    \end{align}
+    implying that the series $\sum b_{n} x^{n}$ has radius of convergence at least $r$, by the ratio test. Since $r < R$ is arbitrary, $\sum b_{n} x^{n}$ has radius of convergence at least $R$. Hence, $\sum a_{n} x^{n}$ also has radius of convergence at least $R$. This completes the proof.
 \end{proof}
-
-Consider the ODE $y'' + \frac{p}{x} y' + \frac{q}{x^{2}} y = 0$ for some $p,q \in \R$. Note that $0$ is a regular singular point. Let us substitute $x = e^{z}$. Then $Y(z) = y(x(z))$, and $\frac{dY}{dz} = \dot{Y}$ and $\frac{dy}{dx} = y'$. By the chain rule, $\dot{Y} = y' \cdot \frac{dx}{dz} = y' e^{z}$, so $y' = \dot{Y} e^{-z}$. Also, $\ddot{Y} = \frac{d}{dz} (y' e^{z}) = y'' e^{2z} + y' e^{z}$, so $y'' = \ddot{Y} e^{-2z} - y' e^{-z}$. Substituting these into the ODE gives us $\ddot{Y} + (p-1) \dot{Y} + q Y = 0$. This is an ODE with constant coefficients, so we can solve it explicitly. Hence, we can find a solution to the original ODE. As a variation, we also wish to find solutions of
-\begin{align}
-    y'' + \frac{p(x)}{x} y' + \frac{q(x)}{x^{2}} y = 0
-\end{align}
-where $p$ and $q$ are analytic around and at $0$. A guess is to look for a solution of the form $y = x^{m} \sum_{n \geq 0} a_{n} x^{n}$ or $y = x^{m} \ln x \sum_{n \geq 0} a_{n} x^{n}$ for some $m \in \R$ and some sequence $(a_{n})$. Substituting these into the ODE gives us a way to solve for $m$ and $a_{n}$'s. This is known as the \eax{Frobenius method}. 
