@@ -871,3 +871,76 @@ Note that without the assumption of $\lim_{n \to \infty} \diam(F_{n}) = 0$, the 
 \end{proposition}
 
 The proof is left as an exercise.
+\\ \\
+\noindent \textit{April 7th.}
+
+\begin{theorem}
+    If $(X,d)$ is a compact metric space, then $X$ is complete.
+\end{theorem}
+
+\begin{theorem}
+    Let $(X,d)$ be a metric space. Then, there exists an isometric embedding of $X$ into a complete metric space.
+\end{theorem}
+\begin{proof}
+    Fix $x_{0} \in X$. Now define the map $\Phi : X \to B(X)$ by $\Phi(a) = \varphi_{a}$, where $\varphi_{a} : X \to \R$ is defined as $\varphi_{a}(x) = d(x,a) - d(x,x_{0})$ for all $x \in X$. Note that $\varphi_{a}$ is bounded since $\abs{\varphi_{a}(x)} \leq d(a,x_{0})$ for all $x \in X$. So, $\Phi$ is well-defined. Now, for $a$ and $b$ in $X$, we have
+    \begin{align}
+        \norm{\Phi(a)-\Phi(b)}_{\infty} = \sup_{x \in X} \abs{\varphi_{a}(x) - \varphi_{b}(x)} = \sup_{x \in X} \abs{d(x,a) - d(x,b)} \leq d(a,b),
+    \end{align}
+    and $\norm{\Phi(a)-\Phi(b)}_{\infty} \geq \abs{\varphi_{a}(b) - \varphi_{b}(b)} = d(a,b)$, so $\norm{\Phi(a)-\Phi(b)}_{\infty} = d(a,b)$. Thus, we have
+    \begin{align}
+        X \cong \Phi(X) \subseteq \overline{\Phi(X)} \subseteq B(X),
+    \end{align}
+    where $\overline{\Phi(X)}$ is the closure of $\Phi(X)$ in $B(X)$. Since $B(X)$ is complete, $\overline{\Phi(X)}$ is also complete, so we have an isometric embedding of $X$ into a complete metric space.
+\end{proof}
+
+\begin{definition}
+    A metric space $(X,d)$ is termed \eax{totally bounded} if for every $\varepsilon > 0$, there exists a finite cover of $X$ by open balls of radius $\varepsilon$.
+\end{definition}
+
+\begin{theorem}
+    A metric space $(X,d)$ is compact if and only if it is complete and totally bounded.
+\end{theorem}
+
+\begin{proof}
+    The forward implication is trivial. For the reverse implication, given a sequence $(x_{n})_{n \geq 1} \subseteq X$, it is enough to show that there exists a Cauchy subsequence since $X$ is complete. Let $\varepsilon = 1$. Then, $X$ may be written as $X = \bigcup_{i=1}^{k_{1}} B(y_{i}^{(1)},1)$, a finite union of balls. Let $J_{1} = \{n \in \N \mid x_{n} \in B(y_{i_{1}}^{(1)},1)\}$ for some $i_{1}$ such that $J_{1}$ is infinite (this is possible since $\bigcup_{i=1}^{k_{1}} J_{i} = \N$). Now, let $\varepsilon = 1/2$. Then, $X$ may be written as $X = \bigcup_{i=1}^{k_{2}} B(y_{i}^{(2)},1/2)$, a finite union of balls. Let $J_{2} = \{n \in J_{1} \mid x_{n} \in B(y_{i_{2}}^{(2)},1/2)\}$ for some $i_{2}$ such that $J_{2}$ is infinite. Continuing this process, we can get a sequence of infinite subsets $J_{1} \supseteq J_{2} \supseteq \cdots$ such that for each $m$, there exists some $i_{m}$ such that $x_{n} \in B(y_{i_{m}}^{(m)},1/m)$ for all $n \in J_{m}$. Now, pick some $n_{1} \in J_{1}$, and pick some $n_{m} \in J_{m}$ such that $n_{m} > n_{m-1}$ for each $m > 1$. Then, we have a subsequence $(x_{n_{m}})_{m \geq 1}$ such that for each $m$, there exists some $i_{m}$ such that $x_{n} \in B(y_{i_{m}}^{(m)},1/m)$ for all $n \in J_{m}$, so in particular, we have $x_{n_{m}} \in B(y_{i_{\min\{l,m\}}}^{(\min\{l,m\})}, 1/\min\{l,m\})$ for all $l,m$. Thus, we have
+    \begin{align}
+        d(x_{n_{l}},x_{n_{m}}) \leq d(x_{n_{l}},y_{i_{\min\{l,m\}}}^{(\min\{l,m\})}) + d(y_{i_{\min\{l,m\}}}^{(\min\{l,m\})},x_{n_{m}}) < 2/\min\{l,m\}
+    \end{align}
+    for all $l,m$, so $(x_{n_{m}})_{m \geq 1}$ is a Cauchy subsequence. Hence, $X$ is compact.
+\end{proof}
+
+\subsection{Arzelà-Ascoli Theorem}
+
+\begin{definition}
+    A class of functions $\cF \subseteq C(X,Y)$ is \eax{equicontinuous} at $x \in X$ if for every $\varepsilon > 0$, there exists some open neighbourhood $U$ of $x$ such that $\sup_{f \in \cF} d(f(x),f(y)) < \varepsilon$ for all $y \in U$. $\cF$ is equicontinuous if it is equicontinuous at every point in $X$.
+\end{definition}
+
+\begin{definition}
+    A class of functions $\cF \subseteq C(X,Y)$ is \eax{pointwise bounded} if for every $x \in X$, the set $\{f(x) \mid f \in \cF\}$ is bounded in $Y$.
+\end{definition}
+
+\begin{theorem}[The \eax{Arzelà-Ascoli theorem}]
+    Let $X$ be a compact metric space, and $C(X,\R^{n})$ be equipped with the supremum metric. Then $\cF \subseteq C(X,\R^{n})$ has compact closure if and only if $\cF$ is equicontinuous and pointwise bounded.
+\end{theorem}
+
+To prove this, we will require the following lemma.
+
+\begin{lemma}
+    Let $X$ be a topological space, and $(Y,d)$ be a metric space. If $\cF \subseteq C(X,Y)$ is totally bounded with respect to the supremum metric, then $\cF$ is equicontinuous.
+\end{lemma}
+
+\begin{proof}
+    Let $\varepsilon > 0$. $\cF$ is totally bounded, so we may write $\cF = \bigcup_{i=1}^{k} B(f_{i},\frac{\varepsilon}{3})$. Since $f_{i}$'s are continuous, for all $x_{0} \in X$, there exists some open neighbourhood $U(x_{0})$ such that $d(f_{i}(x),f_{i}(x_{0})) < \varepsilon$ for all $x \in U(x_{0})$ and all $i$. 
+Now, let $f \in \cF$ be arbitrary. Then $f \in B(f_{i},\frac{\varepsilon}{3})$ for some $i$, so $\norm{f - f_{i}}_{\infty} < \frac{\varepsilon}{3}$. Thus, for all $x \in U(x_{0})$, we have
+    \begin{align}
+        d(f(x),f(x_{0})) &\leq d(f(x),f_{i}(x)) + d(f_{i}(x),f_{i}(x_{0})) + d(f_{i}(x_{0}),f(x_{0})) \notag\\
+        &< \frac{\varepsilon}{3} + \frac{\varepsilon}{3} + \frac{\varepsilon}{3} = \varepsilon.
+    \end{align}
+    Since $f$ was arbitrary, $\cF$ is equicontinuous at $x_{0}$. Since $x_{0}$ was arbitrary, $\cF$ is equicontinuous.
+\end{proof}
+
+We are now ready to prove the Arzelà-Ascoli theorem.
+
+\begin{proof}[Proof of the Arzelà-Ascoli theorem]
+    Let $\cG = \overline{\cF}$ be the closure of $\cF$. Suppose $\cG$ is compact. Then, $\cG$ is totally bounded, so $\cF$ is also totally bounded. By the above lemma, $\cF$ is equicontinuous. Moreover, since $\cG$ is compact, it is totally bounded so we can write $\cG = \bigcup_{i=1}^{k} B(g_{i},\frac{1}{2})$. Thus, for each $x \in X$, we have $\{g_{i}(x)\}_{i=1}^{k} \subseteq \R^{n}$ is bounded, so $\{f(x) \mid f \in \cF\} \subseteq \bigcup_{i=1}^{k} B(g_{i}(x),\frac{1}{2})$ is also bounded. Hence, $\cF$ is pointwise bounded.
+\end{proof}
