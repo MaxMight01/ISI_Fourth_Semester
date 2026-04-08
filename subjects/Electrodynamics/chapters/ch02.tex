@@ -325,3 +325,57 @@ which is the differential form of Poynting's theorem. This equation, along with
     \frac{\partial \rho}{\partial t} + \nabla \cdot \bv{J} = 0
 \end{align}
 which is the continuity equation, are the two conservation laws of electromagnetics. The first one states that the total energy (mechanical plus electromagnetic) is conserved, while the second one states that electric charge is conserved.
+
+\section{Waves}
+\noindent \textit{April 8th.}
+
+A wave $f(z,t)$ is a function of both space and time that satisfies the wave equation
+\begin{align}
+    \frac{\partial^{2} f}{\partial z^{2}} = \frac{1}{v^{2}} \frac{\partial^{2} f}{\partial t^{2}},
+\end{align}
+where $v$ is the speed of the wave. The wave equation is a second-order linear partial differential equation. The equation $f(z,t) = f(z-vt,t)$ represents a wave of fixed shape propogating in the positive $z$-direction with speed $v$. If the wave were to travel on a string, say, then $v$ is given by $v = \sqrt{T/\mu}$, where $T$ is the tension in the string and $\mu$ is the linear mass density of the string. A general solution of the wave equation is given by $f(z,t) = g(x-vt) + h(x+vt)$, where $g$ and $h$ are arbitrary functions. Come back to the Maxwell's equations in free space, we have, specifically,
+\begin{align}
+    \nabla \times \bv{E} = -\frac{\partial{\bv{B}}}{\partial{t}}, \quad \nabla \times \bv{B} = \mu_{0} \epsilon_{0} \frac{\partial{\bv{E}}}{\partial{t}}.
+\end{align}
+Taking the curl of both sides of the first equation gives us $\nabla \times (\nabla \times \bv{E}) = -\frac{\partial}{\partial t} (\nabla \times \bv{B})$. Using the vector identity $\nabla \times (\nabla \times \bv{E}) = \nabla (\nabla \cdot \bv{E}) - \nabla^{2} \bv{E}$, we have $-\nabla^{2} \bv{E} = -\mu_{0} \epsilon_{0} \frac{\partial^{2} \bv{E}}{\partial t^{2}}$, or
+\begin{align}
+    \nabla^{2} \bv{E} -\mu_{0}\epsilon_{0} \frac{\partial^{2} \bv{E}}{\partial t^{2}} = 0.
+\end{align}
+Taking curl of the second equation, along with a similar calculation, gives us
+\begin{align}
+    \nabla^{2} \bv{B} -\mu_{0}\epsilon_{0} \frac{\partial^{2} \bv{B}}{\partial t^{2}} = 0.
+\end{align}
+We earlier stated the wave equation in one spatial dimension; the generalization to three spatial dimensions is given by
+\begin{align}
+    \nabla^{2} \bv{A} - \frac{1}{v^{2}} \frac{\partial^{2} \bv{A}}{\partial t^{2}} = 0,
+\end{align}
+where $\bv{A}$ is a vector field. Comparing this with the equations for $\bv{E}$ and $\bv{B}$, we see that both $\bv{E}$ and $\bv{B}$ satisfy the wave equation with speed
+\begin{align}
+    v = \frac{1}{\sqrt{\mu_{0} \epsilon_{0}}} \approx 3 \times 10^{8} \, \text{m/s}.
+\end{align}
+This is termed the \eax{speed of light}, and it is a fundamental constant of nature. However, this speed being a constant poses a problem for Newtonian mechanics, which is based on the Galilean transformation. Suppose we have a stationary observer and a moving observer, where the moving observer is moving at a speed $v$ relative to the stationary observer, moving in the positive $y$-direction. At time $t = 0$, their origins coincide. In such a case, the Galilean transformation states that $x' = x$, $y' = y - vt$, and $z' = z$. Any body which moves with speed $u$ in the stationary observer's frame will move with speed $u' = u - v$ in the moving observer's frame. The accelerations, however, are the same in both frames $a' = a$ of any body. This is consistent with Newton's second law $F = ma$, since the force $F$ is the same in both frames. However, if we consider a light wave moving with speed $c$ in the stationary observer's frame, then it will move with speed $c' = c - v$ in the moving observer's frame, which contradicts the fact that the speed of light is a constant. Wave equations are not invariant under the Galilean transformation, and this is a problem for Newtonian mechanics. The resolution to this problem is given by Einstein's theory of special relativity.
+
+The simplest solution to the wave equation is given by a sinusoidal wave, which is given by
+\begin{align}
+    f(z,t) = A \cos (k(z-vt) + \delta) = A \cos (kz - \omega t + \delta),
+\end{align}
+where $A$ is the \eax{amplitude} of the wave, $k$ is the \eax{wave number}, $\omega$ is the \eax{angular frequency}, and $\delta$ is the \eax{phase constant}. The \eax{wavelength} $\lambda$ of the wave is given by $\lambda = 2\pi/k$, and the \eax{frequency} $f$ of the wave is given by $f = \omega/2\pi$. The speed of the wave is given by $v = \lambda f = \omega/k$. For an electromagnetic wave, we have $v = c$, so $\omega/k = c$. The wave can be complexified as
+\begin{align}
+    \tilde{f}(z,t) = \tilde{A} e^{i(kz - \omega t)}.
+\end{align}
+The advantage of this complex form is that it is easier to manipulate mathematically; for example, this is useful in polarization. Suppose we have two independent polrization directions for transerve waves given as
+\begin{align}
+    \hat{\bv{f}}_{v}(z,t) = \tilde{A} e^{i(kz-\omega t)} \hat{\bv{x}}, \quad \hat{\bv{f}}_{h}(z,t) = \tilde{A} e^{i(kz-\omega t)} \hat{\bv{y}}.
+\end{align}
+The most general wave is given by a linear combination of these two independent polarization directions, which is given by
+\begin{align}
+    \hat{\bv{f}}(z,t) = \tilde{A} e^{i(kz-\omega t)} \hat{\bv{n}},
+\end{align}
+where $\hat{\bv{n}} = \alpha \hat{\bv{x}} + \beta \hat{\bv{y}}$ is a unit vector in the $xy$-plane. From here, we can have one wave as the electric field and the other wave as the magnetic field, so that we have
+\begin{align}
+    \tilde{\bv{E}} = \tilde{\bv{E}}_{0} e^{i(kz-\omega t)}, \quad \tilde{\bv{B}} = \tilde{\bv{B}}_{0} e^{i(kz-\omega t)},
+\end{align}
+where the physical electric and magnetic fields are given by the real parts of $\tilde{\bv{E}}$ and $\tilde{\bv{B}}$, respectively. Every solution of Maxwell's equations is also a solution of the wave equation, but the converse is not true. More algebraic manipulation also gives
+\begin{align}
+    \tilde{\bv{B}}_{0} = \frac{k}{\omega} (\hat{\bv{z}} \times \tilde{\bv{E}}_{0}) = \frac{1}{c} (\hat{\bv{z}} \times \tilde{\bv{E}}_{0}).
+\end{align}
