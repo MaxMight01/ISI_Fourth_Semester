@@ -1132,3 +1132,43 @@ where $p$ and $q$ are analytic around and at $0$. A guess is to look for a solut
     \end{align}
     implying that the series $\sum b_{n} x^{n}$ has radius of convergence at least $r$, by the ratio test. Since $r < R$ is arbitrary, $\sum b_{n} x^{n}$ has radius of convergence at least $R$. Hence, $\sum a_{n} x^{n}$ also has radius of convergence at least $R$. This completes the proof.
 \end{proof}
+
+\section{Strum-Liouville Problems}
+\textit{April 8th.}
+
+A \eax{Hilbert space} is an inner product sace $(\cH,\ip{\cdot,\cdot})$ which is complete with respect to the norm $\norm{v} = \sqrt{\ip{v,v}}$.
+
+\begin{definition}
+    For a given continuous linear map $T:\cH \to \cH$, the \eax{adjoint} of $T$ is a (unique) continuous linear map $T^{\ast}:\cH \to \cH$ such that $\ip{Tv,w} = \ip{v,T^{\ast}w}$ for all $v,w \in \cH$.
+\end{definition}
+
+Note that such a $T^{\ast}$ always exists; suppose $\varphi : \cH \to \C$ is a continuous linear functional. By the Riesz representation theorem, there exists a unique $u \in \cH$ such that $\varphi(v) = \ip{v,u}$ for all $v \in \cH$. Hence, for each $w \in \cH$, there exists a unique $T^{\ast} w$ such that $\ip{Tv,w} = \ip{v,T^{\ast} w}$ for all $v \in \cH$. One can also show that $T^{\ast}$ is linear and continuous.
+
+\begin{definition}
+    $T$ is \eax{self-adjoint} if $T = T^{\ast}$.
+\end{definition}
+
+\begin{proposition}
+    If $T:\cH \to \cH$ is self-adjoint, then all eigenvalues of $T$ are real, and eigenvectors corresponding to distinct eigenvalues are orthogonal.
+\end{proposition}
+
+\begin{proof}
+    Suppose $Tv = \lambda v$ for some $v \in \cH$ and $\lambda \in \C$. Then $\lambda \norm{v}^{2} = \ip{Tv,v} = \ip{v,T^{\ast} v} = \ip{v,T v} = \overline{\lambda} \norm{v}^{2}$, so $\lambda$ is real. Now suppose $Tv_{1} = \lambda_{1} v_{1}$ and $Tv_{2} = \lambda_{2} v_{2}$ for some $v_{1},v_{2} \in \cH$ and $\lambda_{1},\lambda_{2} \in \R$ with $\lambda_{1} \neq \lambda_{2}$. Then, $\lambda_{1} \ip{v_{1},v_{2}} = \ip{Tv_{1},v_{2}} = \ip{v_{1},T^{\ast} v_{2}} = \ip{v_{1},T v_{2}} = \lambda_{2} \ip{v_{1},v_{2}}$. Hence, $\ip{v_{1},v_{2}} = 0$, so $v_{1}$ and $v_{2}$ are orthogonal.
+\end{proof}
+
+Fix a compact interval $[a,b] \subseteq \R$. We wish to study solutions of ODEs of the form $Py'' + Qy' + Ry = 0$. Let $\cH = L^{2}[a,b]$, the Hilbert space of square-integrable functions on $[a,b]$ with the inner product $\ip{f,g} = \int_{a}^{b} f(x) \overline{g(x)} \, dx$. Let us define
+\begin{align}
+    \cL : L^{2}[a,b] \cap C^{2}[a,b] \to L^{2}[a,b], \quad \cL(f) = Pf'' + Qf' + Rf.
+\end{align}
+Note that $\cL$ is a linear map. So,
+\begin{align}
+    \ip{\cL f, g} &= \int_{a}^{b} (Pf'' + Qf' + Rf) \overline{g} = \int_{a}^{b} f'' P \overline{g} + f' Q \overline{g} + f R \overline{g} \notag \\ &= (P\overline{g} f'pf(P\overline{g})' + fQ\overline{g})_{a}^{b} + \int_{a}^{b} f ((P\overline{g})'' - (Q\overline{g})' + R \overline{g}).
+\end{align}
+Assume we only look at functions $f$ and $g$ such that the first term vanishes. Then, $\ip{\cL f, g} = \ip{f, \cL^{\ast} g}$ where $\cL^{\ast} g = (P\overline{g})'' - (Q\overline{g})' + R \overline{g}$.
+
+
+Consider $\cL : \cH \to L^{2}[a,b]$ defined as $\cL f \defeq (Pf')' + Rf$, where $\cH \subseteq L^{2}[a,b] \cap C^{2}[a,b]$ consisting of functions with $\alpha_{1} f(a) + \alpha_{2} f'(a) = 0$ and $\beta_{1} f(b) + \beta_{2} f'(b) = 0$ for some $\alpha_{1},\alpha_{2},\beta_{1},\beta_{2}$ with $\abs{\alpha_{1}} + \abs{\alpha_{2}} > 0$ and $\abs{\beta_{1}} + \abs{\beta_{2}} > 0$. Then $\cL$ is self-adjoint on here, and under these assumptions the first term above vanishes.
+
+\begin{theorem}[\eax{Strum-Liouville theorem}]
+    If, in the system $Py'' + Qy' + Ry = 0$, $P > 0$ on $[a,b]$ and there exist a sequence of eigenvalues $\lambda_{1} < \lambda_{2} < \cdots < \lambda_{n} \to \infty$ which are the only eigenvalues of $(Py')' + Ry + \lambda y = 0$ with $a_{1} y(a) + a_{2} y'(a) = 0$ and $b_{1} y(b) + b_{2} y'(b) = 0$ for some $a_{1},a_{2},b_{1},b_{2}$ with $\abs{a_{1}} + \abs{a_{2}} > 0$ and $\abs{b_{1}} + \abs{b_{2}} > 0$, then the eigenspace of each $\lambda_{n}$ is one-dimensional. Moreover, let $\varphi_{n}$ be an eigenfunction corresponding to $\lambda_{n}$ for each $n$ with $\norm{\varphi_{n}} = 1$. Then, $\{\varphi_{n}\}$ is an orthonormal basis of $L^{2}[a,b]$, and any $f \in L^{2}[a,b]$ satisfying the boundary conditions can be written as $f = \sum c_{n} \varphi_{n}$.
+\end{theorem}
