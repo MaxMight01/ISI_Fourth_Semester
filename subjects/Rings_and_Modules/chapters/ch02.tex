@@ -304,6 +304,8 @@ We show the second statement.
 \end{proposition}
 The proof is left as a straightforward exercise.
 
+\section{Structure Theorem}
+
 \begin{theorem}[The \eax{structure theorem for finitely generated modules over a PID}]
     Let $R$ be a principal ideal domain, and $M$ be a finitely generated $R$-module. Then
     \begin{align}
@@ -383,3 +385,53 @@ There also exists an alternative version of the structure theorem for finitely g
     \end{align}
     The result follows by applying this decomposition to each $R/(a_{i})$.
 \end{proof}
+
+
+\subsection{Applications}
+\textit{April 9th.}
+
+\begin{theorem}[The \eax{Jordan canonical form}]
+    Let $A \in M_{n}(\C)$ be an $n \times n$ complex matrix. Then there exists an invertible matrix $P \in GL_{n}(\C)$ such that $P^{-1}AP = \diag (J_{r_{1}}^{\lambda_{1}},\ldots,J_{r_{l}}^{\lambda_{l}})$, where $\lambda_{1},\ldots,\lambda_{l}$ are the distinct eigenvalues of $A$, and
+    \begin{align}
+        J_{r}^{\lambda} = \begin{pmatrix}
+            \lambda & 0 & \cdots & 0 \\
+            0 & \lambda & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & \lambda
+        \end{pmatrix}_{r \times r} + \begin{pmatrix}
+            0 & 1 & \cdots & 0 \\
+            0 & 0 & \cdots & 0 \\
+            \vdots & \vdots & \ddots & \vdots \\
+            0 & 0 & \cdots & 0
+        \end{pmatrix}_{r \times r} = \begin{pmatrix}
+            \lambda & 1 & 0 & \cdots & 0 \\
+            0 & \lambda & 1 & \cdots & 0 \\
+            0 & 0 & \lambda & \cdots & 0 \\
+            \vdots & \vdots & \vdots & \ddots & 1 \\
+            0 & 0 & 0 & \cdots & \lambda
+        \end{pmatrix}_{r \times r}
+    \end{align}
+    is the $r \times r$ Jordan block with eigenvalue $\lambda$ for all $r \geq 1$ and $\lambda \in \C$. 
+\end{theorem}
+
+\begin{theorem}[The \eax{rational canonical form}]
+    Let $k$ be a field, and $A \in M_{n}(k)$ be an $n \times n$ matrix over $k$. Then there exists an invertible matrix $P \in GL_{n}(k)$ such that $P^{-1}AP = \diag (R_{a_{1}},\ldots,R_{a_{m}})$, where $a_{1},\ldots,a_{m} \in k[X]$ are monic polynomials such that $a_{1} \mid a_{2} \mid \cdots \mid a_{m}$, and
+    \begin{align}
+        R_{a} = \begin{pmatrix}
+            0 & 0 & \cdots & 0 & -b_{0} \\
+            1 & 0 & \cdots & 0 & -b_{1} \\
+            0 & 1 & \cdots & 0 & -b_{2} \\
+            \vdots & \vdots & \ddots & \vdots & \vdots \\
+            0 & 0 & \cdots & 1 & -b_{n-1}
+        \end{pmatrix}_{n \times n}
+    \end{align}
+    is the companion matrix of $a(X) = X^{n} + b_{n-1}X^{n-1} + \cdots + b_{1}X + b_{0}$ for all $n \geq 1$ and $a(X) \in k[X]$.
+\end{theorem}
+
+Note that if $R$ is a ring, and $M$ is an $R[X]$-module, then $M$ is an $R$-module via the restriction of scalars, and there is a natural $R$-linear map $M \to M$ defined by $m \mapsto Xm$ for all $m \in M$. Conversely, suppose $M$ is an $R$-module, and there is an $R$-linear map $\varphi : M \to M$. Then one can give $M$ a natural $R[X]$-module structure by defining $X \cdot m = \varphi(m)$ for all $m \in M$; if $f(X) \in R[X]$, then $f(X) \cdot m$ is defined as $f(\varphi)(m)$, where $f(\varphi) : M \to M$ is the $R$-linear map obtained by substituting $\varphi$ into $f(X)$. Hence, there is a one-to-one correspondence between $R[X]$-modules and pairs $(M,\varphi)$, where $M$ is an $R$-module and $\varphi : M \to M$ is an $R$-linear map. In particular, if we take $R = k$ to be a field, and $M = V = k^{n}$ to be the standard $n$-dimensional vector space over $k$, then a pair $(V,A)$, where $A : V \to V$ is a $k$-linear map, corresponds to a $k[X]$-module structure on $V$.
+
+\begin{definition}
+    Let $M$ be an $R$-module, and $m \in M$. The \eax{annihilator} of $m$ is defined as $\Ann(m) = \{r \in R \mid rm = 0\}$. Note that $\Ann(m)$ is an ideal of $R$. Similarly, the annihilator of $M$ is defined as $\Ann(M) = \{r \in R \mid rm = 0 \text{ for all } m \in M\} = \bigcap_{m \in M} \Ann(m)$, which is also an ideal of $R$.
+\end{definition}
+
+Few properties may be inferred easily. For instance, $M$ is a torsion module if and only if $\Ann(m) \neq 0$ for all $m \in M$. If $\Ann(M) \neq 0$, then $M$ is a torsion module; converse holds if $R$ is an integral domain and $M$ is finitely generated. Specific to our case, let $V$ be a finite-dimensional vector space over a field $k$, and $\varphi$ be a $k$-linear map from $V$ to itself. We already showed this gives $V$ a natural $k[X]$-module structure. Here, $\Ann(v) \neq 0$. Let $p_{\varphi}(X)$ be the characteristic polynomial of $\varphi$. Then $(p_{\varphi}(X)) = \Ann_{k[X]}(V)$. Also, the Cayley-Hamilton theorem states that $p_{\varphi}(\varphi) = 0$.
