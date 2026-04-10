@@ -435,3 +435,67 @@ Note that if $R$ is a ring, and $M$ is an $R[X]$-module, then $M$ is an $R$-modu
 \end{definition}
 
 Few properties may be inferred easily. For instance, $M$ is a torsion module if and only if $\Ann(m) \neq 0$ for all $m \in M$. If $\Ann(M) \neq 0$, then $M$ is a torsion module; converse holds if $R$ is an integral domain and $M$ is finitely generated. Specific to our case, let $V$ be a finite-dimensional vector space over a field $k$, and $\varphi$ be a $k$-linear map from $V$ to itself. We already showed this gives $V$ a natural $k[X]$-module structure. Here, $\Ann(v) \neq 0$. Let $p_{\varphi}(X)$ be the characteristic polynomial of $\varphi$. Then $(p_{\varphi}(X)) = \Ann_{k[X]}(V)$. Also, the Cayley-Hamilton theorem states that $p_{\varphi}(\varphi) = 0$.
+\\ \\
+\textit{April 10th.}
+
+We now prove the rational canonical form, which is a direct consequence of the structure theorem for finitely generated modules over a PID.
+
+\begin{proof}[Proof of the rational canonical form]
+    Let $\varphi = A:k^{n} \to k^{n}$ be the $k$-linear map defined by $A$. Since $V = k^{n}$ is a $k$-module, and $\varphi$ is a $k$-linear map from $V$ to itself, $V$ is a $k[X]$-module. Let $R = k[X]$. Then $R$ is a PID, and $V$ is a finitely generated $R$-module; thus by the structure theorem for finitely generated modules over a PID, we have
+    \begin{align}
+        V \cong R^{\rank(V)} \oplus R/(a_{1}) \oplus R/(a_{2}) \oplus \cdots \oplus R/(a_{m})
+    \end{align}
+    where $\rank(V) = 0$ since $V$ is a finite dimensional vector space over $k$, and $a_{1},\ldots,a_{m} \in R = k[X]$ are such that $a_{1} \mid a_{2} \mid \cdots \mid a_{m}$. We may assume that the $a_{i}$'s are monic since $k$ is a field. Now define the map
+    \begin{align}
+        \mu_{X} : R/(a_{1}) \oplus \cdots \oplus R/(a_{m}) \to R/(a_{1}) \oplus \cdots \oplus R/(a_{m})
+    \end{align}
+    where
+    \begin{align}
+        (f_{1}+(a_{1}),\ldots,f_{m}+(a_{m})) \mapsto (Xf_{1}+(a_{1}),\ldots,Xf_{m}+(a_{m})) = X \cdot (f_{1}+(a_{1}),\ldots,f_{m}+(a_{m}))
+    \end{align}
+    It is easy to verify that $\mu_{X}$ is a well-defined $R$-linear map. If we let $\theta$ denote the isomorphism from $V$ to $R/(a_{1}) \oplus \cdots \oplus R/(a_{m})$, we then claim that $\mu_{X} = \theta \circ \varphi \circ \theta^{-1}$. Let $v \in V$. Then
+    \begin{align}
+        \varphi \circ \theta(v) = X \cdot \theta(v) = \theta(X \cdot v) = \theta \circ \varphi(v).
+    \end{align}
+    Thus, $\varphi \circ \theta = \theta \circ \varphi$, so $\mu_{X} = \theta \circ \varphi \circ \theta^{-1}$ as claimed. Note that $k[X]/(a_{1}(X))$ has basis $\{1,X,X^{2},\ldots,X^{d_{1}-1}\}$, where $a_{1}(X) = X^{d_{1}} + b_{1,d_{1}-1}X^{d_{1}-1} + \cdots + b_{1,1}X + b_{1,0}$ by repeated division algorithm. Thus, if we let $R/(a_{1})$ be the first component of $R/(a_{1}) \oplus \cdots \oplus R/(a_{m})$, then $\mu_{X}$ restricted to $R/(a_{1})$ is given by the companion matrix of $a_{1}(X)$; that is, $1$ in the first component is mapped to $X$ in the first component, $X$ to $X^{2}$, and so on, until $X^{d_{1}-1}$ is mapped to $-b_{1,0} - b_{1,1}X - \cdots - b_{1,d_{1}-1}X^{d_{1}-1}$ in the first component. So the matrix representation of $\mu_{X}$ with respect to the basis $\{1,X,\ldots,X^{d_{1}-1}\}$ of $R/(a_{1})$ is the companion matrix $R_{a_{1}}$ of $a_{1}(X)$. Similarly, the matrix representation of $\mu_{X}$ restricted to $R/(a_{i})$ with respect to the basis $\{1,X,\ldots,X^{d_{i}-1}\}$ of $R/(a_{i})$ is the companion matrix $R_{a_{i}}$ of $a_{i}(X)$ for all $2 \leq i \leq m$. Hence, the matrix representation of $\mu_{X}$ with respect to the basis obtained by concatenating the bases of each $R/(a_{i})$ is $\diag (R_{a_{1}},\ldots,R_{a_{m}})$. Finally, if we let $P$ be the matrix of $\theta$ with respect to the standard basis of $V$ and the concatenated basis of $R/(a_{1}) \oplus \cdots \oplus R/(a_{m})$, then $PAP^{-1}$ is the matrix representation of $\mu_{X} = \theta \circ \varphi \circ \theta^{-1}$ with respect to the concatenated basis of $R/(a_{1}) \oplus \cdots \oplus R/(a_{m})$, which is $\diag (R_{a_{1}},\ldots,R_{a_{m}})$ as shown above. The proof is complete.
+\end{proof}
+
+We now prove the Jordan canonical form, which is a direct consequence of the rational canonical form.
+
+\begin{proof}[Proof of the Jordan canonical form]
+    Let $k = \C$ and $A \in M_{n}(\C)$. Note that $\varphi = A:\C^{n} \to \C^{n}$ is a $\C$-linear map, so $V = \C^{n}$ gains a $\C[X]$-module structure as before. Note that $R = \C[X]$ is a PID, and $V$ is a finitely generated $R$-module; thus by the alternative version of the structure theorem for finitely generated modules over a PID, we have
+    \begin{align}
+        V \cong &R/(p_{1}^{r_{11}}) \oplus R/(p_{1}^{r_{12}}) \oplus \cdots \oplus R/(p_{1}^{r_{1n_{1}}}) \notag \\
+        &\oplus R/(p_{2}^{r_{21}}) \oplus R/(p_{2}^{r_{22}}) \oplus \cdots \oplus R/(p_{2}^{r_{2n_{2}}}) \notag \\
+        &\oplus \cdots \notag \\
+        &\oplus R/(p_{l}^{r_{l1}}) \oplus R/(p_{l}^{r_{l2}}) \oplus \cdots \oplus R/(p_{l}^{r_{ln_{l}}})
+    \end{align}
+    where $p_{1},\ldots,p_{l}$ are irreducibles in $\C[X]$, and $r_{ij} \geq 1$. Let $\theta$ be the isomorphism from $V$ to the above direct sum, and $\mu_{X}$ denote the map defined by $X$ as before. By the fundamental theorem of algebra, we must have $p_{i}(X) = (X-\lambda_{i})$ for some $\lambda_{i} \in \C$ for all $1 \leq i \leq l$. In $R/(X-\lambda_{1})^{r_{11}}$, note that $\cB_{1} = \{1+(X-\lambda_{1})^{r_{11}}, (X-\lambda_{1})+(X-\lambda_{1})^{r_{11}}, \ldots, (X-\lambda_{1})^{r_{11}-1}+(X-\lambda_{1})^{r_{11}}\}$ is a basis. Observing where $\mu_{X}$ sends each element of $\cB_{1}$, we see that the matrix representation of $\mu_{X}$ restricted to $R/(X-\lambda_{1})^{r_{11}}$ with respect to $\cB_{1}$ is the transpose of the Jordan block $J_{r_{11}}^{\lambda_{1}}$; writing the basis in reverse order gives the Jordan block. Similarly, the matrix representation of $\mu_{X}$ restricted to $R/(X-\lambda_{i})^{r_{ij}}$ with respect to the basis $\cB_{ij} = \{(X-\lambda_{i})^{j-1}+(X-\lambda_{i})^{r_{ij}} \mid 1 \leq j \leq r_{ij}\}$ is the transpose of the Jordan block $J_{r_{ij}}^{\lambda_{i}}$, and writing the basis in reverse order gives the required Jordan block. Hence, the matrix representation of $\mu_{X}$ with respect to the basis obtained by concatenating the bases $\cB_{ij}$ is $\diag (J_{r_{11}}^{\lambda_{1}},\ldots,J_{r_{ln_{l}}}^{\lambda_{l}})$. Finally, if we let $P$ be the matrix of $\theta$ with respect to the standard basis of $V$ and the concatenated basis of the direct sum, then $PAP^{-1}$ is the matrix representation of $\mu_{X} = \theta \circ \varphi \circ \theta^{-1}$ with respect to the concatenated basis, which is $\diag (J_{r_{11}}^{\lambda_{1}},\ldots,J_{r_{ln_{l}}}^{\lambda_{l}})$ as shown above. The proof is complete.
+\end{proof}
+
+Finally, we look into the Cayley-Hamilton theorem.
+
+\begin{theorem}[The \eax{Cayley-Hamilton theorem}]
+    Let $R$ be a ring, and $A \in M_{n}(R)$. If $\chi_{A}(x) = \det(xI_{n} - A)$ is the characteristic polynomial of $A$, then $\chi_{A}(A) = 0$.
+\end{theorem}
+
+\begin{proof}
+    Let $A = (a_{ij})_{n \times n}$, and $\varphi_{A}:R^{n} \to R^{n}$ be the $R$-linear map defined by $A$. Then $R^{n}$ is a $R[X]$-module as before, where $f(X) \cdot v = f(\varphi_{A})(v)$ for all $f(X) \in R[X]$ and $v \in R^{n}$. Now, $X \cdot e_{j} = \varphi_{A}(e_{j}) = \sum_{i=1}^{n} a_{ij}e_{i}$ for all $1 \leq j \leq n$, where $\{e_{1},\ldots,e_{n}\}$ is the standard basis of $R^{n}$. Hence, $-a_{j1}e_{1} - a_{j2}e_{2} - \cdots - a_{j,j-1}e_{j-1} + (X-a_{jj})e_{j} -a_{j,j+1}e_{j+1} - \cdots - a_{jn}e_{n} = 0$ for all $1 \leq j \leq n$. Therefore,
+    \begin{align}
+        XI - A = \begin{pmatrix}
+            X-a_{11} & -a_{12} & \cdots & -a_{1n} \\
+            -a_{21} & X-a_{22} & \cdots & -a_{2n} \\
+            \vdots & \vdots & \ddots & \vdots \\
+            -a_{n1} & -a_{n2} & \cdots & X-a_{nn}
+        \end{pmatrix} \begin{pmatrix}
+            e_{1} \\
+            e_{2} \\
+            \vdots \\
+            e_{n}
+        \end{pmatrix}
+        =0.
+    \end{align}
+    Let $B = \adj(XI-A)$. Then $B(XI-A) = (XI-A)B = \det(XI-A)I_{n} = \chi_{A}(X)I_{n}$. Hence, $\chi_{A}(X)e_{i} = 0$ for all $1 \leq i \leq n$, or $\chi_{A}(X)v = 0$ for all $v \in R^{n}$. Thus, $\chi_{A}(A)v = \chi_{A}(\varphi_{A})(v) = \chi_{A}(X)v = 0$ for all $v \in R^{n}$, so $\chi_{A}(A) = 0$ as an $R$-linear map from $R^{n}$ to itself.
+\end{proof}
+
+As a final note, if $R_{a}$ is the companion matrix of $a(X) = X^{n} + b_{n-1}X^{n-1} + \cdots + b_{1}X + b_{0}$, then $\chi_{R_{a}}(X) = a(X)$, so the Cayley-Hamilton theorem implies that $a(R_{a}) = 0$. Hence, in the rational canonical form, for the matrix $A$ which is similar to $\diag (R_{a_{1}},\ldots,R_{a_{m}})$, we have $\chi_{A}(X) = a_{1}(X)a_{2}(X) \cdots a_{m}(X)$. Moreover, $A$ must have minimal polynomial $p_{A}(X) = a_{m}(X)$. Lastly, if for such a matrix $A$ we have $\chi_{A}(X) = p_{A}(X)$, then $P^{-1}AP = R_{\chi_{A}(X)}$.
