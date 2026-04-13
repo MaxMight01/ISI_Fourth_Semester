@@ -1172,3 +1172,71 @@ Consider $\cL : \cH \to L^{2}[a,b]$ defined as $\cL f \defeq (Pf')' + Rf$, where
 \begin{theorem}[\eax{Strum-Liouville theorem}]
     If, in the system $Py'' + Qy' + Ry = 0$, $P > 0$ on $[a,b]$ and there exist a sequence of eigenvalues $\lambda_{1} < \lambda_{2} < \cdots < \lambda_{n} \to \infty$ which are the only eigenvalues of $(Py')' + Ry + \lambda y = 0$ with $a_{1} y(a) + a_{2} y'(a) = 0$ and $b_{1} y(b) + b_{2} y'(b) = 0$ for some $a_{1},a_{2},b_{1},b_{2}$ with $\abs{a_{1}} + \abs{a_{2}} > 0$ and $\abs{b_{1}} + \abs{b_{2}} > 0$, then the eigenspace of each $\lambda_{n}$ is one-dimensional. Moreover, let $\varphi_{n}$ be an eigenfunction corresponding to $\lambda_{n}$ for each $n$ with $\norm{\varphi_{n}} = 1$. Then, $\{\varphi_{n}\}$ is an orthonormal basis of $L^{2}[a,b]$, and any $f \in L^{2}[a,b]$ satisfying the boundary conditions can be written as $f = \sum c_{n} \varphi_{n}$.
 \end{theorem}
+
+
+\subsection{Legendre Polynomials}
+\noindent \textit{April 13th.}
+
+We first discuss where they occur; in higher dimensions, the wave equation is $\frac{\partial^{2} u}{\partial t^{2}} = \Delta u$, and the heat equation is $\frac{\partial u}{\partial t} = \Delta u$. Note that $\Delta$ is the Laplacian, which is a second order differential operator. In spherical coordinates, it looks like
+\begin{align}
+    \Delta u = \frac{1}{r^{2}} \partial_{r}(r \partial_{r} u) + \frac{1}{r^{2} \sin \theta} \partial_{\theta}(\sin \theta \partial_{\theta} u) + \frac{1}{r^{2} \sin^{2} \theta} \partial_{\phi}^{2} u.
+\end{align}
+For a function $f:S^{2} \to \R$, we have
+\begin{align}
+    \Delta_{S^{2}} f = \frac{1}{\sin \theta} \partial_{\theta}(\sin \theta \partial_{\theta} f) + \frac{1}{\sin^{2} \theta} \partial_{\phi}^{2} f.
+\end{align}
+Solving the heat equation or the wave equation is equivalent to understanding the eigenvalues and the eigenfunctions of $\Delta$. We can use separation of variables to reduce the problem for now; let $u(x,t) = f(x) g(t)$. Then $\partial_{t} u = g'(t)f(x)$ and
+\begin{align}
+    \Delta u = g(t) \Delta f(x) = g'(t) f(x) \implies \frac{\Delta f}{f} = \frac{g'}{g} = -\lambda.
+\end{align}
+The function $f$ solves $\Delta f + \lambda f = 0$. There will then be a sequence of eigenvalues $\lambda_{1} < \lambda_{2} < \cdots < \lambda_{n} \to \infty$ and corresponding eigenfunctions $f_{1},f_{2},\ldots,f_{n},\ldots$ and $g_{1},g_{2},\ldots,g_{n},\ldots$ such that $\Delta f_{n} + \lambda_{n} f_{n} = 0$ and $g_{n}' + \lambda_{n} g_{n} = 0$. It will turn out that any solution $u$ is of the form $u(x,t) = \sum c_{n} f_{n}(x) g_{n}(t)$ for some sequence $(c_{n})$. The \eax{Legendre polynomials} are useful to understand the eigenvalues and eigenfunctions of $\Delta_{S^{2}}$. It is known that $\lambda_{n} = n(n+1)$, and the eigenfunctions satisfy $\Delta_{S^{2}} f + n(n+1) f = 0$. Among the eigenfunctions, there are some which only depend on $\theta$, that is, $f_{n}(\theta,\phi) = u_{n}(\theta)$. The $u_{n}$'s must satisfy
+\begin{align}
+    \frac{1}{\sin \theta} \partial_{\theta}(\sin \theta \partial_{\theta} u_{n}(\theta)) + n(n+1) u_{n}(\theta) = 0.
+\end{align}
+Setting $t = \cos \theta$ gives
+\begin{align}
+    \frac{d}{dt}((1-t^{2}) \frac{du_{n}}{dt}) + n(n+1) u_{n} = 0.
+\end{align}
+Denote, by $P_{n}$, the solution of the above equation such that $P_{n}(1) = 1$. $u(\theta) = P_{n}(\cos \theta)$ is then an eigenfunction of $\Delta_{S^{2}}$ with eigenvalue $n(n+1)$. The $P_{n}$'s are the Legendre polynomials. Of course, we need to show that $P_{n}$ is a polynomial. 
+
+\begin{theorem}
+    Let $P_{n}$ be the solution of $((1-x^{2})y')' + n(n+1) y = 0$ on $[-1,1]$,, which is bounded on $[-1,1]$, such that $P_{n}(1) = 1$. Then
+    \begin{enumerate}[label=\arabic*.]
+        \item $P_{n}(x) = F(-n,n+1,1,\frac{1-x}{2})$ for all $x \in [-1,1]$, where $F$ is the hypergeometric function.
+        \item $P_{n}$ is a polynomial of degree $n$.
+        \item $\ip{P_{n},P_{m}} = 0$ for all $n \neq m$, and $\ip{P_{n},P_{n}} = \frac{2}{2n+1}$ for all $n$.
+        \item \eax{Rodrigues' formula} is satisfied:
+        \begin{align}
+            P_{n}(x) = \frac{1}{2^{n} n!} \frac{d^{n}}{dx^{n}} ((1-x^{2})^{n}).
+        \end{align}
+    \end{enumerate}
+\end{theorem}
+
+The \eax{hypergeometric equation} is $x(1-x) y'' + (c-(a+b+1)x) y' - ab y = 0$ for some $a,b,c \in \R$. The \eax{hypergeometric function} $F(a,b,c,x)$ is the analytic solution of the hypergeometric equation such that $F(a,b,c,0) = 1$. We now prove the theorem.
+
+\begin{proof}
+    Under $t = \frac{1-x}{2}$, and $y(x) = u(t(x))$, the equation $((1-x^{2})y')' + n(n+1) y = 0$ becomes $t(1-t) u'' + (1-2t) u' + n(n+1) u = 0$. This is the hypergeometric equation with $a = -n$, $b = n+1$, and $c = 1$. Hence, $P_{n}(x) = F(-n,n+1,1,\frac{1-x}{2})$ for all $x \in [-1,1]$. For the second statement, note that the hypergeometric function $F(a,b,c,x)$ has a power series representation $\sum_{n=0}^{\infty} \frac{(a)_{n} (b)_{n}}{(c)_{n} n!} x^{n}$, where $(a)_{n} = a(a+1)\cdots(a+n-1)$. Since $a = -n$ is a negative integer, $(a)_{n+1} = 0$, so $F(-n,n+1,1,x)$ is a polynomial of degree at most $n$. Since $F(-n,n+1,1,0) = 1$, the degree of $F(-n,n+1,1,x)$ is exactly $n$. Hence, $P_{n}$ is a polynomial of degree $n$. For now, let us assume the fourth statement and prove the third. Take any $f \in C^{n}[-1,1]$. Then, by integration by parts, $\int_{-1}^{1} P_{n}(x) f(x) \, dx = \frac{1}{2^{n} n!} \int_{-1}^{1} \frac{d^{n}}{dx^{n}} ((1-x^{2})^{n}) f(x) \, dx = \frac{(-1)^{n}}{2^{n} n!} \int_{-1}^{1} (1-x^{2})^{n} f^{(n)}(x) \, dx$. Hence, $\ip{P_{n},f} = \frac{(-1)^{n}}{2^{n} n!} \int_{-1}^{1} (1-x^{2})^{n} f^{(n)}(x) \, dx$. In particular, $\ip{P_{n},P_{m}} = 0$ for all $n > m$ by choosing $f = P_{m}$. Also,
+    \begin{align}
+        \int_{-1}^{1} P_{n}^{2}(x) \, dx &= \frac{(-1)^{n}}{2^{n} n!} \int_{-1}^{1} (1-x^{2})^{n} P_{n}^{(n)}(x) \, dx = \frac{(-1)^{n}}{2^{n} n!} \int_{-1}^{1} (1-x^{2})^{n} \cdot \frac{(2n)!}{2^{n} n!} \, dx \notag \\ &= \frac{(2n)!}{4^{n} (n!)^{2}} \int_{-1}^{1} (1-x^{2})^{n} \, dx = \frac{(2n)!}{4^{n} (n!)^{2}} \cdot \frac{2^{2n+1} (n!)^{2}}{(2n+1)!} = \frac{2}{2n+1}.
+    \end{align}
+    We show the fourth statement. Let $y = \sum a_{k} x^{k}$ be the solution of $((1-x^{2})y')' + n(n+1) y = 0$ such that $y(1) = 1$. Substituting this into the equation gives us $a_{k+2} = \frac{(k-n)(k+n+1)}{(k+2)(k+1)} a_{k}$ for all $k \geq 0$. Using $P_{n}(x) = F(-n,n+1,1,\frac{1-x}{2})$, we find the $n$th coefficient of $P_{n}$ a
+    \begin{align}
+        a_{n} = \left( \frac{-1}{2} \right)^{n} \cdot (-1)^{n} \cdot \frac{2n!}{(n!)^{2}} = \frac{(2n)!}{2^{n} (n!)^{2}}.
+    \end{align}
+    We observe that $P_{n}$ contains only even powers of $x$ when $n$ is even, and only odd powers of $x$ when $n$ is odd. 
+Thus, $P_n(x) = \frac{(2n)!}{2^n (n!)^2} x^n + \text{lower order terms}$.
+
+Now, let $Q_n(x) = \frac{1}{2^n n!} \frac{d^n}{dx^n}((1-x^2)^n)$. We compute the leading coefficient of $Q_n$. Note that
+\begin{align}
+    (1-x^2)^n = \sum_{j=0}^{n} \binom{n}{j} (-x^2)^j = \sum_{j=0}^{n} \binom{n}{j} (-1)^j x^{2j}.
+\end{align}
+The highest power of $x$ in $(1-x^2)^n$ is $x^{2n}$ with coefficient $(-1)^n$. Taking $n$ derivatives, the leading coefficient becomes
+\begin{align}
+    \frac{d^n}{dx^n}((-1)^n x^{2n} + \ldots) = (-1)^n (2n)(2n-1) \cdots (n+1) x^n + \ldots = (-1)^n \frac{(2n)!}{n!} x^n + \ldots
+\end{align}
+Thus, the leading coefficient of $Q_n$ is
+\begin{align}
+    \frac{1}{2^n n!} \cdot (-1)^n \frac{(2n)!}{n!} = \frac{(-1)^n (2n)!}{2^n (n!)^2}.
+\end{align}
+This matches the leading coefficient of $P_n$. Since both $P_n$ and $Q_n$ satisfy the same second-order linear ODE $((1-x^2)y')' + n(n+1)y = 0$ on $[-1,1]$ and have the same leading coefficient, and since the solution space of this ODE is two-dimensional but we have the additional constraint that the solution is bounded on $[-1,1]$, there is a unique solution satisfying $y(1) = 1$. Therefore, $P_n(x) = Q_n(x) = \frac{1}{2^n n!} \frac{d^n}{dx^n}((1-x^2)^n)$.
+\end{proof}
