@@ -953,3 +953,42 @@ We are now ready to prove the Arzelà-Ascoli theorem.
 
     Now recall that $X = \bigcup U_{x_{i}}$ for some $x_{1},\ldots,x_{k}$, and $\norm{g(x)-g(x_{i})} < \varepsilon$ for all $g \in \cG$ and all $x \in U_{x_{i}}$. Let $Y = \bigcup_{j=1}^{m} B(y_{j},\varepsilon)$ be a finite cover of $\overline{B(0,\max_{1 \leq i \leq k} (M_{i} + \varepsilon))}$ by balls of radius $\varepsilon$. Note that $Y$ is compact. Let $J = \{\alpha : \{1,\ldots,s\} \to \{1,\ldots,m\}\}$, and define $J' = \{\alpha \in J \mid \text{there exists some } g \in \cG \text{ such that } g(x_{i}) \in B(y_{\alpha(i)},\varepsilon) \text{ for all } i\}$. Trivially note that $J' \neq \emptyset$ and is finite. For each $\alpha \in J'$, pick some $g_{\alpha} \in \cG$ such that $g_{\alpha}(x_{i}) \in B(y_{\alpha(i)},\varepsilon)$ for all $i$. We claim that $\cG = \bigcup_{\alpha \in J'} B(g_{\alpha},3\varepsilon)$. Take $g \in \cG$. For every $i = 1,\ldots,s$, choose $1 \leq \alpha(i) \leq m$ such that $g(x_{i}) \in B(y_{\alpha(i)},\varepsilon)$. For all $x$, choose $1 \leq i \leq s$ such that $x \in U_{x_{i}}$. Then, we have $\norm{\tilde{g}(x)-\tilde{g}(x_{i})} < \varepsilon$ for all $\tilde{g} \in \cG$. In particular, $\tilde{g} = g$ and $g_{\alpha}$, we have $\norm{g(x)-g_{\alpha}(x)} < 3\varepsilon$. Thus, $\cG \subseteq \bigcup_{\alpha \in J'} B(g_{\alpha},3\varepsilon)$. The reverse inclusion is trivial. Therefore, $\cG = \bigcup_{\alpha \in J'} B(g_{\alpha},3\varepsilon)$, and $\cG$ is totally bounded. Since $\cG$ is closed and totally bounded, $\cG$ is compact. Hence, $\cF$ has compact closure.
 \end{proof}
+
+\section{Quotient Spaces}
+\textit{April 14th.}
+
+Let $X$ be a topological space. Given an equivalence relation $\sim$ on $X$, we have the set of equivalence classes $X/\!\sim \; = \{[x] \mid x \in X\}$, where $[x] = \{y \in X \mid y \sim x\}$. We can define a topology on $X/\!\sim$ by declaring $U \subseteq X/\!\sim$ to be open if and only if $\pi^{-1}(U)$ is open in $X$, where $\pi : X \to X/\!\sim$ is the map defined as $\pi(x) = [x]$. Of course, we need to verify that $\tau = \{ U \subseteq X/\!\sim \mid \pi^{-1}(U) \text{ is open in } X\}$ is a topology on $X/\!\sim$. We have $\pi^{-1}(\emptyset) = \emptyset$ and $\pi^{-1}(X/\!\sim) = X$, so $\emptyset$ and $X/\!\sim$ are in $\tau$. Let $\{U_{\alpha}\}$ be a family of sets in $\tau$. Then, $\pi^{-1}(\bigcup_{\alpha} U_{\alpha}) = \bigcup_{\alpha} \pi^{-1}(U_{\alpha})$, so $\bigcup_{\alpha} U_{\alpha}$ is in $\tau$. Let $U_{1},\ldots,U_{n}$ be sets in $\tau$. Then, $\pi^{-1}(\bigcap_{i=1}^{n} U_{i}) = \bigcap_{i=1}^{n} \pi^{-1}(U_{i})$, so $\bigcap_{i=1}^{n} U_{i}$ is in $\tau$. Hence, $\tau$ is a topology on $X/\!\sim$, and we call it the \eax{quotient topology}. Note that $\pi : X \to X/\!\sim$ is continuous by the definition of the quotient topology. Moreover, $\pi$ is surjective by the definition of $X/\!\sim$.
+
+Now suppose we have another topology $\tau'$ on $X/\!\sim$ such that $\pi : X \to (X/\!\sim,\tau')$ is continuous. We claim that $\tau' \subseteq \tau$. Let $U \in \tau'$. Then, $\pi^{-1}(U)$ is open in $X$ since $\pi : X \to (X/\!\sim,\tau')$ is continuous, so $U \in \tau$. Hence, $\tau' \subseteq \tau$.
+
+\begin{proposition}
+    Let $f : X/\!\sim\; \to Y$ be a map of sets. Let $\pi : X \to X/\!\sim$ be the quotient map, and $g:X \to Y$ be the composition map $g = f \circ \pi$. Then, $f$ is continuous if and only if $g$ is continuous.
+\end{proposition}
+\begin{proof}
+    One direction is clear; if $f$ is continuous, then $g = f \circ \pi$ is continuous since $\pi$ is continuous. For the other direction, let $U \subseteq Y$ be open. Then, $g^{-1}(U)$ is open in $X$ since $g$ is continuous, so $\pi(g^{-1}(U))$ is open in $X/\!\sim$. Note that $\pi(g^{-1}(U)) = f^{-1}(U)$, so $f^{-1}(U)$ is open in $X/\!\sim$. Hence, $f$ is continuous.
+\end{proof}
+
+Now suppose $g:X \to Y$ is a continuous map. Define an equivalence relation $\sim$ on $X$ by $x_{1}\sim x_{2}$ if and only if $g(x_{1}) = g(x_{2})$. Then, we have a map $f : X/\!\sim \; \to Y$ defined as $f([x]) = g(x)$. Note that $f$ is well-defined since if $[x] = [y]$, then $g(x) = g(y)$. Moreover, we have $g = f \circ \pi$, so $f$ is continuous by the above proposition.
+
+
+\begin{lemma}
+    Let $\varphi:X_{1} \to X_{2}$ be a continous bijection between a compact space $X_{1}$ and a Hausdorff space $X_{2}$. Then, $\varphi$ is a homeomorphism.
+\end{lemma}
+
+The above lemma is required for the following theorem.
+
+\begin{theorem}
+    Let $X$ be a compact space, and $Y$ Hausdorff. If $g:X \to Y$ is a surjective continuous map, then $X/\!\sim \; \cong Y$ as topological spaces, where $\sim$ is the equivalence relation defined as $x_{1} \sim x_{2}$ if and only if $g(x_{1}) = g(x_{2})$.
+\end{theorem}
+
+\begin{proof}
+    Define $f:X/\!\sim \; \to Y$ by $f([x]) = g(x)$. We will show that $f$ is a homeomorphism. We have $g = f \circ \pi$, so $f$ is continuous by the above proposition. Since $g$ is surjective, $f$ is also surjective. Let $[x_{1}],[x_{2}] \in X/\!\sim$ be given such that $f([x_{1}]) = f([x_{2}])$. Then, $g(x_{1}) = g(x_{2})$, so $x_{1} \sim x_{2}$, giving that $[x_{1}] = [x_{2}]$. Hence, $f$ is injective. Now, note that $X/\!\sim$ is compact; since $X$ is compact, and $X/\!\sim$ is a continuous image of $X$, $X/\!\sim$ is also compact. $Y$ is also Hausdorff; the above lemma gives that $f$ is a homeomorphism.
+\end{proof}
+
+\begin{theorem}
+    Let $g:X \to Y$ be surjective and continuous, and open or closed. Then, $X/\!\sim \; \cong Y$ as topological spaces, where $\sim$ is the equivalence relation defined as $x_{1} \sim x_{2}$ if and only if $g(x_{1}) = g(x_{2})$.
+\end{theorem}
+
+\begin{proof}
+    Define $f:X/\!\sim \; \to Y$ by $f([x]) = g(x)$. As before, $f$ is continuous, surjective, and injective by the same argument. It remains to show that $f$ is a homeomorphism by verifying that $f^{-1}$ is continuous. Let $V \subseteq X/\!\sim$ be closed. Then, $\pi^{-1}(V)$ is closed in $X$. Since $g$ is open or closed, $g(\pi^{-1}(V))$ is open or closed in $Y$, respectively. But $g(\pi^{-1}(V)) = f(V)$ by the definition of $f$. Thus, $f(V)$ is open or closed in $Y$. Since $f$ is a bijection, $f(V)$ is open or closed if and only if $f^{-1}$ maps open or closed sets to open or closed sets. In particular, if $U$ is open in $Y$, then $f^{-1}(U) = g^{-1}(U)/\sim$ is open in $X/\!\sim$ since $g$ is open or closed and $g^{-1}(U)$ is open in $X$. Hence, $f^{-1}$ is continuous, so $f$ is a homeomorphism.
+\end{proof}
