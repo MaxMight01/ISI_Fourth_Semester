@@ -1240,3 +1240,66 @@ Thus, the leading coefficient of $Q_n$ is
 \end{align}
 This matches the leading coefficient of $P_n$. Since both $P_n$ and $Q_n$ satisfy the same second-order linear ODE $((1-x^2)y')' + n(n+1)y = 0$ on $[-1,1]$ and have the same leading coefficient, and since the solution space of this ODE is two-dimensional but we have the additional constraint that the solution is bounded on $[-1,1]$, there is a unique solution satisfying $y(1) = 1$. Therefore, $P_n(x) = Q_n(x) = \frac{1}{2^n n!} \frac{d^n}{dx^n}((1-x^2)^n)$.
 \end{proof}
+
+\subsection{Bessel Functions}
+\noindent \textit{April 15th.}
+
+Here, we study equations of the form $x^{2} y'' + xy' + (x^{2}-p^{2})y = 0$, where $p > 0$. Note that the Laplacian in polar coordinates is
+\begin{align}
+    \Delta u = \frac{1}{r} \partial_{r}(r \partial_{r} u) + \frac{1}{r^{2}} \partial_{\theta}^{2} u.
+\end{align}
+Recall that to solve the wave or the heat equation, we first solve the eigenequation of $\Delta$ given as $\Delta u = -\lambda^{2} u$. If $\varphi(x,t) = u(x) v(t)$ solves the wave equation, then $\partial_{tt} \varphi = \Delta \varphi$ implies that $\frac{v''}{v} = \frac{\Delta u}{u} = -\lambda^{2}$. Then any solution $\psi$ of the wave equation is of the form $\psi(x,t) = \sum c_{n} u_{n}(x) v_{n}(t)$, where $u_{n}$ and $v_{n}$ are eigenfunctions corresponding to $\lambda_{n}^{2}$ for some sequence of eigenvalues $\lambda_{1}^{2} < \lambda_{2}^{2} < \cdots < \lambda_{n}^{2} \to \infty$. In our current interest, let us write down the eigenequation of $\Delta$ in polar coordinates. Assume that $u(r,\theta) = f(r) g(\theta)$. Then
+\begin{align}
+    \Delta u &= \partial_{r}^{2} u + \frac{1}{r} \partial_{r} u + \frac{1}{r^{2}} \partial_{\theta}^{2} u = g(\theta) f''(r) + \frac{1}{r} f'(r) g(\theta) + \frac{1}{r^{2}} f(r) g''(\theta) = -\lambda^{2} f(r) g(\theta).
+\end{align}
+Dividing by $f(r)g(\theta)$ gives
+\begin{align}
+    r^{2}\frac{f''(r)}{f(r)} + r \frac{f'(r)}{f(r)} + \frac{g''(\theta)}{g(\theta)} = -\lambda^{2} r^{2}.
+\end{align}
+Setting the two terms on the left equal to $-\lambda^{2}r^{2}+C$ and the right term equal to $-C$ for some constant $C$ gives us the following two equations:
+\begin{align}
+    r^{2} f''(r) + rf'(r) + (\lambda^{2} r^{2} - n^{2}) f(r) = 0, \quad g''(\theta) = -n^{2} g(\theta)
+\end{align}
+where $n^{2} = C$. The first equation is simply the \eax{Bessel equation} with a change of variable. In the Bessel equation $x^{2} y'' + xy' + (x^{2}-p^{2})y = 0$, let $p \in \N$. Note that $0$ is a regular singular point, so we look for Frobenius solutions of the form $y = x^{m} \sum_{k \geq 0} a_{k} x^{k}$, where $m$ solves the indicial equation $m(m-1) + m - p^{2} = 0$. Hence, $m = \pm p$. We will denote by $J_{p}$ the solution corresponding to $m = p$, $a_{0} = \frac{1}{2^{p} p!}$, and $a_{1} = 0$. Note that $J_{p}$ vanishes to prder $p$ at $0$. Let us find the $a_{k}$'s; we have
+\begin{align}
+    (x^{2}-p^{2}) y(x) = \sum a_{k} x^{p+k} (x^{2}-p^{2}) \implies &x y'(x) = \sum (p+k) a_{k} x^{p+k}, \notag \\ &x^{2} y''(x) = \sum (p+k)(p+k-1) a_{k} x^{p+k}.
+\end{align}
+The coefficient of $x^{p+k}$ gives
+\begin{align}
+    a_{k}(p+k)(p+k-1) + a_{k}(p+k) + a_{k-2} - p^{2} a_{k} = 0 \implies -a_{k}(2pk+k^{2}) = a_{k-2}.
+\end{align}
+So, $a_{i} = 0$ for all odd $i$, and $a_{i}$'s may be found recursively for all even $i$.
+
+\begin{lemma}
+    $J_{p}$ has infinitely many zeroes on $(0,\infty)$.
+\end{lemma}
+\begin{proof}
+    Let $y = J_{p}$. Look at the function $u(x) = \sqrt{x} y(x)$. Then $u$ satisfies the equation $u'' + u \left( 1 - \frac{1-4p^{2}}{4x^{2}} \right) = 0$. Let $q(x)$ be the coefficient function of $u$ in the above equation. Note that $q(x) \to 1$ as $x \to \infty$. Hence, there exists $M \gg 1$ such that $q(x) > \frac{1}{4}$ on $[M,\infty)$. Let $v(x) = \sin \frac{x}{2}$. Then $v'' + \frac{1}{4} v = 0$. Since $v$ has infinitely many zeroes on $[M,\infty)$, between any two zeroes of $v$ there is a zero of $u$. Hence, $u$ has infinitely many zeroes on $[M,\infty)$, and so does $y$.
+\end{proof}
+
+Fix $p \in \N \cup \{0\}$, and let $0 < \lambda_{1} < \lambda_{2} < \cdots < \lambda_{n} < \cdots$ be the zeroes of $J_{p}$. Then
+\begin{align}
+    \int_{0}^{1} J_{p}(\lambda_{n} x) J_{p}(\lambda_{m} x) x \, dx = 0 \text{ for all } n \neq m, \quad \int_{0}^{1} J_{p}^{2}(\lambda_{n} x) x \, dx = \frac{1}{2} J_{p}'(\lambda_{n})^{2}.
+\end{align}
+\begin{proof}
+    Let $y_{n}(x) = J_{p}(\lambda_{n} x)$ and $y_{m}(x) = J_{p}(\lambda_{m} x)$. Then $y_{n}$ and $y_{m}$ satisfy the Bessel equation with $\lambda$ replaced by $\lambda_{n}$ and $\lambda_{m}$, respectively. Hence, $y_{n}'' + \frac{1}{x} y_{n}' + (\lambda_{n}^{2} - \frac{p^{2}}{x^{2}}) y_{n} = 0$ and $y_{m}'' + \frac{1}{x} y_{m}' + (\lambda_{m}^{2} - \frac{p^{2}}{x^{2}}) y_{m} = 0$. Multiplying the first equation by $y_{m}$ and the second equation by $y_{n}$ gives us
+    \begin{align}
+        y_{n}'' y_{m} + \frac{1}{x} y_{n}' y_{m} + (\lambda_{n}^{2} - \frac{p^{2}}{x^{2}}) y_{n} y_{m} = 0, \quad y_{m}'' y_{n} + \frac{1}{x} y_{m}' y_{n} + (\lambda_{m}^{2} - \frac{p^{2}}{x^{2}}) y_{m} y_{n} = 0.
+    \end{align}
+    Subtracting the second equation from the first gives us
+    \begin{align}
+        (y_{n}' y_{m} - y_{m}' y_{n})' + \frac{1}{x}(y_{n}' y_{m} - y_{m}' y_{n}) + (\lambda_{n}^{2}-\lambda_{m}^{2}) y_{n} y_{m} = 0.
+    \end{align}
+    Multiplying by $x$ gives us
+    \begin{align}
+        (x(y_{n}' y_{m}-y_{m}' y_{n}))' + (\lambda_{n}^{2}-\lambda_{m}^{2}) x y_{n} y_{m} = 0
+    \end{align}
+    Integrating from $0$ to $1$ gives us
+    \begin{align}
+        x(y_{n}' y_{m} - y_{m}' y_{n}) \Big|_{0}^{1} + (\lambda_{n}^{2}-\lambda_{m}^{2}) \int_{0}^{1} x y_{n} y_{m} \, dx = 0.
+    \end{align}
+    Since $y_{n}(1) = y_{m}(1) = 0$, the first term vanishes. Hence, $\int_{0}^{1} x y_{n} y_{m} \, dx = 0$ for all $n \neq m$. For the second statement, we have
+    \begin{align}
+        \int_{0}^{1} x y_{n}^{2} \, dx = -\frac{1}{2 \lambda_{n}} \int_{0}^{1} (x(y_{n}' y_{n} - y_{n}' y_{n}))' \, dx = -\frac{1}{2 \lambda_{n}} x(y_{n}' y_{n} - y_{n}' y_{n}) \Big|_{0}^{1} = \frac{1}{2} J_{p}'(\lambda_{n})^{2}.
+    \end{align}
+\end{proof}
