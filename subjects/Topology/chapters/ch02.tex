@@ -992,3 +992,58 @@ The above lemma is required for the following theorem.
 \begin{proof}
     Define $f:X/\!\sim \; \to Y$ by $f([x]) = g(x)$. As before, $f$ is continuous, surjective, and injective by the same argument. It remains to show that $f$ is a homeomorphism by verifying that $f^{-1}$ is continuous. Let $V \subseteq X/\!\sim$ be closed. Then, $\pi^{-1}(V)$ is closed in $X$. Since $g$ is open or closed, $g(\pi^{-1}(V))$ is open or closed in $Y$, respectively. But $g(\pi^{-1}(V)) = f(V)$ by the definition of $f$. Thus, $f(V)$ is open or closed in $Y$. Since $f$ is a bijection, $f(V)$ is open or closed if and only if $f^{-1}$ maps open or closed sets to open or closed sets. In particular, if $U$ is open in $Y$, then $f^{-1}(U) = g^{-1}(U)/\sim$ is open in $X/\!\sim$ since $g$ is open or closed and $g^{-1}(U)$ is open in $X$. Hence, $f^{-1}$ is continuous, so $f$ is a homeomorphism.
 \end{proof}
+
+\textit{April 16th.}
+
+\begin{theorem}
+    The following hold true for a topological space $X$ and an equivalence relation $\sim$ on $X$.
+    \begin{enumerate}[label=(\arabic*)]
+        \item If $X$ is connected, then $X/\!\sim$ is also connected.
+        \item If $X$ is compact, then $X/\!\sim$ is also compact.
+        \item If $\pi:X \to X\!\sim \;$ is open and $R = \{(x,y) \mid x \sim y\}$ is closed in $X \times X$, then $X/\!\sim \;$ is Hausdorff.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    The first two statements are trivial since $X/\!\sim \;$ is a continuous image of $X$ under $\pi$. Suppose $\pi:X \to X\!\sim \;$ is open and $R = \{(x,y) \mid x \sim y\}$ is closed in $X \times X$. Let $[x]$ and $[y]$ be distinct points in $X/\!\sim$. Then, $(x,y) \in X \setminus R$, which is open, so there exist open sets $U$ and $V$ in $X$ such that $x \in U$, $y \in V$, and $U \times V \subseteq X \setminus R$. Since $\pi$ is open, $\pi(U)$ and $\pi(V)$ are open in $X/\!\sim$. We claim that $\pi(U) \cap \pi(V) = \emptyset$. Suppose not. Then, there exists some $[z] \in \pi(U) \cap \pi(V)$. Since $[z] \in \pi(U)$, there exists some $u \in U$ such that $u \sim z$. Since $[z] \in \pi(V)$, there exists some $v \in V$ such that $v \sim z$. Thus, we have $u \sim z$ and $v \sim z$, so $(u,v) \in R$, contradicting the fact that $U \times V \subseteq X \setminus R$. Hence, $\pi(U) \cap \pi(V) = \emptyset$, so $X/\!\sim$ is Hausdorff.
+\end{proof}
+
+Let $G$ be a group and $X$ a topological space. A group action of $G$ on $X$, denoted $G \curvearrowright X$, is a map $G \times X \to X$ such that $e \cdot x = x$ for all $x \in X$, and $g \cdot (h \cdot x) = (gh) \cdot x$ for all $g,h \in G$ and all $x \in X$, and where the map $x \mapsto g \cdot x$ is continuous for each $g \in G$. Given a group action $G \curvearrowright X$, we can define an equivalence relation $\sim$ on $X$ by $x \sim y$ if and only if there exists some $g \in G$ such that $g \cdot x = y$. In such a case, we define $X/G = X/\!\sim$. For example, if we let $\Z$ act on $\R$ by $n \cdot x = x + n$ for all $n \in \Z$ and all $x \in \R$, then $\R/\Z$ is homeomorphic to the unit circle $S^{1}$.
+
+Given any topological space $X$ and a subset $A \subseteq X$, we can define an equivalence relation $\sim$ on $X$ by $x \sim y$ if and only if either $x = y$ or $x,y \in A$. In such a case, we define $X/A = X/\!\sim$. For example, if we let $X = B[0,1] \subseteq \R^{2}$ and $A = \partial B[0,1]$, then $X/A$ is homeomorphic to the unit sphere $S^{2} \subseteq \R^{3}$.
+
+Let $S^{n} \subseteq \R^{n+1}$ be the $n$-sphere. Define an equivalence relation on $S^{n}$ by $x \sim y$ if and only if $x = y$ or $x = -y$. The quotient space $\R P^{n} \defeq S^{n}/\!\sim$ is called the \eax{real projective space}. Note that for $n = 1$, one can show that $\R P^{1} \cong S^{1}$.
+
+\subsection{Topological Groups}
+
+\begin{definition}
+    A \eax{topological group} is a group $G$ equipped with a topology such that the group operation $G \times G \to G$ defined by $(g,h) \mapsto gh$ and the inverse map $G \to G$ defined by $g \mapsto g^{-1}$ are continuous, and such that $G$ is T1, that is, singletons are closed in $G$.
+\end{definition}
+
+Note that every topological group can be shown to be Hausdorff, by showing that the diagonal $\{(g,g) \mid g \in G\}$ is closed in $G \times G$. Now let $H \subseteq G$ be a subgroup. We can define an equivalence relation $\sim$ on $G$ by $g_{1} \sim g_{2}$ if and only if $g_{1}^{-1}g_{2} \in H$ (equivalent to saying $g_{1}H = g_{2}H$). In such a case, we define $G/H = G/\!\sim$. We have the following result. We have already seen how $\R/\Z \cong S^{1}$, so this quotient by a subgroup is a generalization.
+
+Consider a \eax{lattice} in $\R^{2}$ which is of the form $\Z v_{1} + \Z v_{2}$ for some linearly independent vectors $v_{1},v_{2} \in \R^{2}$. Thus, we can write a lattice simply as $g \Z^{2}$ with $g \in GL_{2}(\R)$. Now, on the domain $SL_{2}(\R)$, consider the map $g \mapsto g\Z^{2}$, mapping an element of $SL_{2}(\R)$ to a lattice. Note that if $g \in SL_{2}(\Z)$, then $g\Z^{2} = \Z^{2}$, so the above map factors through $SL_{2}(\R)/SL_{2}(\Z)$.
+
+We prove more properties for topological groups.
+
+\begin{proposition}
+    Left multiplication, right multiplication, and conjugation are homeomorphisms of a topological group $G$.
+\end{proposition}
+\begin{proof}
+    Left multiplication by $g \in G$ is a homeomorphism because the map $x \mapsto gx$ is continuous with continuous inverse $x \mapsto g^{-1}x$. Similarly for right multiplication and conjugation.
+\end{proof}
+
+\begin{proposition}
+    The quotient map $\pi : G \to G/H$ is open.
+\end{proposition}
+\begin{proof}
+    Suppose $U$ is an open set in $G$. Then, $\pi^{-1}(\pi(U)) = UH = \bigcup_{h \in H} Uh$, which is open since $Uh$ is open for each $h$ (since left multiplication is a homeomorphism). Thus, $\pi(U)$ is open in $G/H$.
+\end{proof}
+
+
+\begin{theorem}
+    Let $H \subseteq G$ be a subgroup of a topological group $G$. Then, $H$ is closed if and only if $G/H$ is T1.
+\end{theorem}
+\begin{proof}
+    One direction is clear; if $G/H$ is T1, then $\{eH\}$ is closed in $G/H$, so $\pi^{-1}(\{eH\}) = H$ is closed in $G$. For the other direction, let $gH \in G/H$ be given. Then $gH \subseteq G$ is closed since $H$ is closed and left multiplication by $g$ is a homeomorphism. Thus, $\{gH\} = \pi(gH)$ is closed in $G/H$. Hence, $G/H$ is T1.
+\end{proof}
